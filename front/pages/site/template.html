@@ -1,0 +1,65 @@
+<page>
+  <page-header></page-header>
+  <main >
+		<section>
+			<div class="container" *ngIf="ready">
+				<div class="box site-def">
+				  <div id="accordion" class="accordion">
+				    <div class="acc-panel">
+				      <h2 class="acc-title">
+				        SITE DEFINITION
+				        <ul class="edit-buttons">
+				        </ul>
+				      </h2>
+				      <div class="panel cf">
+								<div class="row">
+									<div class="col-2">
+										<label for="" class="label-form">ICON</label>
+										<div *ngIf="site._icon.length > 0" >
+										  <img style="width:100%;max-width:350px;" src="{{site._icon}}" alt="">
+										  <div *ngIf="userRole > 9000" (click)="openPanel()" class="fa fa-pencil"></div>
+										  <div (click)="site._icon = ''" *ngIf="userRole > 9000" class="fa fa-times"></div>
+										</div>
+										<div *ngIf="site._icon.length <= 0" >
+											<button *ngIf="userRole > 9000" (click)="openPanel()">SELECT FILE</button>
+										</div>									<s3-file-picker *ngIf="panel" (close)="closePanel()" [accept]="['.jpg','.jpeg','.png','.gif','.bmp','.tif','.svg']" (fileSelected)="grabFiles($event)"></s3-file-picker>
+									</div>
+									<div class="col-6">
+										<label for="" class="label-form">SITE TITLE</label>
+										<input [disabled]="userRole < 9000" type="text" [(ngModel)]="site._name" class="input-form">
+									</div>
+									<div class="col-6">
+										<label for="" class="label-form">DOMAIN NAME</label>
+										<h3>{{site._domain}}</h3>
+									</div>
+
+									<div class="col-6">
+										<save-btn></save-btn>
+                    <!-- <a href="/demo-site/{{site._domain}}/index" target="_blank" class="btn btn-inverted">
+                      PREVIEW
+                    </a> -->
+									</div>
+
+				      </div>
+				    </div>
+				  </div>
+				</div>
+				<div class="big-title site-admin-bar cf" fixedElement>
+						<div class="left">
+							<img src="{{site._icon}}" alt="">
+							<span>{{site._name}}  |  {{site._domain}}</span>
+						</div>
+						<div class="right">
+							<!-- <a href="/demo-site/{{site._domain}}/index" target="_blank" class="btn btn-inverted">
+								PREVIEW
+							</a> -->
+							<save-btn></save-btn>
+						</div>
+				</div>
+			</div>
+			        <data-view [userRole]="userRole"></data-view>
+			</div>
+		</section>
+	</main>
+  <page-footer></page-footer>
+</page>

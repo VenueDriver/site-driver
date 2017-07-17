@@ -1,0 +1,22 @@
+@import "variables";
+@import "mixins";
+@import "reset";
+
+// LAYOUT
+@import "layout";
+@import "buttons";
+@import "header";
+@import "footer";
+@import "navbar";
+@import "typography";
+@import "images";
+
+// SECTIONS
+@import "slider-top";
+@import "box-events";
+@import "slider-events";
+@import "box-arrow";
+@import "gallery";
+@import "box-subscribe";
+@import "box-contact";
+@import "box-image-top";

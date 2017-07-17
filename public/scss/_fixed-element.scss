@@ -1,0 +1,45 @@
+.big-title.site-admin-bar.fixed-element-active {
+    display: block !important;
+    background: $primary-color-dark;
+    .right {
+        width: 100%;
+        padding-top: 15px;
+        .btn {
+            width: 49%;
+            &.btn-inverted, &.btn-save {
+                float: right;
+            }
+            &.btn-inverted {
+                margin-left: 2%;
+            }
+            &.btn-save {
+                border: 1px solid $accent-color;
+            }
+        }
+    }
+    .left {
+        span {
+            color: white;
+        }
+    }
+    img {
+        outline: 1px solid #666;
+    }
+}
+
+
+// 768px
+@media all and (min-width: $screen-portrait) {
+    .big-title.site-admin-bar.fixed-element-active{
+        .left {
+            width: 50%;
+        }
+        .right {
+            width: 50%;
+            padding-top: 0px;
+            .btn {
+                max-width: 200px;
+            }
+        }
+    }
+}

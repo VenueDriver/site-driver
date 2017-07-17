@@ -1,0 +1,195 @@
+<modal>
+    <div class="filemanager-container">
+        <section class="content-thumbs" style="width:100%;height:100%;">
+            <button (click)="cancel()" class="fa fa-times close-btn"></button>
+            <div class="content-thumbs-col-left">
+                <a (click)="mobileToggleFolders()" class="folder-plus cf">Folders<i class="fa fa-angle-down" aria-hidden="true"></i></a>
+                <a *ngIf="!newFolderInput" (click)="newFolderInput=true" class="btns"><i class="fa fa-plus"></i>ADD FOLDER</a>
+                <div *ngIf="newFolderInput" class="form-files">
+                    <input [disabled]="loading" [(ngModel)]="newFolderName" type="text">
+                    <button (click)="newFolder()" class="ok"></button>
+                    <button (click)="resetFolderInput()" class="nop"></button>
+                </div>
+
+                <div [class.show-folders]="mobileFolders" class="content-overflow">
+                    <ul class="list-of-folders" *ngIf="!loading">
+                        <li *ngFor="let item of current | keys" >
+                            <a *ngIf="item !== '_files'" (click)="openFolder(item)">
+                                <i class="fa fa-folder" aria-hidden="true"></i>{{item}}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <a (click)="cancel()" class="cancel-btn"><i class="fa fa-undo"></i><span>CANCEL</span></a>
+
+            </div>
+            <div class="content-thumbs-col-right">
+
+                <div class="breadcrumbs">
+                    <a *ngFor="let folder of path; let i = index" class="breadcrumbs-item" (click)="goToFolder(i)">
+                        <span *ngIf="i>0">{{folder}}</span><i *ngIf="i==0" class="fa fa-home"></i>
+                    </a>
+                </div>
+                <header class="header-title cf">
+                    <h2>Media Files</h2>
+                    <a *ngIf="!loading" (click)="inputFile.click()">Add files</a>
+                    <input style="display:none" #inputFile type="file" multiple [accept]="(accept.length>0) ? accept.join(',') : ''" (change)="fileChange($event)" placeholder="Upload file" >
+                </header>
+                <span *ngIf="!loading && current._files.length < 1" class="message-not-found">No files found.</span>
+
+                <div class="content-overflow">
+                    <spinner *ngIf="loading"></spinner>
+                    <div *ngIf="!loading">
+                        <figure class="thumb" [class.selected]="file.selected" *ngFor="let file of current._files" (click)="selectFile(file)">
+                            <div class="thumb-image" *ngIf="file.isImage">
+                                <img [src]="file.src" alt="">
+                                <div class="content-name"> <span>{{file.name}}</span></div>
+                            </div>
+
+                            <span class="video-file" *ngIf="!file.isImage">{{file.src}}
+                                <span class="content-icon"><i class="fa fa-file-video-o"></i></span>
+                                <div class="content-name"> <span>{{file.name}}</span></div>
+                            </span>
+                        </figure>
+                    </div>
+                </div>
+
+                <div *ngIf="selected().length > 0 && !loading" class="box-buttons-image">
+                    <a class="btn-ok" (click)="save()">
+                        <i class="fa fa-check"></i><span>SELECT</span>
+                    </a>
+                    <a class="btn-del" (click)="deleteSelected()">
+                        <i class="fa fa-times"></i><span>DELETE</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+    <!--
+<div class="filemanager-container">
+    <div *ngIf="!loading" class="filemanager-top-nav">
+      <div class="top-of-folder">
+        <span *ngIf="path.length > 1"> << BACK </span>
+      </div>
+      <div class="breadcrumb">
+        <ul class="horizontal-list">
+          <li *ngFor="let folder of path; let i = index">
+              <a (click)="goToFolder(i)"><span class="fa fa-folder" aria-hidden="true"></span> {{folder}}</a> >
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="folders-col">
+      <spinner  *ngIf="loading"></spinner>
+      <ul *ngIf="!loading">
+        <li *ngFor="let item of current | keys">
+          <a *ngIf="item !== '_files'" (click)="openFolder(item)"><span class="fa fa-folder" aria-hidden="true"></span> {{item}} </a>
+        </li>
+      </ul>
+    </div>
+    <div class="filemanager-current">
+      <div *ngIf="!loading && current._files.length < 1">
+        No files found.
+      </div>
+      <ul *ngIf="!loading" >
+        <li style="display:inline-block;float:left;">
+          <div (click)="inputFile.click()" style="width:194px;height:194px;border: 3px solid #0089e0;color:#0089e0;text-align:center;float:left;margin:0 10px 10px 10px;">
+            <span class="fa fa-plus" aria-hidden="true"></span> ADD FILES
+          </div>
+        </li>
+        <li style="display:inline-block;float:left;" *ngFor="let file of current._files" (click)="selectFile(file)">
+          <div *ngIf="!file.isImage" style="position:relative;width:200px;height:200px;background:#ccc;text-align:center;float:left;margin:10px;">
+            {{file.name}}
+            <div *ngIf="file.selected" class="filemanager-options">
+              <div class="filemanager-button" (click)="save()">
+                Select
+              </div>
+              <div class="filemanager-button" style="background:#c00" (click)="deleteSelected()">
+                Delete
+              </div>
+            </div>
+          </div>
+          <div *ngIf="file.isImage" [style.background-image]="'url('+file.src+')'" style="position:relative;width:200px;height:200px;background:#ccc;text-align:center;float:left;margin:0 10px 10px 10px;background-position:center;background-size:cover;background-repeat:no-repeat">
+            <div *ngIf="file.selected" class="filemanager-options">
+              <div class="filemanager-button" (click)="save()">
+                Select
+              </div>
+              <div class="filemanager-button" style="background:#c00" (click)="deleteSelected()">
+                Delete
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <input style="display:none" #inputFile type="file" multiple [accept]="(accept.length>0) ? accept.join(',') : ''" (change)="fileChange($event)" placeholder="Upload file" >
+    </div>
+  </div> -->
+
+
+
+
+
+
+
+
+
+<!--
+ <div class="container">
+
+    <h2 class="acc-title">
+      MEDIA
+      <ul class="edit-buttons">
+        <li></li>
+      </ul>
+    </h2>
+    <div class="panel">
+      <div class="row">
+        <div class="col-6" *ngIf="!loading">
+          <span>
+            <div class="col-4">
+              <input type="text" [(ngModel)]="newFolderName">
+              <a (click)="newFolder()">[ + NEW ]</a>
+            </div>
+          </span>
+          <span *ngFor="let item of current | keys" >
+            <div *ngIf="item !== '_files'" class="col-4">
+              <a (click)="openFolder(item)">[ {{item}} ]</a>
+            </div>
+          </span>
+          <ul *ngIf="current._files.length > 0" >
+            <li style="display:inline-block;float:left;" *ngFor="let file of current._files" (click)="selectFile(file)" [style.border]="file.selected ? '3px solid #000' : ''">
+              <div *ngIf="!file.isImage" style="width:200px;height:200px;background:#ccc;text-align:center;float:left;margin:10px;">
+                {{file.name}}
+              </div>
+              <div *ngIf="file.isImage" style="width:200px;height:200px;background:#ccc;text-align:center;overflow:hidden;float:left;margin:10px;">
+                <img [src]="file.src" style="width:100%;height:auto" alt="">
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="col-4">
+
+        </div>
+        <spinner *ngIf="loading"></spinner>
+      </div>
+      <div class="box-buttons cf">
+        <a class="btn btn-cancel" (click)="cancel()">CANCEL</a>
+        <a (click)="deleteSelected()" *ngIf="selected().length > 0" class="btn btn-cancel" >DELETE</a>
+        <a (click)="save()" *ngIf="selected().length > 0" class="btn btn-save">SELECT</a>
+      </div>
+
+    </div>
+  </div>
+</modal> -->

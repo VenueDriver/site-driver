@@ -1,0 +1,107 @@
+.box-socials {
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        li {
+            a {
+                background: $brand-primary;
+                color: white;
+                display: block;
+                text-align: center;
+                padding: 10px;
+                &:hover {
+                    opacity: .8;
+                }
+                i {
+                    margin-right: 10px;
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+            }
+        }
+    }
+}
+
+.hakkasan-logo {
+    svg {
+        max-width: 250px;
+        height: auto;
+        width: 100%;
+        opacity: .8;
+        fill: white;
+        @include transition;
+    }
+    &:hover {
+        svg {
+            opacity: 1;
+        }
+    }
+}
+
+.box-legal {
+    padding: 30px 0;
+    text-align: center;
+    p {
+        font-size: 12px;
+        line-height: 22px;
+        color: $gray;
+        a {
+            color: white;
+            display: inline-block;
+            padding: 0 10px;
+            &:hover {
+                color: $brand-primary;
+            }
+        }
+    }
+}
+
+// 768px
+@media all and (min-width: $screen-portrait) {
+    .box-socials {
+        ul {
+            display: table;
+            width: 100%;
+            li {
+                display: table-cell;
+                width: 25%;
+            }
+        }
+    }
+}
+
+// 992px
+@media all and (min-width: $screen-landscape) {
+    .box-legal {
+        p {
+            br {
+                display: none;
+            }
+        }
+        .container {
+            display: table;
+            width: 100%;
+            max-width: 100%;
+            padding-left: 15px;
+            padding-right: 15px;
+            .cols {
+                display: table-cell;
+                width: 70%;
+                vertical-align: middle;
+                text-align: left;
+                p {
+                    margin: 0;
+                }
+                &.last {
+                    text-align: right;
+                    width: 30%;
+                }
+            }
+        }
+    }
+}
+
+// 1200px
+@media all and (min-width: $screen-desktop) {
+}

@@ -1,0 +1,42 @@
+<div class="table-data-view">
+    <div class="col-left-view">
+
+        <ul *ngIf="userRole > 9000" [dragula]='"bag-one"' [dragulaModel]='selectedItem._child' class="site-menu">
+          <li *ngFor="let section of selectedItem._child; let i = index" class="site-nav"  [class.active-nav]="section._active_section" (click)="makeActive(section)">
+            <a style="width:75%;display:block;padding:10px;" >{{section._name | userlabel: userRole }}</a>
+            <ul class="edit-buttons" style="position: absolute;top: 0;right: 0;">
+              <li *ngIf="section._editable_field || userRole > 9000">
+                <generator [label]="'Edit ' + section._name" [path]="section._path" [edit]="section"><a class="fa fa-pencil"></a></generator>
+              </li>
+              <li *ngIf="section._delete_field || userRole > 9000">
+                <delete-btn  [path]="section._path"></delete-btn>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <ul *ngIf="!(userRole > 9000)" class="site-menu">
+          <li *ngFor="let section of selectedItem._child; let i = index" class="site-nav"  [class.active-nav]="section._active_section" (click)="makeActive(section)">
+            <a *ngIf="section._visible_field" style="width:75%;display:block;padding:10px;" >{{section._name | userlabel: userRole }}</a>
+            <ul *ngIf="section._visible_field" class="edit-buttons" style="position: absolute;top: 0;right: 0;">
+              <li *ngIf="section._editable_field || userRole > 9000">
+                <generator [label]="'Edit ' + section._name" [path]="section._path" [edit]="section"><a class="fa fa-pencil"></a></generator>
+              </li>
+              <li *ngIf="section._delete_field || userRole > 9000">
+                <delete-btn  [path]="section._path"></delete-btn>
+              </li>
+            </ul>
+          </li>
+        </ul>
+
+        <generator *ngIf="userRole > 9000" [path]="[]" [components]="['Group']" [label]="'ADD SECTION'" ></generator>
+    </div>
+    <div class="col-right-view">
+        <div *ngFor="let section of selectedItem._child">
+          <div *ngIf="section._active_section">
+            <child [userRole]="userRole" [data]="section"></child>
+            <generator *ngIf="userRole > 9000" [path]="section._path" [components]="['Group']" [label]="'ADD GROUP'" ></generator>
+          </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+
+<label for="" class="label-form">{{data._name | userlabel: userRole }}<span class="required-indicator" *ngIf="data._required">*</span>
+<div class="edit-buttons">
+	<generator *ngIf="data._editable_field || userRole > 9000" [label]="'Edit ' + data._name" [path]="data._path" [edit]="data"><a class="fa fa-pencil"></a></generator>
+	<delete-btn *ngIf="data._delete_field || userRole > 9000" [path]="data._path"></delete-btn>
+</div></label>
+<div *ngIf="data._value.length > 0" >
+ <div style="position: relative;display: inline-block;">
+ 	 <div class="image-field-container">
+ 	 	<img style="width:100%;max-width:350px;" *ngIf="isImage()" src="{{data._value}}" alt="">
+ 	 </div>
+ 	<div (click)="openPanel()" *ngIf="data._editable_value || userRole > 9000" class="fa fa-pencil" style="position: absolute; top: 0; color: white; right: 0; padding: 10px; background: #af945c; width: 10px; cursor: pointer;"></div>
+ 	 <div (click)="data._value = ''" *ngIf="data._editable_value || userRole > 9000" class="fa fa-times" style="position: absolute; top: 38px; color: white; right: 0; padding: 10px; background: #af945c; width: 10px; cursor: pointer;"></div>
+ </div>
+
+</div>
+
+<!-- error message -->
+<div class="error-message" *ngIf="errors.length > 0 && data._required">
+  <ul>
+    <li *ngFor="let error of errors">- {{error}}</li>
+  </ul>
+</div>
+<div *ngIf="data._value.length <= 0" >
+<button (click)="openPanel()" *ngIf="data._editable_value || userRole > 9000">SELECT FILE</button>
+</div>
+<s3-file-picker  *ngIf="(data._editable_value || userRole > 9000) && panel" (close)="closePanel()" [accept]="['.jpg','.jpeg','.png','.gif','.bmp','.tif','.svg']" (fileSelected)="grabFiles($event)"></s3-file-picker>

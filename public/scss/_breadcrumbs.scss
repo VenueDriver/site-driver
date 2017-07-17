@@ -1,0 +1,72 @@
+.breadcrumbs {
+    font-size: 14px;
+    line-height: 1;
+    display: inline-block;
+    margin: 0 0 15px 0;
+}
+.breadcrumbs-item {
+    display: inline-block;
+    padding: 0.5em 0.8em;
+    padding-left: 1.8em;
+    text-decoration: none;
+    transition: all .15s;
+    vertical-align: top;
+    height: 14px;
+    outline: 0;
+
+    background-color: $accent-color;
+    color: white;
+    text-align: center;
+    position: relative;
+    margin-right: 2px;
+    i {
+        margin-right: 3px;
+    }
+}
+.breadcrumbs-item:before,
+.breadcrumbs-item:after {
+    content: "";
+    height: 0;
+    width: 0;
+    border-width: 1em 0 1em 1em;
+    border-style: solid;
+    transition: all .25s;
+    position: absolute;
+    left: 100%;
+    top: 0;
+}
+.breadcrumbs-item:before {
+    border-color: transparent transparent transparent $gray-light;
+    left: 0;
+}
+.breadcrumbs-item:after {
+    border-color: transparent transparent transparent $accent-color;
+    z-index: 1;
+}
+.current.breadcrumbs-item {
+    background-color: darken($accent-color, 20%);
+    color: white;
+    cursor: default;
+}
+.current.breadcrumbs-item:after {
+    border-color: transparent transparent transparent darken($accent-color, 20%);
+}
+.breadcrumbs-item:not(.current):hover {
+    background-color: darken($accent-color, 10%);
+}
+.breadcrumbs-item:not(.current):hover:after {
+    border-color: transparent transparent transparent darken($accent-color, 10%);
+}
+// .breadcrumbs-item:first-of-type:before,
+// .breadcrumbs-item:last-of-type:after {
+//     border-color: transparent!important;
+// }
+.breadcrumbs-item:first-of-type:before {
+    border-color: transparent!important;
+}
+.breadcrumbs-item:first-of-type {
+    padding-left: 1.3em;
+}
+// .breadcrumbs-item:last-of-type {
+//     padding-right: 1.3em;
+// }

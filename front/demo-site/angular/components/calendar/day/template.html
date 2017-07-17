@@ -1,0 +1,54 @@
+<!-- DAYS -->
+<div (window:resize)="windowResize($event)" class="day-inner">
+  <div class="calendar-day-number">
+    <div class="calendar-week-day-indicator">
+      {{day.name.substring(0,3)}}
+    </div>
+    {{d}}
+  </div>
+  <div (mouseenter)="mouseIn($event)" (mouseleave)="mouseOut($event)" class="day-events-holder" *ngIf="day.events.length>=1">
+    <div *ngFor="let event of day.events">
+      <div class="calendar-day-event">
+
+
+        <div [style.top]="popup.t+'px'" [style.left]="(popup.l=='auto')? popup.l :popup.l+'px'" [style.right]="(popup.r=='auto')? popup.r :popup.r+'px'" [class.open]="open" class="event-card">
+          <div class='keep-aspect-ratio'>
+          	<div class='keep-aspect-ratio-content'>
+              <div class="image-preloader">
+                <div>
+                  <!-- <img src="http://omnianightclub.com/wp-content/themes/omnia/img/preloader.svg"> -->
+                </div>
+              </div>
+              <img magic src="//flyerdriver.com/flyer/squared/640/event/{{event.id}}.png" alt="Event Flyer"
+              
+                sizes="
+                (max-width:768px) 50vw,
+                (max-width:1100px) 25vw,
+                (max-width:2400px) 12.5vw,
+                12.5vw
+                ">
+            </div>
+          </div>
+        </div>
+
+
+        <div class="calendar-event-title">
+          <span >
+            <span *ngIf="event.artist_event.hasOwnProperty('headliner')" class="event-location">{{event.artist_event.headliner.area.title}}</span>
+            <span class="highlight-text" [innerHTML]="event.title | truncate : 20 "></span>
+          </span>
+          <span *ngIf="event.artist_event.hasOwnProperty('supporting')">
+            <span class="event-location">{{event.artist_event.supporting.area.title}}</span>
+            <span class="highlight-text">{{event.artist_event.supporting.name}}</span>
+          </span>
+        </div>
+
+        <div [class.open]="open" [style.width]="popup.w+'px'" [style.min-height]="popup.h2+'px'" [style.top]="popup.h+'px'" class="card-actions">
+          <a class="button brand-border" href="http://ticketdriver.com/{{event.get_friendly_id}}/buy/tickets/event/{{event.id}}"><span class="text-node trans-300">TICKETS</span></a>
+          <a class="button brand-border" href="http://ticketdriver.com/{{event.get_friendly_id}}/apps/web/reservation?event={{event.id}}" ><span class="text-node trans-300">VIP TABLES</span></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+list > div > div > div > div child > div > ul > li > mutation > *:not(div),
+slide-field {
+  border: 1px solid #bbb;
+  display: table;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+group{
+  display: table;
+  width: 100%;
+}
+
+group group{
+  margin-top:30px;
+}
+
+generator , s3-file-picker{
+  cursor: default;
+}
+
+generator a, s3-file-picker a{
+  cursor: pointer;
+}

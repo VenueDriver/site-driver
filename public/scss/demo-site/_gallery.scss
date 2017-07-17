@@ -1,0 +1,39 @@
+.gallery {
+    a {
+        float: left;
+        display: block;
+        line-height: 0;
+        img {
+            width: 100%;
+            height: auto;
+            @include transition;
+        }
+        &:hover {
+            img {
+                opacity: .8;
+            }
+        }
+    }
+}
+
+// 550px
+@media all and (min-width: 550px) {
+    .gallery {
+        a {
+            width: 50%;
+        }
+    }
+}
+
+// 992px
+@media all and (min-width: $screen-landscape) {
+    .gallery {
+        a {
+            width: 25%;
+        }
+    }
+}
+
+// 1200px
+@media all and (min-width: $screen-desktop) {
+}

@@ -1,0 +1,40 @@
+.btn {
+    display: inline-block;
+    padding: 10px 15px;
+    background: transparent;
+    border: 1px solid $brand-primary;
+    color: $brand-primary;
+    text-transform: uppercase;
+}
+
+.btn-primary {
+    @extend .btn;
+    background: $brand-primary;
+    color: white;
+    text-transform: uppercase;
+    font-size: 13px;
+    &:hover {
+        background: darken($brand-primary,10%);
+        border-color: darken($brand-primary,10%);
+        opacity: .9;
+    }
+}
+
+// 768px
+@media all and (min-width: $screen-portrait) {
+    .btn-primary {
+        font-size: 19px;
+    }
+}
+
+// 992px
+@media all and (min-width: $screen-landscape) {
+
+}
+
+// 1200px
+@media all and (min-width: $screen-desktop) {
+    .btn {
+        padding: 20px 30px;
+    }
+}

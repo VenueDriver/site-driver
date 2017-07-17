@@ -1,0 +1,52 @@
+.box-image-top {
+	padding: 60px 0px;
+	text-align: center;
+	position: relative;
+    h1, p {
+        z-index: 9;
+        position: relative;
+    }
+    h1 {
+        &:after {
+            content: "";
+            background: rgba(255,255,255,0.5);
+            width: 50px;
+            margin: 20px auto;
+            height: 4px;
+            display: block;
+        }
+    }
+	&:after {
+		content: "";
+		background: rgba(0,0,0,0.5);
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 8;
+	}
+}
+
+.gallery {
+    z-index: 99;
+    position: relative;
+}
+
+// 768px
+@media all and (min-width: $screen-portrait) {
+}
+
+// 992px
+@media all and (min-width: $screen-landscape) {
+    .box-image-top {
+        padding: 200px 0 100px 0;
+        .container {
+            max-width: 900px;
+        }
+    }
+}
+
+// 1200px
+@media all and (min-width: $screen-desktop) {
+}

@@ -1,0 +1,48 @@
+.table-data-view {
+    display: table;
+    width: 100%;
+}
+
+.col-left-view {
+    display: table-header-group;
+    width: 100%;
+}
+.col-right-view {
+    display: table-header-group;
+    width: 100%;
+    .box {
+        margin-bottom: 0;
+    }
+}
+
+// 768px
+@media all and (min-width: $screen-portrait) {
+    .col-left-view,
+    .col-right-view {
+        display: table-cell;
+        vertical-align: top;
+        width: 35%;
+    }
+    .col-right-view {
+        padding-left: 15px;
+        width: 65%;
+        .col-12 {
+            padding-right: 0px;
+            padding-left: 0;
+        }
+    }
+}
+
+// 992px
+@media all and (min-width: $screen-landscape) {
+    .col-right-view {
+        width: 28%;
+    }
+    .col-right-view {
+        width: 72%;
+    }
+}
+
+// 1200px
+@media all and (min-width: $screen-desktop) {
+}

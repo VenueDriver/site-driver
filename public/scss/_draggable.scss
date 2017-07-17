@@ -1,0 +1,81 @@
+.gu-mirror {
+  position: fixed !important;
+  margin: 0 !important;
+  z-index: 9999 !important;
+  opacity: 0.8;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+  filter: alpha(opacity=80);
+  display: none !important;
+}
+.gu-hide {
+  display: none !important;
+}
+.gu-unselectable {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+.gu-transit {
+  opacity: 1.0;
+}
+
+.isDraggable > group > div > .box > .accordion > .acc-panel > h2,
+.isDraggable > list > .box > .accordion > .acc-panel > h2,
+.isDraggable > * > label,
+.isDraggable:not(input){
+  cursor: move;
+}
+
+
+list > div > div > div > div child > div > ul > li > mutation > *:not(div),
+mutation.isDraggable > slide-field{
+  -webkit-box-shadow: 4px 4px 2px 0px #cccccc;
+  box-shadow: 4px 4px 2px 0px #cccccc;
+  -webkit-transition: all 300ms ease-in-out;
+  -moz-transition: all 300ms ease-in-out;
+  -ms-transition: all 300ms ease-in-out;
+  -o-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+  // -moz-transform: translateX(0px) translateY(0px);
+  // -webkit-transform: translateX(0px) translateY(0px);
+  // -o-transform: translateX(0px) translateY(0px);
+  // -ms-transform: translateX(0px) translateY(0px);
+  // transform: translateX(0px) translateY(0px);
+}
+
+list > div > div > div > div child > div > ul > li > mutation.isDraggable,
+slider-field > div > div > div > div child > div > ul > li > mutation.isDraggable{
+  padding-top: 20px;
+  padding-bottom: 0px;
+  -webkit-transition: all 300ms ease-in-out;
+  -moz-transition: all 300ms ease-in-out;
+  -ms-transition: all 300ms ease-in-out;
+  -o-transition: all 300ms ease-in-out;
+  transition: all 300ms ease-in-out;
+}
+
+list > div > div > div > div child > div > ul > li > mutation.isDraggable:hover,
+slider-field > div > div > div > div child > div > ul > li > mutation.isDraggable:hover{
+  padding-top: 0px;
+  padding-bottom: 20px;
+}
+
+list > div > div > div > div child > div > ul > li > mutation.isDraggable:hover > *:not(div),
+mutation.isDraggable:hover > slide-field{
+  -webkit-box-shadow: 10px 16px 2px 0px #cccccc;
+  box-shadow: 10px 16px 2px 0px #cccccc;
+  // -moz-transform: translateX(0px) translateY(-10px);
+  // -webkit-transform: translateX(0px) translateY(-10px);
+  // -o-transform: translateX(0px) translateY(-10px);
+  // -ms-transform: translateX(0px) translateY(-10px);
+  // transform: translateX(0px) translateY(-10px);
+}
+
+mutation{
+  display: block;
+}
+
+.reduceButton{
+  cursor: pointer !important;
+}

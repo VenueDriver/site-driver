@@ -1,0 +1,149 @@
+.header {
+    background: black;
+    @include border-box;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    .container {
+        display: table;
+        width: 100%;
+        .col-left, .col-middle {
+            display: table-cell;
+            vertical-align: middle;
+            width: 70%;
+            text-align: left;
+        }
+        .col-middle {
+            width: 30%;
+            text-align: right;
+        }
+        .col-right {
+            display: none;
+        }
+    }
+
+    .fa-bars {
+        font-size: 20px;
+    }
+}
+.brand {
+  img {
+    fill: white;
+    width: auto;
+    height: 100%;
+    max-height: 80px;
+    @include transition;
+  }
+}
+
+// 768px
+@media all and (min-width: $screen-portrait) {
+    .header {
+        .container {
+            max-width: 100%;
+            padding-left: 15px;
+            padding-right: 15px;
+            .col-left, .col-middle {
+                width: 40%;
+            }
+            .col-middle {
+                width: 60%;
+            }
+        }
+    }
+}
+
+// 992px
+@media all and (min-width: $screen-landscape) {
+    .header {
+        position: absolute;
+        left: 0;
+        z-index: 99;
+        top: 0;
+        width: 100%;
+        @include transition;
+        border-bottom: 1px solid rgba(255,255,255,.4);
+        background: black;
+        background: -webkit-linear-gradient(top, transparent , black);
+        background: -o-linear-gradient(top, transparent, black);
+        background: -moz-linear-gradient(top, transparent, black);
+        background: linear-gradient(to top, transparent , black);
+        .container {
+            .col-left, .col-middle, .col-right {
+                width: 20%;
+                vertical-align: middle;
+            }
+            .col-right {
+                display: table-cell;
+                width: 25%;
+                text-align: right;
+            }
+            .col-middle {
+                width: 55%;
+                text-align: center;
+            }
+        }
+    }
+    .fixed-header {
+        background: black;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 999;
+        border: 0;
+        .brand {
+            img {
+                max-height: 50px;
+            }
+        }
+    }
+
+    .fixed-nav{
+      padding-top:87px;
+      header{
+          background: black;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          z-index: 999;
+          border: 0;
+          .brand {
+              img {
+                  max-height: 50px;
+              }
+          }
+      }
+    }
+}
+
+
+
+// 1200px
+@media all and (min-width: $screen-desktop) {
+    .header {
+        .container {
+            .col-left, .col-right {
+                width: 28%;
+            }
+            .col-middle {
+                width: 44%;
+            }
+        }
+    }
+}
+
+
+// 1500px
+@media all and (min-width: 1500px) {
+    .header {
+        .container {
+            .col-left, .col-right {
+                width: 24%;
+            }
+            .col-middle {
+                width: 52%;
+            }
+        }
+    }
+}

@@ -1,0 +1,43 @@
+h1, h2, h3, h4, h5, h6, p, span, a, ul, li, button, input, textarea {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.big-title {
+	@extend .box;
+	margin-bottom: 40px;
+	h3 {
+		font-size: 20px;
+	}
+}
+.box {
+	h2.acc-title {
+		font-size: 18px;
+		font-weight: 700;
+	}
+}
+.title-slide {
+	background: $brand-primary;
+	color: white;
+	font-size: 18px;
+	margin-bottom: 20px;
+	padding: 10px;
+}
+
+// 768px
+@media all and (min-width: $screen-portrait) {
+	.big-title {
+		h3 {
+			font-size: 25px;
+		}
+	}
+}
+
+// 992px
+@media all and (min-width: $screen-landscape) {
+}
+
+// 1200px
+@media all and (min-width: $screen-desktop) {
+
+}

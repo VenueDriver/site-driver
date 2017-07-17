@@ -1,0 +1,120 @@
+<modal *ngIf="panel && !noModal">
+  <div class="container">
+
+    <h2 class="acc-title">
+      {{label || 'Add new attribute'}}
+      <ul class="edit-buttons">
+        <li><a (click)="hidePanel()"><i class="fa fa-times" style="color:#000;color: #666;cursor:pointer;"></i></a></li>
+      </ul>
+    </h2>
+    <div class="panel">
+      <div class="row">
+        <div class="col-6">
+          <label for="" class="label-form">Type:</label>
+          <div class="box-select">
+            <input (focus)="type = ''" readonly="readonly" [match-formatted]="true" [accept-user-input]="false" [disabled]="disableType" auto-complete [(ngModel)]="type" [source]="components || dataService.availableTypes" />
+          </div>
+        </div>
+        <div class="col-6" *ngIf="['Column','row'].indexOf(type)<0 && noName != true && type">
+          <label for="" class="label-form">Name:</label>
+          <input type="text" (keyup)="onKey($event)" [value]="name" class="input-form">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12" *ngIf="['Text'].indexOf(type)>-1 && type" style="margin-bottom: 5px;">
+          <span (click)="use_textarea=!use_textarea" >
+            <ng-checkbox id="use_textarea" [checked]="use_textarea"></ng-checkbox>
+            <label for="use_textarea">Use textarea</label>
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-2">
+          <span (click)="required=!required" >
+            <ng-checkbox id="required" [checked]="required"></ng-checkbox>
+            <label for="required">Required</label>
+          </span>
+        </div>
+        <div class="col-2">
+          <span (click)="editable_value=!editable_value" >
+            <ng-checkbox id="editable_value" [checked]="editable_value"></ng-checkbox>
+            <label for="editable_value">Edit value</label>
+          </span>
+        </div>
+        <div class="col-2">
+          <span (click)="visible_field=!visible_field" >
+            <ng-checkbox id="visible_field" [checked]="visible_field"></ng-checkbox>
+            <label for="visible_field">Visible</label>
+          </span>
+        </div>
+        <div class="col-2">
+          <span (click)="delete_field=!delete_field" >
+            <ng-checkbox id="delete_field" [checked]="delete_field"></ng-checkbox>
+            <label for="delete_field">Can delete</label>
+          </span>
+        </div>
+        <div class="col-2">
+          <span (click)="editable_field=!editable_field" >
+            <ng-checkbox id="editable_field" [checked]="editable_field"></ng-checkbox>
+            <label for="editable_field">Can configure</label>
+          </span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12" *ngIf="['Column','Group'].indexOf(type)>-1 && type">
+          <label for="" class="label-form">Columns:</label>
+          <input type="number" [(ngModel)]="columns" class="input-form">
+        </div>
+      </div>
+      <div *ngIf="['Event','Slider'].indexOf(type) > -1 && type" class="row" style="padding: 0 20px;">
+      <label for="" style="font-size:16px;padding-bottom:5px;" class="label-form">Filter event list by venue:</label>
+        <div class="box" style="background:#fcfcfc;max-height: 170px;overflow-y: scroll;">
+          <div class="col-12" >
+            <venue-list [activeItems]="filter.venues" (listChange)="setVenueFilter($event)"></venue-list>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="['Event','Slider'].indexOf(type) > -1 && type" class="row" style="padding: 0 20px;">
+      <label for="" style="font-size:16px;padding-bottom:5px;" class="label-form">Filter event list by artist:</label>
+        <div class="box" style="background:#fcfcfc;max-height: 170px;overflow-y: scroll;">
+          <div class="col-12">
+            <artist-list [activeItems]="filter.artists" (listChange)="setArtistFilter($event)"></artist-list>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="type == 'List' && type" class="row">
+        <div class="box" style="background:#fcfcfc">
+          <div class="col-12">
+            <label for="" style="font-size:20px;padding-bottom:20px;" class="label-form">Select available components for this list:</label>
+            <type-list [activeTypes]="components" (listChange)="setTypeList($event)"></type-list>
+          </div>
+        </div>
+      </div>
+      <div class="box-buttons cf">
+        <a (click)="hidePanel()" class="btn btn-cancel">CANCEL</a>
+        <a (click)="save()" class="btn btn-save">SAVE</a>
+      </div>
+
+    </div>  <!-- PANEL END -->
+  </div>  <!-- CONTAINER END -->
+</modal>
+
+<div *ngIf="panel && noModal && components.length > 1">
+  <div class="panel">
+    <div class="row">
+      <div class="col-12">
+        <label for="" class="label-form">Type:</label>
+        <div class="box-select">
+          <input [disabled]="disableType" auto-complete [(ngModel)]="type" [source]="components || dataService.availableTypes" />
+        </div>
+      </div>
+    </div>
+    <div class="box-buttons cf">
+      <a (click)="hidePanel()" class="btn btn-cancel">CANCEL</a>
+      <a (click)="save()" class="btn btn-save">ADD</a>
+    </div>
+  </div>  <!-- PANEL END -->
+</div>
+
+<a (click)="showPanel()" #ref><ng-content></ng-content></a>
+<a *ngIf="!panel && ref.children.length == 0" (click)="showPanel()" class="btn-add">{{label || 'ADD NEW'}}</a>

@@ -1,0 +1,108 @@
+<label for="" class="label-form"><a class="reduceButton" (click)="reduced = !reduced">
+  <span *ngIf="!reduced" class="fa fa-angle-down"></span>
+  <span *ngIf="reduced" class="fa fa-angle-up"></span>
+  {{data._value.use_item_type}}
+</a>
+<span class="required-indicator" *ngIf="data._required" style="display: none;">*</span>
+<div class="edit-buttons">
+  <generator *ngIf="data._editable_field || userRole > 9000" [label]="'Edit ' + data._name" [path]="data._path" [edit]="data"><a class="fa fa-pencil"></a></generator>
+  <delete-btn *ngIf="data._delete_field || userRole > 9000" [path]="data._path"></delete-btn>
+</div></label>
+<div class="row" style="padding-bottom: 20px; margin-bottom: 30px;" *ngIf="!reduced">
+
+
+  <!-- STARTING POINT -->
+  <div class="col-12">
+    <label for="">Use information from</label>
+    <input (focus)="data._value.use_item_type = ''" readonly="readonly" [match-formatted]="true" [accept-user-input]="false" auto-complete [(ngModel)]="data._value.use_item_type" (ngModelChange)="newItemToUse($event)" [source]="['Custom Slide','Upcoming Event','Select Event','Select Artist','Select Venue']" />
+  </div>
+
+  <!-- SELECT A DATA ITEM TO USE -->
+  <div class="col-12" *ngIf="data._value.use_item_type !== 'Custom Slide' && data._value.use_item_type !== ''">
+    <label *ngIf="['Custom Slide','Upcoming Event'].indexOf(data._value.use_item_type) < 0" for="">{{data._value.use_item_type}}</label>
+    <div *ngIf="['Upcoming Event'].indexOf(data._value.use_item_type) > -1">
+      <label for="">
+        This slide will be automatically populated using events from the specified venue.<br><b>Note:</b> In the case that no venue is specified, the slide will use events from all venues.
+      </label>
+      <venue-select [currentValue]="data._value.use_information_from" (valueChange)="setDataItem($event)"  [disabled]="!(userRole > 9000 || data._editable_value)" [filter]="data._filter.venues"></venue-select>
+    </div>
+    <div *ngIf="['Select Event'].indexOf(data._value.use_item_type) > -1">
+      <label for="">Events from venue:</label>
+      <venue-select [currentValue]="filter_events[0]" (valueChange)="updateFilter($event)"   [disabled]="!(userRole > 9000 || data._editable_value)" [filter]="data._filter.venues"></venue-select>
+    </div>
+    <div *ngIf="data._value.use_item_type.indexOf('Event')>-1 && data._value.use_item_type.indexOf('Upcoming') < 0 && filter_events.length > 0">
+      <label for="">Events:</label>
+      <event-select [currentValue]="data._value.use_information_from" (valueChange)="setDataItem($event)"  [disabled]="!(userRole > 9000 || data._editable_value)" [filter]="{venues:filter_events}"></event-select>
+    </div>
+    <div *ngIf="data._value.use_item_type.indexOf('Artist')>-1">
+      <artist-select [currentValue]="data._value.use_information_from" (valueChange)="setDataItem($event)" [disabled]="!(userRole > 9000 || data._editable_value)" [filter]="data._filter.artists"></artist-select>
+    </div>
+    <div *ngIf="data._value.use_item_type.indexOf('Venue')>-1">
+      <venue-select [currentValue]="data._value.use_information_from" (valueChange)="setDataItem($event)"  [disabled]="!(userRole > 9000 || data._editable_value)" [filter]="data._filter.venues"></venue-select>
+    </div>
+  </div>
+
+  <!-- CUSTOMIZE SLIDE -->
+
+  <div class="col-12" *ngIf="['Custom Slide','Upcoming Event'].indexOf(data._value.use_item_type) < 0  && data._value.use_item_type !== ''">
+    <a [class.active]="overwrite" (click)="overwrite=!overwrite" style="color: #a28750;cursor: pointer;">CUSTOMIZE FIELDS <i class="fa fa-angle-down"></i><i class="fa fa-angle-up" style="display: none;"></i></a>
+
+  </div>
+
+  <div *ngIf="['Custom Slide'].indexOf(data._value.use_item_type) > -1 || overwrite">
+    <div class="col-12">
+      <label for="">Media Background</label>
+      <div>
+        <div *ngIf="data._value.media.length > 0" style="position: relative;display: inline-block;" >
+          <img style="width:100%;max-width:350px;" *ngIf="isImage(data._value.media)" [src]="data._value.media" alt="">
+          <video preload="none" *ngIf="!isImage(data._value.media)" width="320" height="240" controls>
+            <source [src]="data._value.media">
+            Your browser does not support the video tag.
+          </video>
+           <div (click)="openPanel()" *ngIf="data._editable_value || userRole > 9000" class="fa fa-pencil" style="position: absolute; top: 0; color: white; right: 0; padding: 10px; background: #af945c; width: 10px; cursor: pointer;"></div>
+           <div (click)="data._value.media = ''" *ngIf="data._editable_value || userRole > 9000" class="fa fa-times" style="position: absolute; top: 38px; color: white; right: 0; padding: 10px; background: #af945c; width: 10px; cursor: pointer;"></div>
+        </div>
+        <div *ngIf="data._value.media.length < 1 && data._value.tmp.media.length > 0" style="position: relative;display: inline-block;">
+          <img style="width:100%;max-width:350px;" [src]="data._value.tmp.media" alt="">
+        </div>
+      </div>
+      <div *ngIf="data._value.media.length <= 0" >
+        <button (click)="openPanel()" *ngIf="data._editable_value || userRole > 9000">SELECT FILE</button>
+      </div>
+      <s3-file-picker  *ngIf="(data._editable_value || userRole > 9000) && panel" (close)="closePanel()" [accept]="['.jpg','.jpeg','.png','.gif','.bmp','.tif','.svg','.mp4','.webm','.ogg']" (fileSelected)="grabFiles($event)"></s3-file-picker>
+
+    </div>
+    <div class="col-6">
+      <label for="">Title</label>
+      <textarea [placeholder]="data._value.tmp.title" [disabled]="!(userRole > 9000 || data._editable_value)" [(ngModel)]="data._value.title" (keyup)="setValue($event)" class="input-form"></textarea>
+    </div>
+    <div class="col-6">
+      <label for="">Additional Text</label>
+      <textarea [placeholder]="data._value.tmp.additional_text" [disabled]="!(userRole > 9000 || data._editable_value)" [(ngModel)]="data._value.additional_text" (keyup)="setValue($event)" class="input-form"></textarea>
+    </div>
+    <div class="col-6">
+      <label for="">Button 1 Label</label>
+      <input [placeholder]="data._value.tmp.buttons[0].label" [disabled]="!(userRole > 9000 || data._editable_value)" type="text" [(ngModel)]="data._value.buttons[0].label" (keyup)="setValue($event)" class="input-form">
+    </div>
+    <div class="col-6">
+      <label for="">Button 1 url</label>
+      <input [placeholder]="data._value.tmp.buttons[0].url" [disabled]="!(userRole > 9000 || data._editable_value)" type="text" [(ngModel)]="data._value.buttons[0].url" (keyup)="setValue($event)" class="input-form">
+    </div>
+    <div class="col-6">
+      <label for="">Button 2 Label</label>
+      <input [placeholder]="data._value.tmp.buttons[1].label" [disabled]="!(userRole > 9000 || data._editable_value)" type="text" [(ngModel)]="data._value.buttons[1].label" (keyup)="setValue($event)" class="input-form">
+    </div>
+    <div class="col-6">
+      <label for="">Button 2 url</label>
+      <input [placeholder]="data._value.tmp.buttons[1].url" [disabled]="!(userRole > 9000 || data._editable_value)" type="text" [(ngModel)]="data._value.buttons[1].url" (keyup)="setValue($event)" class="input-form">
+    </div>
+</div>
+
+</div>
+
+<!-- error message -->
+<div class="error-message" *ngIf="errors.length > 0 && data._required">
+  <ul>
+    <li *ngFor="let error of errors">- {{error}}</li>
+  </ul>
+</div>

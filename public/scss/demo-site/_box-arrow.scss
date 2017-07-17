@@ -1,0 +1,106 @@
+.box-arrow {
+    .col {
+        line-height: 0;
+        position: relative;
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+    div:nth-child(2) {
+        background: $brand-primary;
+        position: relative;
+        padding: 40px;
+        &:before {
+            content: "\f0d8";
+            display: inline-block;
+            font: normal normal normal 14px/1 FontAwesome;
+            font-size: inherit;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-size: 60px;
+
+            position: absolute;
+            top: -35px;
+            color: $brand-primary;
+            left: 47%;
+            z-index: 99;
+        }
+    }
+    &.to-right {
+        div:nth-child(1) {
+            background: $gray-light;
+            padding: 40px 40px 20px 40px;
+            position: relative;
+            h2, p {
+                color: black;
+            }
+            &:before {
+                content: "\f0d7";
+                display: inline-block;
+                font: normal normal normal 14px/1 FontAwesome;
+                font-size: inherit;
+                text-rendering: auto;
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                font-size: 60px;
+
+                position: absolute;
+                bottom: -30px;
+                color: $gray-light;
+                left: 47%;
+                z-index: 99;
+            }
+        }
+        div:nth-child(2) {
+            padding: 0;
+            &:before {
+                display: none;
+            }
+        }
+    }
+}
+
+// 768px
+@media all and (min-width: $screen-portrait) {
+
+}
+
+// 992px
+@media all and (min-width: $screen-landscape) {
+    .box-arrow {
+        display: table;
+        width: 100%;
+        .col {
+            display: table-cell;
+            width: 50%;
+            vertical-align: middle;
+        }
+        div:nth-child(2) {
+            &:before {
+                content: "\f0d9";
+                top: 44%;
+                left: -15px;
+            }
+        }
+        &.to-right {
+            div:nth-child(1) {
+                &:before {
+                    content: "\f0da";
+                    top: 44%;
+                    left: auto;
+                    right: -15px;
+                }
+            }
+            div:nth-child(2) {
+                background: black;
+            }
+        }
+    }
+}
+
+// 1200px
+@media all and (min-width: $screen-desktop) {
+
+}

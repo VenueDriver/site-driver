@@ -1,0 +1,76 @@
+html {
+	font-family: $primary-font;
+	height: 100%;
+}
+body {
+	background: $gray-light;
+	position: relative;
+	min-height: 100%;
+}
+
+.left {
+	float:left;
+}
+.right {
+	float: right;
+}
+a, a:hover, a:active, a:focus {
+	text-decoration: none;
+	-webkit-transition: all 230ms ease-in-out;
+	-moz-transition: all 230ms ease-in-out;
+	-ms-transition: all 230ms ease-in-out;
+	-o-transition: all 230ms ease-in-out;
+	transition: all 230ms ease-in-out;
+}
+.container {
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.cf:before,
+.cf:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+}
+
+.cf:after {
+    clear: both;
+}
+
+/**
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+.cf {
+    *zoom: 1;
+}
+
+// 768px
+@media all and (min-width: $screen-portrait) {
+	.container {
+		@include center;
+		max-width: 750px;
+	}
+
+
+}
+
+// 992px
+@media all and (min-width: $screen-landscape) {
+	.container {
+		max-width: 970px;
+	}
+	main {
+		display: inline-block;
+		vertical-align: top;
+		width: calc(100% - 210px);
+		margin: 20px 0;
+		margin-left: 200px;
+	}
+}
+
+// 1200px
+@media all and (min-width: $screen-desktop) {
+	.container {
+		max-width: 1170px;
+	}
+}

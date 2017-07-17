@@ -1,0 +1,140 @@
+/* General styles for all menus */
+.menu-btn{
+	display: block;
+	.fa-bars {
+		cursor:pointer;
+		font-size: 25px;
+		color: $gray;
+		-moz-transform: rotate(90deg);
+		-webkit-transform: rotate(90deg);
+		-o-transform: rotate(90deg);
+		-ms-transform: rotate(90deg);
+		transform: rotate(90deg);
+		&:before {
+			content: "|||"
+		}
+		&:hover {
+			color: $accent-color;
+		}
+	}
+	.fa-close {
+		-moz-transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		-ms-transform: rotate(0deg);
+		transform: rotate(0deg);
+		&:before {
+			content: "✕";
+		}
+	}
+}
+.cbp-spmenu {
+	background: $brand-primary;
+	display: inline-block;
+	@include transition;
+	@include border-box;
+	position: absolute;
+	width: 220px;
+	height: 100%;
+	top: 88px;
+	left: -280px;
+	padding: 30px;
+	padding-left:10px;
+	padding-right:10px;
+	z-index: 9;
+}
+.cbp-spmenu-open {
+	left: 0px;
+}
+.sub-nav {
+	a {
+		color: white;
+		display: block;
+		font-weight: 700;
+		text-transform: uppercase;
+		padding: 10px;
+		cursor: pointer;
+		font-size: 14px;
+		opacity: .3;
+		&:hover {
+			color: white;
+			padding-left: 15px;
+			opacity: 1;
+		}
+		&.select-menu {
+			color: $accent-color;
+			color: white;
+			opacity: 1;
+		}
+		i {
+			display: inline-block;
+			vertical-align: middle;
+			margin-right: 5px;
+			position: relative;
+			top: -2px;
+		}
+	}
+	ul ul {
+		padding-left: 15px;
+		li {
+			a {
+				font-weight: normal;
+				font-size: 14px;
+			}
+		}
+	}
+}
+.show-nav{
+	left: 0 !important;
+}
+
+.site-nav {
+	font-size:14px;
+	position: relative;
+	margin-bottom: 10px;
+	background: #fff;
+	cursor: pointer;
+}
+
+.site-nav > a{
+	padding-bottom:5px;
+}
+
+.site-nav:hover{
+	outline: 2px solid #333;
+}
+
+.active-nav{
+	color: #af945c;
+	outline: 2px solid #af945c;
+}
+// 768px
+@media all and (min-width: $screen-portrait) {
+
+}
+
+// 992px
+@media all and (min-width: $screen-landscape) {
+	.menu-btn{
+		display: none;
+	}
+	.cbp-spmenu {
+		left: 0;
+		width: 200px;
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		padding-top: 68px;
+		.fa-bars {
+			display: none;
+		}
+	}
+	.cbp-spmenu-open {
+		left: 0px;
+	}
+}
+
+// 1200px
+@media all and (min-width: $screen-desktop) {
+
+}

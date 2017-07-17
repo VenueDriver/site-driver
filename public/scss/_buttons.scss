@@ -1,0 +1,148 @@
+.btn {
+	background: $accent-color;
+	color: white;
+	padding: 20px 10px;
+	display: inline-block;
+	width: 100%;
+	cursor:pointer;
+	text-align: center;
+	@include border-box;
+	margin-bottom: 10px;
+	&.btn-cancel {
+		background: #666;
+		&:hover {
+			background: #222;
+		}
+	}
+	&.btn-save {
+		background: $accent-color;
+		margin-bottom: 0;
+		&:hover {
+			background: darken($accent-color,5%);
+		}
+	}
+	&.btn-inverted{
+		background:transparent;
+		border:1px solid $accent-color;
+		color: $accent-color;
+		&:hover{
+			color: #fff;
+			background: $accent-color;
+		}
+	}
+}
+.btn-add {
+	@extend .btn;
+	opacity:0.7;
+	margin-top: 15px;
+	background: transparent;
+	border: 2px dashed $accent-color;
+	width: 100%;
+	color : $accent-color;
+	padding: 10px;
+	@include center;
+	text-align: center;
+	&:before {
+		content: "\f067";
+		@include fontawesome;
+		margin-right: 10px;
+		vertical-align: middle;
+		@include transition;
+	}
+	&:hover {
+		opacity:1.0;
+		background: darken($accent-color,5%);
+		border-style: solid;
+		color: white;
+		&:before {
+			-moz-transform: rotate(90deg);
+			-webkit-transform: rotate(90deg);
+			-o-transform: rotate(90deg);
+			-ms-transform: rotate(90deg);
+			transform: rotate(90deg);
+
+		}
+	}
+}
+
+.delete-slide {
+	right: 23px;
+	top: 22px;
+	position: absolute;
+	display: inline-block;
+	z-index: 999;
+	width: 20px;
+	height: 20px;
+	&:before {
+		content: "✕";
+    color: white;
+	}
+	&:hover {
+		@include transition;
+		&:before {
+			color: $brand-atention;
+			-moz-transform: rotate(90deg);
+			-webkit-transform: rotate(90deg);
+			-o-transform: rotate(90deg);
+			-ms-transform: rotate(90deg);
+			transform: rotate(90deg);
+		}
+	}
+}
+
+.btns {
+	display: inline-block;
+	border: 1px solid $brand-secondary;
+	color: $brand-secondary;
+	padding: 5px;
+	@include border-box;
+	margin: 10px 10px 10px 0;
+	font-size: 14px;
+	&:hover {
+		color: darken($brand-secondary, 10%);
+	}
+	i {
+		margin-right: 5px;
+	}
+	&.remove {
+		color: $brand-atention;
+		border: 1px solid $brand-atention;
+		&:hover {
+			color: darken($brand-atention, 10%);
+		}
+	}
+}
+// 768px
+@media all and (min-width: $screen-portrait) {
+	.btn {
+		width: auto;
+		min-width: 150px;
+		margin-bottom: 0;
+		&.btn-cancel {
+			float: left;
+		}
+		&.btn-save {
+			float: right;
+		}
+	}
+	.site-def {
+		.btn {
+			&.btn-save {
+				margin-top: 15px;
+				float: none;
+			}
+		}
+	}
+	.btn-add {
+		float: none;
+		width: 100%;
+	}
+}
+
+// 992px
+@media all and (min-width: $screen-landscape) {
+}
+
+// 1200px
+@media all and (min-width: $screen-desktop) {
+}

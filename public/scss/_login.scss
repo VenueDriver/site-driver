@@ -1,0 +1,132 @@
+.box-login {
+	display: table;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	background: url(../images/bkg.png) no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+	position: relative;
+	padding: 50px 15px;
+	@include border-box;
+	&:before {
+		content: "";
+		background: rgba(255,255,255,.4);
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		z-index: 1;
+	}
+	.login {
+		display: table-cell;
+		width: 100%;
+		vertical-align: middle;
+		position: relative;
+		z-index: 2;
+	}
+}
+.box-login-cms {
+	background: white;
+	@include box-shadow;
+	max-width: 500px;
+	@include center;
+
+	.fa-lock {
+		color: white;
+		font-size: 20px;
+		display: inline-block;
+		vertical-align: middle;
+		margin-right: 10px;
+		position: relative;
+		top: -2px;
+	}
+	h2 {
+		background: $gray;
+		padding: 20px;
+		color: white;
+		font-weight: 700;
+		font-size: 20px;
+		text-align: left;
+		letter-spacing: 1px;
+	}
+	small {
+		font-size: 12px;
+		color: $gray;
+		a {
+			color: $brand-secondary;
+			text-decoration: underline;
+			&:hover {
+				color: $gray;
+			}
+		}
+	}
+}
+.cms-login {
+	padding: 35px 25px 25px 25px;
+	input, button {
+		width: 100%;
+		height: 50px;
+		background: $gray-light;
+		@include border-box;
+		font-family: $primary-font;
+		font-size: 18px;
+		margin-bottom: 20px;
+		padding: 10px;
+		border: 0;
+	}
+	button {
+		background: $brand-secondary;
+		color: white;
+		border: 0;
+		text-transform: uppercase;
+		padding: 0;
+		margin-bottom: 10px;
+		@include transition;
+		cursor: pointer;
+		position: relative;
+		span {
+			background: olive;
+			position: relative;
+			z-index: 999;
+		}
+		&:after {
+			content: "";
+			position: absolute;
+			background: darken($brand-secondary, 15%);
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			width: 0;
+			@include transition;
+		}
+		&:before {
+			content: "LOGIN";
+			z-index: 9;
+			position: relative;
+		}
+		&:hover {
+			background: darken($brand-secondary, 15%);
+			&:after {
+				width: 100%;
+			}
+		}
+	}
+}
+// 768px
+@media all and (min-width: $screen-portrait) {
+
+}
+
+// 992px
+@media all and (min-width: $screen-landscape) {
+
+}
+
+// 1200px
+@media all and (min-width: $screen-desktop) {
+}

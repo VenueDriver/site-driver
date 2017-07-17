@@ -1,0 +1,130 @@
+.image-field-container{
+	background-position: center;
+	background-repeat: repeat;
+	background-image: url('../images/transparency-bg.png');
+}
+.image-field-container img{
+	display: table;
+}
+.box {
+	background: white;
+	padding: 23px;
+	@include box-shadow;
+	margin-bottom: 40px;
+	.acc-panel {
+		position: relative;
+	}
+	.panel {
+		border-top: 1px solid #f1f1f1;
+		padding-top: 20px;
+		margin-top: 20px;
+	}
+
+}
+.box-details {
+    background: $primary-color-dark;
+    color: #fff;
+    padding: 15px 20px;
+    > * {
+	    margin-bottom: 2px;
+	}
+	h2 {
+		font-weight: bold;
+	}
+	p {
+		color: #999;
+		font-style: italic;
+	}
+}
+.site-def {
+	.col-2 {
+		float: left;
+   		padding-bottom: 0;
+		> div {
+			position: relative;
+			div {
+			    position: absolute;
+			    top: 0;
+			    color: white;
+			    right: 0;
+			    padding: 10px;
+			    background: $accent-color;
+			    width: 10px;
+			    cursor: pointer;
+			    &:hover {
+					background: darken($accent-color,5%);
+				}
+				&:last-of-type{
+				    top: 38px;
+				}
+			}
+		}
+	}
+}
+column,row{
+	display: block;
+}
+column {
+	margin-left: -15px;
+	margin-right:  -15px;
+}
+column > div[class^="col-"]{
+	float: left;
+}
+row .row{
+	width: 100%;
+}
+.edit-buttons {
+	float: right;
+	li {
+		display: inline-block;
+		vertical-align: middle;
+		.fa {
+			font-size: 20px;
+			padding: 0 5px;
+			color: $accent-color;
+			&.fa-plus {
+				color: $accent-color;
+			}
+			&.fa-pencil {
+				 color: $accent-color;
+			}
+			&:hover {
+				opacity: .8;
+			}
+		}
+	}
+}
+.fa-pencil {
+	color: $accent-color;
+}
+.box-buttons {
+	border-top: 1px solid #f1f1f1;
+	margin-top: 20px;
+	padding-top: 30px;
+}
+.line-border {
+	border: 1px solid darken($gray-light, 10%);
+	padding: 15px;
+	background: #f1f1f1;
+	position: relative;
+	input, select, textarea {
+		background: white;
+	}
+}
+
+.margin-bottom {
+	margin-bottom: 30px;
+}
+// 768px
+@media all and (min-width: $screen-portrait) {
+
+}
+
+// 992px
+@media all and (min-width: $screen-landscape) {
+}
+
+// 1200px
+@media all and (min-width: $screen-desktop) {
+}

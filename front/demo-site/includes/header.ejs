@@ -1,0 +1,25 @@
+<header class="header">
+  <div class="container">
+    <div class="col-left">
+      <a href="./index" class="brand">
+        <img src="<%= layout.brand.logo %>" alt="The Bank">
+      </a>
+    </div>
+    <div class="col-middle">
+      <a href="javascript:void(0);" id="toggle" class="fa fa-bars"></a>
+      <ul class="navbar">
+        <a href="javascript:void(0);" class="fa fa-times" id="close"></a>
+        <% navigation.main.links.forEach(link =>{ %>
+          <li><a href="<%= link.url %>" target="_self"><%= link.label %></a></li>
+        <% }) %>
+      </ul>
+    </div>
+    <div class="col-right">
+      <ul class="navbar navbar-featured">
+        <% navigation.header_buttons.links.forEach(link =>{ %>
+          <li><a href="<%= link.url %>"><%= link.label %></a></li>
+        <% }) %>
+      </ul>
+    </div>
+  </div>
+</header>

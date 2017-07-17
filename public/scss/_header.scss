@@ -1,0 +1,126 @@
+.big-title.admin-bar {
+	margin-bottom: 0;
+	padding: 10px 15px;
+    font-size: 14px;
+    background: $primary-color-dark;
+    color: white;
+    position: relative;
+    z-index: 99;
+    a {
+		color: white;
+	}
+}
+.big-title.site-admin-bar {
+	display: none;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-sizing: border-box;
+    z-index: 9999;
+    padding: 10px 23px;
+    background: $gray-light;
+    .btn {
+	    margin-top: 0;
+	    padding: 10px 31px;
+	    min-width: 0;
+    }
+    img{
+		width:100%;
+		max-width:40px;
+		vertical-align: middle;
+		margin-right: 10px;
+    }
+}
+.brand-content {
+	background: darken($primary-color-dark, 10%);
+	padding: 10px 30px;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	text-align: center;
+}
+.brand-composer {
+	width: 100%;
+	height: auto;
+	display: inline-block;
+	vertical-align: middle;
+	max-width: 320px;
+	@include center;
+}
+.admin-bar {
+	.left {
+		.brand-composer {
+			display: none;
+		}
+	}
+}
+.user-bar {
+	display: inline-block;
+	position: relative;
+    padding: 16px 20px;
+    margin: -10px 0;
+    background: $primary-color-dark;
+    cursor: pointer;
+    &:hover {
+    	background: lighten($primary-color-dark, 5%);
+    	.user-dropdown {
+    		display: block;
+    	}
+    }
+    .fa-angle-down {
+    	margin-left: 8px;
+    }
+    img {
+	    height: 18px;
+	    width: 18px;
+	    border-radius: 2px;
+	    vertical-align: middle;
+	    margin-right: 5px;
+	}
+}
+
+.user-dropdown {
+	display: none;
+	background: $primary-color;
+    color: white;
+    width: 100%;
+    box-sizing: border-box;
+    position: absolute;
+    top: 38px;
+    right: 0;
+    z-index: 9;
+    -webkit-box-shadow: 0 4px 8px rgba(0,0,0,0.175);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.175);
+    li a{
+		display: block;
+	    padding: 15px 20px;
+	    border-top: 1px solid #585f68;
+	    &:hover {
+	    	background: lighten($primary-color, 5%);
+	    }
+    }
+}
+
+// 768px
+@media all and (min-width: $screen-portrait) {
+}
+
+// 992px
+@media all and (min-width: $screen-landscape) {
+	.brand-content {
+		display: none;
+	}
+	.admin-bar {
+		.left {
+			.brand-composer {
+				display: inline-block;
+			}
+		}
+	}
+}
+
+// 1200px
+@media all and (min-width: $screen-desktop) {
+}

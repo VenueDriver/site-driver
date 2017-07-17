@@ -1,0 +1,65 @@
+.owl-events {
+    margin-bottom: 60px;
+
+    .owl-dots {
+        bottom: -50px;
+        .owl-dot {
+            display: inline-block;
+            border-radius: 50%;
+            height: 13px;
+            width: 13px;
+            margin: 4px;
+            border: 1px solid white;
+            background: rgba(255,255,255,.2);
+            &.active {
+                background: transparent;
+                border: 1px solid $brand-primary;
+            }
+        }
+    }
+}
+
+.event-flyer {
+    width: 100%;
+    height: 300px;
+}
+
+.event-flyer-video {
+    position: relative;
+    video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+}
+
+// 768px
+@media all and (min-width: $screen-portrait) {
+}
+
+// 992px
+@media all and (min-width: $screen-landscape) {
+}
+
+// 1200px
+@media all and (min-width: $screen-desktop) {
+    .event-flyer {
+        height: 320px;
+    }
+}
+// 1400px
+@media all and (min-width: 1400px) {
+    .event-flyer {
+        height: 400px;
+    }
+}
+
+// 1700px
+@media all and (min-width: 1700px) {
+    .event-flyer {
+        width: 100%;
+        height: 490px;
+    }
+}

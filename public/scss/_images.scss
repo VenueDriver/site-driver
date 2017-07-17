@@ -1,0 +1,30 @@
+.box-brand-icon {
+    overflow: hidden;
+    line-height: 0;
+    &:hover {
+        img {
+            -moz-transform: scale(1.02);
+            -webkit-transform: scale(1.02);
+            -o-transform: scale(1.02);
+            -ms-transform: scale(1.02);
+            transform: scale(1.02);
+        }
+    }
+}
+.brand-icon {
+    width: 100%;
+    height: auto;
+    @include transition;
+}
+
+// 768px
+@media all and (min-width: $screen-portrait) {
+}
+
+// 992px
+@media all and (min-width: $screen-landscape) {
+}
+
+// 1200px
+@media all and (min-width: $screen-desktop) {
+}

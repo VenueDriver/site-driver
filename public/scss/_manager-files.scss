@@ -1,0 +1,418 @@
+.content-thumbs {
+    position: relative;
+    .btns {
+        border-color: $accent-color;
+        color: $accent-color;
+        &:hover {
+            background: $accent-color;
+            color: white;
+        }
+    }
+}
+.content-thumbs-col-left, .content-thumbs-col-right {
+    padding: 10px;
+    @include border-box;
+    background: $gray-light;
+}
+.content-thumbs-col-right {
+    font-size: 0;
+    background: $gray-light;
+    border-left: 1px solid white;
+}
+.thumb {
+    display: inline-block;
+    width: 50%;
+    padding: 10px;
+    position: relative;
+    @include border-box;
+    cursor: pointer;
+    img {
+        width: 100%;
+        height: auto;
+    }
+    &:hover {
+        img {
+            outline: 2px solid $accent-color;
+        }
+    }
+    &.selected {
+        &:before {
+            content: "\f00c";
+            display: inline-block;
+            font-family: FontAwesome;
+            font-size: 15px;
+            text-align: center;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            width: 30px;
+            height: 30px;
+            color: white;
+            line-height: 30px;
+            position: absolute;
+            top: 10px;
+            z-index: 99;
+            right: 10px;
+            background: $accent-color;
+        }
+        img {
+            outline: 4px solid $accent-color;
+        }
+    }
+
+}
+.thumb-image {
+    position: relative;
+}
+.list-of-folders {
+    li {
+        a {
+            i {
+                display: inline-block;
+                vertical-align: middle;
+                margin-right: 5px;
+            }
+            display: block;
+            background: $accent-color;
+            color: white;
+            padding: 10px;
+            &:hover {
+                background: darken($accent-color,10%);
+            }
+        }
+    }
+}
+
+.form-files {
+    border-top: 3px solid white;
+    margin-top: 10px;
+    position: relative;
+    button.ok, button.nop {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 35px;
+        padding: 10px;
+        width: 35px;
+        @include border-box;
+        @include transition;
+        background: $brand-atention;
+        &:before {
+            content: "\f00d";
+            display: inline-block;
+            font-family: FontAwesome;
+            font-size: 15px;
+            text-align: center;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            color: white;
+        }
+        &:hover {
+            opacity: .8;
+        }
+    }
+    button.ok {
+        right: 35px;
+        background: $accent-color;
+        &:before {
+            content: "\f00c";
+        }
+    }
+    input, button {
+        font-family: $primary-font;
+    }
+    input {
+        width: 100%;
+        height: 35px;
+        font-size: 16px;
+        padding: 10px 80px 10px 10px;
+        @include border-box;
+    }
+    button {
+        border: 0;
+        cursor: pointer;
+        color: white;
+        font-size: 14px;
+        text-align: center;
+    }
+}
+.message-not-found {
+    display: block;
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+    border: 2px solid white;
+    @include border-box;
+    margin-bottom: 15px;
+}
+
+.header-title {
+    padding-bottom: 20px;
+    border-bottom: 1px solid #FFF;
+    margin-bottom: 20px;
+    padding-top: 15px;
+    h2, a {
+        display: inline-block;
+        vertical-align: middle;
+        text-transform: uppercase;
+        font-size: 20px;
+    }
+    h2 {
+        font-weight: bold;
+    }
+    a {
+        background: $accent-color;
+        color: white;
+        padding: 10px;
+        margin-left: 10px;
+        text-align: center;
+        font-size: 14px;
+        &:hover {
+            background: darken($accent-color, 10%);
+        }
+    }
+}
+.folder-plus {
+    display: block;
+    padding: 10px;
+    background: $accent-color;
+    border: 1px solid darken($accent-color,10%);
+    color: white;
+    margin-bottom: 2px;
+    i {
+        float: right;
+    }
+}
+
+.box-buttons-image {
+    font-size: 0;
+    -webkit-box-shadow: 0 -3px 0 0 rgba(0,0,0,.2);
+    box-shadow: 0 -3px 0 0 rgba(0,0,0,.2);
+    position: fixed;
+    z-index: 9999;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: white;
+    a {
+        font-size: 14px;
+        display: inline-block;
+        vertical-align: middle;
+        width: 50%;
+        background: $accent-color;
+        color: white;
+        text-align: center;
+        padding: 10px;
+        @include border-box;
+        @include transition;
+        &:hover {
+            opacity: .8;
+        }
+        &.btn-ok {
+            background: $brand-ok;
+        }
+        &.btn-del {
+            background: $brand-atention;
+        }
+        i {
+            margin-right: 5px;
+            display: none;
+        }
+    }
+}
+
+.content-overflow {
+    max-height: 380px;
+    overflow: scroll;
+}
+
+.content-thumbs {
+    .close-btn {
+        font-size: 20px;
+        position: absolute;
+        color: white;
+        background: $accent-color;
+        right: 5px;
+        top: 5px;
+        border: 0;
+        padding: 0;
+        z-index: 999;
+    }
+}
+.cancel-btn {
+    background: $accent-color;
+    display: block;
+    padding: 10px;
+    @include transition;
+    @include border-box;
+    color: white;
+    text-align: center;
+    margin: 20px 0;
+    i {
+        margin-right: 10px;
+    }
+}
+
+.video-file {
+    background: $primary-color-light;
+    width:100%;
+    height: 180px;
+    display: table;
+    position: relative;
+    text-align: center;
+    .content-icon {
+        display: table-cell;
+        vertical-align: middle;
+        height: 180px;
+        width: 100%;
+        .fa {
+            font-size: 50px;
+            opacity: .5;
+            color: white;
+            margin-bottom: 20px;
+        }
+    }
+}
+
+div.content-name {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    overflow: hidden;
+    display: none;
+    span {
+        float: right;
+        background: $gray-dark;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        font-size: 14px;
+        padding: 5px;
+        display: block;
+        color: white;
+
+    }
+}
+.video-file {
+    div.content-name {
+        display: block;
+    }
+}
+@media all and (min-width: $screen-portrait) {
+
+}
+
+// 992px
+@media all and (min-width: $screen-landscape) {
+    .content-thumbs {
+        display: table;
+        width: 100%;
+        .close-btn {
+            right: 22px;
+            top: 35px;
+            font-size: 20px;
+            padding: 5px;
+            cursor: pointer;
+            @include transition;
+            &:hover {
+                background: darken( $accent-color, 10%);
+            }
+        }
+    }
+    .content-thumbs-col-left {
+        position: relative;
+    }
+    .content-thumbs-col-left, .content-thumbs-col-right {
+        display: table-cell;
+        width: 20%;
+        vertical-align: top;
+    }
+    .content-thumbs-col-right {
+        width: 80%;
+    }
+    .thumb {
+        width: 20%;
+    }
+    .folder-plus {
+        display: none;
+    }
+    .list-of-folders {
+        li {
+            a {
+                i {
+                    color: $brand-primary;
+                }
+                background: transparent;
+                color: $brand-primary;
+                &:hover {
+                    background: transparent;
+                    color: $accent-color;
+                    i {
+                        color: $accent-color;
+                    }
+                }
+                &.select-folder {
+                    background: transparent;
+                    color: $accent-color;
+                    i {
+                        color: $accent-color;
+                    }
+                }
+            }
+        }
+    }
+    .box-buttons-image {
+        left: auto;
+        box-shadow: none;
+        background: transparent;
+        margin-top: 0;
+        bottom: 20px;
+        left: auto;
+        right: 15px;
+        position: absolute;
+        box-shadow: none;
+        width: 77%;
+
+        text-align: center;
+
+        a {
+            height: 37px;
+            margin: 0 5px;
+            width: 300px;
+            i {
+                display: inline-block;
+                vertical-align: middle;
+            }
+
+        }
+    }
+
+    .cancel-btn {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 90%;
+        left: 10px;
+        bottom: 0px;
+    }
+}
+
+// 1320px
+@media all and (min-width: 1320px) {
+    .box-buttons-image {
+        a {
+            span {
+                display: inline-block;
+                vertical-align: middle;
+                font-size: 12px;
+            }
+        }
+    }
+}
+
+// 1600px
+@media all and (min-width: 1600px) {
+    .thumb {
+        width: 12.5%;
+    }
+}

@@ -1,0 +1,35 @@
+<section class="box-contact">
+  <div class="container">
+    <h2>CONTACT US</h2>
+    <ul>
+      <li>
+        <h4>SpeciAl Events</h4>
+        <p><%- venue_info.special_events.contact_name.replace(/\n/g,"<br>") %><br>
+        <%- venue_info.special_events.contact_title.replace(/\n/g,"<br>") %><br>
+        <%- venue_info.special_events.contact_phone.replace(/\n/g,"<br>") %> <br>
+        <%- venue_info.special_events.contact_email.replace(/\n/g,"<br>") %></p>
+      </li>
+      <li>
+        <h4>Corporate Events</h4>
+        <p>
+          <%- venue_info.corporate_events.contact_title.replace(/\n/g,"<br>") %><br>
+          <%- venue_info.corporate_events.contact_phone.replace(/\n/g,"<br>") %> <br>
+          <%- venue_info.corporate_events.contact_email.replace(/\n/g,"<br>") %>
+        </p>
+      </li>
+      <li>
+        <h4>Hours</h4>
+        <p>
+          <%- venue_info.general_info.hours_of_operation.replace(/\n/g,"<br>") %>
+        </p>
+      </li>
+      <li>
+        <h4>Visit Us</h4>
+        <p><%- venue_info.general_info.location_name.replace(/\n/g,"<br>") %><br>
+        <%- venue_info.general_info.location_address.replace(/\n/g,"<br>") %>
+        <%- venue_info.general_info.contact_email.replace(/\n/g,"<br>") %><br>
+        <%- venue_info.general_info.contact_phone.replace(/\n/g,"<br>") %></p>
+      </li>
+    </ul>
+  </div>
+</section>

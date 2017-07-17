@@ -1,0 +1,109 @@
+.box-image-slider {
+  position: relative;
+  display: inline-block;
+  max-width: 200px;
+  margin-bottom: 20px;
+  img {
+    width: 100%;
+    height: auto;
+  }
+}
+.delete {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  top: 15px;
+  font-size: 25px;
+  right: 15px;
+  z-index: 9999;
+  &:after {
+    content: "✕";
+    color: white;
+    @include transition;
+  }
+  &:hover {
+    &:after {
+      color: $brand-secondary;
+    }
+  }
+}
+.options-slider {
+  display: block;
+  @include center;
+  margin-top: 20px;
+  font-size: 0;
+  border-top: 1px solid white;
+  padding-top: 30px;
+  li {
+    display: inline-block;
+    vertical-align: middle;
+    width: 50%;
+    &:last-child {
+      text-align: right;
+    }
+    a {
+      font-size: 23px;
+    }
+  }
+}
+
+.close-s, .delete-s {
+  color: $accent-color;
+  display: inline-block;
+  &:hover {
+    color: black;
+    i {
+      color: black;
+    }
+  }
+  i {
+    color: $accent-color;
+    margin-right: 10px;
+    @include transition;
+  }
+}
+
+.site-menu {
+  .delete-s {
+    padding: 10px 0;
+  }
+}
+
+.close-s {
+  color: $gray;
+  i {
+    color: $gray;
+  }
+  &:hover {
+    i {
+      color: black;
+    }
+  }
+}
+
+slide-field label {
+    display: inline-block;
+    padding-bottom: 8px;
+}
+
+a.active {
+  color: darken($accent-color,15%)!important;
+  .fa-angle-down{
+    display:none;
+  }
+  .fa-angle-up {
+    display: inline-block!important;
+  }
+}
+
+// 768px
+@media all and (min-width: $screen-portrait) {
+}
+
+// 992px
+@media all and (min-width: $screen-landscape) {
+}
+
+// 1200px
+@media all and (min-width: $screen-desktop) {
+}
