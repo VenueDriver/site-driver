@@ -14,6 +14,7 @@ const mongoose          = require('mongoose');
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/loginapp');
 const app   = express();
+module.exports._app = app;
 const db    = mongoose.connection;
 
 

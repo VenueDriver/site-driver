@@ -4,6 +4,7 @@ const path = require("path");
 const asyncLoop = require("../custom_modules/asyncloop");
 const validateComponent = require("../custom_modules/validate-component");
 const s3module = require("../custom_modules/amazons3");
+const staticfy = require("../custom_modules/staticfy");
 const s3 = new s3module();
 
 
@@ -158,7 +159,27 @@ const save = (req,res,next)=>{
                   "/config","_"+filename+".json",
                   ()=>{
 
-                  res.json({"body" : outputData(req.body) });
+
+                    fs.readdir(path.join(__dirname,"../",'front/',"demo-site") ,'utf-8', (err, fileList)=>{
+                      fileList = fileList.filter(name => /index\.ejs$/.test(name));
+                      let fl = 0;
+                      asyncLoop(
+                        ()=> fl >= fileList.length,
+                        (next,end)=>{
+                          let page = fileList[fl].replace(/\.ejs$/,'');
+                          staticfy.parseHTML(req.body._domain,page,'demo-site',(err,html)=>{
+                            s3.upload(html,"","index.html",()=>{
+                              fl++;
+                              next();
+                            }, s3.fs);
+                          });
+                        },
+                        ()=>{
+                          res.json({"body" : outputData(req.body) });
+                        }
+                      );
+                    });
+
 
                 }, s3.dataBucket.fs )
             }, s3.dataBucket.fs )
