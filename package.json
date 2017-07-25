@@ -4,7 +4,7 @@
   "description": "Content Management System",
   "main": "update.js",
   "scripts": {
-    "postinstall" : "tsc && gulp sass && webpack ",
+    "postinstall": "tsc && gulp sass && webpack ",
     "start": "node server.js",
     "server": "tsc && gulp sass && webpack && concurrently \"tsc -w\" \"nodemon server.js\" \"gulp sass:watch\" ",
     "dev": "tsc && concurrently \"tsc -w\" \"webpack --progress --display-error-details --watch\" \"gulp \" "
@@ -77,9 +77,7 @@
     "webpack-dev-server": "^2.1.0"
   },
   "engines": {
-    "node": "6.9.x"
+    "node": "7.10.1"
   },
-  "devDependencies": {
-
-  }
+  "devDependencies": {}
 }
