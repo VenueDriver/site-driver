@@ -1,0 +1,41 @@
+<page>
+  <page-header></page-header>
+  <main >
+		<section>
+			<div class="container" *ngIf="ready">
+
+
+
+				<div class="col-12">
+				  <div class="box">
+				    <div id="accordion" class="accordion">
+				      <div class="acc-panel">
+				        <h2 class="acc-title">
+			            New Cell
+				          <ul class="edit-buttons">
+
+				          </ul>
+				        </h2>
+				        <div class="panel" *ngIf="!reduced">
+									<label for="" class="label-form">Name*</label>
+				          <div class="box-select">
+				            <input [(ngModel)]="name" type="text" class="input-form" />
+				          </div>
+									<div class="box-buttons cf">
+						        <spinner *ngIf="savingData"></spinner>
+						        <a (click)="createCell()" *ngIf="!savingData" class="btn btn-save">BUILD</a>
+						      </div>
+				        </div>
+				      </div>
+				    </div>
+				  </div>
+				</div>
+
+
+
+
+			</div>
+		</section>
+	</main>
+  <page-footer></page-footer>
+</page>

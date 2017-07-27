@@ -120,6 +120,27 @@ export class DataService implements OnInit {
     this.save(data,next);
   }
 
+  saveCell(cell){
+    let data = cell; // ALIAS
+    return new Promise((resolve,reject)=>{
+      let formData = new FormData();
+      if(cell.hasOwnProperty("_child")) (<any>data)._child = JSON.stringify((<any>data)._child);
+      Object.keys(data).forEach(key=>{
+        formData.append(key,data[key]);
+      });
+      this.postToServer(
+        "/cell/save",
+        formData,
+        [
+          //{name : "Content-Type", value : "multipart/form-data" }
+        ]
+      ).subscribe(data =>{
+        console.log("Cell Saved",data);
+        resolve(data);
+      });
+    })
+  }
+
   uploadFile(data,domain){
     return new Promise((resolve,reject)=>{
       let formData = new FormData();

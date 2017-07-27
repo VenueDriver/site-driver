@@ -136,6 +136,16 @@ router.get( "/site/:site_domain" ,(req,res)=>{
   });
 });
 
+router.get( "/:pagename" ,(req,res)=>{
+  c.sites.checkUser(req,res, (isAuth)=> {
+    if(isAuth){
+      res.render("index");
+    }else{
+      res.redirect('/login');
+    }
+  });
+});
+
 router.get("/login", (req,res)=>{
   res.render("login");
 });

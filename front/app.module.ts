@@ -57,10 +57,11 @@ import { LinkFieldComponent }     from './components/link-field/script';
 import { FixedElementDirective }  from './directives/fixed-element/script';
 
 // CUSTOM SERVICES
-import { DataService }    from './services/data.service';
-import { S3Service }      from './services/s3.service';
-import { PdService }      from './services/pd.service';
-import { Config }         from './services/config.service';
+import { DataService }        from './services/data.service';
+import { MoleculeService }    from './services/molecule.service';
+import { S3Service }          from './services/s3.service';
+import { PdService }          from './services/pd.service';
+import { Config }             from './services/config.service';
 
 // HELPERS
 import { WindowRef }      from './helpers/window-ref';
@@ -76,6 +77,7 @@ import { PageFooter }     from './components/page-footer/script';
 
 import { SitePage }       from './pages/site/script';
 import { IndexPage }      from './pages/index/script';
+import { CellBuilder }      from './pages/cell-builder/script';
 
 
 //DEFINE ROUTES
@@ -141,7 +143,8 @@ const appRoutes: Routes = require('./config/routes');
     AddSiteComponent,
     LinkFieldComponent,
     IndexPage,
-    SitePage
+    SitePage,
+    CellBuilder
   ],
   entryComponents: [
     GroupComponent,
@@ -166,6 +169,7 @@ const appRoutes: Routes = require('./config/routes');
     S3Service,
     TruncatePipe,
     DataService,
+    MoleculeService,
     PdService,
     Config,
     WindowRef
