@@ -59,6 +59,7 @@ import { FixedElementDirective }  from './directives/fixed-element/script';
 // CUSTOM SERVICES
 import { DataService }        from './services/data.service';
 import { MoleculeService }    from './services/molecule.service';
+import { ServerService }      from './services/server.service';
 import { S3Service }          from './services/s3.service';
 import { PdService }          from './services/pd.service';
 import { Config }             from './services/config.service';
@@ -169,6 +170,7 @@ const appRoutes: Routes = require('./config/routes');
     S3Service,
     TruncatePipe,
     DataService,
+    ServerService,
     MoleculeService,
     PdService,
     Config,

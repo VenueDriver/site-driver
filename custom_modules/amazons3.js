@@ -13,6 +13,11 @@ let s3fsImpl = new S3FS('assets.portaldriver.com' ,
     accessKeyId : process.env.S3KEY,
     secretAccessKey : process.env.S3SECRET
   })
+let s3fsImplMolecule = new S3FS('molecule.portaldriver.com' ,
+  {
+    accessKeyId : process.env.S3KEY,
+    secretAccessKey : process.env.S3SECRET
+  })
 
 module.exports = function (){
 
@@ -57,6 +62,9 @@ module.exports = function (){
   this.fs = s3fsImpl;
   this.dataBucket = {
     fs : s3fsImplData
+  };
+  this.moleculeBucket = {
+    fs : s3fsImplMolecule
   };
   return this;
 

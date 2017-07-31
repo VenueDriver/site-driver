@@ -18,8 +18,28 @@ const User = require('../models/user');
 const c = {
   sites : require("../controllers/sites"),
   external : require("../controllers/external"),
-  amazons3 : require("../controllers/amazons3")
+  amazons3 : require("../controllers/amazons3"),
+  molecule : require("../controllers/molecule")
 };
+
+const bouncer = (req,res)=>{
+  return new Promise((resolve,reject)=>{
+    if(req.isAuthenticated()){
+      resolve(req,res);
+    }else{
+      reject(req,res);
+    }
+  })
+}
+
+const rejectAccess = (req,res)=>{
+  res.redirect('/login');
+}
+
+const rejectEndpoint = (req,res)=>{
+  res.status(403);
+  return res.json({error : "User not allowed"});
+}
 
 // = SET ROUTES
 
@@ -102,18 +122,6 @@ router.get('/demo-site/:domain/:page',(req,res)=>{
 });
 
 
-router.get("/",(req,res)=>{
-  c.sites.checkUser(req,res, (isAuth)=> {
-    if(isAuth){
-      res.render("index");
-    }else{
-      res.redirect('/login');
-    }
-  });
-});
-
-
-
 router.get("/site/list", (req,res)=>{
   // console.log("Requesting Site List")
   c.sites.checkUser(req,res, (isAuth)=> {
@@ -136,22 +144,9 @@ router.get( "/site/:site_domain" ,(req,res)=>{
   });
 });
 
-router.get( "/:pagename" ,(req,res)=>{
-  c.sites.checkUser(req,res, (isAuth)=> {
-    if(isAuth){
-      res.render("index");
-    }else{
-      res.redirect('/login');
-    }
-  });
-});
-
 router.get("/login", (req,res)=>{
   res.render("login");
 });
-
-
-
 
 
 passport.use(new LocalStrategy(
@@ -189,10 +184,34 @@ passport.deserializeUser(function(id, done) {
 
 
 
-router.get('/logout', function(req, res){
+router.get('/logout', function(req, res){  
 	req.logout();
+  req.session.destroy();
 	res.redirect('/');
 });
+
+
+router.get( "/:pagename" ,(req,res)=>{
+  c.sites.checkUser(req,res, (isAuth)=> {
+    if(isAuth){
+      res.render("index");
+    }else{
+      res.redirect('/login');
+    }
+  });
+});
+
+
+router.get("/",(req,res)=>{  
+  c.sites.checkUser(req,res, (isAuth)=> {
+    if(isAuth){      
+      res.render("index");
+    }else{      
+      res.redirect('/login');
+    }
+  });
+});
+
 
 
 
@@ -263,6 +282,91 @@ router.post( "/media/s3/remove" , (req,res)=>{
     }
   });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+==============================
+ MOLECULE
+==============================
+*/
+
+
+
+
+
+router.post("/cell/save",upload.single("_file"),(req,res)=>{
+  bouncer(req,res).then(()=>{
+    c.molecule.cell.save(req,res).then((success)=>{
+      res.status(200);
+      return res.json({message : "Success! Data saved"});
+    }).catch((error)=>{
+      res.status(400);
+      return res.json(error);
+    });
+
+  }).catch((error)=> rejectEndpoint(error));
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

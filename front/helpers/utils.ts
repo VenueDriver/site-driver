@@ -57,6 +57,16 @@
     }
   }
 
+  export function aloop(condition,work,end){
+    if ( condition() ){
+      end()
+    }else{
+      work(()=>{
+        aloop(condition,work,end)
+      },end)
+    }
+  }
+
   //ASYNC WORK EXECUTED ON AN ARRAY
   export function asyncLoop(
     source : any[] ,

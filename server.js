@@ -12,7 +12,7 @@ const mongo             = require('mongodb');
 const MongoStore        = require('connect-mongo')(session);
 const mongoose          = require('mongoose');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/loginapp');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/loginapp',{ useMongoClient: true });
 const app   = express();
 const db    = mongoose.connection;
 
