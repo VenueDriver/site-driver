@@ -23,12 +23,38 @@
 				          </div>
 									<div class="box-buttons cf">
 						        <spinner *ngIf="savingData"></spinner>
-						        <a (click)="saveCell()" *ngIf="!savingData" class="btn btn-save">BUILD</a>
+						        <a (click)="createCell()" *ngIf="!savingData" class="btn btn-save">BUILD</a>
 						      </div>
 				        </div>
 				      </div>
 				    </div>
 				  </div>
+				</div>
+				<div class="col-12">
+				  <table>
+				    <thead>
+				      <tr>
+				        <td>Name</td>
+								<td>Actions</td>
+				      </tr>
+				    </thead>
+						<tbody>
+	            <tr *ngFor="let cell of cellList">
+								<td>{{cell._type}}</td>
+								<td>
+									<a href="javascript:void(0);" (click)="edit(cell)">
+										<span class="fa fa-pencil"></span> Edit
+									</a>
+									<a href="javascript:void(0);" (click)="remove(cell)">
+										<span class="fa fa-times"></span> Remove
+									</a>
+								</td>
+								<td *ngIf="editingList[cell._id]">
+                  <molecule-renderer [data]="cell" ></molecule-renderer>
+								</td>
+	            </tr>
+	          </tbody>
+				  </table>
 				</div>
 
 

@@ -53,6 +53,9 @@ import { SliderFieldComponent }   from './components/slider/script';
 import { S3FilePicker }           from './components/s3-file-picker/script';
 import { LinkFieldComponent }     from './components/link-field/script';
 
+import { MoleculeRenderer }       from './components/molecule-renderer/script';
+import { FusionComponent }        from './components/fusion/script';
+
 // CUSTOM DIRECTIVES
 import { FixedElementDirective }  from './directives/fixed-element/script';
 
@@ -78,7 +81,7 @@ import { PageFooter }     from './components/page-footer/script';
 
 import { SitePage }       from './pages/site/script';
 import { IndexPage }      from './pages/index/script';
-import { CellBuilder }      from './pages/cell-builder/script';
+import { CellBuilder }    from './pages/cell-builder/script';
 
 
 //DEFINE ROUTES
@@ -145,7 +148,9 @@ const appRoutes: Routes = require('./config/routes');
     LinkFieldComponent,
     IndexPage,
     SitePage,
-    CellBuilder
+    CellBuilder,
+    MoleculeRenderer,
+    FusionComponent
   ],
   entryComponents: [
     GroupComponent,

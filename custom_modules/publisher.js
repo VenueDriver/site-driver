@@ -18,7 +18,6 @@ class Publisher{
   }
 
   publishJSON(){
-    console.log("Publishing json");
     return new Promise((resolve,reject)=>{
       let formattedData = Object.assign({},this.data);
       // formattedData = cleanFormatter(formattedData);
@@ -35,6 +34,21 @@ class Publisher{
       formattedData = JSON.stringify(formattedData);
       this.storageAdapter.input(this.type,formattedData,"/jsonp",this.basename).then(resolve).catch(reject);
     })
+  }
+
+  unpublish(onlyOriginal){
+    return new Promise((resolve,reject)=>{
+      this.storageAdapter.remove(this.type,this.data._id,"/original").then((data)=>{
+        if(onlyOriginal){
+          resolve(data);
+        }else{
+          this.storageAdapter.remove(this.type,this.data._id,"").then(()=>{
+            this.storageAdapter.remove(this.type,this.data._id,"/jsonp").then(resolve).catch(reject);
+          }).catch(reject);
+        }
+      }).catch(reject)
+    })
+
   }
 
   cleanFormatter(data){

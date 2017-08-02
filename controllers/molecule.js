@@ -1,14 +1,14 @@
 const Publisher = require( "../custom_modules/publisher" );
 const StorageAdapter = require( "../custom_modules/storage-adapter" );
-
 const storageConfig = require('../config/storage');
 const storageAdapter = new StorageAdapter(storageConfig);
+const uniqid = require('uniqid');
 
 
 const validate = (data)=>{
   return new Promise((resolve,reject)=>{
-    if(data._name){
-      resolve(data._name);
+    if(data._type){
+      resolve(data._type);
     }else{
       reject();
     }
@@ -19,6 +19,7 @@ const validate = (data)=>{
 const save = (req,type)=>{
   return new Promise((resolve,reject)=>{
     let molecules = Object.assign({},req.body);
+    if(!molecules._id) molecules._id = uniqid();
     // VALIDATE DATA STRUCTURE
     validate(molecules).then((validName)=>{
       // CREATE PUBLISHER AND LINK IT TO THE STORAGE ADAPTER
@@ -49,6 +50,36 @@ const save = (req,type)=>{
   })
 }
 
+const remove = (req,type)=>{  
+  return new Promise((resolve,reject)=>{    
+    let molecules = Object.assign({},req.body);
+    if(molecules._id){
+      const publisher = new Publisher({
+        data : molecules,
+        basename : molecules._type+'.json',
+        storageAdapter : storageAdapter,
+        type : type
+      });      
+      // UNPUBLISH ALL THREE VERSIONS
+      publisher.unpublish().then(resolve).catch(reject);
+
+    }else{
+      reject({error : type+" Does not have an ID"});
+    }
+  })
+}
+
+const get = (type,typeName)=>{
+  // TYPE IS THE NAME OF THE NEW CELL TYPE
+    if(typeName){
+      return storageAdapter.getOne(type,typeName);
+    }else{
+      return storageAdapter.getAll(type);
+    }
+}
+
 module.exports.cell = {
-  save : (req,res) => save(req,"cell")
+  save : (req,res) => save(req,"cell"),
+  remove : (req) => remove(req,"cell"),
+  get : (typeName) => get("cell",typeName)
 };

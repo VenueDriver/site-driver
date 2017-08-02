@@ -184,7 +184,102 @@ passport.deserializeUser(function(id, done) {
 
 
 
-router.get('/logout', function(req, res){  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+==============================
+ MOLECULE
+==============================
+*/
+
+
+router.get("/cell/get/all",(req,res)=>{
+  bouncer(req,res).then(()=>{
+    c.molecule.cell.get().then((data)=>{
+      res.status(200);
+      return res.json(data);
+    }).catch((error)=>{
+      res.status(400);
+      return res.json(error);
+    });
+
+  }).catch((error)=> rejectEndpoint(error));
+})
+
+router.get("/cell/get/:typeName",(req,res)=>{
+  bouncer(req,res).then(()=>{
+    c.molecule.cell.get(req.params.typeName).then((data)=>{
+      res.status(200);
+      return res.json(data);
+    }).catch((error)=>{
+      res.status(400);
+      return res.json(error);
+    });
+
+  }).catch((error)=> rejectEndpoint(error));
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+router.get('/logout', function(req, res){
 	req.logout();
   req.session.destroy();
 	res.redirect('/');
@@ -202,11 +297,11 @@ router.get( "/:pagename" ,(req,res)=>{
 });
 
 
-router.get("/",(req,res)=>{  
+router.get("/",(req,res)=>{
   c.sites.checkUser(req,res, (isAuth)=> {
-    if(isAuth){      
+    if(isAuth){
       res.render("index");
-    }else{      
+    }else{
       res.redirect('/login');
     }
   });
@@ -323,6 +418,19 @@ router.post("/cell/save",upload.single("_file"),(req,res)=>{
     c.molecule.cell.save(req,res).then((success)=>{
       res.status(200);
       return res.json({message : "Success! Data saved"});
+    }).catch((error)=>{
+      res.status(400);
+      return res.json(error);
+    });
+
+  }).catch((error)=> rejectEndpoint(error));
+})
+
+router.post("/cell/remove",upload.single("_file"),(req,res)=>{  
+  bouncer(req,res).then(()=>{
+    c.molecule.cell.remove(req,res).then((success)=>{      
+      res.status(200);
+      return res.json({message : "Success! Data removed"});
     }).catch((error)=>{
       res.status(400);
       return res.json(error);

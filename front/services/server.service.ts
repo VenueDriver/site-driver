@@ -11,7 +11,7 @@ export class ServerService {
 
   }
 
-  request(verb : string , endpoint : string , data : any , h : Array<any>) : Observable<any>{
+  request(verb : string , endpoint : string , data : any = {} , h : Array<any> = []) : Observable<any>{
     let formData = new FormData();
     formData.append("data",JSON.stringify(data));
 
@@ -21,9 +21,15 @@ export class ServerService {
     });
 
     let options = new RequestOptions({ headers: headers });
-    return this.http[verb]( endpoint , data , options).map(
-      (res:Response) => res.json()
-    );
+    if(verb == "get"){
+      return this.http[verb]( endpoint ).map(
+        (res:Response) => res.json()
+      );
+    }else{
+      return this.http[verb]( endpoint , data , options).map(
+        (res:Response) => res.json()
+      );
+    }
   }
 
   // POST TO SERVER
@@ -32,8 +38,8 @@ export class ServerService {
   }
 
   // GET FROM SERVER
-  get(endpoint : string , data : any , headers : Array<any>) : Observable<any> {
-    return this.request("get",endpoint,data,headers)
+  get(endpoint : string ) : Observable<any> {
+    return this.request("get",endpoint)
   }
 
 }
