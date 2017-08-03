@@ -20,10 +20,11 @@ import { RootComponent }          from './root.component';
 import { MutationWrapper }        from './components/mutation/script';
 import { CheckboxComponent }      from './components/checkbox/script';
 import { GroupComponent }         from './components/group/script';
+import { CellComponent }          from './components/cell/script';
 import { ListFieldComponent }     from './components/list/script';
 import { DataViewComponent }      from './components/data-view/script';
 import { PageComponent }          from './components/page/script';
-import { TextComponent }          from './components/text/script';
+import { TextNodeComponent }      from './components/text/script';
 import { NumberFieldComponent }   from './components/number/script';
 import { ColorFieldComponent }    from './components/color/script';
 import { DateFieldComponent }     from './components/date/script';
@@ -119,7 +120,8 @@ const appRoutes: Routes = require('./config/routes');
     SafePipe,
     FileFieldComponent,
     GroupComponent,
-    TextComponent,
+    CellComponent,
+    TextNodeComponent,
     GeneratorComponent,
     ChildComponent,
     SiteListComponent,
@@ -154,7 +156,8 @@ const appRoutes: Routes = require('./config/routes');
   ],
   entryComponents: [
     GroupComponent,
-    TextComponent,
+    CellComponent,
+    TextNodeComponent,
     RowComponent,
     SlideFieldComponent,
     SliderFieldComponent,

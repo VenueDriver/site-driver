@@ -1,13 +1,13 @@
 import {
-  Component,
-  Input,
-  ViewChild,
-  ComponentRef,
-  ComponentFactoryResolver,
-  Compiler,
-  ViewContainerRef,
-  Type,
-  ChangeDetectorRef
+    Component,
+    Input,
+    ViewChild,
+    ComponentRef,
+    ComponentFactoryResolver,
+    Compiler,
+    ViewContainerRef,
+    Type,
+    ChangeDetectorRef
   } from '@angular/core';
 
 // Helper component to add dynamic components
@@ -18,9 +18,8 @@ import {
 
 export class MoleculeRenderer {
   @ViewChild('target', {read: ViewContainerRef}) target: ViewContainerRef;
-  @Input() data : any;
-  @Input() userRole : number = 0;
   cmpRef: ComponentRef<Component>;
+  @Input() data : any;
   private isViewInitialized:boolean = false;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver, private compiler: Compiler , private ref: ChangeDetectorRef) {}
@@ -35,12 +34,13 @@ export class MoleculeRenderer {
       this.cmpRef.destroy();
     }
 
+    console.log("Data received:",this.data);
 
-    let factory = this.componentFactoryResolver.resolveComponentFactory(this.data._typeComponent);
+    let factory = this.componentFactoryResolver.resolveComponentFactory(this.data._ngComponent);
     this.cmpRef = this.target.createComponent(factory);
     // to access the created instance use
     (<any>this.cmpRef.instance).data = this.data;
-    (<any>this.cmpRef.instance).userRole = this.userRole;
+
     this.ref.detectChanges();
     // this.cmpRef.instance.someOutput.subscribe(val => doSomething());
   }

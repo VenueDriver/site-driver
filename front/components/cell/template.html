@@ -1,0 +1,23 @@
+<div class="col-12">
+  <div class="box">
+    <div id="accordion" class="accordion">
+      <div class="acc-panel">
+        <h2 class="acc-title">
+          <a class="reduceButton" (click)="reduced = !reduced">
+            <span *ngIf="!reduced" class="fa fa-angle-down"></span>
+            <span *ngIf="reduced" class="fa fa-angle-up"></span>
+            <span [innerHTML]="data._name || data._type"></span>
+          </a><span class="required-indicator" *ngIf="data._can._be_required">*</span>
+          <ul class="edit-buttons">
+
+          </ul>
+        </h2>
+        <div class="panel" *ngIf="!reduced">
+
+          <!-- error message -->
+          <fusion [node]="data"></fusion>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

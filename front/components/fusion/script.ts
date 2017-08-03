@@ -1,6 +1,6 @@
 import { Component , Input , OnInit } from '@angular/core';
 import { MoleculeService } from '../../services/molecule.service';
-import { TextInterface } from '../../../models/interfaces';
+import { TextInterface } from '../../../definitions/interfaces';
 
 
 @Component({
@@ -21,8 +21,8 @@ export class FusionComponent {
       _type : 'Text',
       _path : [],
       _value : 'Test Value',
-      _ngComponent : null,
       _can : {
+        _be_required : false,
         _edit : true,
         _show : true,
         _dragg : true,

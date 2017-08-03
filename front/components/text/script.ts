@@ -5,7 +5,7 @@ import { Component , Input , OnInit } from '@angular/core';
   template: require('./template.html')
 })
 
-export class TextComponent implements OnInit {
+export class TextNodeComponent implements OnInit {
 
   @Input() data : any;
   @Input() userRole : number = 0;

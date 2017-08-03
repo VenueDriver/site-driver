@@ -1,6 +1,6 @@
 import { Component , OnInit } from '@angular/core';
 import { ActivatedRoute , Router } from '@angular/router';
-import { CellInterface } from '../../../models/interfaces';
+import { CellInterface } from '../../../definitions/interfaces';
 import { MoleculeService } from '../../services/molecule.service';
 
 @Component({

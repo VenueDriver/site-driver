@@ -5,19 +5,24 @@ import { Observable } from 'rxjs/Observable';
 import { aloop as asyncLoop } from '../helpers/utils';
 
 // INTERFACES
-import { CellInterface } from '../../models/interfaces';
-import * as nodes from '../../models/nodes';
+import { CellInterface , MoleculeInterface } from '../../definitions/interfaces';
+import { Molecule } from '../../definitions/nodes/molecule';
 
 @Injectable()
 
 export class MoleculeService implements OnInit {
 
-  constructor(private _server : ServerService){
-
+  constructor(private _server : ServerService ){
   }
 
   ngOnInit(){
     console.log("init molecule service");
+  }
+
+  validateCell(cell) {
+    return new Promise((resolve,reject)=>{
+      resolve(true);
+    });
   }
 
   saveCell(cell){
@@ -34,13 +39,15 @@ export class MoleculeService implements OnInit {
   }
 
   createCell(name : string){
+    console.log(Molecule);
     let newCell : CellInterface = {
       _name : '',
       _type : name,
       _path : [],
       _value : [],
-      _ngComponentName : 'CellComponent',
+      _ngClass : 'Cell',
       _can :{
+        _be_required : false,
         _edit_value : false,
         _edit : false,
         _show : true,
@@ -65,7 +72,7 @@ export class MoleculeService implements OnInit {
   getCell(name){
     return new Promise((resolve,reject)=>{
       this._server.get( "/cell/get/"+name ).subscribe((data)=>{
-        resolve(data);
+        new Molecule({}).parse(data).then(resolve).catch(reject);
       },(error)=>{
         reject(error);
       })
@@ -75,27 +82,27 @@ export class MoleculeService implements OnInit {
   getCellList() : Promise<CellInterface[]> {
     return new Promise((resolve,reject)=>{
       this._server.get( "/cell/get/all" ).subscribe((data)=>{
-        resolve(data);
+        let i = 0;
+        asyncLoop(
+          ()=> i >= data.length,
+          (next,end)=>{
+            new Molecule({}).parse(data[i]).then((parsedResult)=>{
+              data[i] = parsedResult;
+              i++;
+              next();
+            }).catch((error)=> end(error));
+          },
+          (err)=>{
+            if(err){
+              reject(err);
+            }else{
+              resolve(data);
+            }
+          }
+        );
       },(error)=>{
         reject(error);
       })
-    });
-  }
-
-  appendComponent(molecule : any){
-    return new Promise((resolve,reject)=>{
-      if(nodes.hasOwnProperty(molecule._ngComponentName)){
-        molecule._ngComponent = nodes[molecule._ngComponentName];
-        resolve(molecule);
-      }else{
-        reject(false);
-      }
-    });
-  }
-
-  validateCell(cell) {
-    return new Promise((resolve,reject)=>{
-      resolve(true);
     });
   }
 

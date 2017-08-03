@@ -10,7 +10,7 @@ var Text = (function (_super) {
     __extends(Text, _super);
     function Text(opts, value) {
         if (value === void 0) { value = ""; }
-        _super.call(this, opts._name, script_1.TextComponent, opts);
+        _super.call(this, opts._name, script_1.TextNodeComponent, opts);
         this._value = opts._value || "";
         this._use_textarea = (opts.hasOwnProperty("_use_textarea")) ? opts._use_textarea : false;
     }
