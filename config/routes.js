@@ -426,9 +426,9 @@ router.post("/cell/save",upload.single("_file"),(req,res)=>{
   }).catch((error)=> rejectEndpoint(error));
 })
 
-router.post("/cell/remove",upload.single("_file"),(req,res)=>{  
+router.post("/cell/remove",upload.single("_file"),(req,res)=>{
   bouncer(req,res).then(()=>{
-    c.molecule.cell.remove(req,res).then((success)=>{      
+    c.molecule.cell.remove(req,res).then((success)=>{
       res.status(200);
       return res.json({message : "Success! Data removed"});
     }).catch((error)=>{

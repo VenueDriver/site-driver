@@ -1,23 +1,19 @@
-// IMPORT NG COMPONENT
-import { TextNodeComponent } from '../../front/components/text/script';
-// IMPORT INTERFACE
-import { TextInterface } from './../interfaces';
+import { Molecule } from './molecule'; // IMPORT NODE CLASS
+import { TextNodeComponent } from '../../front/components/text/script'; // IMPORT NG COMPONENT
+import { TextInterface } from './../interfaces'; // IMPORT INTERFACE
 
 
-export class TextNode {
+export class TextNode extends Molecule {
 
   // THIS CLASS NAME
   _ngClass : string = "TextNode";
-  _ngComponent : TextNodeComponent;
+  _ngComponent = TextNodeComponent;
   _type : string = "Node";
 
 
   constructor(obj : TextInterface) {
 
-    // TRANSFER PROPERTIES FROM THE INTERFACE TO THE CLASS
-    for(let key in obj){
-      this[key] = obj[key];
-    }
+    super(obj);
 
   }
 

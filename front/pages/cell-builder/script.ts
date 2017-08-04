@@ -67,7 +67,6 @@ export class CellBuilder implements OnInit {
 
 
   edit(cell : CellInterface){
-    console.log(cell);
     if(this.editingList[cell._id]){
       this.editingList[cell._id] = false;
     }else{

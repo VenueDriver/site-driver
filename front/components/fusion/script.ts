@@ -19,6 +19,7 @@ export class FusionComponent {
       _id : '',
       _name : 'Sarasa Test',
       _type : 'Text',
+      _ngClass : 'TextNode',
       _path : [],
       _value : 'Test Value',
       _can : {
@@ -33,7 +34,7 @@ export class FusionComponent {
         _use_textarea : false
       }
     }
-    this.node.push(testNode);
+    this.node.insert(testNode);
   }
 
 }

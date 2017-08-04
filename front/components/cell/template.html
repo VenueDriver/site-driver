@@ -13,7 +13,7 @@
           </ul>
         </h2>
         <div class="panel" *ngIf="!reduced">
-
+          <molecule-renderer *ngFor="let cell of data._value" [data]="cell" ></molecule-renderer>
           <!-- error message -->
           <fusion [node]="data"></fusion>
         </div>

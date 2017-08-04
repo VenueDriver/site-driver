@@ -6,13 +6,16 @@ import { aloop as asyncLoop } from '../helpers/utils';
 
 // INTERFACES
 import { CellInterface , MoleculeInterface } from '../../definitions/interfaces';
-import { Molecule } from '../../definitions/nodes/molecule';
+import { MoleculeParser } from '../helpers/molecule-parser';
 
 @Injectable()
 
 export class MoleculeService implements OnInit {
 
+  parser : any;
+
   constructor(private _server : ServerService ){
+    this.parser = new MoleculeParser();
   }
 
   ngOnInit(){
@@ -39,7 +42,6 @@ export class MoleculeService implements OnInit {
   }
 
   createCell(name : string){
-    console.log(Molecule);
     let newCell : CellInterface = {
       _name : '',
       _type : name,
@@ -72,7 +74,7 @@ export class MoleculeService implements OnInit {
   getCell(name){
     return new Promise((resolve,reject)=>{
       this._server.get( "/cell/get/"+name ).subscribe((data)=>{
-        new Molecule({}).parse(data).then(resolve).catch(reject);
+        this.parser.toNg(data).then(resolve).catch(reject);
       },(error)=>{
         reject(error);
       })
@@ -86,7 +88,7 @@ export class MoleculeService implements OnInit {
         asyncLoop(
           ()=> i >= data.length,
           (next,end)=>{
-            new Molecule({}).parse(data[i]).then((parsedResult)=>{
+            this.parser.toNg(data[i]).then((parsedResult)=>{
               data[i] = parsedResult;
               i++;
               next();
