@@ -2,10 +2,40 @@
     margin-bottom: 40px;
 }
 
-.table-style {
+
+table.table-style {
+    table-layout: fixed;
+    text-align: left;
     width: 100%;
-    background: red;
+    border-collapse: collapse;
+    border: 1px solid #f1f1f1;
+    thead th:nth-child(1) {
+        width: 30%;
+    }
+    thead th:nth-child(2) {
+        width: 20%;
+    }
+    thead th:nth-child(3) {
+        width: 15%;
+    }
+    thead th:nth-child(4) {
+        width: 35%;
+    }
+    th, td {
+        padding: 20px;
+    }
+    tr:nth-child(even) td {
+        background: #F1F1F1;
+    }
+    tr:nth-child(odd) td {
+        background: #FEFEFE;
+    }
+    tr td:hover {
+        background: #F9f9f9;
+    }
 }
+
+
 
 // 768px
 @media all and (min-width: $screen-portrait) {
