@@ -30,15 +30,20 @@ import { ColorFieldComponent }    from './components/color/script';
 import { DateFieldComponent }     from './components/date/script';
 import { ChildComponent }         from './components/child/script';
 import { GeneratorComponent }     from './components/generator/script';
+
+
+
 import { ModalComponent }         from './components/modal/script';
 import { DeleteButtonComponent }  from './components/delete-btn/script';
 import { SaveButtonComponent }    from './components/save-btn/script';
 import { ColumnComponent }        from './components/col/script';
 import { RowComponent }           from './components/row/script';
 import { ArtistFieldComponent }   from './components/artist/script';
+
 import { ArtistSelectComponent }  from './components/artist-select/script';
 import { VenueSelectComponent }   from './components/venue-select/script';
 import { EventSelectComponent }   from './components/event-select/script';
+
 import { ArtistListComponent }    from './components/artist-list/script';
 import { VenueFieldComponent }    from './components/venue/script';
 import { VenueListComponent }     from './components/venue-list/script';
@@ -54,6 +59,9 @@ import { SliderFieldComponent }   from './components/slider/script';
 import { S3FilePicker }           from './components/s3-file-picker/script';
 import { LinkFieldComponent }     from './components/link-field/script';
 
+// MOLECULE
+import { MoleculeSelect }         from './components/molecule-select/script';
+import { MoleculeConfig }         from './components/molecule-config/script';
 import { MoleculeRenderer }       from './components/molecule-renderer/script';
 import { FusionComponent }        from './components/fusion/script';
 
@@ -104,18 +112,20 @@ const appRoutes: Routes = require('./config/routes');
     RouterModule.forRoot(appRoutes)
   ],
   declarations: [
+    ColumnComponent,
     FixedElementDirective,
-    ModalComponent,
-    TypeListComponent,
-    Spinner,
     KeysPipe,
+    ModalComponent,
+    MoleculeSelect,
+    MoleculeConfig,
+    Spinner,
+    TypeListComponent,
     UserLabelPipe,
     TruncatePipe,
     S3FilePicker,
     ArtistSelectComponent,
     VenueSelectComponent,
     EventSelectComponent,
-    ColumnComponent,
     RootComponent,
     SafePipe,
     FileFieldComponent,

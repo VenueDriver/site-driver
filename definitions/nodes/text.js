@@ -13,7 +13,9 @@ var TextNode = (function (_super) {
         // THIS CLASS NAME
         this._ngClass = "TextNode";
         this._ngComponent = script_1.TextNodeComponent;
-        this._type = "Node";
+        this._options = {
+            _use_textarea: false
+        };
     }
     return TextNode;
 }(molecule_1.Molecule));

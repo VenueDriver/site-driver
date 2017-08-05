@@ -13,28 +13,10 @@ import { TextInterface } from '../../../definitions/interfaces';
 export class FusionComponent {
 
   @Input() node : any;
+  @Input() nodeInsert : any;
 
   insert(){
-    let testNode : TextInterface = {
-      _id : '',
-      _name : 'Sarasa Test',
-      _type : 'Text',
-      _ngClass : 'TextNode',
-      _path : [],
-      _value : 'Test Value',
-      _can : {
-        _be_required : false,
-        _edit : true,
-        _show : true,
-        _dragg : true,
-        _delete : true,
-        _edit_value : true
-      },
-      _options : {
-        _use_textarea : false
-      }
-    }
-    this.node.insert(testNode);
+    this.node.insert(this.nodeInsert);
   }
 
 }

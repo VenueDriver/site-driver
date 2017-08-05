@@ -1,15 +1,33 @@
 import { MoleculeParser } from '../../front/helpers/molecule-parser';
+import { NodeInterface } from '../interfaces/Inode';
 
-export class Molecule {
+export class Molecule implements NodeInterface {
 
-  _value : any;
-  parser : MoleculeParser = new MoleculeParser();
+  // DEFAULT VALUES IMPLEMENTING THE INTERFACE
+  _name : string = '';
+  _id   : string = '';
+  _type : string = "Text";
+  _value : any = null;
+  _path : Array<number> = [];
+  _default_value : any = null;
+  _can : any = {
+    _be_required : false,
+    _edit_value  : true,
+    _edit    : false,
+    _drag   : false,
+    _delete  : false,
+    _show    : true
+  };
+
+  parser : MoleculeParser;
 
   constructor(obj : any) {
 
     for(let key in obj){
       this[key] = obj[key];
     }
+
+    this.parser = new MoleculeParser();
 
   }
 

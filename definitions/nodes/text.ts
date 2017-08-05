@@ -3,12 +3,18 @@ import { TextNodeComponent } from '../../front/components/text/script'; // IMPOR
 import { TextInterface } from './../interfaces'; // IMPORT INTERFACE
 
 
-export class TextNode extends Molecule {
+export class TextNode extends Molecule implements TextInterface{
 
   // THIS CLASS NAME
   _ngClass : string = "TextNode";
   _ngComponent = TextNodeComponent;
-  _type : string = "Node";
+
+  // OVERRIDES SPECIFIC TO THIS CLASS
+  _value : string;
+  _default_value : string;
+  _options : any = {
+    _use_textarea : false
+  };
 
 
   constructor(obj : TextInterface) {

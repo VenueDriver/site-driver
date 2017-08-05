@@ -33,7 +33,7 @@ export class MoleculeRenderer {
       // created component before creating the new one
       this.cmpRef.destroy();
     }
-
+    
     let factory = this.componentFactoryResolver.resolveComponentFactory(this.data._ngComponent);
     this.cmpRef = this.target.createComponent(factory);
     // to access the created instance use

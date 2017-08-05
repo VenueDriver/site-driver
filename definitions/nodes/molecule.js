@@ -2,10 +2,25 @@
 var molecule_parser_1 = require('../../front/helpers/molecule-parser');
 var Molecule = (function () {
     function Molecule(obj) {
-        this.parser = new molecule_parser_1.MoleculeParser();
+        // DEFAULT VALUES IMPLEMENTING THE INTERFACE
+        this._name = '';
+        this._id = '';
+        this._type = "Text";
+        this._value = null;
+        this._path = [];
+        this._default_value = null;
+        this._can = {
+            _be_required: false,
+            _edit_value: true,
+            _edit: false,
+            _drag: false,
+            _delete: false,
+            _show: true
+        };
         for (var key in obj) {
             this[key] = obj[key];
         }
+        this.parser = new molecule_parser_1.MoleculeParser();
     }
     Molecule.prototype.insert = function (obj) {
         var _this = this;

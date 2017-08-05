@@ -415,6 +415,7 @@ router.post( "/media/s3/remove" , (req,res)=>{
 
 router.post("/cell/save",upload.single("_file"),(req,res)=>{
   bouncer(req,res).then(()=>{
+    console.log(req.body);
     c.molecule.cell.save(req,res).then((success)=>{
       res.status(200);
       return res.json({message : "Success! Data saved"});

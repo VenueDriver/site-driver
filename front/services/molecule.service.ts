@@ -6,7 +6,9 @@ import { aloop as asyncLoop } from '../helpers/utils';
 
 // INTERFACES
 import { CellInterface , MoleculeInterface } from '../../definitions/interfaces';
+import * as nodes from '../../definitions/nodes';
 import { MoleculeParser } from '../helpers/molecule-parser';
+
 
 @Injectable()
 
@@ -28,10 +30,11 @@ export class MoleculeService implements OnInit {
     });
   }
 
-  saveCell(cell){
-    return new Promise((resolve,reject)=>{
-      this.validateCell(cell).then(()=>{
-        this._server.post( "/cell/save", cell, [] ).subscribe((data)=>{
+  saveCell(cell){    
+    return new Promise((resolve,reject)=>{      
+      cell = this.parser.toData(cell);      
+      this.validateCell(cell).then(()=>{        
+        this._server.post( "/cell/save", cell, [] ).subscribe((data)=>{          
           resolve(data);
         },
         (error)=>{
@@ -81,8 +84,8 @@ export class MoleculeService implements OnInit {
     })
   }
 
-  getCellList() : Promise<CellInterface[]> {
-    return new Promise((resolve,reject)=>{
+  getCellList() {
+    return new Promise<any>((resolve,reject)=>{
       this._server.get( "/cell/get/all" ).subscribe((data)=>{
         let i = 0;
         asyncLoop(
@@ -106,6 +109,20 @@ export class MoleculeService implements OnInit {
         reject(error);
       })
     });
+  }
+
+  getAllMolecules(){
+    return new Promise((resolve,reject)=>{
+      this.getCellList().catch(reject).then((cells)=>{
+        let fullList = cells.map(cell => cell);
+        for(var key in nodes){
+          if(["Cell"].indexOf(key)==-1){
+            fullList.push(new nodes[key]({}));
+          }
+        }
+        resolve(fullList);
+      });
+    })
   }
 
 }

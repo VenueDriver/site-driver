@@ -23,7 +23,7 @@ export class MoleculeParser{
       molecule = Object.assign({},molecule);
       this._parseDataLayer(molecule).then((parsedLayer)=>{
 
-        if(typeof parsedLayer._value === 'object'){
+        if(Array.isArray(parsedLayer._value)){
 
           let i = 0;
           asyncLoop(
@@ -54,5 +54,52 @@ export class MoleculeParser{
 
       }).catch(reject);
     })
+  }
+
+
+
+  toData(molecule : any){
+    let moleculeCopy = Object.assign({},molecule);
+    const deleteProp = (element,prop)=>{
+      if(element.hasOwnProperty(prop)){
+        delete element[prop];
+      }
+      return element;
+    }
+    const emptyProp = (element,prop)=>{
+      if(element.hasOwnProperty(prop)){
+        element[prop] = null;
+      }
+      return element;
+    }
+
+    const removeProperties = ['parser'];
+    const emptyProperties = ['_ngComponent'];
+
+    let cleanLayer = (data)=>{
+      Object.keys(data).forEach((key)=>{
+        if(typeof data[key] == 'function' || removeProperties.indexOf(key)>-1){
+          data = deleteProp(data,key);
+        };
+        if(emptyProperties.indexOf(key)>-1){
+          data = emptyProp(data,key);
+        }
+      });
+      if(data.hasOwnProperty("_value")){
+        if(Array.isArray(data._value)){
+          let arrayCopy = data._value.map(el=>el);
+          arrayCopy.forEach((value,i) => {
+            arrayCopy[i] = this.toData(arrayCopy[i]);
+          });
+          data._value = arrayCopy;
+        }
+      }
+      
+      return data;
+    }
+
+
+    return cleanLayer(moleculeCopy);
+
   }
 }

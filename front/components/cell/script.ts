@@ -1,4 +1,5 @@
 import { Component , Input , OnInit } from '@angular/core';
+import { MoleculeService } from '../../services/molecule.service';
 
 @Component({
   selector: 'cell',
@@ -9,15 +10,25 @@ export class CellComponent implements OnInit {
 
   @Input() data : any;
   @Input() userRole : number = 0;
+  newMolecule : any;
   reduced = false;
   ready : boolean = false;
 
-  constructor(){
+  constructor(private moleculeService : MoleculeService){
 
+  }
+
+  moleculeSelected(selected){
+    this.newMolecule = selected[0];
+  }
+
+  save(){
+    return this.moleculeService.saveCell(Object.assign({},this.data));
   }
 
   ngOnInit(){
     this.ready = true;
   }
+
 
 }
