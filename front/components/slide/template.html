@@ -13,7 +13,7 @@
 
   <!-- STARTING POINT -->
   <div class="col-12">
-    <label for="">Use information from</label>
+    <label class="labeltn-form" for="">Use information from:</label>
     <input (focus)="data._value.use_item_type = ''" readonly="readonly" [match-formatted]="true" [accept-user-input]="false" auto-complete [(ngModel)]="data._value.use_item_type" (ngModelChange)="newItemToUse($event)" [source]="['Custom Slide','Upcoming Event','Select Event','Select Artist','Select Venue']" />
   </div>
 
@@ -51,7 +51,7 @@
 
   <div *ngIf="['Custom Slide'].indexOf(data._value.use_item_type) > -1 || overwrite">
     <div class="col-12">
-      <label for="">Media Background</label>
+      <label class="labeltn-form" for="">Media Background:</label>
       <div>
         <div *ngIf="data._value.media.length > 0" style="position: relative;display: inline-block;" >
           <img style="width:100%;max-width:350px;" *ngIf="isImage(data._value.media)" [src]="data._value.media" alt="">
@@ -73,27 +73,27 @@
 
     </div>
     <div class="col-6">
-      <label for="">Title</label>
+      <label class="labeltn-form" for="">Title:</label>
       <textarea [placeholder]="data._value.tmp.title" [disabled]="!(userRole > 9000 || data._editable_value)" [(ngModel)]="data._value.title" (keyup)="setValue($event)" class="input-form"></textarea>
     </div>
     <div class="col-6">
-      <label for="">Additional Text</label>
+      <label class="labeltn-form" for="">Additional Text:</label>
       <textarea [placeholder]="data._value.tmp.additional_text" [disabled]="!(userRole > 9000 || data._editable_value)" [(ngModel)]="data._value.additional_text" (keyup)="setValue($event)" class="input-form"></textarea>
     </div>
     <div class="col-6">
-      <label for="">Button 1 Label</label>
+      <label class="labeltn-form" for="">Button 1 Label:</label>
       <input [placeholder]="data._value.tmp.buttons[0].label" [disabled]="!(userRole > 9000 || data._editable_value)" type="text" [(ngModel)]="data._value.buttons[0].label" (keyup)="setValue($event)" class="input-form">
     </div>
     <div class="col-6">
-      <label for="">Button 1 url</label>
+      <label class="labeltn-form" for="">Button 1 url</label>
       <input [placeholder]="data._value.tmp.buttons[0].url" [disabled]="!(userRole > 9000 || data._editable_value)" type="text" [(ngModel)]="data._value.buttons[0].url" (keyup)="setValue($event)" class="input-form">
     </div>
     <div class="col-6">
-      <label for="">Button 2 Label</label>
+      <label class="labeltn-form" for="">Button 2 Label</label>
       <input [placeholder]="data._value.tmp.buttons[1].label" [disabled]="!(userRole > 9000 || data._editable_value)" type="text" [(ngModel)]="data._value.buttons[1].label" (keyup)="setValue($event)" class="input-form">
     </div>
     <div class="col-6">
-      <label for="">Button 2 url</label>
+      <label class="labeltn-form" for="">Button 2 url</label>
       <input [placeholder]="data._value.tmp.buttons[1].url" [disabled]="!(userRole > 9000 || data._editable_value)" type="text" [(ngModel)]="data._value.buttons[1].url" (keyup)="setValue($event)" class="input-form">
     </div>
 </div>
