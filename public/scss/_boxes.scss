@@ -24,7 +24,7 @@
 .box-details {
     background: $primary-color-dark;
     color: #fff;
-    padding: 15px 20px;
+    padding: 15px 5px 15px 20px;
 	@include transition;
     > * {
 	    margin-bottom: 2px;
