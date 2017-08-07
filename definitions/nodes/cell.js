@@ -13,6 +13,9 @@ var Cell = (function (_super) {
         // THIS CLASS NAME
         this._ngClass = "Cell";
         this._ngComponent = script_1.CellComponent;
+        for (var key in obj) {
+            this[key] = obj[key];
+        }
     }
     return Cell;
 }(molecule_1.Molecule));

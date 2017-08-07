@@ -18,6 +18,10 @@ export class Cell extends Molecule implements CellInterface {
 
     super(obj);
 
+    for(let key in obj){
+      this[key] = obj[key];
+    }
+
   }
 
 }

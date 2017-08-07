@@ -16,6 +16,9 @@ var TextNode = (function (_super) {
         this._options = {
             _use_textarea: false
         };
+        for (var key in obj) {
+            this[key] = obj[key];
+        }
     }
     return TextNode;
 }(molecule_1.Molecule));

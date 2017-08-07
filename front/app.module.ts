@@ -61,6 +61,7 @@ import { LinkFieldComponent }     from './components/link-field/script';
 
 // MOLECULE
 import { MoleculeSelect }         from './components/molecule-select/script';
+import { MoleculeGeneratorComponent }  from './components/molecule-generator/script';
 import { MoleculeConfig }         from './components/molecule-config/script';
 import { MoleculeRenderer }       from './components/molecule-renderer/script';
 import { FusionComponent }        from './components/fusion/script';
@@ -88,9 +89,10 @@ import { KeysPipe }       from './pipes/keys';
 import { PageHeader }     from './components/page-header/script';
 import { PageFooter }     from './components/page-footer/script';
 
-import { SitePage }       from './pages/site/script';
-import { IndexPage }      from './pages/index/script';
-import { CellBuilder }    from './pages/cell-builder/script';
+import { SitePage }             from './pages/site/script';
+import { IndexPage }            from './pages/index/script';
+import { CellBuilder }          from './pages/cell-builder/script';
+import { MoleculeGenerator }    from './pages/molecule-generator/script';
 
 
 //DEFINE ROUTES
@@ -160,9 +162,11 @@ const appRoutes: Routes = require('./config/routes');
     LinkFieldComponent,
     IndexPage,
     SitePage,
+    MoleculeGenerator,
     CellBuilder,
     MoleculeRenderer,
-    FusionComponent
+    FusionComponent,
+    MoleculeGeneratorComponent
   ],
   entryComponents: [
     GroupComponent,
@@ -181,7 +185,8 @@ const appRoutes: Routes = require('./config/routes');
     VenueFieldComponent,
     EventFieldComponent,
     ListFieldComponent,
-    ColumnComponent
+    ColumnComponent,
+    MoleculeGeneratorComponent
   ],
   providers :   [
     DatePipe,
