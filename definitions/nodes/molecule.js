@@ -5,7 +5,8 @@ var Molecule = (function () {
         // DEFAULT VALUES IMPLEMENTING THE INTERFACE
         this._name = '';
         this._id = '';
-        this._type = "Text";
+        this._type = "molecule";
+        this._label = "Molecule";
         this._value = null;
         this._path = [];
         this._default_value = null;

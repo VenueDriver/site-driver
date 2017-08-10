@@ -8,6 +8,8 @@ export class MoleculeGenerator extends Molecule implements MoleculeGeneratorInte
 
   // THIS CLASS NAME
   _ngClass : string = "MoleculeGenerator";
+  _type : string = "generator";
+  _label : string = "Molecule Generator";
   _ngComponent = MoleculeGeneratorComponent;
 
   // OVERRIDES SPECIFIC TO THIS CLASS
@@ -15,8 +17,7 @@ export class MoleculeGenerator extends Molecule implements MoleculeGeneratorInte
   _default_value : Array<any> = [];
   _options = {
     _molecule_types : {
-      _ngClass : 'MoleculeSelect',
-      _ngComponent : MoleculeSelect,
+      _ngInput : '<molecule-select></molecule-select>',
       _value : []
     },
     _use_only_childs : true,

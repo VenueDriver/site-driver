@@ -24,17 +24,17 @@ export class MoleculeService implements OnInit {
     console.log("init molecule service");
   }
 
-  validateCell(cell) {
+  validateMolecule(type,molecule) {
     return new Promise((resolve,reject)=>{
       resolve(true);
     });
   }
 
-  saveCell(cell){    
-    return new Promise((resolve,reject)=>{      
-      cell = this.parser.toData(cell);      
-      this.validateCell(cell).then(()=>{        
-        this._server.post( "/cell/save", cell, [] ).subscribe((data)=>{          
+  saveMolecule(type,molecule){
+    return new Promise((resolve,reject)=>{
+      molecule = this.parser.toData(molecule);
+      this.validateMolecule(type,molecule).then(()=>{
+        this._server.post( `/${type}/save` , molecule, [] ).subscribe((data)=>{
           resolve(data);
         },
         (error)=>{
@@ -44,12 +44,13 @@ export class MoleculeService implements OnInit {
     })
   }
 
-  createCell(name : string){
+  createMolecule(type,name : string){
     let newCell : CellInterface = {
-      _name : '',
-      _type : name,
-      _path : [],
-      _value : [],
+      _name : '' ,
+      _type : name.toLowerCase(),
+      _label : name,
+      _path : [] ,
+      _value : [] ,
       _ngClass : 'Cell',
       _can :{
         _be_required : false,
@@ -63,9 +64,9 @@ export class MoleculeService implements OnInit {
     return newCell;
   }
 
-  removeCell(cell : CellInterface){
+  removeMolecule(type,molecule : any){
     return new Promise((resolve,reject)=>{
-      this._server.post( "/cell/remove", cell, [] ).subscribe((data)=>{
+      this._server.post( `/${type}/remove`, molecule, [] ).subscribe((data)=>{
         resolve(data);
       },
       (error)=>{
@@ -74,9 +75,9 @@ export class MoleculeService implements OnInit {
     });
   }
 
-  getCell(name){
+  getMolecule(type,name){
     return new Promise((resolve,reject)=>{
-      this._server.get( "/cell/get/"+name ).subscribe((data)=>{
+      this._server.get( `/${type}/get/${name}` ).subscribe((data)=>{
         this.parser.toNg(data).then(resolve).catch(reject);
       },(error)=>{
         reject(error);
@@ -84,9 +85,9 @@ export class MoleculeService implements OnInit {
     })
   }
 
-  getCellList() {
+  getMoleculeList(type) {
     return new Promise<any>((resolve,reject)=>{
-      this._server.get( "/cell/get/all" ).subscribe((data)=>{
+      this._server.get( `/${type}/get/all` ).subscribe((data)=>{
         let i = 0;
         asyncLoop(
           ()=> i >= data.length,
@@ -113,7 +114,7 @@ export class MoleculeService implements OnInit {
 
   getAllMolecules(){
     return new Promise((resolve,reject)=>{
-      this.getCellList().catch(reject).then((cells)=>{
+      this.getMoleculeList('cell').catch(reject).then((cells)=>{
         let fullList = cells.map(cell => cell);
         for(var key in nodes){
           if(["Cell"].indexOf(key)==-1){

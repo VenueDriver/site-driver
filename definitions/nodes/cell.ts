@@ -8,6 +8,8 @@ export class Cell extends Molecule implements CellInterface {
 
   // THIS CLASS NAME
   _ngClass : string = "Cell";
+  _type : string = "cell";
+  _label : string = "Cell";
   _ngComponent = CellComponent;
 
   // OVERRIDES SPECIFIC TO THIS CLASS

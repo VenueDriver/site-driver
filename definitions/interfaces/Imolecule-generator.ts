@@ -5,8 +5,7 @@ export interface MoleculeGeneratorInterface extends NodeInterface{
   _default_value : Array<any>;
   _options : {
     _molecule_types : {
-      _ngClass ?: string,
-      _ngComponent ?: any,
+      _ngInput : (string|any);
       _value : Array<any>
     },
     _use_only_childs : boolean,

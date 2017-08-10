@@ -12,6 +12,8 @@ var Cell = (function (_super) {
         _super.call(this, obj);
         // THIS CLASS NAME
         this._ngClass = "Cell";
+        this._type = "cell";
+        this._label = "Cell";
         this._ngComponent = script_1.CellComponent;
         for (var key in obj) {
             this[key] = obj[key];

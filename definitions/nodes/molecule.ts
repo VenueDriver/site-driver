@@ -6,7 +6,8 @@ export class Molecule implements NodeInterface {
   // DEFAULT VALUES IMPLEMENTING THE INTERFACE
   _name : string = '';
   _id   : string = '';
-  _type : string = "Text";
+  _type : string = "molecule";
+  _label : string = "Molecule";
   _value : any = null;
   _path : Array<number> = [];
   _default_value : any = null;

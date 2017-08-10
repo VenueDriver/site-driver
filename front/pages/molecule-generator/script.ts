@@ -23,8 +23,22 @@ import { MoleculeService } from '../../services/molecule.service';
 
 export class MoleculeGenerator implements OnInit {
 
+  newMolecule : any;
+  reduced = false;
+  ready : boolean = false;
+
+  constructor(){}
+
+  moleculeSelected(selected){
+    this.newMolecule = selected[0];
+  }
+
   ngOnInit(){
-    
+    this.ready = true;
+  }
+
+  log(what){
+    console.log(what);
   }
 
 }

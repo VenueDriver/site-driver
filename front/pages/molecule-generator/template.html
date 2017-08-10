@@ -2,11 +2,16 @@
   <page-header></page-header>
   <main >
 		<section>
-			<div class="container" *ngIf="ready">
+			<div class="container" >
+				<div class="box">
 
-				
+					<molecule-select [max]="1" (valueChange)="moleculeSelected($event)"></molecule-select>
+					<molecule-config [molecule]="newMolecule"></molecule-config>
+					<molecule-save [type]="'generator'" [molecule]="newMolecule">
+						<a href="javascript:void(0)" class="btn btn-save">Create</a>
+					</molecule-save>
 
-
+				</div>
 
 			</div>
 		</section>

@@ -23,7 +23,7 @@ export class CellComponent implements OnInit {
   }
 
   save(){
-    return this.moleculeService.saveCell(Object.assign({},this.data));
+    return this.moleculeService.saveMolecule('cell',Object.assign({},this.data));
   }
 
   ngOnInit(){

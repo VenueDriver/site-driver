@@ -40,7 +40,7 @@ export class CellBuilder implements OnInit {
 
   updateCellList(){
     return new Promise((resolve,reject)=>{
-      this.moleculeService.getCellList().then((list)=>{
+      this.moleculeService.getMoleculeList('cell').then((list)=>{
         this.cellList = list;
         this.ready = true;
         resolve(this.cellList);
@@ -53,7 +53,7 @@ export class CellBuilder implements OnInit {
 
   saveCell(cell : CellInterface){
     this.savingData = true;
-    this.moleculeService.saveCell(cell).then((data)=>{
+    this.moleculeService.saveMolecule('cell',cell).then((data)=>{
       this.updateCellList().then(()=>{
         this.savingData = false;
       })
@@ -61,7 +61,7 @@ export class CellBuilder implements OnInit {
   }
 
   createCell(){
-    let newCell = this.moleculeService.createCell(this.name);
+    let newCell = this.moleculeService.createMolecule('cell',this.name);
     this.saveCell(newCell);
   }
 
@@ -79,7 +79,7 @@ export class CellBuilder implements OnInit {
     let accept = confirm("Are you sure you want to remove this element?"+cell._type);
     if(accept){
       return new Promise((resolve,reject)=>{
-        this.moleculeService.removeCell(cell).then((success)=>{
+        this.moleculeService.removeMolecule('cell',cell).then((success)=>{
           resolve(success);
           this.updateCellList();
         }).catch((err)=>{

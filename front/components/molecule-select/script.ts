@@ -29,7 +29,7 @@ export class MoleculeSelect implements OnInit {
   }
 
   formatItems(item){
-    return `${item._type}`;
+    return `${item._label || 'unnamed'}`;
   }
 
 

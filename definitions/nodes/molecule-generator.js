@@ -5,22 +5,22 @@ var __extends = (this && this.__extends) || function (d, b) {
     d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
 };
 var molecule_1 = require('./molecule'); // IMPORT NODE CLASS
-var script_1 = require('../../front/components/molecule-select/script'); // IMPORT NG COMPONENT
-var script_2 = require('../../front/components/molecule-generator/script'); // IMPORT NG COMPONENT
+var script_1 = require('../../front/components/molecule-generator/script'); // IMPORT NG COMPONENT
 var MoleculeGenerator = (function (_super) {
     __extends(MoleculeGenerator, _super);
     function MoleculeGenerator(obj) {
         _super.call(this, obj);
         // THIS CLASS NAME
         this._ngClass = "MoleculeGenerator";
-        this._ngComponent = script_2.MoleculeGeneratorComponent;
+        this._type = "generator";
+        this._label = "Molecule Generator";
+        this._ngComponent = script_1.MoleculeGeneratorComponent;
         // OVERRIDES SPECIFIC TO THIS CLASS
         this._value = [];
         this._default_value = [];
         this._options = {
             _molecule_types: {
-                _ngClass: 'MoleculeSelect',
-                _ngComponent: script_1.MoleculeSelect,
+                _ngInput: '<molecule-select></molecule-select>',
                 _value: []
             },
             _use_only_childs: true,

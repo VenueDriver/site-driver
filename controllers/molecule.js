@@ -16,7 +16,8 @@ const validate = (data)=>{
 }
 
 // EASY ALIAS TO TRIGGER VALIDATION, SANITAZION AND STORAGE OF DATA
-const save = (req,type)=>{
+const save = (req)=>{
+  let type = req.params.type;
   return new Promise((resolve,reject)=>{
     let molecules = Object.assign({},req.body);
     if(!molecules._id) molecules._id = uniqid();
@@ -50,8 +51,9 @@ const save = (req,type)=>{
   })
 }
 
-const remove = (req,type)=>{  
-  return new Promise((resolve,reject)=>{    
+const remove = (req)=>{
+  let type = req.params.type;
+  return new Promise((resolve,reject)=>{
     let molecules = Object.assign({},req.body);
     if(molecules._id){
       const publisher = new Publisher({
@@ -59,7 +61,7 @@ const remove = (req,type)=>{
         basename : molecules._type+'.json',
         storageAdapter : storageAdapter,
         type : type
-      });      
+      });
       // UNPUBLISH ALL THREE VERSIONS
       publisher.unpublish().then(resolve).catch(reject);
 
@@ -78,7 +80,7 @@ const get = (type,typeName)=>{
     }
 }
 
-module.exports.cell = {
+module.exports = {
   save : (req,res) => save(req,"cell"),
   remove : (req) => remove(req,"cell"),
   get : (typeName) => get("cell",typeName)

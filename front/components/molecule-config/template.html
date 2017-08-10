@@ -15,11 +15,22 @@
   <div *ngIf="hasOptions">
     <h3>Options:</h3>
     <div class="col-3" *ngFor="let key of molecule._options | keys ">
-      <div (click)="optionsChange(key)" class="checkbox" [class.checked]="molecule._options[key]">
-          <ng-checkbox [checked]="molecule._options[key]"></ng-checkbox>
-          <span class="checkbox-label" [innerHTML]="key.replace('_',' ')">
-          </span>
+
+      <div *ngIf="isBoolean(molecule._options[key])" (click)="optionsChange(key)" class="checkbox" [class.checked]="molecule._options[key]">
+        <ng-checkbox [checked]="molecule._options[key]"></ng-checkbox>
+        <span class="checkbox-label" [innerHTML]="key.replace('_',' ')"> </span>
       </div>
+
+      <div *ngIf="isString(molecule._options[key])">
+        <span class="checkbox-label" [innerHTML]="key.replace('_',' ')"> </span>
+        <input type="text" [(ngModel)]="molecule._options[key]">
+      </div>
+
+      <div *ngIf="isComplex(molecule._options[key])">
+        <span class="checkbox-label" [innerHTML]="key.replace('_',' ')"> </span>
+        It's complex.
+      </div>
+
     </div>
   </div>
 </div>

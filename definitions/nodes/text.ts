@@ -7,6 +7,8 @@ export class TextNode extends Molecule implements TextInterface{
 
   // THIS CLASS NAME
   _ngClass : string = "TextNode";
+  _type : string = "text";
+  _label : string = "Text";
   _ngComponent = TextNodeComponent;
 
   // OVERRIDES SPECIFIC TO THIS CLASS

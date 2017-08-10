@@ -211,9 +211,9 @@ passport.deserializeUser(function(id, done) {
 */
 
 
-router.get("/cell/get/all",(req,res)=>{
+router.get("/:type/get/all",(req,res)=>{
   bouncer(req,res).then(()=>{
-    c.molecule.cell.get().then((data)=>{
+    c.molecule.get().then((data)=>{
       res.status(200);
       return res.json(data);
     }).catch((error)=>{
@@ -224,9 +224,9 @@ router.get("/cell/get/all",(req,res)=>{
   }).catch((error)=> rejectEndpoint(error));
 })
 
-router.get("/cell/get/:typeName",(req,res)=>{
+router.get("/:type/get/:typeName",(req,res)=>{
   bouncer(req,res).then(()=>{
-    c.molecule.cell.get(req.params.typeName).then((data)=>{
+    c.molecule.get(req.params.typeName).then((data)=>{
       res.status(200);
       return res.json(data);
     }).catch((error)=>{
@@ -339,7 +339,6 @@ router.post( "/media/s3/list" , (req,res)=>{
 });
 
 router.post( "/media/s3/add/folder" , (req,res)=>{
-  console.log("add folder");
   c.sites.checkUser(req,res, (isAuth)=> {
     if(isAuth){
       c.amazons3.addFolder(req.body.path).then((err)=>{
@@ -413,10 +412,9 @@ router.post( "/media/s3/remove" , (req,res)=>{
 
 
 
-router.post("/cell/save",upload.single("_file"),(req,res)=>{
+router.post("/:type/save",upload.single("_file"),(req,res)=>{
   bouncer(req,res).then(()=>{
-    console.log(req.body);
-    c.molecule.cell.save(req,res).then((success)=>{
+    c.molecule.save(req,res).then((success)=>{
       res.status(200);
       return res.json({message : "Success! Data saved"});
     }).catch((error)=>{
@@ -427,9 +425,9 @@ router.post("/cell/save",upload.single("_file"),(req,res)=>{
   }).catch((error)=> rejectEndpoint(error));
 })
 
-router.post("/cell/remove",upload.single("_file"),(req,res)=>{
+router.post("/:type/remove",upload.single("_file"),(req,res)=>{
   bouncer(req,res).then(()=>{
-    c.molecule.cell.remove(req,res).then((success)=>{
+    c.molecule.remove(req,res).then((success)=>{
       res.status(200);
       return res.json({message : "Success! Data removed"});
     }).catch((error)=>{

@@ -12,6 +12,8 @@ var TextNode = (function (_super) {
         _super.call(this, obj);
         // THIS CLASS NAME
         this._ngClass = "TextNode";
+        this._type = "text";
+        this._label = "Text";
         this._ngComponent = script_1.TextNodeComponent;
         this._options = {
             _use_textarea: false

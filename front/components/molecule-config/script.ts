@@ -1,4 +1,5 @@
 import { Component , Input , OnInit } from '@angular/core';
+import * as nodes from '../../../definitions/nodes';
 
 
 
@@ -43,6 +44,18 @@ export class MoleculeConfig implements OnInit {
       this.hasOptions = this.molecule.hasOwnProperty("_options");
       this.hasName = this.molecule.hasOwnProperty("_name");
     }
+  }
+
+  isBoolean(value) : boolean{
+    return typeof(value) == 'boolean';
+  }
+
+  isString(value) : boolean{
+    return typeof(value) == 'string';
+  }
+
+  isComplex(value) : boolean{
+    return typeof(value) == 'object' && value.hasOwnProperty("_ngInput");
   }
 
 }
