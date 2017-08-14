@@ -14,9 +14,17 @@ var Cell = (function (_super) {
         this._ngClass = "Cell";
         this._type = "cell";
         this._label = "Cell";
+        this._name = "Cell";
         this._ngComponent = script_1.CellComponent;
         for (var key in obj) {
             this[key] = obj[key];
+        }
+        if (!Array.isArray(this._value)) {
+            this._value = [];
+        }
+        if (obj._name) {
+            this._label = obj._name;
+            this._name = obj._name;
         }
     }
     return Cell;

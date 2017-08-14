@@ -30,9 +30,9 @@ class StorageAdapter{
     })
   }
 
-  remove(type,id,location){    
-    return new Promise((resolve,reject)=>{      
-      this.getAdapter(type).then((hasAdapter)=>{        
+  remove(type,id,location){
+    return new Promise((resolve,reject)=>{
+      this.getAdapter(type).then((hasAdapter)=>{
         this.adapter[type].remove(id,location).then(resolve).catch(reject);
       }).catch(reject);
     })
@@ -43,7 +43,7 @@ class StorageAdapter{
       if(this.adapter.hasOwnProperty(type)){
         resolve(true);
       }else{
-        let error = "Please provide an adapter for type:"+type;
+        let error = "Please provide a storage route for type:"+type;
         console.log(error);
         reject({error : error});
       }

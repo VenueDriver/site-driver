@@ -60,12 +60,15 @@ import { S3FilePicker }           from './components/s3-file-picker/script';
 import { LinkFieldComponent }     from './components/link-field/script';
 
 // MOLECULE
-import { MoleculeSelect }         from './components/molecule-select/script';
-import { MoleculeSave }           from './components/molecule-save/script';
+import { MoleculeCreate }          from './components/molecule-create/script';
+import { MoleculeSelect }           from './components/molecule-select/script';
+import { MoleculeSave }             from './components/molecule-save/script';
 import { MoleculeGeneratorComponent }  from './components/molecule-generator/script';
-import { MoleculeConfig }         from './components/molecule-config/script';
-import { MoleculeRenderer }       from './components/molecule-renderer/script';
-import { FusionComponent }        from './components/fusion/script';
+import { MoleculeConfig }           from './components/molecule-config/script';
+import { MoleculeRenderer }         from './components/molecule-renderer/script';
+import { FusionComponent }          from './components/fusion/script';
+import { TableRenderer }          from './components/table-renderer/script';
+
 
 // CUSTOM DIRECTIVES
 import { FixedElementDirective }  from './directives/fixed-element/script';
@@ -94,6 +97,7 @@ import { SitePage }             from './pages/site/script';
 import { IndexPage }            from './pages/index/script';
 import { CellBuilder }          from './pages/cell-builder/script';
 import { MoleculeGenerator }    from './pages/molecule-generator/script';
+import { GeneratorPage }        from './pages/generator/script';
 
 
 //DEFINE ROUTES
@@ -162,13 +166,16 @@ const appRoutes: Routes = require('./config/routes');
     AddSiteComponent,
     LinkFieldComponent,
     IndexPage,
+    GeneratorPage,
     SitePage,
     MoleculeGenerator,
     CellBuilder,
     MoleculeRenderer,
     MoleculeSave,
+    MoleculeCreate,
     FusionComponent,
-    MoleculeGeneratorComponent
+    MoleculeGeneratorComponent,
+    TableRenderer
   ],
   entryComponents: [
     GroupComponent,
@@ -188,6 +195,7 @@ const appRoutes: Routes = require('./config/routes');
     EventFieldComponent,
     ListFieldComponent,
     ColumnComponent,
+    MoleculeSelect,
     MoleculeGeneratorComponent
   ],
   providers :   [

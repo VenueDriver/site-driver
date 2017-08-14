@@ -28,7 +28,11 @@
 
       <div *ngIf="isComplex(molecule._options[key])">
         <span class="checkbox-label" [innerHTML]="key.replace('_',' ')"> </span>
-        It's complex.
+        <molecule-renderer
+          (valueChange)="molecule._options[key]._value = $event"
+          [component]="getComponent(molecule._options[key]._ngComponentName)"
+          [options]="molecule._options[key]._options">
+        </molecule-renderer>
       </div>
 
     </div>

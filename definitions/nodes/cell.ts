@@ -10,6 +10,7 @@ export class Cell extends Molecule implements CellInterface {
   _ngClass : string = "Cell";
   _type : string = "cell";
   _label : string = "Cell";
+  _name : string = "Cell";
   _ngComponent = CellComponent;
 
   // OVERRIDES SPECIFIC TO THIS CLASS
@@ -22,6 +23,15 @@ export class Cell extends Molecule implements CellInterface {
 
     for(let key in obj){
       this[key] = obj[key];
+    }
+
+    if(!Array.isArray(this._value)){
+      this._value = [];
+    }
+
+    if(obj._name){
+      this._label = obj._name;
+      this._name = obj._name;
     }
 
   }

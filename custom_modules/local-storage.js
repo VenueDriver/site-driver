@@ -88,12 +88,12 @@ class LocalStorage{
   }
 
   unlink(location,filename){
-    return new Promise((resolve,reject)=>{      
+    return new Promise((resolve,reject)=>{
       location = path.join(location,filename);
-      fs.unlink(location,(err)=>{        
+      fs.unlink(location,(err)=>{
         if(err){
           reject(err);
-        }else{          
+        }else{
           resolve(null,{message : filename+" removed."});
         }
       })

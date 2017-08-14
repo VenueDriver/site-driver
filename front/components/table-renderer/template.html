@@ -1,0 +1,23 @@
+<table>
+  <thead>
+    <tr>
+      <th *ngFor="let prop of columns">
+        <span [innerHTML]="prop"></span>
+      </th>
+      <th>
+        Actions
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of list">
+      <td *ngFor="let prop of columns">
+        {{item[prop]}}
+      </td>
+      <td>
+        <span (click)="editContainer.style.display = block">Edit</span>
+        <molecule-renderer [data]="item" [component]="item._ngComponent"></molecule-renderer>
+      </td>
+    </tr>
+  </tbody>
+</table>

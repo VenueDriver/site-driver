@@ -5,8 +5,7 @@ import { MoleculeService } from '../../services/molecule.service';
 @Component({
   selector: 'molecule-save',
   template: require('./template.html'),
-  styles : [require('./styles.css')],
-  //encapsulation: ViewEncapsulation.None
+  styles : [require('./styles.css')]
 })
 
 export class MoleculeSave implements OnInit {

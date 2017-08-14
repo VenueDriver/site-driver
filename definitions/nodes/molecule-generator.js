@@ -14,13 +14,17 @@ var MoleculeGenerator = (function (_super) {
         this._ngClass = "MoleculeGenerator";
         this._type = "generator";
         this._label = "Molecule Generator";
+        this._name = "MoleculeGenerator";
         this._ngComponent = script_1.MoleculeGeneratorComponent;
         // OVERRIDES SPECIFIC TO THIS CLASS
         this._value = [];
         this._default_value = [];
         this._options = {
             _molecule_types: {
-                _ngInput: '<molecule-select></molecule-select>',
+                _options: {
+                    max: -1
+                },
+                _ngComponentName: 'MoleculeSelect',
                 _value: []
             },
             _use_only_childs: true,

@@ -14,7 +14,7 @@
           </ul>
         </h2>
         <div class="panel" *ngIf="!reduced">
-          <molecule-renderer *ngFor="let cell of data._value" [data]="cell" ></molecule-renderer>
+          <molecule-renderer *ngFor="let cell of data._value" [data]="cell" [component]="cell._ngComponent" ></molecule-renderer>
 
           <molecule-select [max]="1" (valueChange)="moleculeSelected($event)"></molecule-select>
           <molecule-config [molecule]="newMolecule"></molecule-config>

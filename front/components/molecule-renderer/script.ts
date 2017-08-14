@@ -1,6 +1,8 @@
 import {
     Component,
     Input,
+    Output,
+    EventEmitter,
     ViewChild,
     ComponentRef,
     ComponentFactoryResolver,
@@ -19,7 +21,10 @@ import {
 export class MoleculeRenderer {
   @ViewChild('target', {read: ViewContainerRef}) target: ViewContainerRef;
   cmpRef: ComponentRef<Component>;
+  @Input() component : any;
+  @Input() options : any;
   @Input() data : any;
+  @Output() valueChange = new EventEmitter();
   private isViewInitialized:boolean = false;
 
   constructor(private componentFactoryResolver: ComponentFactoryResolver, private compiler: Compiler , private ref: ChangeDetectorRef) {}
@@ -33,11 +38,26 @@ export class MoleculeRenderer {
       // created component before creating the new one
       this.cmpRef.destroy();
     }
-    
-    let factory = this.componentFactoryResolver.resolveComponentFactory(this.data._ngComponent);
-    this.cmpRef = this.target.createComponent(factory);
-    // to access the created instance use
-    (<any>this.cmpRef.instance).data = this.data;
+
+    if(this.component){
+      console.log(this.data);
+      let factory = this.componentFactoryResolver.resolveComponentFactory(this.component);
+      this.cmpRef = this.target.createComponent(factory);
+      // to access the created instance use
+      console.log((<any>this.cmpRef.instance));
+      if(this.data){
+        (<any>this.cmpRef.instance).data = this.data;
+      }
+
+      if((<any>this.cmpRef.instance).valueChange && this.valueChange){
+        (<any>this.cmpRef.instance).valueChange = this.valueChange;
+      }
+      if(this.options){
+        for(let key in this.options){
+          (<any>this.cmpRef.instance)[key] = this.options[key];
+        }
+      }
+    }
 
     this.ref.detectChanges();
     // this.cmpRef.instance.someOutput.subscribe(val => doSomething());

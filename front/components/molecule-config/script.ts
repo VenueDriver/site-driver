@@ -1,5 +1,5 @@
 import { Component , Input , OnInit } from '@angular/core';
-import * as nodes from '../../../definitions/nodes';
+import * as inputs from '../inputs';
 
 
 
@@ -55,7 +55,11 @@ export class MoleculeConfig implements OnInit {
   }
 
   isComplex(value) : boolean{
-    return typeof(value) == 'object' && value.hasOwnProperty("_ngInput");
+    return typeof(value) == 'object' && value.hasOwnProperty("_ngComponentName");
+  }
+
+  getComponent(name){
+    return inputs[name];
   }
 
 }

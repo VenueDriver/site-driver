@@ -14,6 +14,7 @@ export class MoleculeSelect implements OnInit {
   @Input() activeTypes : any = false;
   @Input() max : number = 1;
   @Output() valueChange = new EventEmitter();
+  @Input() useMolecules : Array<string>;
 
   constructor(private moleculeService : MoleculeService){
 
@@ -32,14 +33,28 @@ export class MoleculeSelect implements OnInit {
     return `${item._label || 'unnamed'}`;
   }
 
-
-  ngOnInit(){
-    this.moleculeService.getAllMolecules().then((list)=>{
+  update(){
+    return this.moleculeService.getAllMolecules().then((list)=>{
+      if(this.useMolecules){
+        console.log(list);
+        list = list.filter((el)=> this.useMolecules.indexOf(el._name) > -1)
+      }
       this.ready = true;
       this.typesList = list;
+      if(this.typesList.length === 1){
+        this.emitValue(this.typesList[0]);
+      }
     }).catch((err)=>{
       console.log(err);
     })
+  }
+
+  ngOnInit(){
+    this.update();
+  }
+
+  ngOnChanges(){
+    this.update();
   }
 
 }

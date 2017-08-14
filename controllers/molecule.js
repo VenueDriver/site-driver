@@ -7,8 +7,8 @@ const uniqid = require('uniqid');
 
 const validate = (data)=>{
   return new Promise((resolve,reject)=>{
-    if(data._type){
-      resolve(data._type);
+    if(data._name){
+      resolve(data._name);
     }else{
       reject();
     }
@@ -16,10 +16,9 @@ const validate = (data)=>{
 }
 
 // EASY ALIAS TO TRIGGER VALIDATION, SANITAZION AND STORAGE OF DATA
-const save = (req)=>{
-  let type = req.params.type;
+const save = (type,molecules)=>{
   return new Promise((resolve,reject)=>{
-    let molecules = Object.assign({},req.body);
+    molecules = Object.assign({},molecules);
     if(!molecules._id) molecules._id = uniqid();
     // VALIDATE DATA STRUCTURE
     validate(molecules).then((validName)=>{
@@ -51,10 +50,9 @@ const save = (req)=>{
   })
 }
 
-const remove = (req)=>{
-  let type = req.params.type;
+const remove = (type,molecules)=>{
   return new Promise((resolve,reject)=>{
-    let molecules = Object.assign({},req.body);
+    molecules = Object.assign({},molecules);
     if(molecules._id){
       const publisher = new Publisher({
         data : molecules,
@@ -81,7 +79,7 @@ const get = (type,typeName)=>{
 }
 
 module.exports = {
-  save : (req,res) => save(req,"cell"),
-  remove : (req) => remove(req,"cell"),
-  get : (typeName) => get("cell",typeName)
+  save : save,
+  remove : remove,
+  get : get
 };

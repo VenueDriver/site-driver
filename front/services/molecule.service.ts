@@ -44,26 +44,6 @@ export class MoleculeService implements OnInit {
     })
   }
 
-  createMolecule(type,name : string){
-    let newCell : CellInterface = {
-      _name : '' ,
-      _type : name.toLowerCase(),
-      _label : name,
-      _path : [] ,
-      _value : [] ,
-      _ngClass : 'Cell',
-      _can :{
-        _be_required : false,
-        _edit_value : false,
-        _edit : false,
-        _show : true,
-        _dragg : false,
-        _delete : false
-      }
-    };
-    return newCell;
-  }
-
   removeMolecule(type,molecule : any){
     return new Promise((resolve,reject)=>{
       this._server.post( `/${type}/remove`, molecule, [] ).subscribe((data)=>{
@@ -113,13 +93,11 @@ export class MoleculeService implements OnInit {
   }
 
   getAllMolecules(){
-    return new Promise((resolve,reject)=>{
+    return new Promise<any>((resolve,reject)=>{
       this.getMoleculeList('cell').catch(reject).then((cells)=>{
         let fullList = cells.map(cell => cell);
         for(var key in nodes){
-          if(["Cell"].indexOf(key)==-1){
-            fullList.push(new nodes[key]({}));
-          }
+          fullList.push(new nodes[key]({}));
         }
         resolve(fullList);
       });

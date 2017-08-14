@@ -213,7 +213,7 @@ passport.deserializeUser(function(id, done) {
 
 router.get("/:type/get/all",(req,res)=>{
   bouncer(req,res).then(()=>{
-    c.molecule.get().then((data)=>{
+    c.molecule.get(req.params.type).then((data)=>{
       res.status(200);
       return res.json(data);
     }).catch((error)=>{
@@ -226,10 +226,10 @@ router.get("/:type/get/all",(req,res)=>{
 
 router.get("/:type/get/:typeName",(req,res)=>{
   bouncer(req,res).then(()=>{
-    c.molecule.get(req.params.typeName).then((data)=>{
-      res.status(200);
+    c.molecule.get(req.params.type,req.params.typeName).then((data)=>{
+      res.status(200);      
       return res.json(data);
-    }).catch((error)=>{
+    }).catch((error)=>{      
       res.status(400);
       return res.json(error);
     });
@@ -287,17 +287,6 @@ router.get('/logout', function(req, res){
 
 
 router.get( "/:pagename" ,(req,res)=>{
-  c.sites.checkUser(req,res, (isAuth)=> {
-    if(isAuth){
-      res.render("index");
-    }else{
-      res.redirect('/login');
-    }
-  });
-});
-
-
-router.get("/",(req,res)=>{
   c.sites.checkUser(req,res, (isAuth)=> {
     if(isAuth){
       res.render("index");
@@ -414,7 +403,7 @@ router.post( "/media/s3/remove" , (req,res)=>{
 
 router.post("/:type/save",upload.single("_file"),(req,res)=>{
   bouncer(req,res).then(()=>{
-    c.molecule.save(req,res).then((success)=>{
+    c.molecule.save(req.params.type,req.body).then((success)=>{
       res.status(200);
       return res.json({message : "Success! Data saved"});
     }).catch((error)=>{
@@ -427,7 +416,7 @@ router.post("/:type/save",upload.single("_file"),(req,res)=>{
 
 router.post("/:type/remove",upload.single("_file"),(req,res)=>{
   bouncer(req,res).then(()=>{
-    c.molecule.remove(req,res).then((success)=>{
+    c.molecule.remove(req.params.type,req.body).then((success)=>{
       res.status(200);
       return res.json({message : "Success! Data removed"});
     }).catch((error)=>{
@@ -586,6 +575,23 @@ router.post('/register', (req, res)=>{
     }
   })
 });
+
+
+// = DEFAUL ROUTES
+router.get("*",(req,res)=>{
+  c.sites.checkUser(req,res, (isAuth)=> {
+    if(isAuth){
+      res.render("index");
+    }else{
+      res.redirect('/login');
+    }
+  });
+});
+
+
+
+
+
 
 // = EXPORT ROUTES
 module.exports = router;
