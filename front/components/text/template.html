@@ -3,8 +3,8 @@
 	<generator *ngIf="data._editable_field || userRole > 9000" [label]="'Edit ' + data._name" [path]="data._path" [edit]="data"><a class="fa fa-pencil"></a></generator>
 	<delete-btn *ngIf="data._delete_field || userRole > 9000" [path]="data._path"></delete-btn>
 </div></label>
-<input *ngIf="!data._use_textarea" [disabled]="!(userRole > 9000 || data._editable_value)" type="text" [(ngModel)]="data._value" (keyup)="setValue($event)" class="input-form">
-<textarea *ngIf="data._use_textarea" [disabled]="!(userRole > 9000 || data._editable_value)" [(ngModel)]="data._value" (keyup)="setValue($event)" class="input-form"></textarea>
+<input *ngIf="!data._use_textarea" type="text" [(ngModel)]="data._value" (keyup)="setValue($event)" class="input-form">
+<textarea *ngIf="data._use_textarea" [(ngModel)]="data._value" (keyup)="setValue($event)" class="input-form"></textarea>
 
 <!-- error message -->
 <div class="error-message" *ngIf="errors.length > 0 && data._required">

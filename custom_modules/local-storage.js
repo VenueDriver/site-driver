@@ -36,8 +36,8 @@ class LocalStorage{
 
   readFile(location,file){
     return new Promise((resolve,reject)=>{
-      location = path.join(location,file);
-      fs.readFile(location,'utf-8',(err,data)=>{
+      let mergedLocation = path.join(this.opts.baseDirectory,location,file);
+      fs.readFile(mergedLocation,'utf-8',(err,data)=>{
         if(this.opts.json) data = stringToJSON(data);
         if(err){
           reject(err);
@@ -51,9 +51,9 @@ class LocalStorage{
   readdir(location,opts){
     return new Promise((resolve,reject)=>{
       let encoding = opts.encoding || 'utf-8';
-      location = path.join(this.opts.baseDirectory,location);
-      mkdirp(location).then(()=>{
-        fs.readdir(location,encoding,(err,directory)=>{
+      let mergedLocation = path.join(this.opts.baseDirectory,location);
+      mkdirp(mergedLocation).then(()=>{
+        fs.readdir(mergedLocation,encoding,(err,directory)=>{
           if(err){
             reject(err)
           }else if(opts.readFiles){
@@ -89,8 +89,8 @@ class LocalStorage{
 
   unlink(location,filename){
     return new Promise((resolve,reject)=>{
-      location = path.join(location,filename);
-      fs.unlink(location,(err)=>{
+      let mergedLocation = path.join(this.opts.baseDirectory,location,filename);
+      fs.unlink(mergedLocation,(err)=>{
         if(err){
           reject(err);
         }else{
@@ -103,8 +103,8 @@ class LocalStorage{
 
   remove(id,location){
     return new Promise((resolve,reject)=>{
-      location = path.join(this.opts.baseDirectory,location);
-      fs.readdir(location,'utf-8',(err,directory)=>{
+      let mergedLocation = path.join(this.opts.baseDirectory,location);
+      fs.readdir(mergedLocation,'utf-8',(err,directory)=>{
         directory = directory.filter(file => !(/^\./.test(file) || !(/\.\w+$/gi.test(file))));
         let i = 0;
         asyncLoop(

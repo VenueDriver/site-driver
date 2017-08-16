@@ -27,6 +27,7 @@ export class GeneratorPage implements OnInit {
     generatorName : string;
     generator : any;
     newMolecule : any;
+    useMolecules : Array<string>;
     private sub: any;
 
     constructor(private route: ActivatedRoute , private moleculeService : MoleculeService){}
@@ -44,7 +45,9 @@ export class GeneratorPage implements OnInit {
       this.sub = this.route.params.subscribe(params => {
          this.generatorName = params['generator_name'];
          this.moleculeService.getMolecule("generator",this.generatorName).then((generator)=>{
+           console.log("generator:",generator);
            this.generator = generator;
+           this.useMolecules = this.generator._options._molecule_types._value.map((value)=> value._name);
            this.ready = true;
          });
       });
