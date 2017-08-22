@@ -14,11 +14,20 @@ import {
 export class MoleculeCreate {
 
   @Input() type : string;
+  @Input() generator : any;
   @Input() useMolecules : Array<string>;
   newMolecule : any;
 
   constructor(){
 
+  }
+
+  updateMolecule(molecules){
+    this.newMolecule = molecules[0];
+    if(this.generator){
+      this.newMolecule._generator = this.generator;
+      this.newMolecule._id = '';
+    }
   }
 
   log(message){

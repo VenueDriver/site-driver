@@ -16,7 +16,7 @@ class LocalStorage{
 
   constructor(opts){
     this.opts = {};
-    this.opts.baseDirectory = '';
+    this.opts.baseLocation = '';
     this.opts.json = true;
     Object.keys(opts).forEach((key)=>{
       this.opts[key] = opts[key];
@@ -25,7 +25,7 @@ class LocalStorage{
 
   write(data,location,filename){
     return new Promise((resolve,reject)=> {
-      location = path.join(this.opts.baseDirectory,location);
+      location = path.join(this.opts.baseLocation,location);
       mkdirp(location).then(()=>{
         fs.writeFile(path.join(location,filename) , data ,(err)=>{
           if(err){ return reject(err) } else { return resolve() }
@@ -36,7 +36,7 @@ class LocalStorage{
 
   readFile(location,file){
     return new Promise((resolve,reject)=>{
-      let mergedLocation = path.join(this.opts.baseDirectory,location,file);
+      let mergedLocation = path.join(this.opts.baseLocation,location,file);
       fs.readFile(mergedLocation,'utf-8',(err,data)=>{
         if(this.opts.json) data = stringToJSON(data);
         if(err){
@@ -51,7 +51,7 @@ class LocalStorage{
   readdir(location,opts){
     return new Promise((resolve,reject)=>{
       let encoding = opts.encoding || 'utf-8';
-      let mergedLocation = path.join(this.opts.baseDirectory,location);
+      let mergedLocation = path.join(this.opts.baseLocation,location);
       mkdirp(mergedLocation).then(()=>{
         fs.readdir(mergedLocation,encoding,(err,directory)=>{
           if(err){
@@ -89,7 +89,7 @@ class LocalStorage{
 
   unlink(location,filename){
     return new Promise((resolve,reject)=>{
-      let mergedLocation = path.join(this.opts.baseDirectory,location,filename);
+      let mergedLocation = path.join(this.opts.baseLocation,location,filename);
       fs.unlink(mergedLocation,(err)=>{
         if(err){
           reject(err);
@@ -103,8 +103,9 @@ class LocalStorage{
 
   remove(id,location){
     return new Promise((resolve,reject)=>{
-      let mergedLocation = path.join(this.opts.baseDirectory,location);
+      let mergedLocation = path.join(this.opts.baseLocation,location);
       fs.readdir(mergedLocation,'utf-8',(err,directory)=>{
+        if(err) reject(err)
         directory = directory.filter(file => !(/^\./.test(file) || !(/\.\w+$/gi.test(file))));
         let i = 0;
         asyncLoop(
@@ -132,8 +133,6 @@ class LocalStorage{
       });
     })
   }
-
-
 }
 
 

@@ -24,17 +24,23 @@ export class MoleculeService implements OnInit {
     console.log("init molecule service");
   }
 
-  validateMolecule(type,molecule) {
+  validateMolecule(molecule) {
     return new Promise((resolve,reject)=>{
       resolve(true);
     });
   }
 
-  saveMolecule(type,molecule){
+  saveMolecule(molecule){
     return new Promise((resolve,reject)=>{
       molecule = this.parser.toData(molecule);
-      this.validateMolecule(type,molecule).then(()=>{
-        this._server.post( `/${type}/save` , molecule, [] ).subscribe((data)=>{
+      this.validateMolecule(molecule).then(()=>{
+        let query = {
+          type : molecule._type,
+          name : molecule._name,
+          id : molecule._id,
+          data : molecule
+        };
+        this._server.post( `/molecule/save` , query, [] ).subscribe((data)=>{
           resolve(data);
         },
         (error)=>{
@@ -44,9 +50,14 @@ export class MoleculeService implements OnInit {
     })
   }
 
-  removeMolecule(type,molecule : any){
+  removeMolecule(molecule : any){
     return new Promise((resolve,reject)=>{
-      this._server.post( `/${type}/remove`, molecule, [] ).subscribe((data)=>{
+      let query = {
+        type : molecule._type,
+        name : molecule._name,
+        id : molecule._id
+      };
+      this._server.post( `/molecule/remove`, query, [] ).subscribe((data)=>{
         resolve(data);
       },
       (error)=>{
@@ -55,19 +66,14 @@ export class MoleculeService implements OnInit {
     });
   }
 
-  getMolecule(type,name){
-    return new Promise((resolve,reject)=>{
-      this._server.get( `/${type}/get/${name}` ).subscribe((data)=>{
-        this.parser.toNg(data).then(resolve).catch(reject);
-      },(error)=>{
-        reject(error);
-      })
-    })
-  }
-
-  getMoleculeList(type) {
+  getMoleculeList(query) {
     return new Promise<any>((resolve,reject)=>{
-      this._server.get( `/${type}/get/all` ).subscribe((data)=>{
+      if(typeof query === "string"){
+        query = {
+          type : [query]
+        }
+      }
+      this._server.post( `/molecule/get` , query , [] ).subscribe((data)=>{
         let i = 0;
         asyncLoop(
           ()=> i >= data.length,
@@ -94,7 +100,7 @@ export class MoleculeService implements OnInit {
 
   getAllMolecules(){
     return new Promise<any>((resolve,reject)=>{
-      this.getMoleculeList('cell').catch(reject).then((cells)=>{
+      this.getMoleculeList({type : 'cell'}).catch(reject).then((cells)=>{
         let fullList = cells.map(cell => cell);
         for(var key in nodes){
           fullList.push(new nodes[key]({}));

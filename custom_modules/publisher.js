@@ -1,106 +1,135 @@
-const path = require("path");
+const settings = require('../config/publisher');
+const asyncLoop = require('../custom_modules/asyncloop');
+const StorageRoutes = require('../config/storage');
 
 class Publisher{
 
-  constructor(opts){
-    this.data = Object.assign({},opts.data);
-    this.basename = opts.basename;
-    this.storageAdapter = opts.storageAdapter;
-    this.type = opts.type;
+  constructor(query){
+    this.query = Object.assign({},query);
   }
 
-  publishOriginal(){
+  publish(format,data){
     return new Promise((resolve,reject)=>{
-      let formattedData = Object.assign({},this.data);
-      formattedData = JSON.stringify(formattedData);
-      this.storageAdapter.input(this.type,formattedData,"/original",this.basename).then(resolve).catch(reject);
+      data = Object.assign({},data); // PRESERVE ORIGINAL DATA
+      if(!settings.formats.hasOwnProperty(format)){
+        reject("No format '"+format+"'.Please provide format function on config/publisher.js");
+      }else{
+        settings.formats[format](data).then((formatted)=>{
+          this.query.formattedData = formatted;
+          this.query.format = format;
+          this.getStorage().save().then(resolve).catch(reject);
+        }).catch(reject);
+      }
     })
   }
 
-  publishJSON(){
-    return new Promise((resolve,reject)=>{
-      let formattedData = Object.assign({},this.data);
-      // formattedData = cleanFormatter(formattedData);
-      formattedData = JSON.stringify(formattedData);
-      this.storageAdapter.input(this.type,formattedData,"",this.basename).then(resolve).catch(reject);
-    })
+  unpublish(format){
+    this.query.format = format;
+    return this.getStorage().remove();
   }
 
-  publishJSONP(){
-    return new Promise((resolve,reject)=>{
-      let formattedData = Object.assign({},this.data);
-      // formattedData = cleanFormatter(formattedData);
-      // formattedData = 'retrieveJSONP({ref:\"jsonp/'+filename+'\",data:'+formattedData+'})';
-      formattedData = JSON.stringify(formattedData);
-      this.storageAdapter.input(this.type,formattedData,"/jsonp",this.basename).then(resolve).catch(reject);
-    })
+  get(format){
+    this.query.format = format;
+    return this.getStorage().get();
   }
 
-  unpublish(onlyOriginal){
-    return new Promise((resolve,reject)=>{
-      this.storageAdapter.remove(this.type,this.data._id,"/original").then((data)=>{
-        if(onlyOriginal){
-          resolve(data);
-        }else{
-          this.storageAdapter.remove(this.type,this.data._id,"").then(()=>{
-            this.storageAdapter.remove(this.type,this.data._id,"/jsonp").then(resolve).catch(reject);
-          }).catch(reject);
-        }
-      }).catch(reject)
-    })
-
+  getStorage(){
+    return new StorageRoutes(this.query);
   }
 
-  cleanFormatter(data){
-
-    const cleanOutput = (data)=>{
-      Object.keys(data).forEach( key => {
-        if( /^\_/.test(key) ) delete data[key]
-      });
-      return data;
-    }
-
-    const outputData = (data)=>{
-      data = Object.assign({},data);
-      if(data.hasOwnProperty("_child")){
-
-
-        if(["List","Slider"].indexOf(data._type)>-1){
-
-
-          // IF IS LIST
-          if(data._child.length > 0){
-
-            return data._child.map( (el)=>outputData(el) );
+  publishAll(){
+    return new Promise((resolve,reject)=>{
+      let i = 0;
+      let formats = Object.keys(settings.formats);
+      asyncLoop(
+        ()=> i >= formats.length,
+        (next,end)=>{
+          this.publish(formats[i],this.query.data).then(()=>{ i++ ; next() })
+          .catch((err)=> end(err) );
+        },
+        (err)=>{
+          if(err){
+            reject(err)
           }else{
-
-            return [];
+            resolve();
           }
-
-        }else{
-
-
-          // IF IS GROUP
-          if(data._child.length > 0){
-            data._child.forEach((el,i)=>{
-              data[el._name.replace(/\s/,"-")] = outputData(el);
-            });
-          }
-
         }
-
-      }
-
-
-      if(data._value){
-        return data._value;
-      }
-
-      return cleanOutput(data);
-
-    }
-
+      );
+    })
   }
+
+  unpublishAll(){
+    return new Promise((resolve,reject)=>{
+      let i = 0;
+      let formats = Object.keys(settings.formats);
+      asyncLoop(
+        ()=> i >= formats.length,
+        (next,end)=>{
+          this.unpublish(formats[i]).then(()=>{ i++ ; next() })
+          .catch((err)=> end(err) );
+        },
+        (err)=>{
+          if(err){
+            reject(err)
+          }else{
+            resolve();
+          }
+        }
+      );
+    })
+  }
+
+
+  // cleanFormatter(data){
+  //
+  //   const cleanOutput = (data)=>{
+  //     Object.keys(data).forEach( key => {
+  //       if( /^\_/.test(key) ) delete data[key]
+  //     });
+  //     return data;
+  //   }
+  //
+  //   const outputData = (data)=>{
+  //     data = Object.assign({},data);
+  //     if(data.hasOwnProperty("_child")){
+  //
+  //
+  //       if(["List","Slider"].indexOf(data._type)>-1){
+  //
+  //
+  //         // IF IS LIST
+  //         if(data._child.length > 0){
+  //
+  //           return data._child.map( (el)=>outputData(el) );
+  //         }else{
+  //
+  //           return [];
+  //         }
+  //
+  //       }else{
+  //
+  //
+  //         // IF IS GROUP
+  //         if(data._child.length > 0){
+  //           data._child.forEach((el,i)=>{
+  //             data[el._name.replace(/\s/,"-")] = outputData(el);
+  //           });
+  //         }
+  //
+  //       }
+  //
+  //     }
+  //
+  //
+  //     if(data._value){
+  //       return data._value;
+  //     }
+  //
+  //     return cleanOutput(data);
+  //
+  //   }
+  //
+  // }
 
 }
 

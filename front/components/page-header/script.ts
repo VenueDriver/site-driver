@@ -18,7 +18,7 @@ export class PageHeader implements OnInit {
   ngOnInit(){
     this.dataService.userRole().then((data : any)=>{
       this.userRole = data.role;
-      this.moleculeService.getMoleculeList('generator').then((list)=>{
+      this.moleculeService.getMoleculeList({type : 'generator'}).then((list)=>{
         this.generators = list;
       })
     });

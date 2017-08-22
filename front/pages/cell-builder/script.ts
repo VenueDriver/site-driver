@@ -20,7 +20,9 @@ export class CellBuilder implements OnInit{
     }
 
     ngOnInit(){
-      this.moleculeService.getMoleculeList('cell').then((list)=>{
+      this.moleculeService.getMoleculeList({
+        type : 'cell'
+      }).then((list)=>{
         this.cellList = list;
       })
     }

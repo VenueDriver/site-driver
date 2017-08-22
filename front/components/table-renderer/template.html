@@ -16,6 +16,7 @@
       </td>
       <td>
         <span (click)="editContainer.style.display = block">Edit</span>
+        <molecule-remove [molecule]="item">Delete</molecule-remove>
         <molecule-renderer [data]="item" [component]="item._ngComponent"></molecule-renderer>
       </td>
     </tr>

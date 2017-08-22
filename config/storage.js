@@ -1,104 +1,53 @@
 const LocalStorage = require('../custom_modules/local-storage');
+const path = require('path');
 const rootStorageFolder = "_storage";
 
-const type = {
-  save : (type,data,location,filename)=>{
-    return new Promise((resolve,reject)=>{
-      const storage = new LocalStorage({ baseDirectory : rootStorageFolder+'/'+type+'s'});
-      storage.write(data,location,filename).then(resolve).catch(reject);
-    })
-  },
-  remove : (type,id,location)=>{
-    return new Promise((resolve,reject)=>{
-      const storage = new LocalStorage({ baseDirectory : rootStorageFolder+'/'+type+'s' });
-      storage.remove(id,location).then(resolve).catch(reject);
-    });
-  },
-  getOne : (type,id)=>{
-    return new Promise((resolve,reject)=>{
-      const storage = new LocalStorage({ baseDirectory : rootStorageFolder+'/'+type+'s' });
-      storage.readFile('/original',id+'.json').then((data)=>{
-        resolve(data);
-      }).catch(reject);
-    });
-  },
-  getAll : (type)=>{
-    return new Promise((resolve,reject)=>{
-      const storage = new LocalStorage({ baseDirectory : rootStorageFolder+'/'+type+'s' });
-      storage.readdir('original',{readFiles : true}).then(resolve).catch(reject);
-    });
-  }
-};
+class StorageRoutes{
 
-
-module.exports ={
-  types : {
-
-    cell : {
-      save : (data,location,filename)=>{
-        return type.save('cell',data,location,filename)
-      },
-      remove : (id,location)=>{
-        return type.remove('cell',id,location)
-      },
-      getOne : (id)=>{
-        return type.getOne('cell',id)
-      },
-      getAll : ()=>{
-        return type.getAll('cell')
-      }
-    },
-
-    generator : {
-      save : (data,location,filename)=>{
-        return type.save('generator',data,location,filename)
-      },
-      remove : (id,location)=>{
-        return type.remove('generator',id,location)
-      },
-      getOne : (id)=>{
-        console.log("trying to get",id);
-        return type.getOne('generator',id)
-      },
-      getAll : ()=>{
-        console.log("trying to get all");
-        return type.getAll('generator')
-      }
-    },
-
-    instance : {
-      save : (data,location,filename)=>{
-        let type = "instance";
-        console.log("Instance.save",type,data,location,filename);
-        return new Promise((resolve,reject)=>{
-          const storage = new LocalStorage({ baseDirectory : rootStorageFolder+'/'+type+'s'});
-          storage.write(data,location,filename).then(resolve).catch(reject);
-        })
-      },
-      remove : (id,location)=>{
-        let type = "instance";
-        return new Promise((resolve,reject)=>{
-          const storage = new LocalStorage({ baseDirectory : rootStorageFolder+'/'+type+'s' });
-          storage.remove(id,location).then(resolve).catch(reject);
-        });
-      },
-      getOne : (id)=>{
-        let type = "instance";
-        return new Promise((resolve,reject)=>{
-          const storage = new LocalStorage({ baseDirectory : rootStorageFolder+'/'+type+'s' });
-          storage.readFile('/original',id+'.json').then((data)=>{
-            resolve(data);
-          }).catch(reject);
-        });
-      },
-      getAll : ()=>{
-        let type = "instance";
-        return new Promise((resolve,reject)=>{
-          const storage = new LocalStorage({ baseDirectory : rootStorageFolder+'/'+type+'s' });
-          storage.readdir('original',{readFiles : true}).then(resolve).catch(reject);
-        });
-      }
+  constructor(query){
+    this.query = query;
+    if(typeof this.query.readFiles !== "undefined") this.query.readFiles = true;
+    switch(query.type){
+      case 'instance':
+        this.storeInLocation = path.join(rootStorageFolder,query.type,query.name);
+        this.filename = query.id+'.json';
+      default :
+        this.storeInLocation = path.join(rootStorageFolder,query.type);
+        this.filename = query.name+'.json';
     }
-
+    // USE SAME STORAGE FOR ALL?
+    // YOU CAN CREATE A CONDITION TO CHANGE THE STORAGE HERE
+    this.storage = new LocalStorage({ baseLocation : this.storeInLocation });
   }
+
+  save(){
+    let data = JSON.stringify(this.query.formattedData);
+    return this.storage.write(data,this.query.format,this.filename);
+  }
+
+  remove(){
+    console.log("Trying to remove",this.query);
+    return this.storage.remove(this.query.id,this.query.format);
+  }
+
+  get(){
+    return new Promise((resolve,reject)=>{
+      this.storage.readdir(this.query.format,{readFiles : true}).catch(reject).resolve((list)=>{
+        console.log(this.query.where);
+        if(this.query.hasOwnProperty("where")){
+          list.filter((item)=>{
+            for(let key in this.query.where){
+              if(!item[key] === this.query.where[key]){
+                return false;
+              }
+            }
+          });
+          resolve(list);
+        }
+      });
+    })
+  }
+
 }
+
+module.exports = StorageRoutes;

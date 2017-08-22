@@ -44,10 +44,13 @@ export class GeneratorPage implements OnInit {
     ngOnInit() {
       this.sub = this.route.params.subscribe(params => {
          this.generatorName = params['generator_name'];
-         this.moleculeService.getMolecule("generator",this.generatorName).then((generator)=>{
-           console.log("generator:",generator);
-           this.generator = generator;
-           this.useMolecules = this.generator._options._molecule_types._value.map((value)=> value._name);
+         this.moleculeService.getMoleculeList({
+           type : "generator",
+           where : {
+             _name : params['generator_name']
+           }}).then((generator)=>{
+           generator = generator[0];
+           console.log("GENERATOR:",generator);
            this.ready = true;
          });
       });

@@ -63,6 +63,7 @@ import { LinkFieldComponent }     from './components/link-field/script';
 import { MoleculeCreate }          from './components/molecule-create/script';
 import { MoleculeSelect }           from './components/molecule-select/script';
 import { MoleculeSave }             from './components/molecule-save/script';
+import { MoleculeRemove }             from './components/molecule-remove/script';
 import { MoleculeGeneratorComponent }  from './components/molecule-generator/script';
 import { MoleculeConfig }           from './components/molecule-config/script';
 import { MoleculeRenderer }         from './components/molecule-renderer/script';
@@ -172,6 +173,7 @@ const appRoutes: Routes = require('./config/routes');
     CellBuilder,
     MoleculeRenderer,
     MoleculeSave,
+    MoleculeRemove,
     MoleculeCreate,
     FusionComponent,
     MoleculeGeneratorComponent,

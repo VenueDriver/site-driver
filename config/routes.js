@@ -210,26 +210,12 @@ passport.deserializeUser(function(id, done) {
 ==============================
 */
 
-
-router.get("/:type/get/all",(req,res)=>{
-  bouncer(req,res).then(()=>{
-    c.molecule.get(req.params.type).then((data)=>{
-      res.status(200);
-      return res.json(data);
-    }).catch((error)=>{
-      res.status(400);
-      return res.json(error);
-    });
-
-  }).catch((error)=> rejectEndpoint(error));
-})
-
 router.get("/:type/get/:typeName",(req,res)=>{
   bouncer(req,res).then(()=>{
     c.molecule.get(req.params.type,req.params.typeName).then((data)=>{
-      res.status(200);      
+      res.status(200);
       return res.json(data);
-    }).catch((error)=>{      
+    }).catch((error)=>{
       res.status(400);
       return res.json(error);
     });
@@ -399,11 +385,23 @@ router.post( "/media/s3/remove" , (req,res)=>{
 
 
 
-
-
-router.post("/:type/save",upload.single("_file"),(req,res)=>{
+router.post("/molecule/get",upload.single("_file"),(req,res)=>{
   bouncer(req,res).then(()=>{
-    c.molecule.save(req.params.type,req.body).then((success)=>{
+    c.molecule.get(req.body).then((data)=>{
+      res.status(200);
+      return res.json(data);
+    }).catch((error)=>{
+      res.status(400);
+      return res.json(error);
+    });
+
+  }).catch((error)=> rejectEndpoint(error));
+})
+
+
+router.post("/molecule/save",upload.single("_file"),(req,res)=>{
+  bouncer(req,res).then(()=>{
+    c.molecule.save(req.body).then((success)=>{
       res.status(200);
       return res.json({message : "Success! Data saved"});
     }).catch((error)=>{
@@ -414,16 +412,16 @@ router.post("/:type/save",upload.single("_file"),(req,res)=>{
   }).catch((error)=> rejectEndpoint(error));
 })
 
-router.post("/:type/remove",upload.single("_file"),(req,res)=>{
+router.post("/molecule/remove",upload.single("_file"),(req,res)=>{
+  console.log("/molecule/remove",req.body);
   bouncer(req,res).then(()=>{
-    c.molecule.remove(req.params.type,req.body).then((success)=>{
+    c.molecule.remove(req.body).then((success)=>{
       res.status(200);
       return res.json({message : "Success! Data removed"});
     }).catch((error)=>{
       res.status(400);
       return res.json(error);
     });
-
   }).catch((error)=> rejectEndpoint(error));
 })
 
