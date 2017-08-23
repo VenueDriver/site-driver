@@ -26,7 +26,12 @@ export class MoleculeSave implements OnInit {
   save(){
     this.bussy = true;
     console.log("Save ",this.molecule);
-    this.moleculeService.saveMolecule(this.molecule).then((response)=>{
+    this.moleculeService.saveMolecule({
+      type : this.type,
+      name : this.molecule._name,
+      id   : this.molecule._id,
+      data : this.molecule
+    }).then((response)=>{
       this.bussy = false;
       console.log("All good saved",response);
     });

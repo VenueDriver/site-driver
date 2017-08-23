@@ -1,19 +1,27 @@
 const LocalStorage = require('../custom_modules/local-storage');
+const QueryFilter = require('../custom_modules/query-filter');
 const path = require('path');
 const rootStorageFolder = "_storage";
 
 class StorageRoutes{
 
   constructor(query){
+    console.log("Constructor start");
     this.query = query;
+    console.log(this.query);
     if(typeof this.query.readFiles !== "undefined") this.query.readFiles = true;
     switch(query.type){
       case 'instance':
-        this.storeInLocation = path.join(rootStorageFolder,query.type,query.name);
-        this.filename = query.id+'.json';
-      default :
-        this.storeInLocation = path.join(rootStorageFolder,query.type);
-        this.filename = query.name+'.json';
+        console.log("Is instance");
+        if(!this.query.hasOwnProperty("name")) this.query.name = '';
+        this.storeInLocation = path.join(rootStorageFolder,this.query.type,this.query.name);
+        this.filename = this.query.id+'.json';
+        console.log(this.storeInLocation,this.filename);
+        break;
+      default:
+        this.storeInLocation = path.join(rootStorageFolder,this.query.type);
+        this.filename = this.query.name+'.json';
+      console.log("Constructor end");
     }
     // USE SAME STORAGE FOR ALL?
     // YOU CAN CREATE A CONDITION TO CHANGE THE STORAGE HERE
@@ -21,29 +29,26 @@ class StorageRoutes{
   }
 
   save(){
-    let data = JSON.stringify(this.query.formattedData);
-    return this.storage.write(data,this.query.format,this.filename);
+    return this.storage.write( JSON.stringify(this.query.formattedData) , this.query.format , this.filename);
   }
 
   remove(){
-    console.log("Trying to remove",this.query);
     return this.storage.remove(this.query.id,this.query.format);
   }
 
   get(){
+    console.log("GET STORAGE");
     return new Promise((resolve,reject)=>{
-      this.storage.readdir(this.query.format,{readFiles : true}).catch(reject).resolve((list)=>{
-        console.log(this.query.where);
-        if(this.query.hasOwnProperty("where")){
-          list.filter((item)=>{
-            for(let key in this.query.where){
-              if(!item[key] === this.query.where[key]){
-                return false;
-              }
-            }
-          });
-          resolve(list);
-        }
+      console.log("\n\n=======================\n\n","Request received, Criteria:",this.query,"\n\n--------------------------------");
+      this.storage.readdir(this.query.format,{readFiles : true}).catch(reject).then((list)=>{
+        const queryFilter = new QueryFilter(this.query);
+        let filterList = list.filter((item)=>{
+          let valid = queryFilter.filter(item);
+          console.log(item._name,item._type,"\n\nCriteria:",this.query,"\n\nValid:",valid,'\n\n--------------------------------');
+          return valid;
+        });
+        console.log("\n\nResults count:",filterList.length);
+        resolve(filterList);
       });
     })
   }

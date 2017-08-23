@@ -30,16 +30,10 @@ export class MoleculeService implements OnInit {
     });
   }
 
-  saveMolecule(molecule){
+  saveMolecule(query){
     return new Promise((resolve,reject)=>{
-      molecule = this.parser.toData(molecule);
-      this.validateMolecule(molecule).then(()=>{
-        let query = {
-          type : molecule._type,
-          name : molecule._name,
-          id : molecule._id,
-          data : molecule
-        };
+      query.data = this.parser.toData(query.data);
+      this.validateMolecule(query.data).then(()=>{
         this._server.post( `/molecule/save` , query, [] ).subscribe((data)=>{
           resolve(data);
         },

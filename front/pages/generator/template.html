@@ -6,12 +6,13 @@
         <h1>{{generator._name}}</h1>
 				<div class="box">
 
+          <h1>MOLECULE CREATE</h1>
 					<molecule-create [useMolecules]="useMolecules" [generator]="generator" [type]="'instance'"></molecule-create>
 
 				</div>
         <table-renderer
-					[columns]="['name','description']"
-					[list]="[{name : 'test 1', description : 'this is test 1',active : true},{name : 'test 2', description : 'this is test 2',active : false}]"
+					[columns]="['_id','_name']"
+					[list]="instanceList"
 				></table-renderer>
 			</div>
 		</section>

@@ -14,7 +14,10 @@ const validate = (data)=>{
 // EASY ALIAS TO TRIGGER VALIDATION, SANITAZION AND STORAGE OF DATA
 const save = (query)=>{
   return new Promise((resolve,reject)=>{
-    if(!query.data._id) query.data._id = uniqid();
+    if(!query.id && !query.data._id){
+      query.data._id = uniqid();
+      query.id = query.data._id;
+    };
     // VALIDATE DATA
     validate(query.data).then((validName)=>{
       const publisher = new Publisher(query);
@@ -33,6 +36,7 @@ const remove = (query)=>{
 }
 
 const get = (query)=>{
+  console.log("Get",query.where);
   const publisher = new Publisher(query);
   return publisher.get('original');
 }

@@ -387,6 +387,7 @@ router.post( "/media/s3/remove" , (req,res)=>{
 
 router.post("/molecule/get",upload.single("_file"),(req,res)=>{
   bouncer(req,res).then(()=>{
+    console.log("/molecule/get",req.body);
     c.molecule.get(req.body).then((data)=>{
       res.status(200);
       return res.json(data);
