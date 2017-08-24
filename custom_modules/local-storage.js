@@ -37,10 +37,10 @@ class LocalStorage{
       types.forEach( type =>{
         if(names.length > 0 && type === "instance"){
           names.forEach(name =>{
-            routes.push(path.join(type,name));
+            routes.push(path.join(type,name,this.query.format));
           })
         }else{
-          routes.push(path.join(type));
+          routes.push(path.join(type,this.query.format));
         }
       });
 
@@ -80,6 +80,7 @@ class LocalStorage{
   readFile(location,file){
     return new Promise((resolve,reject)=>{
       let mergedLocation = path.join(this.opts.root,location,file);
+      console.log("\nreadFile:",mergedLocation);
       fs.readFile(mergedLocation,'utf-8',(err,data)=>{
         if(this.opts.json) data = stringToJSON(data);
         if(err){
@@ -101,7 +102,6 @@ class LocalStorage{
             reject(err)
           }else if(opts.readFiles){
             let files = [];
-            console.log(directory)
             directory = directory.filter(file => !(/^\./.test(file) && !/\.json$/gi.test(file)));
             let i = 0;
             asyncLoop(

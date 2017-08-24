@@ -29,7 +29,6 @@ class Publisher{
   }
 
   get(format){
-    console.log("Publisher get");
     this.query.format = format;
     return this.getStorage().get();
   }

@@ -32,7 +32,6 @@ const remove = (query)=>{
 }
 
 const get = (query)=>{
-  console.log("Get",query.where);
   const publisher = new Publisher(query);
   return publisher.get('original');
 }
