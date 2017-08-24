@@ -94,7 +94,7 @@ export class MoleculeService implements OnInit {
 
   getAllMolecules(){
     return new Promise<any>((resolve,reject)=>{
-      this.getMoleculeList({type : 'cell'}).catch(reject).then((cells)=>{
+      this.getMoleculeList({type : ['cell']}).catch(reject).then((cells)=>{
         let fullList = cells.map(cell => cell);
         for(var key in nodes){
           fullList.push(new nodes[key]({}));

@@ -15,6 +15,7 @@ const stringToJSON = (str)=>{
 class LocalStorage{
 
   constructor(opts){
+    this.query = Object.assign({},opts.query);
     this.opts = {};
     this.opts.baseLocation = '';
     this.opts.json = true;

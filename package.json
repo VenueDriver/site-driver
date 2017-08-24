@@ -6,7 +6,7 @@
   "scripts": {
     "postinstall": "tsc && gulp sass && webpack ",
     "start": "node server.js",
-    "server": "tsc && gulp sass && webpack && concurrently \"tsc -w\" \"nodemon server.js --ignore 'cells/*.json'\" \"gulp sass:watch\" ",
+    "server": "tsc && gulp sass && webpack && concurrently \"tsc -w\" \"nodemon server.js --ignore '_storage/*.*'\" \"gulp sass:watch\" ",
     "dev": "tsc && concurrently \"tsc -w\" \"webpack --progress --display-error-details --watch\" \"gulp \" "
   },
   "author": "",
