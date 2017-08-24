@@ -1,5 +1,5 @@
 const LocalStorage = require('../custom_modules/local-storage');
-const QueryFilter = require('../custom_modules/query-filter');
+const uniqid = require('uniqid');
 const path = require('path');
 const rootStorageFolder = "_storage";
 
@@ -22,11 +22,11 @@ class StorageRoutes{
     //     this.filename = this.query.name+'.json';
     //   console.log("Constructor end");
     // }
-    this.localStorage = new LocalStorage({ query : this.query });
+    this.localStorage = new LocalStorage({ root: rootStorageFolder , query : this.query });
   }
 
   save(){
-    return this.localStorage.save();
+    return this.localStorage.post();
     // return this.storage.write( JSON.stringify(this.query.formattedData) , this.query.format , this.filename);
   }
 
@@ -37,20 +37,6 @@ class StorageRoutes{
 
   get(){
     return this.localStorage.get();
-    // console.log("GET STORAGE");
-    // return new Promise((resolve,reject)=>{
-    //   console.log("\n\n=======================\n\n","Request received, Criteria:",this.query,"\n\n--------------------------------");
-    //   this.storage.readdir(this.query.format,{readFiles : true}).catch(reject).then((list)=>{
-    //     const queryFilter = new QueryFilter(this.query);
-    //     let filterList = list.filter((item)=>{
-    //       let valid = queryFilter.filter(item);
-    //       console.log(item._name,item._type,"\n\nCriteria:",this.query,"\n\nValid:",valid,'\n\n--------------------------------');
-    //       return valid;
-    //     });
-    //     console.log("\n\nResults count:",filterList.length);
-    //     resolve(filterList);
-    //   });
-    // })
   }
 
 }

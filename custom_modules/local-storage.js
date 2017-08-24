@@ -1,7 +1,9 @@
 const path = require("path");
 const fs = require("fs");
+const QueryFilter = require('../custom_modules/query-filter');
 const mkdirp = require("mkdirp-promise");
 const asyncLoop = require('./asyncloop');
+
 
 const stringToJSON = (str)=>{
   try{
@@ -15,18 +17,58 @@ const stringToJSON = (str)=>{
 class LocalStorage{
 
   constructor(opts){
-    this.query = Object.assign({},opts.query);
     this.opts = {};
-    this.opts.baseLocation = '';
+    this.opts.root = '_storage';
     this.opts.json = true;
+    this.opts.readFiles = true;
     Object.keys(opts).forEach((key)=>{
       this.opts[key] = opts[key];
+    });
+    this.query = Object.assign({},opts.query);
+  }
+
+  get(){
+    return new Promise((resolve,reject)=>{
+
+      let
+      types = this.query.type || [],
+      names = this.query.name || [],
+      routes = [];
+      types.forEach( type =>{
+        if(names.length > 0 && type === "instance"){
+          names.forEach(name =>{
+            routes.push(path.join(type,name));
+          })
+        }else{
+          routes.push(path.join(type));
+        }
+      });
+
+      let i = 0;
+      let mergedResultList = [];
+
+      asyncLoop(
+        ()=> i >= routes.length,
+        (next,end)=>{
+          this.readdir(routes[i],{readFiles : true}).catch(reject).then((list)=>{
+            const queryFilter = new QueryFilter(this.query);
+            list = list.filter((item)=>{
+              return queryFilter.filter(item);
+            });
+            list.forEach(item => mergedResultList.push(item));
+            i++; next();
+          });
+        },
+        ()=>{
+          resolve(mergedResultList);
+        }
+      );
     });
   }
 
   write(data,location,filename){
     return new Promise((resolve,reject)=> {
-      location = path.join(this.opts.baseLocation,location);
+      location = path.join(this.opts.root,location);
       mkdirp(location).then(()=>{
         fs.writeFile(path.join(location,filename) , data ,(err)=>{
           if(err){ return reject(err) } else { return resolve() }
@@ -37,7 +79,7 @@ class LocalStorage{
 
   readFile(location,file){
     return new Promise((resolve,reject)=>{
-      let mergedLocation = path.join(this.opts.baseLocation,location,file);
+      let mergedLocation = path.join(this.opts.root,location,file);
       fs.readFile(mergedLocation,'utf-8',(err,data)=>{
         if(this.opts.json) data = stringToJSON(data);
         if(err){
@@ -51,15 +93,16 @@ class LocalStorage{
 
   readdir(location,opts){
     return new Promise((resolve,reject)=>{
-      let encoding = opts.encoding || 'utf-8';
-      let mergedLocation = path.join(this.opts.baseLocation,location);
+      let encoding = this.opts.encoding || 'utf-8';
+      let mergedLocation = path.join(this.opts.root,location);
       mkdirp(mergedLocation).then(()=>{
         fs.readdir(mergedLocation,encoding,(err,directory)=>{
           if(err){
             reject(err)
           }else if(opts.readFiles){
             let files = [];
-            directory = directory.filter(file => !(/^\./.test(file)));
+            console.log(directory)
+            directory = directory.filter(file => !(/^\./.test(file) && !/\.json$/gi.test(file)));
             let i = 0;
             asyncLoop(
               ()=> i >= directory.length,
@@ -90,7 +133,7 @@ class LocalStorage{
 
   unlink(location,filename){
     return new Promise((resolve,reject)=>{
-      let mergedLocation = path.join(this.opts.baseLocation,location,filename);
+      let mergedLocation = path.join(this.opts.root,location,filename);
       fs.unlink(mergedLocation,(err)=>{
         if(err){
           reject(err);
@@ -104,7 +147,7 @@ class LocalStorage{
 
   remove(id,location){
     return new Promise((resolve,reject)=>{
-      let mergedLocation = path.join(this.opts.baseLocation,location);
+      let mergedLocation = path.join(this.opts.root,location);
       fs.readdir(mergedLocation,'utf-8',(err,directory)=>{
         if(err) reject(err)
         directory = directory.filter(file => !(/^\./.test(file) || !(/\.\w+$/gi.test(file))));
