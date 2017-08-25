@@ -54,8 +54,8 @@ export class GeneratorPage implements OnInit {
          this.useMolecules = this.generator._options._molecule_types._value.map((value)=> value._name);
          this.moleculeService.getMoleculeList({
            type : ["instance"],
+           name : this.useMolecules,
            where : {
-             _name : this.useMolecules,
              _generator : {
                _name : this.generatorName
              }

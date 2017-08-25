@@ -47,14 +47,14 @@ class LocalStorage{
       let i = 0;
       let mergedResultList = [];
 
+      console.log("Routes:",routes.join('\n'));
+
       asyncLoop(
         ()=> i >= routes.length,
         (next,end)=>{
           this.readdir(routes[i],{readFiles : true}).catch(reject).then((list)=>{
             const queryFilter = new QueryFilter(this.query);
-            list = list.filter((item)=>{
-              return queryFilter.filter(item);
-            });
+            list = queryFilter.filter(list);
             list.forEach(item => mergedResultList.push(item));
             i++; next();
           });

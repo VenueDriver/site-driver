@@ -2,6 +2,7 @@ class QueryFilter{
 
   constructor(query){
     this.query = query;
+    console.log("QueryFilter:",query);
   }
 
   deep(criteria,item){
@@ -17,11 +18,17 @@ class QueryFilter{
     return valid;
   }
 
-  filter(item){
+  filter(list){
+    console.log("Elements received:",list.length);
+
     if(this.query.hasOwnProperty("where")){
-      return this.deep(this.query.where,item);
+      list = list.filter(item=>{
+        return this.deep(this.query.where,item);
+      });
     }
-    return true;
+
+    console.log("Elements sent:",list.length);
+    return list;
   }
 
 }
