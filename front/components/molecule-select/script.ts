@@ -41,9 +41,11 @@ export class MoleculeSelect implements OnInit {
       }
       this.ready = true;
       this.typesList = list;
+      console.log("Use Molecules:",this.useMolecules);
       if(this.typesList.length === 1){
         this.emitValue(this.typesList[0]);
       }
+      console.log("Selected:",this.typesList[0]);
     }).catch((err)=>{
       console.log(err);
     })

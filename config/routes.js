@@ -387,12 +387,14 @@ router.post( "/media/s3/remove" , (req,res)=>{
 
 router.post("/molecule/get",upload.single("_file"),(req,res)=>{
   bouncer(req,res).then(()=>{
-    console.log("\n\n===========================\n/molecule/get",req.body);
+    console.log("\n\n===========================\n\n/molecule/get",req.body);
     c.molecule.get(req.body).then((data)=>{
       res.status(200);
-      console.log("\nResponse:","\nResult count:",data.length,"\n\nFirst element:\n Name:",data[0]._name,", Type: ",data[0]._type,", Id: ",data[0]._id,"\n===========================\n\n")
+      if(data && data.length>0) console.log("\nResponse:","\nResult count:",data.length,"\n\nFirst element:\n Name:",data[0]._name,", Type: ",data[0]._type,", Id: ",data[0]._id)
+      console.log("\n===========================\n");
       return res.json(data);
     }).catch((error)=>{
+      console.log("ERROR",error);
       res.status(400);
       return res.json(error);
     });
@@ -407,6 +409,7 @@ router.post("/molecule/save",upload.single("_file"),(req,res)=>{
       res.status(200);
       return res.json({message : "Success! Data saved"});
     }).catch((error)=>{
+      console.log("ERROR",error);
       res.status(400);
       return res.json(error);
     });
@@ -421,6 +424,7 @@ router.post("/molecule/remove",upload.single("_file"),(req,res)=>{
       res.status(200);
       return res.json({message : "Success! Data removed"});
     }).catch((error)=>{
+      console.log("ERROR",error);
       res.status(400);
       return res.json(error);
     });

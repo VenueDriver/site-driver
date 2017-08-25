@@ -19,7 +19,7 @@
           <molecule-select [max]="1" (valueChange)="moleculeSelected($event)"></molecule-select>
           <molecule-config [molecule]="newMolecule"></molecule-config>
           <fusion [nodeInsert]="newMolecule" [node]="data"></fusion>
-          <button (click)="save()">SAVE</button>
+          <molecule-save [type]="data._type" [molecule]="data"><button>SAVE</button></molecule-save>
         </div>
       </div>
     </div>

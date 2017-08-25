@@ -14,6 +14,10 @@ const validate = (data)=>{
 // EASY ALIAS TO TRIGGER VALIDATION, SANITAZION AND STORAGE OF DATA
 const save = (query)=>{
   return new Promise((resolve,reject)=>{
+    if(query.type === "instance" && !query.id){
+      query.id = uniqid();
+      query.data._id = query.id;
+    }
     // VALIDATE DATA
     validate(query.data).then((validName)=>{
       const publisher = new Publisher(query);

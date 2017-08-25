@@ -77,6 +77,18 @@ class LocalStorage{
     })
   }
 
+  post(){
+    let route = path.join(this.query.type);
+    let filename = this.query.name;
+    if(this.query.type === "instance"){
+      route = path.join(route,this.query.name);
+      filename = this.query.id;
+    }
+    filename += '.json';
+    route = path.join(route,this.query.format);
+    return this.write(JSON.stringify(this.query.formattedData),route,filename);
+  }
+
   readFile(location,file){
     return new Promise((resolve,reject)=>{
       let mergedLocation = path.join(this.opts.root,location,file);

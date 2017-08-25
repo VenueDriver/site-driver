@@ -2,7 +2,6 @@ class QueryFilter{
 
   constructor(query){
     this.query = query;
-    console.log("QueryFilter:",query);
   }
 
   deep(criteria,item){
@@ -19,7 +18,6 @@ class QueryFilter{
   }
 
   filter(list){
-    console.log("Elements received:",list.length);
 
     if(this.query.hasOwnProperty("where")){
       list = list.filter(item=>{
@@ -27,7 +25,6 @@ class QueryFilter{
       });
     }
 
-    console.log("Elements sent:",list.length);
     return list;
   }
 
