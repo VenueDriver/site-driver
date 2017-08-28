@@ -9,26 +9,21 @@ import {
 @Component({
   selector: 'table-renderer',
   template: require('./template.html'),
-  styles : [`
-    table{ width: 100% }
-    tr {
-      background:#fff;
-      border: 1px solid #ccc;
-    }
-    td {
-      padding:10px;
-    }
-    thead td{
-      font-weight:bold;
-    }
-    `]
 })
 
 export class TableRenderer {
 
   @Input() columns : Array<string>;
   @Input() list : Array<any>;
+  showEdition: any = {};
 
-  constructor(){}
+  constructor(){
+
+  }
+
+  editOpen(index){
+    if(!this.showEdition.hasOwnProperty(index)) this.showEdition[index] = false;
+    this.showEdition[index] = !this.showEdition[index];
+  }
 
 }
