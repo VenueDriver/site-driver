@@ -265,6 +265,10 @@ input[type=radio]:not(old):checked +  label > span > span{
   background-image :         linear-gradient(lighten($brand-secondary, 5%),$brand-secondary);
 }
 
+.labeltn-form {
+	font-size: 13px;
+}
+
 // 768px
 @media all and (min-width: $screen-portrait) {
 	.form-search {

@@ -10,6 +10,7 @@ let fixedNav = (layout.home_layout.sections[0] !== 'hero-slider')  ? 'fixed-nav'
 		<% layout.home_layout.sections.forEach(section =>{ %>
 			<%- include('section-templates/'+section) %>
 		<% }) %>
+
 	</main>
 	<%- include('includes/footer') %>
 	<!--JQUERY -->

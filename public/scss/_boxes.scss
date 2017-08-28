@@ -24,9 +24,11 @@
 .box-details {
     background: $primary-color-dark;
     color: #fff;
-    padding: 15px 20px;
+    padding: 15px 5px 15px 20px;
+	@include transition;
     > * {
 	    margin-bottom: 2px;
+		@include transition;
 	}
 	h2 {
 		font-weight: bold;
@@ -34,6 +36,24 @@
 	p {
 		color: #999;
 		font-style: italic;
+	}
+}
+.to-site {
+	&:hover {
+        img {
+            -moz-transform: scale(1.02);
+            -webkit-transform: scale(1.02);
+            -o-transform: scale(1.02);
+            -ms-transform: scale(1.02);
+            transform: scale(1.02);
+        }
+		.box-details {
+			background: $accent-color;
+			h2,p {
+				padding-left: 5px;
+				color: white;
+			}
+		}
 	}
 }
 .site-def {
@@ -83,11 +103,14 @@ row .row{
 			font-size: 20px;
 			padding: 0 5px;
 			color: $accent-color;
+			position: relative;
+			top: -3px;
 			&.fa-plus {
 				color: $accent-color;
 			}
 			&.fa-pencil {
 				 color: $accent-color;
+
 			}
 			&:hover {
 				opacity: .8;
@@ -98,6 +121,38 @@ row .row{
 .fa-pencil {
 	color: $accent-color;
 }
+
+div.fa.fa-pencil,
+div.fa.fa-times {
+	padding: 10px 15px!important;
+	@include transition;
+	&:after {
+		font-family: $primary-font;
+		font-size: 9px;
+		position: relative;
+		left: -4px;
+		top: 3px;
+		display: block;
+		text-align: center;
+	}
+	&:hover{
+		background: darken($accent-color,15%)!important;
+	}
+}
+div.fa.fa-pencil {
+	&:after {
+		content: "EDIT";
+	}
+}
+div.fa.fa-times {
+	top: 45px!important;
+	&:after {
+		content: "DELETE";
+		position: relative;
+		left: -9px;
+	}
+}
+
 .box-buttons {
 	border-top: 1px solid #f1f1f1;
 	margin-top: 20px;
@@ -112,10 +167,10 @@ row .row{
 		background: white;
 	}
 }
-
 .margin-bottom {
 	margin-bottom: 30px;
 }
+
 // 768px
 @media all and (min-width: $screen-portrait) {
 

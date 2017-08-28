@@ -26,23 +26,25 @@
     .col-right-view {
         padding-left: 15px;
         width: 65%;
-        .col-12 {
-            padding-right: 0px;
-            padding-left: 0;
-        }
     }
 }
 
 // 992px
 @media all and (min-width: $screen-landscape) {
     .col-right-view {
-        width: 28%;
-    }
-    .col-right-view {
         width: 72%;
+    }
+    .col-left-view {
+        width: 35%;
     }
 }
 
 // 1200px
 @media all and (min-width: $screen-desktop) {
+    .col-right-view {
+        width: 80%;
+    }
+    .col-left-view {
+        width: 20%;
+    }
 }
