@@ -22,10 +22,6 @@ export class CellComponent implements OnInit {
     this.newMolecule = selected[0];
   }
 
-  save(){
-    return this.moleculeService.saveMolecule(Object.assign({},this.data));
-  }
-
   ngOnInit(){
     this.ready = true;
   }
