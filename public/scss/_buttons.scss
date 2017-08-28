@@ -112,6 +112,55 @@
 		}
 	}
 }
+
+.btn-edit,
+.btn-delete {
+	position: absolute;
+	top: 0;
+	color: white;
+	right: 0;
+	padding: 10px;
+	background: #af945c;
+	width: 50px;
+	cursor: pointer;
+	border-bottom: 1px solid darken($accent-color,4%);
+	border-left: 1px solid darken($accent-color,4%);
+	&:after,
+	&:before {
+		color: white;
+		display: inline-block;
+		vertical-align: middle;
+	}
+	&:before {
+		@include fontawesome;
+		content: "\f040";
+		font-size: 15px;
+		position: relative;
+		top: -2px;
+	}
+	&:after {
+		content: "EDIT";
+		font-family: $primary-font;
+		font-size: 10px;
+		margin-left: 4px;
+	}
+	&:hover{
+		background: darken($accent-color,15%)!important;
+		border-bottom: 1px solid darken($accent-color,15%);
+		border-left: 1px solid darken($accent-color,15%);
+	}
+}
+
+.btn-delete {
+	top: 38px;
+	&:before {
+		content: "\f00d";
+	}
+	&:after {
+		content: "DELETE";
+	}
+}
+
 // 768px
 @media all and (min-width: $screen-portrait) {
 	.btn {
