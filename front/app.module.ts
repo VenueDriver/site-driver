@@ -12,7 +12,8 @@ import { MyDatePickerModule }     from 'mydatepicker';
 import { ColorPickerModule }      from 'angular2-color-picker';
 import { ImageUploadModule }      from 'angular2-image-upload';
 import { Ng2UploaderModule }      from 'ng2-uploader';
-import { DragulaModule }           from 'ng2-dragula';
+import { DragulaModule }          from 'ng2-dragula';
+import { CKEditorModule }         from 'ng2-ckeditor';
 
 
 // CUSTOM COMPONENTS
@@ -116,6 +117,7 @@ const appRoutes: Routes = require('./config/routes');
     ImageUploadModule.forRoot(),
     NguiAutoCompleteModule,
     Ng2UploaderModule,
+    CKEditorModule,
     DragulaModule,
     RouterModule.forRoot(appRoutes)
   ],
