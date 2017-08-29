@@ -26,6 +26,8 @@ import { ListFieldComponent }     from './components/list/script';
 import { DataViewComponent }      from './components/data-view/script';
 import { PageComponent }          from './components/page/script';
 import { TextNodeComponent }      from './components/text/script';
+import { FileNodeComponent }      from './components/file/script';
+
 import { NumberFieldComponent }   from './components/number/script';
 import { ColorFieldComponent }    from './components/color/script';
 import { DateFieldComponent }     from './components/date/script';
@@ -52,7 +54,6 @@ import { EventFieldComponent }    from './components/event/script';
 import { TypeListComponent }      from './components/type-list/script';
 import { SiteListComponent }      from './components/site-list/script';
 import { ImageFieldComponent }    from './components/image-field/script';
-import { FileFieldComponent }     from './components/file-field/script';
 import { Spinner }                from './components/spinner/script';
 import { AddSiteComponent }       from './components/add-site/script';
 import { SlideFieldComponent }    from './components/slide/script';
@@ -138,7 +139,7 @@ const appRoutes: Routes = require('./config/routes');
     EventSelectComponent,
     RootComponent,
     SafePipe,
-    FileFieldComponent,
+    FileNodeComponent,
     GroupComponent,
     CellComponent,
     TextNodeComponent,
@@ -190,7 +191,7 @@ const appRoutes: Routes = require('./config/routes');
     SliderFieldComponent,
     LinkFieldComponent,
     ImageFieldComponent,
-    FileFieldComponent,
+    FileNodeComponent,
     NumberFieldComponent,
     DateFieldComponent,
     ColorFieldComponent,

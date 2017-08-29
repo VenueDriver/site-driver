@@ -1,4 +1,4 @@
-<label for="" class="label-form">{{data._name | userlabel: userRole }}<span class="required-indicator" *ngIf="data._required">*</span>
+<label for="" class="label-form">{{data._name | userlabel: userRole }}<span class="required-indicator" *ngIf="data._can._be_required">*</span>
 <div class="edit-buttons">
 	<generator *ngIf="data._editable_field || userRole > 9000" [label]="'Edit ' + data._name" [path]="data._path" [edit]="data"><a class="fa fa-pencil"></a></generator>
 	<delete-btn *ngIf="data._delete_field || userRole > 9000" [path]="data._path"></delete-btn>
