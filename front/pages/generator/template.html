@@ -1,7 +1,8 @@
 <page>
   <page-header></page-header>
-  <main>
-		<section>
+  <main *ngIf="ready">
+    <molecule-renderer [data]="generator" [component]="generator._ngComponent"></molecule-renderer>
+		<!-- <section>
 			<div class="container" *ngIf="ready">
         <h1>{{generator._name}}</h1>
 				<div class="box">
@@ -15,7 +16,7 @@
 					[list]="instanceList"
 				></table-renderer>
 			</div>
-		</section>
+		</section> -->
 	</main>
   <page-footer></page-footer>
 </page>

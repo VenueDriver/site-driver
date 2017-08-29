@@ -1,7 +1,7 @@
 <div class="box no-margin">
   <div id="accordion" class="accordion">
     <div class="acc-panel">
-      <h2 class="acc-title">
+      <!-- <h2 class="acc-title">
         <a class="reduceButton" (click)="reduced = !reduced">
           <span *ngIf="!reduced" class="fa fa-angle-down"></span>
           <span *ngIf="reduced" class="fa fa-angle-up"></span>
@@ -11,7 +11,7 @@
         <ul class="edit-buttons">
 
         </ul>
-      </h2>
+      </h2> -->
       <div class="panel" *ngIf="!reduced">
         <molecule-renderer *ngFor="let cell of data._value" [data]="cell" [component]="cell._ngComponent" ></molecule-renderer>
 
@@ -20,7 +20,7 @@
           <h3>Add Molecule</h3>
             <molecule-select [max]="1" (valueChange)="moleculeSelected($event)"></molecule-select>
             <molecule-config [molecule]="newMolecule"></molecule-config>
-            <fusion [nodeInsert]="newMolecule" [node]="data"></fusion>
+            <fusion (afterInsert)="resetMolecule($event)" [nodeInsert]="newMolecule" [node]="data"></fusion>
           <hr>
         </div>
 

@@ -6,19 +6,6 @@ import { MoleculeService } from '../../services/molecule.service';
 @Component({
   selector: 'generator-page',
   template: require('./template.html'),
-  styles : [`
-    table{ width: 100% }
-    tr {
-      background:#fff;
-      border: 1px solid #ccc;
-    }
-    td {
-      padding:10px;
-    }
-    thead td{
-      font-weight:bold;
-    }
-    `]
 })
 
 export class GeneratorPage implements OnInit {
@@ -51,6 +38,7 @@ export class GeneratorPage implements OnInit {
              _name : this.generatorName
          }}).then((generator)=>{
          this.generator = generator[0];
+         console.log("DA GENERATOR",this.generator);
          this.useMolecules = this.generator._options._molecule_types._value.map((value)=> value._name);
          this.moleculeService.getMoleculeList({
            type : ["instance"],

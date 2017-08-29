@@ -1,2 +1,4 @@
 <spinner *ngIf="bussy"></spinner>
-<ng-content (click)="save()" *ngIf="!bussy"></ng-content>
+<span (click)="save()" *ngIf="!bussy">
+  <ng-content></ng-content>
+</span>
