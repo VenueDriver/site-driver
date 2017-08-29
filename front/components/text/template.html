@@ -8,7 +8,11 @@
 <ckeditor
 	*ngIf="data._options._use_textarea"
   [(ngModel)]="ckeditorContent"
-  [config]="{uiColor: '#999999'}"
+  [config]="{
+    uiColor: '#999999',
+    removeButtons : '',
+    removePlugins : 'font'
+  }"
   [readonly]="false"
   debounce="500">
 </ckeditor>

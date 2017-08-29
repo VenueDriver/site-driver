@@ -28,4 +28,15 @@ ckeditor > div[id^="cke_editor"]{
 
 .cke_top{
     border-bottom: 1px solid #ccc !important;
+    border-top: 6px solid #000 !important;
+    -webkit-border-radius: 2px 2px 0 0 !important;
+    border-radius: 2px 2px 0 0 !important;
+}
+
+.cke_1 a.cke_button_off:hover{
+    background:#eee !important;
+}
+
+a.cke_button_on{
+    background: #ddd !important;
 }
