@@ -71,6 +71,11 @@ import { MoleculeConfig }           from './components/molecule-config/script';
 import { MoleculeRenderer }         from './components/molecule-renderer/script';
 import { FusionComponent }          from './components/fusion/script';
 import { TableRenderer }          from './components/table-renderer/script';
+  // GENERATOR LAYOUTS
+  import { GeneratorLayoutHorizontalCards } from "./components/molecule-generator/layouts/cards-horizontal/script";
+  import { GeneratorLayoutVerticalCards } from "./components/molecule-generator/layouts/cards-vertical/script";
+  import { GeneratorLayoutTable } from "./components/molecule-generator/layouts/table/script";
+  import { GeneratorLayoutSidebar } from "./components/molecule-generator/layouts/sidebar/script";
 
 
 // CUSTOM DIRECTIVES
@@ -180,7 +185,11 @@ const appRoutes: Routes = require('./config/routes');
     MoleculeCreate,
     FusionComponent,
     MoleculeGeneratorComponent,
-    TableRenderer
+    TableRenderer,
+    GeneratorLayoutHorizontalCards,
+    GeneratorLayoutVerticalCards,
+    GeneratorLayoutTable,
+    GeneratorLayoutSidebar
   ],
   entryComponents: [
     GroupComponent,
@@ -201,7 +210,11 @@ const appRoutes: Routes = require('./config/routes');
     ListFieldComponent,
     ColumnComponent,
     MoleculeSelect,
-    MoleculeGeneratorComponent
+    MoleculeGeneratorComponent,
+    GeneratorLayoutHorizontalCards,
+    GeneratorLayoutVerticalCards,
+    GeneratorLayoutTable,
+    GeneratorLayoutSidebar
   ],
   providers :   [
     DatePipe,

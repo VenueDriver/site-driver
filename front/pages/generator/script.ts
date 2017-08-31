@@ -15,7 +15,7 @@ export class GeneratorPage implements OnInit {
     generator : any;
     newMolecule : any;
     useMolecules : Array<string>;
-    instanceList : Array<any>;
+    instances : Array<any>;
     private sub: any;
 
     constructor(private route: ActivatedRoute , private moleculeService : MoleculeService){}
@@ -47,9 +47,8 @@ export class GeneratorPage implements OnInit {
              _generator : {
                _name : this.generatorName
              }
-         }}).then((instanceList)=>{
-           console.log("instanceList:",instanceList);
-           this.instanceList = instanceList;
+         }}).then((instances)=>{
+           this.instances = instances;
            this.ready = true;
          });
 

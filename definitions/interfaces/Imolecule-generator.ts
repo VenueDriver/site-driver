@@ -6,7 +6,6 @@ export interface MoleculeGeneratorInterface extends NodeInterface{
   _options : {
     _molecule_types : ComponentOption,
     _use_only_childs : boolean,
-    _layout : string,
-    _structure : string
+    _layout : string
   }
 }

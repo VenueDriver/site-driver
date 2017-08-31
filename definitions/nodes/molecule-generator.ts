@@ -25,8 +25,7 @@ export class MoleculeGenerator extends Molecule implements MoleculeGeneratorInte
       _value : []
     },
     _use_only_childs : true,
-    _layout : 'Table',
-    _structure : 'Single Project'
+    _layout : ''
   };
 
 
