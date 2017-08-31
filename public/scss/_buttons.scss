@@ -1,13 +1,16 @@
 .btn {
 	background: $accent-color;
 	color: white;
-	padding: 10px 5px;
+	padding: 15px 5px;
 	display: inline-block;
 	width: 100%;
 	cursor:pointer;
 	text-align: center;
 	@include border-box;
 	margin-bottom: 10px;
+	font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
 	&.btn-cancel {
 		background: #666;
 		&:hover {
@@ -29,6 +32,22 @@
 			color: #fff;
 			background: $accent-color;
 		}
+	}
+}
+button{
+	font-family: $primary-font;
+	background: none;
+	border: 2px solid $accent-color;
+	color: $accent-color;
+	min-width: 150px;
+    padding: 8px;
+	font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    &:hover {
+			border-color: darken($accent-color,5%);
+			color: darken($accent-color,5%);
 	}
 }
 .btn-add {
