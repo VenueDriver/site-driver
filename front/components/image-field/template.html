@@ -9,8 +9,8 @@
  	 <div class="image-field-container">
  	 	<img style="width:100%;max-width:350px;" *ngIf="isImage()" src="{{data._value}}" alt="">
  	 </div>
- 	<div (click)="openPanel()" *ngIf="data._editable_value || userRole > 9000" class="fa fa-pencil" style="position: absolute; top: 0; color: white; right: 0; padding: 10px; background: #af945c; width: 10px; cursor: pointer;"></div>
- 	 <div (click)="data._value = ''" *ngIf="data._editable_value || userRole > 9000" class="fa fa-times" style="position: absolute; top: 38px; color: white; right: 0; padding: 10px; background: #af945c; width: 10px; cursor: pointer;"></div>
+ 	<div (click)="openPanel()" *ngIf="data._editable_value || userRole > 9000" class="fa fa-pencil" style="position: absolute; top: 0; color: white; right: 0; padding: 10px; background: #00c4cc; width: 10px; cursor: pointer;"></div>
+ 	 <div (click)="data._value = ''" *ngIf="data._editable_value || userRole > 9000" class="fa fa-times" style="position: absolute; top: 38px; color: white; right: 0; padding: 10px; background: #00c4cc; width: 10px; cursor: pointer;"></div>
  </div>
 
 </div>

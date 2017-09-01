@@ -65,6 +65,7 @@ a, a:hover, a:active, a:focus {
 		width: calc(100% - 280px);
 		margin: 50px 0;
 		margin-left: 200px;
+		margin-bottom: 0;
 		float: right;
 	}
 }
@@ -72,6 +73,6 @@ a, a:hover, a:active, a:focus {
 // 1200px
 @media all and (min-width: $screen-desktop) {
 	.container {
-		max-width: 90%;
+		max-width: 100%;
 	}
 }
