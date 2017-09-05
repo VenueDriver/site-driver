@@ -47,12 +47,45 @@ table.table-style {
     tr:hover {
         background: #F9f9f9;
     }
-    a {
-        color: black;
-    }
+
     input[type="checkbox"] {
         opacity: 1;
         margin-top: 3px;
+    }
+}
+.table-layout {
+    table.table-style {
+        thead th:nth-child(3) {
+            width: auto;
+        }
+        thead th:nth-child(4) {
+            width: auto;
+        }
+        thead th:nth-child(5) {
+            width: auto;
+        }
+    }
+    .active {
+        color: #6bc452;
+    }
+    .draft{
+        color: $secondary-text-color;
+    }
+    .edit {
+        text-transform: uppercase;
+        font-size: 14px;
+        color: $accent-color;
+        cursor: pointer;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        padding-right:20px;
+        &:hover {
+            color:darken($accent-color,5%)
+        }
+    }
+    .delete-post{
+        @extend .edit;
+        padding-right: 0;
     }
 }
 .link-table {
@@ -73,8 +106,45 @@ table.table-style {
   margin: 0 !important;
 }
 
-
-
+input[type='checkbox']{
+    position: relative;
+    &:before{
+        content: '';
+        margin-right: 10px;
+        display: inline-block;
+        vertical-align: text-top;
+        width: 15px;
+        height: 15px;
+        background: white;
+        border: 1px solid #dadada;
+    }
+    &:checked:before {
+        background: $accent-color;
+        border-color: $accent-color;
+    }
+    &:disabled:before {
+        box-shadow: none;
+        background: #ddd;
+    }
+    &:checked:after {
+        content: '';
+        position: absolute;
+        left: 4px;
+        top: 8px;
+        background: white;
+        width: 2px;
+        height: 2px;
+        box-shadow: 
+          2px 0 0 white,
+          4px 0 0 white,
+          4px -2px 0 white,
+          4px -4px 0 white,
+          4px -6px 0 white,
+          4px -8px 0 white;
+        transform: rotate(45deg);
+        -webkit-backface-visibility: hidden;
+      }
+}
 // 768px
 @media all and (min-width: $screen-portrait) {
 }

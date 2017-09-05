@@ -1,6 +1,8 @@
 /* General styles for all menus */
 .menu-btn{
 	display: block;
+	position: absolute;
+	z-index: 99;
 	.fa-bars {
 		cursor:pointer;
 		font-size: 25px;
@@ -16,6 +18,9 @@
 		&:hover {
 			color: $accent-color;
 		}
+		&.active{
+			color: $white !important;
+		}
 	}
 	.fa-close {
 		-moz-transform: rotate(0deg);
@@ -27,6 +32,9 @@
 			content: "✕";
 		}
 	}
+	+ ul {
+		margin-left: 15px; 
+	}
 }
 .cbp-spmenu {
 	background: $brand-primary;
@@ -34,14 +42,28 @@
 	@include transition;
 	@include border-box;
 	position: absolute;
-	width: 220px;
+	width: 250px;
 	height: 100%;
-	top: 88px;
+	top: 38px;
 	left: -280px;
-	padding: 30px;
+	padding: 70px;
 	padding-left:10px;
 	padding-right:10px;
 	z-index: 9;
+
+	hr {
+	    width: 20px;
+	    text-align: left;
+	    margin: 20px 10px;
+	    border-color: #989898;
+	}
+
+	img {
+		margin-bottom: 60px;
+		padding: 0 10px;
+		box-sizing: border-box;
+		display: none;
+	}
 }
 .cbp-spmenu-open {
 	left: 0px;
@@ -50,7 +72,7 @@
 	a {
 		color: white;
 		display: block;
-		font-weight: 700;
+		font-weight: 600;
 		text-transform: uppercase;
 		padding: 10px;
 		cursor: pointer;
@@ -69,9 +91,11 @@
 		i {
 			display: inline-block;
 			vertical-align: middle;
-			margin-right: 5px;
+			margin-right: 15px;
+			width: 15px;
 			position: relative;
 			top: -2px;
+			color: $gray;
 		}
 	}
 	ul ul {
@@ -105,8 +129,8 @@
 }
 
 .active-nav{
-	color: #af945c;
-	outline: 2px solid #af945c;
+	color: $accent-color;
+	outline: 2px solid $accent-color ;
 }
 // 768px
 @media all and (min-width: $screen-portrait) {
@@ -117,16 +141,22 @@
 @media all and (min-width: $screen-landscape) {
 	.menu-btn{
 		display: none;
+		+ ul {
+			margin-left: 0; 
+		}
 	}
 	.cbp-spmenu {
 		left: 0;
-		width: 200px;
+		width: 270px;
 		position: absolute;
 		top: 0;
 		bottom: 0;
-		padding-top: 68px;
+		padding-top: 18px;
 		.fa-bars {
 			display: none;
+		}
+		img{
+			display: inline;
 		}
 	}
 	.cbp-spmenu-open {

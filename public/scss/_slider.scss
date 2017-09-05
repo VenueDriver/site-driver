@@ -87,12 +87,15 @@ slide-field label {
 }
 
 a.active {
-  color: darken($accent-color,15%)!important;
+  color: $accent-color!important;
   .fa-angle-down{
     display:none;
   }
   .fa-angle-up {
     display: inline-block!important;
+  }
+  i {
+    color: $accent-color;
   }
 }
 

@@ -4,12 +4,14 @@
   <div class="big-title admin-bar cf">
     <div class="left">
       <span class="menu-btn"><a (click)="toggleNav()" [class.fa-close]="open" [class.active]="open" class="fa fa-bars" id="toggle2"></a></span>
-      <img src="/images/composer-white.png" class="brand-composer"  alt="logo">
+      <ul class="">
+        <span class="previous-section">Blogs</span><span class="current-section">The Bank Blog</span>
+      </ul>
     </div>
     <div class="right">
       <div class="user-bar">
         <img src="//s3-us-west-1.amazonaws.com/assets.portaldriver.com/thebanklv/ef8549b37c8724a9248d209e4a97a761.jpg">
-        <span>User Placeholder</span> <i class="fa fa-angle-down"></i>
+        <span>Hi, User</span> <i class="fa fa-angle-down"></i>
         <div class="user-dropdown">
           <ul>
            <li>
@@ -24,6 +26,7 @@
     </div>
   </div>
 <nav class="cbp-spmenu" [class.show-nav]="open" id="cbp-spmenu-s1">
+ <a href="/"> <img src="/images/composer-white.png" class="brand-composer"  alt="logo"></a>
     <nav class="sub-nav">
       <ul>
         <!-- <li>
@@ -39,7 +42,7 @@
           <a href="/molecule-generator" class="select-menu"><i class="fa fa-sitemap"></i>M. Generator</a>
         </li>
         <li *ngIf="userRole > 9000">
-          <a href="/cell-builder" class="select-menu"><i class="fa fa-code-fork"></i>Cell Builder</a>
+          <a href="/cell-builder" class="select-menu"><i class="fa fa-code-fork"></i>Cell Builder</a> 
         </li>
         <!-- <li>
           <a style="pointer-events: none;cursor: default;"><i class="fa fa-picture-o"></i>Smartimage</a>

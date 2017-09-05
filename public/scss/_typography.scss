@@ -23,7 +23,22 @@ h1, h2, h3, h4, h5, h6, p, span, a, ul, li, button, input, textarea {
 	margin-bottom: 20px;
 	padding: 10px;
 }
-
+.title {
+    display: inline-block;
+    font-size: 40px;
+    margin-bottom: 20px;
+    margin-right: 15px;
+    + a > .fa-pencil {
+    	font-size: 20px;
+    }
+}
+.small {
+	display: block;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: $secondary-text-color;
+}
 // 768px
 @media all and (min-width: $screen-portrait) {
 	.big-title {
