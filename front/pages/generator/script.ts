@@ -25,7 +25,7 @@ export class GeneratorPage implements OnInit {
     }
 
     moleculeSelected(molecule){
-      console.log("Selected",molecule);
+      // console.log("Selected",molecule);
       this.newMolecule = molecule;
     }
 
@@ -38,7 +38,7 @@ export class GeneratorPage implements OnInit {
              _name : this.generatorName
          }}).then((generator)=>{
          this.generator = generator[0];
-         console.log("DA GENERATOR",this.generator);
+         console.log("Showing generator:",this.generator);
          this.useMolecules = this.generator._options._molecule_types._value.map((value)=> value._name);
          this.moleculeService.getMoleculeList({
            type : ["instance"],
@@ -48,6 +48,7 @@ export class GeneratorPage implements OnInit {
                _name : this.generatorName
              }
          }}).then((instances)=>{
+           console.log("Has instances:",instances);
            this.instances = instances;
            this.ready = true;
          });

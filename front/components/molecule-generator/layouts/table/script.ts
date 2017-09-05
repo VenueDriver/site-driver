@@ -28,7 +28,8 @@ export class GeneratorLayoutTable implements OnInit {
   constructor(){}
 
   ngOnInit() {
-
+    console.log("INSTANCES",this.instances);
+    this.ready = true;
   }
 
 }

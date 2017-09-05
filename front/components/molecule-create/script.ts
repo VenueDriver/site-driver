@@ -35,4 +35,7 @@ export class MoleculeCreate {
     console.log(message);
   }
 
+  ngOnChanges(){
+  }
+
 }

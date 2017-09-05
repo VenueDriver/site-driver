@@ -2,21 +2,6 @@
   <page-header></page-header>
   <main *ngIf="ready">
     <molecule-renderer [data]="generator" [options]="{instances : instances}" [component]="generator._ngComponent"></molecule-renderer>
-		<!-- <section>
-			<div class="container" *ngIf="ready">
-        <h1>{{generator._name}}</h1>
-				<div class="box">
-
-          <h1>MOLECULE CREATE</h1>
-					<molecule-create [useMolecules]="useMolecules" [generator]="generator" [type]="'instance'"></molecule-create>
-
-				</div>
-        <table-renderer
-					[columns]="['_id','_name']"
-					[list]="instanceList"
-				></table-renderer>
-			</div>
-		</section> -->
 	</main>
   <page-footer></page-footer>
 </page>

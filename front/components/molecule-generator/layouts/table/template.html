@@ -1,1 +1,15 @@
-<h1>Table</h1>
+<section>
+  <div class="container" *ngIf="ready">
+    <h1>{{data._name}}</h1>
+    <div class="box">
+
+      <h1>MOLECULE CREATE</h1>
+      <molecule-create [useMolecules]="data._options._molecule_types._value" [generator]="data" [type]="'instance'"></molecule-create>
+
+    </div>
+    <table-renderer
+      [columns]="['_id','_name']"
+      [list]="instances"
+    ></table-renderer>
+  </div>
+</section>
