@@ -25,13 +25,23 @@
 			background: darken($accent-color,5%);
 		}
 	}
-	&.btn-inverted{
+	&.btn-inverted {
 		background:transparent;
 		border:1px solid $accent-color;
 		color: $accent-color;
 		&:hover{
 			color: #fff;
 			background: $accent-color;
+		}
+	}
+	&.draft {
+		background: none;
+		border: 2px solid $accent-color;
+		color: $accent-color;
+		margin-top: 20px;
+		&:hover {
+			border-color: darken($accent-color,5%);
+			color: darken($accent-color,5%);
 		}
 	}
 }
