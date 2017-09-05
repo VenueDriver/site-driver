@@ -12,7 +12,7 @@ export class TextNode extends Molecule implements TextInterface{
   _ngComponent = TextNodeComponent;
 
   // OVERRIDES SPECIFIC TO THIS CLASS
-  _value : string;
+  _value : string = '';
   _default_value : string;
   _options : any = {
     _use_textarea : false

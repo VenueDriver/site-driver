@@ -15,6 +15,8 @@ var TextNode = (function (_super) {
         this._type = "text";
         this._label = "Text";
         this._ngComponent = script_1.TextNodeComponent;
+        // OVERRIDES SPECIFIC TO THIS CLASS
+        this._value = '';
         this._options = {
             _use_textarea: false
         };

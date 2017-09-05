@@ -14,7 +14,9 @@ export class MoleculeSelect implements OnInit {
   @Input() activeTypes : any = false;
   @Input() max : number = 1;
   @Output() valueChange = new EventEmitter();
-  @Input() useMolecules : Array<string>;
+  @Input() useMolecules : Array<any>;
+
+  useMoleculesParsed : Array<string>;
 
   constructor(private moleculeService : MoleculeService){
 
@@ -34,18 +36,26 @@ export class MoleculeSelect implements OnInit {
   }
 
   update(){
+    if(this.useMolecules){
+      if(this.useMolecules.length > 0 && typeof this.useMolecules[0] !== "string"){
+        this.useMoleculesParsed = this.useMolecules.map(molecule => molecule._name);
+      }else{
+        this.useMoleculesParsed = this.useMolecules;
+      }
+    }
+    console.log("USE THIS MOLECULES",this.useMoleculesParsed);
     return this.moleculeService.getAllMolecules().then((list)=>{
       if(this.useMolecules){
-        console.log(list);
-        list = list.filter((el)=> this.useMolecules.indexOf(el._name) > -1)
+        // console.log(list);
+        list = list.filter((el)=> this.useMoleculesParsed.indexOf(el._name) > -1)
       }
       this.ready = true;
       this.typesList = list;
-      console.log("Use Molecules:",this.useMolecules);
+      // console.log("Use Molecules:",this.useMolecules);
       if(this.typesList.length === 1){
         this.emitValue(this.typesList[0]);
       }
-      console.log("Selected:",this.typesList[0]);
+      // console.log("Selected:",this.typesList[0]);
     }).catch((err)=>{
       console.log(err);
     })

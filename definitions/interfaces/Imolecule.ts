@@ -3,4 +3,5 @@ export interface MoleculeInterface {
     _id   ?: string;
     _label ?: string;
     _type : string;
+    _options ?: any;
 }
