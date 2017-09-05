@@ -40,11 +40,11 @@ export class MoleculeRenderer {
     }
 
     if(this.component){
-      console.log(this.data);
+      // console.log(this.data);
       let factory = this.componentFactoryResolver.resolveComponentFactory(this.component);
       this.cmpRef = this.target.createComponent(factory);
       // to access the created instance use
-      console.log((<any>this.cmpRef.instance));
+      // console.log((<any>this.cmpRef.instance));
       if(this.data){
         (<any>this.cmpRef.instance).data = this.data;
       }

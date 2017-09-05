@@ -207,11 +207,12 @@ add-site .btn-add {
 		width: auto;
 		min-width: 150px;
 		margin-bottom: 0;
+		display: inline-block;
 		&.btn-cancel {
 			float: left;
 		}
 		&.btn-save {
-			float: right;
+			margin-left:auto;
 		}
 	}
 	.site-def {

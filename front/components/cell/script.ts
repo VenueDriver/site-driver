@@ -19,11 +19,15 @@ export class CellComponent implements OnInit {
   }
 
   moleculeSelected(selected){
-    this.newMolecule = selected[0];
+    this.newMolecule = Object.assign({},selected[0]);
   }
 
   ngOnInit(){
     this.ready = true;
+  }
+
+  resetMolecule(event){
+    this.moleculeSelected(this.newMolecule);
   }
 
 

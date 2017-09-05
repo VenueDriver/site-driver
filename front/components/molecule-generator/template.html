@@ -1,3 +1,7 @@
-<h1>
-  GENERATOR POWER
-</h1>
+<molecule-renderer
+  *ngIf="ready"
+  [component]="getComponent(selectedLayout)"
+  [options]="{instances : instances}"
+  [data]="data"
+  >
+</molecule-renderer>

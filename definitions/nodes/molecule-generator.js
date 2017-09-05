@@ -28,8 +28,7 @@ var MoleculeGenerator = (function (_super) {
                 _value: []
             },
             _use_only_childs: true,
-            _layout: 'Table',
-            _structure: 'Single Project'
+            _layout: ''
         };
         for (var key in obj) {
             this[key] = obj[key];

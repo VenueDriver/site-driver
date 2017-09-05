@@ -1,51 +1,32 @@
 import { Component , OnInit, Input } from '@angular/core';
-import { ActivatedRoute , Router } from '@angular/router';
-import { MoleculeGeneratorInterface } from '../../../definitions/interfaces';
+import layouts from "./layouts";
 
 @Component({
   selector: 'molecule-generator',
   template: require('./template.html'),
-  styles : [`
-    table{ width: 100% }
-    tr {
-      background:#fff;
-      border: 1px solid #ccc;
-    }
-    td {
-      padding:10px;
-    }
-    thead td{
-      font-weight:bold;
-    }
-    `]
 })
 
 export class MoleculeGeneratorComponent implements OnInit {
 
-  @Input() moleculeType : string;
+  @Input() data : any;
+  @Input() instances : Array<any>;
 
   ready : boolean = false;
-  userRole : number = 0;
-  savingData = false;
-  editingList : any = {};
-
-  list : Array<any>;
-
-  selectedMolecules : Array<any>;
-  name : string;
-  layout : string;
-  structure : string;
-  use_only_childs : boolean = true;
-
-
+  selectedLayout : string = "Default";
 
   constructor(
-    private route: ActivatedRoute ,
-    private router: Router
-  ) {}
+
+  ){}
 
   ngOnInit() {
+    if(layouts.name.indexOf(this.data._options._layout) > -1) this.selectedLayout = this.data._options._layout;
+    // console.log(this.data._name,"Use Layout",this.data._options._layout);
+    // console.log(layouts.name.indexOf(this.data._options._layout) > -1,"Available layouts",layouts);
+    this.ready = true;
+  }
 
+  getComponent(layoutName){
+    return layouts.ngComponent[layoutName];
   }
 
 }

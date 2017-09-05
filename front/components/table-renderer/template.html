@@ -20,8 +20,10 @@
                   {{item[prop]}}
                 </td>
                 <td>
-                  <span (click)="editOpen(i)">Edit</span>
-                  <molecule-remove [molecule]="item">Delete</molecule-remove>
+                  <span class="btn" (click)="editOpen(i)">Edit</span>
+                  <molecule-remove [molecule]="item">
+                      <span class="btn">Delete</span>
+                  </molecule-remove>
                 </td>
             </tr>
             <tr *ngIf="showEdition[i]">

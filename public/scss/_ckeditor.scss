@@ -1,0 +1,42 @@
+.cke_top,.cke_bottom{
+    background: #fff !important;
+}
+
+.cke_toolgroup,
+.cke_combo_button{
+    background: #fff !important;
+}
+
+.cke_top,
+ckeditor > div[id^="cke_editor"],
+.cke_bottom,
+a.cke_button_on,
+.cke_toolgroup{
+    border : none !important;
+    box-shadow: none !important;
+    border-radius:0;
+}
+
+.cke_bottom{
+    display: none !important;
+}
+
+ckeditor > div[id^="cke_editor"]{
+    -webkit-box-shadow: 0 1px 3px 0 #aaa !important;
+    box-shadow: 0 1px 3px 0 #aaa !important;
+}
+
+.cke_top{
+    border-bottom: 1px solid #ccc !important;
+    border-top: 6px solid #000 !important;
+    -webkit-border-radius: 2px 2px 0 0 !important;
+    border-radius: 2px 2px 0 0 !important;
+}
+
+.cke_1 a.cke_button_off:hover{
+    background:#eee !important;
+}
+
+a.cke_button_on{
+    background: #ddd !important;
+}

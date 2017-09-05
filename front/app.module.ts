@@ -12,7 +12,8 @@ import { MyDatePickerModule }     from 'mydatepicker';
 import { ColorPickerModule }      from 'angular2-color-picker';
 import { ImageUploadModule }      from 'angular2-image-upload';
 import { Ng2UploaderModule }      from 'ng2-uploader';
-import { DragulaModule }           from 'ng2-dragula';
+import { DragulaModule }          from 'ng2-dragula';
+import { CKEditorModule }         from 'ng2-ckeditor';
 
 
 // CUSTOM COMPONENTS
@@ -25,6 +26,8 @@ import { ListFieldComponent }     from './components/list/script';
 import { DataViewComponent }      from './components/data-view/script';
 import { PageComponent }          from './components/page/script';
 import { TextNodeComponent }      from './components/text/script';
+import { FileNodeComponent }      from './components/file/script';
+
 import { NumberFieldComponent }   from './components/number/script';
 import { ColorFieldComponent }    from './components/color/script';
 import { DateFieldComponent }     from './components/date/script';
@@ -51,7 +54,6 @@ import { EventFieldComponent }    from './components/event/script';
 import { TypeListComponent }      from './components/type-list/script';
 import { SiteListComponent }      from './components/site-list/script';
 import { ImageFieldComponent }    from './components/image-field/script';
-import { FileFieldComponent }     from './components/file-field/script';
 import { Spinner }                from './components/spinner/script';
 import { AddSiteComponent }       from './components/add-site/script';
 import { SlideFieldComponent }    from './components/slide/script';
@@ -69,6 +71,11 @@ import { MoleculeConfig }           from './components/molecule-config/script';
 import { MoleculeRenderer }         from './components/molecule-renderer/script';
 import { FusionComponent }          from './components/fusion/script';
 import { TableRenderer }          from './components/table-renderer/script';
+  // GENERATOR LAYOUTS
+  import { GeneratorLayoutHorizontalCards } from "./components/molecule-generator/layouts/cards-horizontal/script";
+  import { GeneratorLayoutVerticalCards } from "./components/molecule-generator/layouts/cards-vertical/script";
+  import { GeneratorLayoutTable } from "./components/molecule-generator/layouts/table/script";
+  import { GeneratorLayoutSidebar } from "./components/molecule-generator/layouts/sidebar/script";
 
 
 // CUSTOM DIRECTIVES
@@ -116,6 +123,7 @@ const appRoutes: Routes = require('./config/routes');
     ImageUploadModule.forRoot(),
     NguiAutoCompleteModule,
     Ng2UploaderModule,
+    CKEditorModule,
     DragulaModule,
     RouterModule.forRoot(appRoutes)
   ],
@@ -136,7 +144,7 @@ const appRoutes: Routes = require('./config/routes');
     EventSelectComponent,
     RootComponent,
     SafePipe,
-    FileFieldComponent,
+    FileNodeComponent,
     GroupComponent,
     CellComponent,
     TextNodeComponent,
@@ -177,7 +185,11 @@ const appRoutes: Routes = require('./config/routes');
     MoleculeCreate,
     FusionComponent,
     MoleculeGeneratorComponent,
-    TableRenderer
+    TableRenderer,
+    GeneratorLayoutHorizontalCards,
+    GeneratorLayoutVerticalCards,
+    GeneratorLayoutTable,
+    GeneratorLayoutSidebar
   ],
   entryComponents: [
     GroupComponent,
@@ -188,7 +200,7 @@ const appRoutes: Routes = require('./config/routes');
     SliderFieldComponent,
     LinkFieldComponent,
     ImageFieldComponent,
-    FileFieldComponent,
+    FileNodeComponent,
     NumberFieldComponent,
     DateFieldComponent,
     ColorFieldComponent,
@@ -198,7 +210,11 @@ const appRoutes: Routes = require('./config/routes');
     ListFieldComponent,
     ColumnComponent,
     MoleculeSelect,
-    MoleculeGeneratorComponent
+    MoleculeGeneratorComponent,
+    GeneratorLayoutHorizontalCards,
+    GeneratorLayoutVerticalCards,
+    GeneratorLayoutTable,
+    GeneratorLayoutSidebar
   ],
   providers :   [
     DatePipe,

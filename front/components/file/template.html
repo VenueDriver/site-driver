@@ -1,0 +1,24 @@
+<label for="" class="label-form">{{data._name | userlabel: userRole }}<span class="required-indicator" *ngIf="data._can._be_required">*</span>
+<generator *ngIf="data._can._edit || userRole > 9000" [label]="'Edit ' + data._name" [path]="data._path" [edit]="data"><a class="fa fa-pencil"></a></generator>
+<delete-btn *ngIf="data._can._delete || userRole > 9000" [path]="data._path"></delete-btn></label>
+
+<div *ngIf="data._value && data._value.length > 0" >
+  <div *ngIf="isImage()" style="position: relative;display: inline-block;">
+    <div class="image-field-container">
+     <img style="width:100%;max-width:350px;" *ngIf="isImage()" src="{{data._value}}" alt="">
+    </div>
+   <div (click)="openPanel()" *ngIf="data._can._edit_value || userRole > 9000" class="fa fa-pencil" style="position: absolute; top: 0; color: white; right: 0; padding: 10px; background: #af945c; width: 10px; cursor: pointer;"></div>
+    <div (click)="data._value = ''" *ngIf="data._can._edit_value || userRole > 9000" class="fa fa-times" style="position: absolute; top: 38px; color: white; right: 0; padding: 10px; background: #af945c; width: 10px; cursor: pointer;"></div>
+  </div>
+</div>
+
+<!-- error message -->
+<div class="error-message" *ngIf="errors.length > 0 && data._can._be_required">
+  <ul>
+    <li *ngFor="let error of errors">- {{error}}</li>
+  </ul>
+</div>
+
+<button (click)="openPanel()" *ngIf="(data._can._edit_value || userRole > 9000) && (!data._value || data._value.length < 1) ">SELECT FILE</button>
+
+<s3-file-picker  *ngIf="(data._can._edit_value || userRole > 9000) && panel" (close)="closePanel()" (fileSelected)="grabFiles($event)"></s3-file-picker>

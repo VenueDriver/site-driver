@@ -21,7 +21,7 @@ export class MoleculeService implements OnInit {
   }
 
   ngOnInit(){
-    console.log("init molecule service");
+    // console.log("init molecule service");
   }
 
   validateMolecule(molecule) {

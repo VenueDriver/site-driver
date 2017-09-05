@@ -10,6 +10,7 @@ export class TextNodeComponent implements OnInit {
   @Input() data : any;
   @Input() userRole : number = 0;
   errors : Array<any> = [];
+  ckeditorContent :any;
 
 
   constructor(){
