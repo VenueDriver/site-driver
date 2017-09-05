@@ -105,12 +105,32 @@
     }
 }
 
-.section-title {
+.current-section, .previous-section  {
     font-weight: 700;
     display: inline-block;
     position: relative;
     padding: 16px 20px;
     margin: -10px 0;
+}
+
+.previous-section {
+    padding-right: 10px;
+    font-weight: 400;
+    + .current-section {
+    	padding-left: 0;
+    	&:before {
+		    content: '/';
+		    padding-right: 10px;
+		    font-weight: 700;
+    	}
+    }
+    + .previous-section{
+   		padding-left: 0;
+    	&:before{
+		    content: '/';
+		    padding-right: 10px;
+    	}
+    }
 }
 
 // 768px

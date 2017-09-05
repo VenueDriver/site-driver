@@ -32,6 +32,9 @@
 			content: "✕";
 		}
 	}
+	+ ul {
+		margin-left: 15px; 
+	}
 }
 .cbp-spmenu {
 	background: $brand-primary;
@@ -138,6 +141,9 @@
 @media all and (min-width: $screen-landscape) {
 	.menu-btn{
 		display: none;
+		+ ul {
+			margin-left: 0; 
+		}
 	}
 	.cbp-spmenu {
 		left: 0;

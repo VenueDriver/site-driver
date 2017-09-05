@@ -173,7 +173,7 @@ div.fa.fa-times {
 
 .search {
     display: inline-block;
-    float: right;
+    vertical-align: top;
     position: relative;
 }
 
@@ -198,7 +198,7 @@ div.fa.fa-times {
 
 .submit, .search-icon{
   position: absolute;
-  top: 8;
+  top: 14px;
   right: 0;
 }
 
