@@ -1,27 +1,3 @@
 <section *ngIf="ready">
-  <div class="container table-layout">
-        <div class="row">
-          <div class="col-12">
-              <h1 class="title">{{data._name}}</h1><a href="javascript:void(0);" (click)="show_generator_edit_form = !show_generator_edit_form"><i class="fa fa-pencil"></i></a>
-              <div class="right">
-                <form class="search"><input id='submit' name='submit' type="submit" value="search" class="btn search-btn"><label for="submit" class="submit"></label><a href="javascript: void(0)" class="search-icon"></a><input type="text" class="search-field"></form>
-                <a class="btn-add" (click)="show_new_molecule_form = !show_new_molecule_form">ADD NEW POST</a>
-              </div>
-          </div>
-      </div>
-  </div>
-
-  <div class="box" *ngIf="show_generator_edit_form">
-    <molecule-config [molecule]="data"></molecule-config>
-
-    <molecule-save [type]="data._type" [molecule]="data">
-      <div class="btn btn-save">SAVE</div>
-    </molecule-save>
-  </div>
-
-  <div class="box" *ngIf="show_new_molecule_form">
-    <molecule-create [generator]="data" [type]="'instance'" [useMolecules]="data._options._molecule_types._value" ></molecule-create>
-  </div>
-
   <table-renderer [columns]="['_name']" [list]="instances"></table-renderer>
 </section>

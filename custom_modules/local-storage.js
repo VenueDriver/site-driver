@@ -52,21 +52,22 @@ class LocalStorage{
       let i = 0;
       let mergedResultList = [];
 
-      // console.log("Routes:",routes.join('\n'));
+      console.log("Routes:",routes.join('\n'));
 
       asyncLoop(
         ()=> i >= routes.length,
         (next,end)=>{
           this.readdir(routes[i],{readFiles : true}).catch(reject).then((list)=>{
-            // console.log("list:",list);
+            console.log("list:",list);
             const queryFilter = new QueryFilter(this.query);
             list = queryFilter.filter(list);
-            // console.log("filter",list);
+            console.log("filter",list);
             list.forEach(item => mergedResultList.push(item));
             i++; next();
           });
         },
         ()=>{
+          console.log("MERGED RESULTS",mergedResultList);
           resolve(mergedResultList);
         }
       );
@@ -182,10 +183,10 @@ class LocalStorage{
       asyncLoop(
         ()=> i >= routes.length,
         (next,end)=>{
-          this.readdir(routes[i],{readFiles : false}).catch(reject).then((directory)=>{            
+          this.readdir(routes[i],{readFiles : false}).catch(reject).then((directory)=>{
             let filename = false;
-            directory.forEach((file)=>{              
-              let fname = file.replace(/\.json$/i,'');              
+            directory.forEach((file)=>{
+              let fname = file.replace(/\.json$/i,'');
               if(fname === id){
                 filename = fname +'.json';
 
