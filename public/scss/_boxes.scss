@@ -23,7 +23,7 @@
 }
 .card {
 	transition: transform .2s;
-	margin-bottom: 40px;
+	margin-bottom: 0;
 	&::after {
 	    position: absolute;
 	    top: 0;
@@ -43,6 +43,9 @@
 	    &::after {
 	      opacity: 1;
 	    }
+	}
+	&:first-of-type {
+		margin-top: 30px;
 	}
 }
 .box-details {
@@ -241,7 +244,12 @@ div.fa.fa-times {
 
 // 768px
 @media all and (min-width: $screen-portrait) {
-
+	.card {
+		margin-bottom: 40px;
+		&:first-of-type {
+			margin-top: 0;
+		}
+	}
 }
 
 // 992px

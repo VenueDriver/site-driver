@@ -25,6 +25,7 @@ a, a:hover, a:active, a:focus {
 .container {
 	padding-left: 15px;
 	padding-right: 15px;
+	margin-top: 30px;
 }
 .cf:before,
 .cf:after {
@@ -58,6 +59,7 @@ a, a:hover, a:active, a:focus {
 @media all and (min-width: $screen-landscape) {
 	.container {
 		max-width: 970px;
+		margin-top: 0;
 	}
 	main {
 		display: inline-block;
