@@ -1,11 +1,12 @@
+<h1>GENERATOR COMPONENT - FIND A WAY TO LOAD INSTANCES FROM THE COMPONENT IT SELF</h1>
 <section *ngIf="ready">
   <div class="container table-layout card-layout">
     <div class="row">
       <div class="col-12">
-          <h1 class="title">{{data._name}}</h1><a href="javascript:void(0);" (click)="show_generator_edit_form = !show_generator_edit_form"><i class="fa fa-pencil"></i></a>
+          <h1 class="title">{{data._options._title}}</h1><a href="javascript:void(0);" (click)="show_generator_edit_form = !show_generator_edit_form"><i class="fa fa-pencil"></i></a>
           <div class="right">
             <form class="search"><input id='submit' name='submit' type="submit" value="search" class="btn search-btn"><label for="submit" class="submit"></label><a href="javascript: void(0)" class="search-icon"></a><input type="text" class="search-field"></form>
-            <a class="btn-add" (click)="show_new_molecule_form = !show_new_molecule_form">ADD NEW POST</a>
+            <a class="btn-add" (click)="show_new_molecule_form = !show_new_molecule_form" [innerHTML]="(data._options._molecule_types._value.length>1)? 'ADD NEW': 'ADD NEW '+data._options._molecule_types._value[0]._name"></a>
           </div>
       </div>
     </div>

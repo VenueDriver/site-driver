@@ -106,6 +106,8 @@ import { IndexPage }            from './pages/index/script';
 import { CellBuilder }          from './pages/cell-builder/script';
 import { MoleculeGenerator }    from './pages/molecule-generator/script';
 import { GeneratorPage }        from './pages/generator/script';
+import { InstancePage }        from './pages/instance/script';
+
 
 
 //DEFINE ROUTES
@@ -177,6 +179,7 @@ const appRoutes: Routes = require('./config/routes');
     IndexPage,
     GeneratorPage,
     SitePage,
+    InstancePage,
     MoleculeGenerator,
     CellBuilder,
     MoleculeRenderer,

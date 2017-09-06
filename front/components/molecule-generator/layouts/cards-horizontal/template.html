@@ -5,7 +5,7 @@
 			<ng-container *ngFor="let item of instances;let i = index">
 				<div class="col-t-6 col-4">
 					<div class="card">
-						<a class="to-site">
+						<a class="to-site" [routerLink]="['/instance',item._id]">
 	            <div class="aspect-ratio">
 	            	<div class="aspect-ratio-content">
 	              	<figure>

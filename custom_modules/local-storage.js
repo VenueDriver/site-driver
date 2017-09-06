@@ -27,50 +27,92 @@ class LocalStorage{
     this.query = Object.assign({},opts.query);
   }
 
-  queryRoutes(){
-    let
-    types = this.query.type || [],
-    names = this.query.name || [],
-    routes = [];
-    types.forEach( type =>{
-      if(names.length > 0 && type === "instance"){
-        names.forEach(name =>{
-          routes.push(path.join(type,name,this.query.format));
-        })
-      }else{
-        routes.push(path.join(type,this.query.format));
-      }
+  getInstanceNames(){
+    return new Promise((resolve,reject)=>{
+      this.readdir('instance',{readFiles : false}).then((names)=>{
+        console.log("Instance names",names);
+        resolve(names);
+      })
     });
-    return routes;
+  }
+
+  queryRoutes(){
+    return new Promise((resolve,reject)=>{
+      let
+      types = this.query.type || [],
+      names = this.query.name || [],
+      routes = [];
+      let i = 0;
+      console.log("Async loop")
+      asyncLoop(
+        ()=> i >= types.length,
+        (next,end)=>{
+          let type = types[i];
+          if(type === "instance"){
+            if(names.length > 0){
+              names.forEach(name =>{
+                routes.push(path.join(type,name,this.query.format));
+              })
+              i++;
+              next();
+            }else{
+              this.getInstanceNames().then((nameList)=>{
+                nameList.forEach(name =>{
+                  routes.push(path.join(type,name,this.query.format));
+                })
+                i++;
+                next();
+              }).catch((err)=>{
+                end("Error While getting instance names.");
+              })
+            }
+          }else{
+            routes.push(path.join(type,this.query.format));
+            i++;
+            next();
+          }
+        },
+        (err)=>{
+          if(err){
+            reject(err);
+          }else{
+            resolve(routes);
+          }
+        }
+      );
+
+
+
+    })
   }
 
   get(){
     return new Promise((resolve,reject)=>{
+      this.queryRoutes().then((routes)=>{
 
-      let routes = this.queryRoutes();
+        let i = 0;
+        let mergedResultList = [];
 
-      let i = 0;
-      let mergedResultList = [];
+        asyncLoop(
+          ()=> i >= routes.length,
+          (next,end)=>{
+            this.readdir(routes[i],{readFiles : true}).catch(reject).then((list)=>{
 
-      console.log("Routes:",routes.join('\n'));
+              const queryFilter = new QueryFilter(this.query);
+              list = queryFilter.filter(list);
 
-      asyncLoop(
-        ()=> i >= routes.length,
-        (next,end)=>{
-          this.readdir(routes[i],{readFiles : true}).catch(reject).then((list)=>{
-            console.log("list:",list);
-            const queryFilter = new QueryFilter(this.query);
-            list = queryFilter.filter(list);
-            console.log("filter",list);
-            list.forEach(item => mergedResultList.push(item));
-            i++; next();
-          });
-        },
-        ()=>{
-          console.log("MERGED RESULTS",mergedResultList);
-          resolve(mergedResultList);
-        }
-      );
+              list.forEach(item => mergedResultList.push(item));
+              i++; next();
+            });
+          },
+          ()=>{
+
+            resolve(mergedResultList);
+          }
+        );
+
+      })
+
     });
   }
 
@@ -167,83 +209,50 @@ class LocalStorage{
 
   remove(){
     return new Promise((resolve,reject)=>{
-      let routes = this.queryRoutes();
-      let i = 0;
-      let id;
-      if(this.query.id){
-        id = this.query.id;
-      }else if(this.query.name && this.query.name.length > 0){
-        id = this.query.name[0];
-      }else{
-        console.log("Malformed query",this.query);
-        reject("Malformed query");
-      }
+      this.queryRoutes().then((routes)=>{
+
+        let i = 0;
+        let id;
+        if(this.query.id){
+          id = this.query.id;
+        }else if(this.query.name && this.query.name.length > 0){
+          id = this.query.name[0];
+        }else{
+          console.log("Malformed query",this.query);
+          reject("Malformed query");
+        }
 
 
-      asyncLoop(
-        ()=> i >= routes.length,
-        (next,end)=>{
-          this.readdir(routes[i],{readFiles : false}).catch(reject).then((directory)=>{
-            let filename = false;
-            directory.forEach((file)=>{
-              let fname = file.replace(/\.json$/i,'');
-              if(fname === id){
-                filename = fname +'.json';
+        asyncLoop(
+          ()=> i >= routes.length,
+          (next,end)=>{
+            this.readdir(routes[i],{readFiles : false}).catch(reject).then((directory)=>{
+              let filename = false;
+              directory.forEach((file)=>{
+                let fname = file.replace(/\.json$/i,'');
+                if(fname === id){
+                  filename = fname +'.json';
 
+                }
+              });
+
+              if(filename){
+                console.log("DELETE",routes[i],filename);
+                this.unlink(routes[i],filename).then(end).catch((err)=>end(err));
+              }else{
+                i++;next();
               }
             });
-
-            if(filename){
-              console.log("DELETE",routes[i],filename);
-              this.unlink(routes[i],filename).then(end).catch((err)=>end(err));
+          },
+          (err,message)=>{
+            if(err){
+              reject(err)
             }else{
-              i++;next();
+              resolve();
             }
-          });
-        },
-        (err,message)=>{
-          if(err){
-            reject(err)
-          }else{
-            resolve();
           }
-        }
-      );
-
-
-
-
-
-      // let mergedLocation = path.join(this.opts.root,location);
-      // fs.readdir(mergedLocation,'utf-8',(err,directory)=>{
-      //   if(err) reject(err)
-      //   directory = directory.filter(file => !(/^\./.test(file) || !(/\.\w+$/gi.test(file))));
-      //   let i = 0;
-      //   asyncLoop(
-      //     ()=> i >= directory.length,
-      //     (next,end)=>{
-      //       this.readFile(location,directory[i]).then((file)=>{
-      //         if(file._id == id){
-      //           this.unlink(location,directory[i]).then(end).catch((err)=>end(err));
-      //         }else{
-      //           i++;
-      //           next();
-      //         }
-      //       }).catch((err)=>{
-      //         end(err);
-      //       })
-      //     },
-      //     (err)=> {
-      //       if(err){
-      //         reject(err);
-      //       }else{
-      //         resolve({message: id+" removed."});
-      //       }
-      //     }
-      //   )
-      // });
-
-
+        );
+      })
     })
   }
 }

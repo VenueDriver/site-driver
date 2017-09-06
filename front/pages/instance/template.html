@@ -1,0 +1,7 @@
+<page>
+  <page-header></page-header>
+  <main *ngIf="ready">
+    <molecule-renderer [data]="data" [component]="data._ngComponent"></molecule-renderer>
+	</main>
+  <page-footer></page-footer>
+</page>
