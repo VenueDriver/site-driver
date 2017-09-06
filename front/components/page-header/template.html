@@ -32,9 +32,11 @@
         <!-- <li>
           <a href="/" class="select-menu"><i class="fa fa-globe"></i>Sites</a>
         </li> -->
-        <li *ngFor="let generator of generators">
-          <a [routerLink]="['/generator',generator._name]" class="select-menu"><i class="fa fa-database"></i>{{generator._name}}</a>
-        </li>
+        <ng-container *ngFor="let generator of generators">
+          <li *ngIf="generator._can._show">
+            <a [routerLink]="['/generator',generator._name]" class="select-menu"><i class="fa fa-database"></i>{{generator._name}}</a>
+          </li>
+        </ng-container>
         <li>
           <hr>
         </li>
@@ -42,7 +44,7 @@
           <a href="/molecule-generator" class="select-menu"><i class="fa fa-sitemap"></i>M. Generator</a>
         </li>
         <li *ngIf="userRole > 9000">
-          <a href="/cell-builder" class="select-menu"><i class="fa fa-code-fork"></i>Cell Builder</a> 
+          <a href="/cell-builder" class="select-menu"><i class="fa fa-code-fork"></i>Cell Builder</a>
         </li>
         <!-- <li>
           <a style="pointer-events: none;cursor: default;"><i class="fa fa-picture-o"></i>Smartimage</a>
