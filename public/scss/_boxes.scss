@@ -267,6 +267,48 @@ div.fa.fa-times {
 	}
 }
 
+.categories {
+	border: 1px dashed #dadada;
+	padding: 20px;
+	.tag {
+		background: $accent-color;
+	    color: $white;
+	    padding: 5px 10px;
+	    font-size: 14px;
+	    letter-spacing: 0.02em;
+	    border-radius: 5px;
+	    font-weight: 600;
+		&:after {
+			@extend .btn-add:before;
+			content: '\f00d';
+			margin-left: 10px;
+   			margin-right: 0;
+   			cursor: pointer;
+   			margin-top: -3px;
+		}
+		&:hover{
+			background: darken($accent-color,5%);
+			&:after {
+				transform: none;
+			}
+		}
+	}
+	.tag-add {
+		background: none;
+		color: #b1b1b1;
+		cursor: pointer;
+		&:before {
+			@extend .btn-add:before;
+		}
+		&:after {
+			display: none;
+		}
+		&:hover{
+			background: none;
+		}
+	}
+}
+
 // 768px
 @media all and (min-width: $screen-portrait) {
 	.card {
