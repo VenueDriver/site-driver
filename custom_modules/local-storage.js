@@ -27,34 +27,41 @@ class LocalStorage{
     this.query = Object.assign({},opts.query);
   }
 
+  queryRoutes(){
+    let
+    types = this.query.type || [],
+    names = this.query.name || [],
+    routes = [];
+    types.forEach( type =>{
+      if(names.length > 0 && type === "instance"){
+        names.forEach(name =>{
+          routes.push(path.join(type,name,this.query.format));
+        })
+      }else{
+        routes.push(path.join(type,this.query.format));
+      }
+    });
+    return routes;
+  }
+
   get(){
     return new Promise((resolve,reject)=>{
 
-      let
-      types = this.query.type || [],
-      names = this.query.name || [],
-      routes = [];
-      types.forEach( type =>{
-        if(names.length > 0 && type === "instance"){
-          names.forEach(name =>{
-            routes.push(path.join(type,name,this.query.format));
-          })
-        }else{
-          routes.push(path.join(type,this.query.format));
-        }
-      });
+      let routes = this.queryRoutes();
 
       let i = 0;
       let mergedResultList = [];
 
-      console.log("Routes:",routes.join('\n'));
+      // console.log("Routes:",routes.join('\n'));
 
       asyncLoop(
         ()=> i >= routes.length,
         (next,end)=>{
           this.readdir(routes[i],{readFiles : true}).catch(reject).then((list)=>{
+            // console.log("list:",list);
             const queryFilter = new QueryFilter(this.query);
             list = queryFilter.filter(list);
+            // console.log("filter",list);
             list.forEach(item => mergedResultList.push(item));
             i++; next();
           });
@@ -157,36 +164,85 @@ class LocalStorage{
   }
 
 
-  remove(id,location){
+  remove(){
     return new Promise((resolve,reject)=>{
-      let mergedLocation = path.join(this.opts.root,location);
-      fs.readdir(mergedLocation,'utf-8',(err,directory)=>{
-        if(err) reject(err)
-        directory = directory.filter(file => !(/^\./.test(file) || !(/\.\w+$/gi.test(file))));
-        let i = 0;
-        asyncLoop(
-          ()=> i >= directory.length,
-          (next,end)=>{
-            this.readFile(location,directory[i]).then((file)=>{
-              if(file._id == id){
-                this.unlink(location,directory[i]).then(end).catch((err)=>end(err));
-              }else{
-                i++;
-                next();
+      let routes = this.queryRoutes();
+      let i = 0;
+      let id;
+      if(this.query.id){
+        id = this.query.id;
+      }else if(this.query.name && this.query.name.length > 0){
+        id = this.query.name[0];
+      }else{
+        console.log("Malformed query",this.query);
+        reject("Malformed query");
+      }
+
+
+      asyncLoop(
+        ()=> i >= routes.length,
+        (next,end)=>{
+          this.readdir(routes[i],{readFiles : false}).catch(reject).then((directory)=>{            
+            let filename = false;
+            directory.forEach((file)=>{              
+              let fname = file.replace(/\.json$/i,'');              
+              if(fname === id){
+                filename = fname +'.json';
+
               }
-            }).catch((err)=>{
-              end(err);
-            })
-          },
-          (err)=> {
-            if(err){
-              reject(err);
+            });
+
+            if(filename){
+              console.log("DELETE",routes[i],filename);
+              this.unlink(routes[i],filename).then(end).catch((err)=>end(err));
             }else{
-              resolve({message: id+" removed."});
+              i++;next();
             }
+          });
+        },
+        (err,message)=>{
+          if(err){
+            reject(err)
+          }else{
+            resolve();
           }
-        )
-      });
+        }
+      );
+
+
+
+
+
+      // let mergedLocation = path.join(this.opts.root,location);
+      // fs.readdir(mergedLocation,'utf-8',(err,directory)=>{
+      //   if(err) reject(err)
+      //   directory = directory.filter(file => !(/^\./.test(file) || !(/\.\w+$/gi.test(file))));
+      //   let i = 0;
+      //   asyncLoop(
+      //     ()=> i >= directory.length,
+      //     (next,end)=>{
+      //       this.readFile(location,directory[i]).then((file)=>{
+      //         if(file._id == id){
+      //           this.unlink(location,directory[i]).then(end).catch((err)=>end(err));
+      //         }else{
+      //           i++;
+      //           next();
+      //         }
+      //       }).catch((err)=>{
+      //         end(err);
+      //       })
+      //     },
+      //     (err)=> {
+      //       if(err){
+      //         reject(err);
+      //       }else{
+      //         resolve({message: id+" removed."});
+      //       }
+      //     }
+      //   )
+      // });
+
+
     })
   }
 }

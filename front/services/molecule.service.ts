@@ -47,8 +47,8 @@ export class MoleculeService implements OnInit {
   removeMolecule(molecule : any){
     return new Promise((resolve,reject)=>{
       let query = {
-        type : molecule._type,
-        name : molecule._name,
+        type : [molecule._type],
+        name : [molecule._name],
         id : molecule._id
       };
       this._server.post( `/molecule/remove`, query, [] ).subscribe((data)=>{

@@ -15,6 +15,9 @@ export class GeneratorLayoutTable implements OnInit {
   savingData = false;
   editingList : any = {};
 
+  show_new_molecule_form : boolean = false;
+  show_generator_edit_form : boolean = false;
+
   list : Array<any>;
 
   selectedMolecules : Array<any>;
