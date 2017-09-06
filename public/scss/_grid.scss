@@ -3,7 +3,7 @@
 	// margin-left:-15px;
 	// margin-right: -15px;
 }
-.col-2, .col-3, .col-4, .col-5, .col-6, .col-12 {
+.col-2, .col-3, .col-4, .col-5, .col-6, .col-10, .col-12 {
 	font-size: 16px;
 	padding-bottom: 15px;
 	@include border-box;
@@ -18,7 +18,7 @@
 
 // 768px
 @media all and (min-width: $screen-portrait) {
-	.col-2, .col-3, .col-4, .col-5, .col-6, .col-12 {
+	.col-2, .col-3, .col-4, .col-5, .col-6, .col-10, .col-12 {
 		display: inline-block;
 		vertical-align: top;
 		padding: 0 15px 15px 15px;
@@ -40,6 +40,9 @@
 	}
 	.col-6 {
 		width: 50%;
+	}
+	.col-10{
+	    width: 75%;
 	}
 	.col-12 {
 		width: 100%;

@@ -269,6 +269,23 @@ input[type=radio]:not(old):checked +  label > span > span{
 	font-size: 13px;
 }
 
+.post-layout {
+	input {
+	    background: none;
+	    border: none;
+	    border-bottom: 1px dashed #dadada;
+	    display: block;
+	    width: 100%;
+	    padding-bottom: 12px;
+	    font-size: 12px;
+	    letter-spacing: 0.02em;
+
+	    &.post-title {
+	    	font-size: 40px;
+	    }
+	}
+}
+
 // 768px
 @media all and (min-width: $screen-portrait) {
 	.form-search {
