@@ -5,36 +5,29 @@ import { MoleculeService } from '../../services/molecule.service';
 
 @Component({
   selector: 'molecule-generator-page',
-  template: require('./template.html'),
-  styles : [`
-    table{ width: 100% }
-    tr {
-      background:#fff;
-      border: 1px solid #ccc;
-    }
-    td {
-      padding:10px;
-    }
-    thead td{
-      font-weight:bold;
-    }
-    `]
+  template: require('./template.html')
 })
 
 export class MoleculeGenerator implements OnInit {
 
   newMolecule : any;
   reduced = false;
+  generatorList : any;
   ready : boolean = false;
 
-  constructor(){}
+  constructor( private moleculeService : MoleculeService ){}
 
   moleculeSelected(selected){
     this.newMolecule = selected[0];
   }
 
   ngOnInit(){
-    this.ready = true;
+    this.moleculeService.getMoleculeList({
+      type : ['generator']
+    }).then((list)=>{
+      this.generatorList = list;
+      this.ready = true;
+    })
   }
 
   log(what){

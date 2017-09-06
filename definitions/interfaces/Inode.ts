@@ -12,5 +12,5 @@ export interface NodeInterface extends MoleculeInterface{
         _dragg   : boolean;
         _delete  : boolean;
         _show    : boolean;
-    }
+    };
 }
