@@ -34,7 +34,7 @@
 			background: $accent-color;
 		}
 	}
-	&.draft {
+	&.btn-draft {
 		background: none;
 		border: 2px solid $accent-color;
 		color: $accent-color;
@@ -44,11 +44,26 @@
 			color: darken($accent-color,5%);
 		}
 	}
+	&.btn-trash {
+		background: none;
+		color: #b7b7b7;
+		margin-top: 10px;
+		&:before {
+			content: "\f1f8";
+			@include fontawesome;
+			margin-right: 10px;
+			margin-top: -2px;
+			vertical-align: middle;
+		}
+		&:hover {
+			color: darken(#b7b7b7,10%);
+		}
+	}
 }
 input .btn {
 	border: none;
 }
-button{
+button {
 	font-family: $primary-font;
 	background: none;
 	border: 2px solid $accent-color;
@@ -60,8 +75,8 @@ button{
     letter-spacing: 0.05em;
     cursor: pointer;
     &:hover {
-			border-color: darken($accent-color,5%);
-			color: darken($accent-color,5%);
+		border-color: darken($accent-color,5%);
+		color: darken($accent-color,5%);
 	}
 }
 .btn-add {
