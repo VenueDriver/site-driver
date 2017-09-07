@@ -67,10 +67,13 @@ textarea {
 	}
 }
 .label-form {
-	display: block;
-	margin-bottom: 10px;
-	color: #777;
-	margin-top:15px;
+    display: block;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #757575;
+    font-weight: 600;
+    margin: 40px 0 20px 0;
 }
 
 .panel {
@@ -276,11 +279,15 @@ input[type=radio]:not(old):checked +  label > span > span{
 	    border-bottom: 1px dashed #dadada;
 	    display: block;
 	    width: 100%;
-	    padding-bottom: 12px;
+	    height: auto;
+	    padding: 0 0 12px 0;
 	    font-size: 12px;
 	    letter-spacing: 0.02em;
-
-	    &.post-title {
+	    &:focus{
+	    	border-bottom: 1px solid $gray-medium;
+	    	background: none;
+	    }
+	    &.big {
 	    	font-size: 40px;
 	    }
 	}

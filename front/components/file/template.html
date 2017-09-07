@@ -5,11 +5,12 @@
 <div *ngIf="data._value && data._value.length > 0" >
   <div *ngIf="isImage()" style="position: relative;display: inline-block;">
     <div class="image-field-container">
-     <img style="width:100%;max-width:350px;" *ngIf="isImage()" src="{{data._value}}" alt="">
+     <img *ngIf="isImage()" src="{{data._value}}" alt="">
+     <span (click)="openPanel()" *ngIf="data._can._edit_value || userRole > 9000" class="edit-field">Edit image</span>
     </div>
-   <div (click)="openPanel()" *ngIf="data._can._edit_value || userRole > 9000" class="fa fa-pencil" style="position: absolute; top: 0; color: white; right: 0; padding: 10px; background: #af945c; width: 10px; cursor: pointer;"></div>
-    <div (click)="data._value = ''" *ngIf="data._can._edit_value || userRole > 9000" class="fa fa-times" style="position: absolute; top: 38px; color: white; right: 0; padding: 10px; background: #af945c; width: 10px; cursor: pointer;"></div>
-  </div>
+   
+  <!--  <div (click)="data._value = ''" *ngIf="data._can._edit_value || userRole > 9000" class="fa fa-times" style="position: absolute; top: 38px; color: white; right: 0; padding: 10px; background: #af945c; width: 10px; cursor: pointer;"></div>
+  </div>-->
 </div>
 
 <!-- error message -->
