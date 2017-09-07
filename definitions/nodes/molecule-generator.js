@@ -28,7 +28,17 @@ var MoleculeGenerator = (function (_super) {
                 _value: []
             },
             _use_only_childs: true,
-            _layout: ''
+            _layout: '',
+            _title: '',
+            _image: {
+                _options: {
+                    _allow_videos: false,
+                    _allow_images: true,
+                    _allow_documents: false
+                },
+                _ngComponentName: 'FileNodeComponent',
+                _value: ''
+            }
         };
         for (var key in obj) {
             this[key] = obj[key];

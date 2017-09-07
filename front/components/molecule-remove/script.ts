@@ -23,7 +23,7 @@ export class MoleculeRemove implements OnInit {
 
   }
 
-  save(){
+  remove(){
     this.bussy = true;
     console.log("Remove ",this.molecule);
     this.moleculeService.removeMolecule(this.molecule).then((response)=>{

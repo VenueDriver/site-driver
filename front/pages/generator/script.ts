@@ -38,7 +38,7 @@ export class GeneratorPage implements OnInit {
              _name : this.generatorName
          }}).then((generator)=>{
          this.generator = generator[0];
-         console.log("Showing generator:",this.generator);
+         console.log("Showing generator:",this.generator._name,this.generator);
          this.useMolecules = this.generator._options._molecule_types._value.map((value)=> value._name);
          this.moleculeService.getMoleculeList({
            type : ["instance"],

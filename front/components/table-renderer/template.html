@@ -24,7 +24,8 @@
                       {{item[prop]}}
                     </td>
                     <td>
-                    <span class="edit" (click)="editOpen(i)">Edit</span>
+                    <span class="edit" (click)="editOpen(i)">Quick edit</span>
+                    <a *ngIf="item._type === 'instance'" class="edit" [routerLink]="['/instance',item._id]">Edit</a>
                     <molecule-remove [molecule]="item">
                       <span class="delete-post">Delete</span>
                     </molecule-remove>
@@ -33,6 +34,9 @@
                 <tr *ngIf="showEdition[i]">
                    <td class="no-padding" [attr.colspan]="columns.length +2">
                        <molecule-renderer [data]="item" [component]="item._ngComponent"></molecule-renderer>
+                       <molecule-save [type]="item._type" [molecule]="item">
+                         <a href="javascript:void(0)" class="btn btn-save">Save</a>
+                       </molecule-save>
                    </td>
                 </tr>
               </ng-container>

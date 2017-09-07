@@ -19,6 +19,7 @@ export class MoleculeConfig implements OnInit {
 
   ngOnInit(){
     this.resetValidation();
+    this.validate();
   }
 
   resetValidation(){
@@ -39,10 +40,17 @@ export class MoleculeConfig implements OnInit {
 
   ngOnChanges(){
     this.resetValidation();
+    this.validate();
+  }
+
+  validate(){
+    console.log("TYPEOF MOLECULE",typeof this.molecule,"Molecule:",this.molecule);
     if(typeof this.molecule == 'object'){
+      console.log("molecule is object");
       this.validMolecule = this.molecule.hasOwnProperty('_can');
       this.hasOptions = this.molecule.hasOwnProperty("_options");
       this.hasName = this.molecule.hasOwnProperty("_name");
+      console.log("valid",this.validMolecule,"options",this.hasOptions,"name",this.hasName)
     }
   }
 

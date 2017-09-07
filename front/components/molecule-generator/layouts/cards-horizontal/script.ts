@@ -15,6 +15,9 @@ export class GeneratorLayoutHorizontalCards implements OnInit {
   savingData = false;
   editingList : any = {};
 
+  show_new_molecule_form : boolean = false;
+  show_generator_edit_form : boolean = false;
+
   list : Array<any>;
 
   selectedMolecules : Array<any>;
@@ -28,8 +31,8 @@ export class GeneratorLayoutHorizontalCards implements OnInit {
   constructor(){}
 
   ngOnInit() {
-    console.log(this.data);
-    console.log(this.instances);
+    console.log("INSTANCES",this.instances);
+    this.ready = true;
   }
-
+  
 }

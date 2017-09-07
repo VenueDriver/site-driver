@@ -1,99 +1,27 @@
-<section>
+<section *ngIf="ready">
   <div class="container card-layout">
-        <div class="row cf">
-          <div class="col-12">
-              <div class="right">
-                <form class="search"><input id='submit' name='submit' type="submit" value="search" class="btn search-btn"><label for="submit" class="submit"></label><a href="javascript: void(0)" class="search-icon"></a><input type="text" class="search-field"></form>
-                <a class="btn-add">ADD NEW BLOG</a>
-              </div>
-          </div>
-      </div>
  	  <div class="row">
-			<div class="col-t-6 col-4">
-				<div class="card">
-					<a class="to-site" href="/site/all.in.vegas">
-					                    <div class="aspect-ratio">
-					                    	<div class="aspect-ratio-content">
-					                        	<figure>
-					                            	<img alt="" class="brand-icon" src="http://s3-us-west-1.amazonaws.com/assets.portaldriver.com/allinvegas/7f6881f295fe52806470395d6126516e.jpg">
-					                         	</figure>
-					                       	</div>
-					                     </div>          
-						 <div class="box box-details">
-							  				<h2>All In Vegas</h2>
-							<p>all.in.vegas</p>
-						  </div>
-					</a>
+
+			<ng-container *ngFor="let item of instances;let i = index">
+				<div class="col-t-6 col-4">
+					<div class="card">
+						<a class="to-site" [routerLink]="['/instance',item._id]">
+	            <div class="aspect-ratio">
+	            	<div class="aspect-ratio-content">
+	              	<figure>
+	                  	<img alt="" class="brand-icon" [src]="item._options._image._value || '/images/placeholder.jpg'">
+	               	</figure>
+	              </div>
+	            </div>
+							<div class="box box-details">
+								<h2>{{item._options._title}}</h2>
+							</div>
+						</a>
+					</div>
 				</div>
-			</div>
-			<div class="col-t-6 col-4">
-				<div class="card">
-					<a class="to-site" href="/site/events.hakkasangroup.com">
-					                	<div class="aspect-ratio">
-					                    	<div class="aspect-ratio-content">
-					                        	<figure>
-					                            	<img alt="" class="brand-icon" src="http://s3-us-west-1.amazonaws.com/assets.portaldriver.com/hakkasanlv/3572e03b5e3589ea530a1add0e02dc47.png">
-					                            </figure>
-					                        </div>
-					                    </div>           
-						<div class="box box-details">
-							  				<h2>HKG - Events</h2>
-							<p>events.hakkasangroup.com</p>
-						</div>
-					</a>
-				</div>
-			</div>
-			<div class="col-t-6 col-4">
-				<div class="card">
-					<a class="to-site" href="/site/hakkasangroup.com">
-					                   <div class="aspect-ratio">
-					                   		<div class="aspect-ratio-content">
-					                        	<figure>
-					                            	<img alt="" class="brand-icon" src="http://s3-us-west-1.amazonaws.com/assets.portaldriver.com/hakkasangroup-com/aa1f1a8a1d4cfc5fde13207230066778.jpg">
-					                         	</figure>
-					                    	</div>
-					                  	</div>  
-						<div class="box box-details">
-							  				<h2>Hakkasan Group - Website</h2>
-							<p>hakkasangroup.com</p>
-						</div>
-					</a>
-				</div>
-			</div>
-			<div class="col-t-6 col-4">
-				<div class="card">
-					<a class="to-site" href="/site/thebanklv.com">
-						                <div class="aspect-ratio">
-						                	<div class="aspect-ratio-content">
-						                		<figure>
-						                			<img alt="" class="brand-icon" src="http://s3-us-west-1.amazonaws.com/assets.portaldriver.com/thebanklv/714264b18ed440a0701d9c64ca784ce7.png">
-						                		</figure>
-						                	</div>
-						                </div>
-						<div class="box box-details">
-								  			<h2>The Bank - LV</h2>
-							<p>thebanklv.com</p>
-						</div>
-					</a>
-				</div>
-			</div>
-			<div class="col-t-6 col-4">
-				<div class="card">
-					<a class="to-site" href="/site/ztest.com">
-					                    <div class="aspect-ratio">
-					                    	<div class="aspect-ratio-content">
-					                    		<figure>
-					            					<img alt="" class="brand-icon" src="http://s3-us-west-1.amazonaws.com/assets.portaldriver.com/demo-site/e8c74ab96c1ce9cd58e9ac983a114c87.jpg">
-					            				</figure>
-					            			</div>
-					                    </div> 
-						<div class="box box-details">
-							  				<h2>Test Project</h2>
-							<p>ztest.com</p>
-						</div>
-					</a>
-				</div>
-			</div>
+			</ng-container>
+
+
 		</div>
   </div>
 </section>

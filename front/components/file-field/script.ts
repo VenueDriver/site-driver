@@ -1,4 +1,4 @@
-import { Component , Input , OnInit } from '@angular/core';
+import { Component , Input , OnInit, Output, EventEmitter } from '@angular/core';
 
 
 
@@ -13,6 +13,8 @@ export class FileFieldComponent implements OnInit{
 
   @Input() data : any;
   @Input() userRole : number = 0;
+  @Output() valueChange = new EventEmitter();
+
   panel : boolean = false;
   errors : Array<any> = [];
 
@@ -42,6 +44,7 @@ export class FileFieldComponent implements OnInit{
 
   grabFiles(files){
     this.data._value = files[0].src;
+    this.valueChange.emit(files[0].src);
     this.closePanel();
     this.validate(this.data._value);
   }
