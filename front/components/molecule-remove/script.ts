@@ -1,4 +1,4 @@
-import { Component , Input , OnInit } from '@angular/core';
+import { Component , Input , OnInit , Output, EventEmitter} from '@angular/core';
 import { MoleculeService } from '../../services/molecule.service';
 
 
@@ -12,6 +12,7 @@ export class MoleculeRemove implements OnInit {
 
   @Input() molecule : any;
   @Input() type : string;
+  @Output() afterRemove = new EventEmitter();
 
   bussy : boolean = false;
 
@@ -24,11 +25,14 @@ export class MoleculeRemove implements OnInit {
   }
 
   remove(){
-    this.bussy = true;
-    console.log("Remove ",this.molecule);
-    this.moleculeService.removeMolecule(this.molecule).then((response)=>{
-      this.bussy = false;
-    });
+    let confirmation = confirm("Are you sure you want to delete this "+this.molecule._name.replace(/\_/gi,' ')+"?");
+    if(confirmation){
+      this.bussy = true;
+      this.moleculeService.removeMolecule(this.molecule).then((response)=>{
+        this.afterRemove.emit(true);
+        this.bussy = false;
+      });
+    }
   }
 
 }

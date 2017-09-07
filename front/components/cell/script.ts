@@ -1,5 +1,6 @@
 import { Component , Input , OnInit } from '@angular/core';
 import { MoleculeService } from '../../services/molecule.service';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'cell',
@@ -9,12 +10,12 @@ import { MoleculeService } from '../../services/molecule.service';
 export class CellComponent implements OnInit {
 
   @Input() data : any;
-  @Input() userRole : number = 0;
+  isDeveloper : boolean = false;
   newMolecule : any;
   reduced = false;
   ready : boolean = false;
 
-  constructor(private moleculeService : MoleculeService){
+  constructor(private moleculeService : MoleculeService, private dataService : DataService){
 
   }
 
@@ -23,7 +24,9 @@ export class CellComponent implements OnInit {
   }
 
   ngOnInit(){
-    this.ready = true;
+    this.dataService.userRole().then((data)=>{
+      this.isDeveloper = (<any>data).role > 9000;
+    })
   }
 
   resetMolecule(event){

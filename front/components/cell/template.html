@@ -15,7 +15,7 @@
       <div class="panel" *ngIf="!reduced">
         <molecule-renderer *ngFor="let cell of data._value" [data]="cell" [component]="cell._ngComponent" ></molecule-renderer>
 
-        <div style="opacity:0.5">
+        <div style="opacity:0.5" *ngIf="data._can._edit || isDeveloper ">
           <hr>
           <h3>Add Molecule</h3>
             <molecule-select [max]="1" (valueChange)="moleculeSelected($event)"></molecule-select>

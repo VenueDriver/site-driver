@@ -10,14 +10,14 @@ import { MoleculeService } from '../../services/molecule.service';
 export class PageHeader implements OnInit {
 
   open : boolean = false;
-  userRole : number;
+  isDeveloper : boolean = false;
   generators : Array<any>;
 
   constructor( private dataService : DataService , private moleculeService : MoleculeService){}
 
   ngOnInit(){
     this.dataService.userRole().then((data : any)=>{
-      this.userRole = data.role;
+      this.isDeveloper = (<any>data).role > 9000;
       this.moleculeService.getMoleculeList({type : ['generator']}).then((list)=>{
         this.generators = list;
       })
