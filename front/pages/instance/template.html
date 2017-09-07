@@ -1,7 +1,20 @@
 <page>
   <page-header></page-header>
   <main *ngIf="ready">
-    <molecule-renderer [data]="data" [options]="{instances:instances}" [component]="data._ngComponent"></molecule-renderer>
+    <section>
+      <div class="container post-layout">
+      	<div *ngIf="!isGenerator" class="col-2 right">
+      		<a class="btn btn-save">Publish</a>
+      		<a class="btn btn-draft">Save as draft</a>
+      		<a class="btn btn-trash">Delete</a>
+      	</div>
+      	<div class="col-10 left">
+      	  <molecule-renderer [data]="data" [options]="{instances:instances}" [component]="data._ngComponent"></molecule-renderer>
+      	</div>
+      </div>
+    </section>
+
 	</main>
+
   <page-footer></page-footer>
 </page>

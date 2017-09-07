@@ -14,6 +14,7 @@ export class InstancePage implements OnInit {
     instanceID : string;
     instances : Array<any>;
     data : any;
+    isGenerator : boolean = false;
     private sub: any;
 
     constructor(private route: ActivatedRoute , private moleculeService : MoleculeService){}
@@ -36,8 +37,9 @@ export class InstancePage implements OnInit {
           }).then((instance)=>{
            console.log("Instance served",instance);
            this.data = instance[0];
+           this.isGenerator = (this.data._ngClass === "MoleculeGenerator");
 
-           if(this.data._ngClass === "MoleculeGenerator"){
+           if(this.isGenerator){
              this.moleculeService.getMoleculeList({
                type : ["instance"],
                name : this.data._options._molecule_types._value.map(value=>value._name),
