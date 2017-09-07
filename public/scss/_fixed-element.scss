@@ -1,3 +1,9 @@
+.fixed-element-active {
+    display: block !important;
+    position: fixed;
+    top: 20px;
+}
+
 .big-title.site-admin-bar.fixed-element-active {
     display: block !important;
     background: $primary-color-dark;

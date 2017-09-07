@@ -1,14 +1,17 @@
 <page>
   <page-header></page-header>
   <main *ngIf="ready">
+
     <section>
       <div class="container post-layout">
-      	<div *ngIf="!isGenerator" class="col-2 right">
-      		<a class="btn btn-save">Publish</a>
-      		<a class="btn btn-draft">Save as draft</a>
-      		<a class="btn btn-trash">Delete</a>
+      	<div *ngIf="!isGenerator" class="col-2 right" >
+          <div fixedElement>
+            <a class="btn btn-save">Publish</a>
+        		<a class="btn btn-draft">Save as draft</a>
+        		<a class="btn btn-trash">Delete</a>
+          </div>
       	</div>
-      	<div class="col-10 left">
+      	<div [class.col-10]="!isGenerator" class="left">
       	  <molecule-renderer [data]="data" [options]="{instances:instances}" [component]="data._ngComponent"></molecule-renderer>
       	</div>
       </div>
