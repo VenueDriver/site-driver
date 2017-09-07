@@ -24,7 +24,8 @@
                       {{item[prop]}}
                     </td>
                     <td>
-                    <span class="edit" (click)="editOpen(i)">Edit</span>
+                    <span class="edit" (click)="editOpen(i)">Quick edit</span>
+                    <a *ngIf="item._type === 'instance'" class="edit" [routerLink]="['/instance',item._id]">Edit</a>
                     <molecule-remove [molecule]="item">
                       <span class="delete-post">Delete</span>
                     </molecule-remove>

@@ -12,6 +12,7 @@ export class InstancePage implements OnInit {
 
     ready : boolean = false;
     instanceID : string;
+    instances : Array<any>;
     data : any;
     private sub: any;
 
@@ -24,6 +25,7 @@ export class InstancePage implements OnInit {
     ngOnInit() {
       this.sub = this.route.params.subscribe(params => {
          this.instanceID = params['id'];
+         console.log("PARAM ID:",params['id']);
          console.log("Instance ID",this.instanceID);
          this.moleculeService.getMoleculeList({
            type : ["instance"],
@@ -34,7 +36,27 @@ export class InstancePage implements OnInit {
           }).then((instance)=>{
            console.log("Instance served",instance);
            this.data = instance[0];
-           this.ready = true;
+
+           if(this.data._ngClass === "MoleculeGenerator"){
+             this.moleculeService.getMoleculeList({
+               type : ["instance"],
+               name : this.data._options._molecule_types._value.map(value=>value._name),
+               where : {
+                 _generator : {
+                   _name : this.data._name,
+                   _id : this.data._id
+                 }
+              }
+            }).then((instances)=>{
+               console.log("Has instances:",instances);
+               this.instances = instances;
+               this.ready = true;
+            });
+
+
+           }else{
+             this.ready = true;
+           }
          });
       });
     }
