@@ -14,6 +14,10 @@ body {
 .right {
 	float: right;
 }
+.container .right,
+.container .left {
+	float: none;
+}
 a, a:hover, a:active, a:focus {
 	text-decoration: none;
 	-webkit-transition: all 230ms ease-in-out;
@@ -43,6 +47,15 @@ a, a:hover, a:active, a:focus {
  */
 .cf {
     *zoom: 1;
+}
+
+@media all and (min-width: 739px) { 
+	.container .right {
+		float: right;
+	}
+	.container .left {
+		float: left;
+	}
 }
 
 // 768px

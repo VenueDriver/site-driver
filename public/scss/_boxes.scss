@@ -223,23 +223,87 @@ div.fa.fa-times {
   border-bottom: 1px solid #dedede;
 }
 
-#submit{
+#submit {
   display: none;
 }
 
-.submit, .search-icon{
+.submit, .search-icon {
   position: absolute;
   top: 10px;
   right: 0;
 }
 
-.submit:after,.search-icon:after{
+.submit:after,.search-icon:after {
     font-family: FontAwesome;
     content: "\f002";
     color: #00c4cc;
     font-size: 20px;
     padding: 9px 30px;
     cursor: pointer;
+}
+
+.image-wrapper {
+	font-size: 0;
+	img {
+		max-width: 300px;
+	}
+	.edit-post {
+		display: block;
+		width: 100%;
+		max-width: 300px;
+		text-align: center;
+		background: $accent-color;
+		cursor: pointer;
+		color: $white;
+		padding: 10px 0;
+		font-size: 12px;
+		font-weight: 600;
+		letter-spacing: 0.02em;
+		text-transform: uppercase;
+		@include transition;
+		&:hover {
+			background: darken($accent-color,5%);
+		}
+	}
+}
+
+.categories {
+	border: 1px dashed #dadada;
+	padding: 20px;
+	.tag {
+		background: $accent-color;
+	    color: $white;
+	    padding: 5px 10px;
+	    font-size: 14px;
+	    letter-spacing: 0.02em;
+	    border-radius: 5px;
+	    font-weight: 600;
+	    cursor: default;
+		&:after {
+			content: '\f00d';
+			@include fontawesome;
+			margin-left: 10px;
+   			cursor: pointer;
+   			margin-top: -3px;
+		}
+		&:hover{
+			background: darken($accent-color,5%);
+		}
+	}
+	.tag-add {
+		background: none;
+		color: #b1b1b1;
+		cursor: pointer;
+		&:before {
+			@extend .btn-add:before;
+		}
+		&:after {
+			display: none;
+		}
+		&:hover{
+			background: none;
+		}
+	}
 }
 
 // 768px
