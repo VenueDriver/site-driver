@@ -278,6 +278,7 @@ div.fa.fa-times {
 	    letter-spacing: 0.02em;
 	    border-radius: 5px;
 	    font-weight: 600;
+	    cursor: default;
 		&:after {
 			content: '\f00d';
 			@include fontawesome;
