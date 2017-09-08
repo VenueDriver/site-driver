@@ -292,7 +292,9 @@ input[type=radio]:not(old):checked +  label > span > span{
 	    }
 	}
 }
-.box-editor {
+.box-editor,
+.box-builder,
+.box-generator {
 	div {
 		&:not(.checkbox) {
 			> label {
@@ -341,6 +343,14 @@ input[type=radio]:not(old):checked +  label > span > span{
 		    -webkit-box-shadow: none;
    		 	box-shadow: none;
 		}
+	}
+}
+
+.box-builder,
+.box-generator {
+	.col-12 {
+	    padding-top: 25px;
+    	padding-left: 0;
 	}
 }
 
