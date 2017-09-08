@@ -281,7 +281,7 @@ input[type=radio]:not(old):checked +  label > span > span{
 	    width: 100%;
 	    height: auto;
 	    padding: 0 0 12px 0;
-	    font-size: 12px;
+	    font-size: 14px;
 	    letter-spacing: 0.02em;
 	    &:focus{
 	    	border-bottom: 1px solid $gray-medium;
@@ -290,6 +290,57 @@ input[type=radio]:not(old):checked +  label > span > span{
 	    &.big {
 	    	font-size: 40px;
 	    }
+	}
+}
+.box-editor {
+	div {
+		&:not(.checkbox) {
+			> label {
+				display: block;
+				text-transform: uppercase;
+				color: $secondary-text-color;
+				font-weight: 600;
+				margin-top: 30px;
+				margin-bottom: 20px;
+				letter-spacing: 0.05em;
+			}
+		}
+		&.checkbox {
+			> label {
+				padding-left: 10px;
+				text-transform: capitalize;
+			}
+		}
+		&.contCheckbox {
+			margin-left: -15px;
+		}
+	}
+	input[type=text] {
+	    background: none;
+	    border: none;
+	    border-bottom: 1px dashed #dadada;
+	    display: block;
+	    width: 100%;
+	    height: auto;
+	    padding: 0 0 12px 0;
+	    font-size: 14px;
+	    letter-spacing: 0.02em;
+	    &:focus{
+	    	border-bottom: 1px solid $gray-medium;
+	    	background: none;
+	    }
+	    &.big {
+	    	font-size: 40px;
+	    }
+	}
+}
+
+.box-creator {
+	.box {
+		&.no-margin {
+		    -webkit-box-shadow: none;
+   		 	box-shadow: none;
+		}
 	}
 }
 
