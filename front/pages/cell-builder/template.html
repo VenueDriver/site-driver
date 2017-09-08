@@ -9,7 +9,9 @@
 
 				</div>
 
-        <table-renderer [columns]="['_name']" [list]="cellList"></table-renderer>
+        <table-renderer [columns]="[
+					{ label : 'Name' , path : ['_name'] }
+				]" [list]="cellList"></table-renderer>
 
 			</div>
 		</section>

@@ -10,10 +10,12 @@
 					<molecule-save [type]="'generator'" [molecule]="newMolecule">
 						<a href="javascript:void(0)" class="btn btn-save">Create</a>
 					</molecule-save>
-          <button (click)="log(newMolecule)">LOG</button>
+
 
 				</div>
-        <table-renderer [list]="generatorList" [columns]="['_name']"></table-renderer>
+        <table-renderer [list]="generatorList" [columns]="[
+					{ label : 'Name' , path : ['_name'] }
+				]"></table-renderer>
 
 			</div>
 		</section>

@@ -8,6 +8,7 @@ export interface MoleculeGeneratorInterface extends NodeInterface{
     _show_in_sidebar : boolean,
     _use_only_childs : boolean,
     _layout : string,
+    _columns : string,
     _title : string,
     _image : ComponentOption
   }

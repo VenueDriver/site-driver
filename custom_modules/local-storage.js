@@ -160,11 +160,11 @@ class LocalStorage{
       let mergedLocation = path.join(this.opts.root,location);
       mkdirp(mergedLocation).then(()=>{
         fs.readdir(mergedLocation,encoding,(err,directory)=>{
+          directory = directory.filter(file => !(/^\./.test(file) && !/\.json$/gi.test(file)));
           if(err){
             reject(err)
           }else if(opts.readFiles){
             let files = [];
-            directory = directory.filter(file => !(/^\./.test(file) && !/\.json$/gi.test(file)));
             let i = 0;
             asyncLoop(
               ()=> i >= directory.length,
