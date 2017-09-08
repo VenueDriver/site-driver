@@ -259,6 +259,10 @@ button {
 		width: 100%;
 	}
 }
+.btn-pick-img{
+	padding: 50px 100px;
+	border-style: dashed;
+}
 
 // 992px
 @media all and (min-width: $screen-landscape) {
