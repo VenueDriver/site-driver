@@ -13,6 +13,35 @@ textarea {
     min-height: 200px;
 }
 
+input[type=text] {
+	background: none;
+	border: none;
+	border-bottom: 1px dashed #dadada;
+	display: block;
+	width: 100%;
+	height: auto;
+	padding: 0 0 12px 0;
+	font-size: 14px;
+	letter-spacing: 0.02em;
+	&:focus{
+	    border-bottom: 1px solid $gray-medium;
+	    background: none;
+	}
+	&.big {
+	    font-size: 40px;
+	}
+}
+
+.checkbox-label {
+	max-width: calc(100% - 28px);
+	line-height: 1.5!important;
+}
+
+.checkbox-box {
+    vertical-align: top;
+    margin-top: 4px;
+}
+
 .event-autocomplete-item{
 	line-height: 20px;
 	.item-date{
@@ -66,6 +95,7 @@ textarea {
 		}
 	}
 }
+
 .label-form {
     display: block;
     font-size: 14px;
@@ -272,39 +302,11 @@ input[type=radio]:not(old):checked +  label > span > span{
 	font-size: 13px;
 }
 
-.post-layout {
-	input {
-	    background: none;
-	    border: none;
-	    border-bottom: 1px dashed #dadada;
-	    display: block;
-	    width: 100%;
-	    height: auto;
-	    padding: 0 0 12px 0;
-	    font-size: 14px;
-	    letter-spacing: 0.02em;
-	    &:focus{
-	    	border-bottom: 1px solid $gray-medium;
-	    	background: none;
-	    }
-	    &.big {
-	    	font-size: 40px;
-	    }
-	}
-}
-.box-editor,
-.box-builder,
-.box-generator {
+.box {
 	div {
 		&:not(.checkbox) {
 			> label {
-				display: block;
-				text-transform: uppercase;
-				color: $secondary-text-color;
-				font-weight: 600;
-				margin-top: 30px;
-				margin-bottom: 20px;
-				letter-spacing: 0.05em;
+				@extend .label-form
 			}
 		}
 		&.checkbox {
@@ -317,40 +319,17 @@ input[type=radio]:not(old):checked +  label > span > span{
 			margin-left: -15px;
 		}
 	}
-	input[type=text] {
-	    background: none;
-	    border: none;
-	    border-bottom: 1px dashed #dadada;
-	    display: block;
-	    width: 100%;
-	    height: auto;
-	    padding: 0 0 12px 0;
-	    font-size: 14px;
-	    letter-spacing: 0.02em;
-	    &:focus{
-	    	border-bottom: 1px solid $gray-medium;
-	    	background: none;
-	    }
-	    &.big {
-	    	font-size: 40px;
-	    }
+	&.no-margin {
+		-webkit-box-shadow: none;
+   		box-shadow: none;
+   		padding: 0;
 	}
-}
-
-.box-creator {
-	.box {
-		&.no-margin {
-		    -webkit-box-shadow: none;
-   		 	box-shadow: none;
-		}
-	}
-}
-
-.box-builder,
-.box-generator {
-	.col-12 {
+	> .col-12 {
 	    padding-top: 25px;
     	padding-left: 0;
+	}
+	.btn {
+		margin-top: 20px;
 	}
 }
 
