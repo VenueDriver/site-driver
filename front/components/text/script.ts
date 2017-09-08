@@ -1,5 +1,7 @@
 import { Component , Input , OnInit } from '@angular/core';
 import { NgClass } from '@angular/common';
+import { DataService } from '../../services/data.service';
+
 
 @Component({
   selector: 'text',
@@ -13,9 +15,15 @@ export class TextNodeComponent implements OnInit {
   @Input() userRole : number = 0;
   errors : Array<any> = [];
   ckeditorContent :any;
+  isDeveloper : boolean = false;
+  editing : boolean = false;
+  ready : boolean = false;
 
 
-  constructor(){
+
+  constructor(
+    private dataService : DataService
+  ){
 
   }
 
@@ -29,6 +37,10 @@ export class TextNodeComponent implements OnInit {
   ngOnInit(){
     this.parseAdditionalClasses();
     this.validate(this.data._value);
+    this.dataService.userRole().then((data)=>{
+      this.isDeveloper = (<any>data).role > 9000;
+      this.ready = true;
+    })
   }
 
   ngOnChanges(){

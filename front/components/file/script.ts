@@ -1,5 +1,7 @@
 import { Component , Input , OnInit , Output, EventEmitter} from '@angular/core';
 import { NgClass } from '@angular/common';
+import { DataService } from '../../services/data.service';
+
 
 
 
@@ -18,15 +20,24 @@ export class FileNodeComponent implements OnInit{
 
   additional_classes : any = [];
   panel : boolean = false;
+  editing : boolean = false;
+  ready : boolean = false;
+  isDeveloper : boolean = false;
   errors : Array<any> = [];
 
-  constructor(){
+  constructor(
+    private dataService : DataService
+  ){
 
   }
 
   ngOnInit(){
     this.validate(this.data._value);
     this.parseAdditionalClasses();
+    this.dataService.userRole().then((data)=>{
+      this.isDeveloper = (<any>data).role > 9000;
+      this.ready = true;
+    })
   }
 
   ngOnChanges(){

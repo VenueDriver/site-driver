@@ -14,7 +14,8 @@ export class CellComponent implements OnInit {
   additional_classes : any = [];
   isDeveloper : boolean = false;
   newMolecule : any;
-  reduced = false;
+  reduced : boolean = false;
+  editing : boolean = false;
   ready : boolean = false;
 
   constructor(
@@ -43,6 +44,7 @@ export class CellComponent implements OnInit {
     this.parseAdditionalClasses();
     this.dataService.userRole().then((data)=>{
       this.isDeveloper = (<any>data).role > 9000;
+      this.ready = true;
     })
   }
 

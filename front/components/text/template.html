@@ -1,9 +1,16 @@
 <div [ngClass]="additional_classes">
 	<label for="" class="label-form">{{data._name | userlabel: userRole }}<span class="required-indicator" *ngIf="data._can._be_required">*</span>
-	<div class="edit-buttons">
-		<generator *ngIf="data._editable_field || userRole > 9000" [label]="'Edit ' + data._name" [path]="data._path" [edit]="data"><a class="fa fa-pencil"></a></generator>
-		<delete-btn *ngIf="data._delete_field || userRole > 9000" [path]="data._path"></delete-btn>
+	<div class="edit-buttons" *ngIf="data._can._edit || isDeveloper">
+		<ul>
+			<li (click)="editing = !editing">
+				edit
+			</li>
+			<li>
+				remove
+			</li>
+		</ul>
 	</div></label>
+	<molecule-edit *ngIf="editing" [molecule]="data"></molecule-edit>
 	<input *ngIf="data._options._use_textarea != true" type="text" [(ngModel)]="data._value" (keyup)="setValue($event)" class="input-form">
 
 	<ckeditor
