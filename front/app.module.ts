@@ -1,10 +1,10 @@
-import { NgModule , APP_INITIALIZER }       from '@angular/core';
-import { BrowserModule }                    from '@angular/platform-browser';
-import { HttpModule }                       from '@angular/http'
-import { RouterModule, Routes }             from '@angular/router';
-import { FormsModule }                      from '@angular/forms';
-import { CommonModule }                     from '@angular/common';
-import { DatePipe }                         from '@angular/common';
+import { NgModule , APP_INITIALIZER } from '@angular/core';
+import { BrowserModule }              from '@angular/platform-browser';
+import { HttpModule }                 from '@angular/http'
+import { RouterModule, Routes }       from '@angular/router';
+import { FormsModule }                from '@angular/forms';
+import { CommonModule }               from '@angular/common';
+import { DatePipe }                   from '@angular/common';
 
 // THIRD PARTY
 import { NguiAutoCompleteModule } from '@ngui/auto-complete';
@@ -14,7 +14,6 @@ import { ImageUploadModule }      from 'angular2-image-upload';
 import { Ng2UploaderModule }      from 'ng2-uploader';
 import { DragulaModule }          from 'ng2-dragula';
 import { CKEditorModule }         from 'ng2-ckeditor';
-
 
 // CUSTOM COMPONENTS
 import { RootComponent }          from './root.component';
@@ -33,8 +32,6 @@ import { ColorFieldComponent }    from './components/color/script';
 import { DateFieldComponent }     from './components/date/script';
 import { ChildComponent }         from './components/child/script';
 import { GeneratorComponent }     from './components/generator/script';
-
-
 
 import { ModalComponent }         from './components/modal/script';
 import { DeleteButtonComponent }  from './components/delete-btn/script';
@@ -62,15 +59,16 @@ import { S3FilePicker }           from './components/s3-file-picker/script';
 import { LinkFieldComponent }     from './components/link-field/script';
 
 // MOLECULE
-import { MoleculeCreate }          from './components/molecule-create/script';
-import { MoleculeSelect }           from './components/molecule-select/script';
-import { MoleculeSave }             from './components/molecule-save/script';
+import { MoleculeCreate }             from './components/molecule-create/script';
+import { MoleculeSelect }             from './components/molecule-select/script';
+import { MoleculeSave }               from './components/molecule-save/script';
 import { MoleculeRemove }             from './components/molecule-remove/script';
-import { MoleculeGeneratorComponent }  from './components/molecule-generator/script';
-import { MoleculeConfig }           from './components/molecule-config/script';
-import { MoleculeRenderer }         from './components/molecule-renderer/script';
-import { FusionComponent }          from './components/fusion/script';
-import { TableRenderer }          from './components/table-renderer/script';
+import { MoleculeGeneratorComponent } from './components/molecule-generator/script';
+import { MoleculeConfig }             from './components/molecule-config/script';
+import { MoleculeEdit }               from './components/molecule-edit/script';
+import { MoleculeRenderer }           from './components/molecule-renderer/script';
+import { FusionComponent }            from './components/fusion/script';
+import { TableRenderer }              from './components/table-renderer/script';
   // GENERATOR LAYOUTS
   import { GeneratorLayoutHorizontalCards } from "./components/molecule-generator/layouts/cards-horizontal/script";
   import { GeneratorLayoutVerticalCards } from "./components/molecule-generator/layouts/cards-vertical/script";
@@ -184,6 +182,7 @@ const appRoutes: Routes = require('./config/routes');
     CellBuilder,
     MoleculeRenderer,
     MoleculeSave,
+    MoleculeEdit,
     MoleculeRemove,
     MoleculeCreate,
     FusionComponent,

@@ -33,17 +33,17 @@
           <a href="/" class="select-menu"><i class="fa fa-globe"></i>Sites</a>
         </li> -->
         <ng-container *ngFor="let generator of generators">
-          <li *ngIf="generator._can._show">
+          <li *ngIf="generator._options._show_in_sidebar">
             <a [routerLink]="['/generator',generator._name]" class="select-menu"><i class="fa fa-database"></i>{{generator._name}}</a>
           </li>
         </ng-container>
         <li>
           <hr>
         </li>
-        <li *ngIf="userRole > 9000">
+        <li *ngIf="isDeveloper">
           <a href="/molecule-generator" class="select-menu"><i class="fa fa-sitemap"></i>M. Generator</a>
         </li>
-        <li *ngIf="userRole > 9000">
+        <li *ngIf="isDeveloper">
           <a href="/cell-builder" class="select-menu"><i class="fa fa-code-fork"></i>Cell Builder</a>
         </li>
         <!-- <li>

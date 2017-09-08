@@ -1,4 +1,6 @@
 import { Component , OnInit, Input } from '@angular/core';
+import { DataService } from '../../services/data.service';
+
 import layouts from "./layouts";
 
 @Component({
@@ -11,18 +13,22 @@ export class MoleculeGeneratorComponent implements OnInit {
   @Input() data : any;
   @Input() instances : Array<any>;
 
+  isDeveloper : boolean = false;
   ready : boolean = false;
   selectedLayout : string = "Default";
 
   constructor(
-
+    private dataService : DataService
   ){}
 
   ngOnInit() {
     if(layouts.name.indexOf(this.data._options._layout) > -1) this.selectedLayout = this.data._options._layout;
     // console.log(this.data._name,"Use Layout",this.data._options._layout);
     // console.log(layouts.name.indexOf(this.data._options._layout) > -1,"Available layouts",layouts);
-    this.ready = true;
+    this.dataService.userRole().then((data)=>{
+      this.ready = true;
+      this.isDeveloper = (<any>data).role > 9000;
+    })
   }
 
   getComponent(layoutName){

@@ -6,9 +6,11 @@
           <thead>
               <tr>
                 <th><input name="" type="checkbox" value=""></th>
-                <th *ngFor="let prop of columns">
-                  <span [innerHTML]="prop"></span>
-                </th>
+                <ng-container *ngIf="parsedColumns">
+                  <th *ngFor="let column of parsedColumns">
+                    <span [innerHTML]="column.label || ''"></span>
+                  </th>
+                </ng-container>
                 <th>
                   <span>Actions</span>
                 </th>
@@ -20,9 +22,10 @@
                     <td>
                       <input name="" type="checkbox" value="">
                     </td>
-                    <td *ngFor="let prop of columns">
-                      {{item[prop]}}
-                    </td>
+                    <ng-container *ngIf="parsedColumns">
+                      <td *ngFor="let column of parsedColumns" [innerHTML]="getColumnData(item,column)">
+                      </td>
+                    </ng-container>
                     <td>
                     <span class="edit" (click)="editOpen(i)">Quick edit</span>
                     <a *ngIf="item._type === 'instance'" class="edit" [routerLink]="['/instance',item._id]">Edit</a>
@@ -32,7 +35,7 @@
                     </td>
                 </tr>
                 <tr *ngIf="showEdition[i]">
-                   <td class="no-padding" [attr.colspan]="columns.length +2">
+                   <td class="no-padding" [attr.colspan]="parsedColumns.length +2">
                        <molecule-renderer [data]="item" [component]="item._ngComponent"></molecule-renderer>
                        <molecule-save [type]="item._type" [molecule]="item">
                          <a href="javascript:void(0)" class="btn btn-save">Save</a>
@@ -46,42 +49,3 @@
     </div>
   </div>
 </section>
-
-<!-- <section class="newtable">
-
-    <table class="table-style">
-        <thead>
-            <tr>
-              <th><input type="checkbox" name="" value=""></th>
-              <th *ngFor="let prop of columns">
-                <span [innerHTML]="prop"></span>
-              </th>
-              <th>
-                  Actions
-              </th>
-            </tr>
-        </thead>
-        <tbody>
-        <ng-container *ngFor="let item of list;let i = index">
-            <tr>
-                <td><input type="checkbox" name="" value=""></td>
-                <td *ngFor="let prop of columns">
-                  {{item[prop]}}
-                </td>
-                <td>
-                  <span class="btn" (click)="editOpen(i)">Edit</span>
-                  <molecule-remove [molecule]="item">
-                      <span class="btn">Delete</span>
-                  </molecule-remove>
-                </td>
-            </tr>
-            <tr *ngIf="showEdition[i]">
-               <td class="no-padding" [attr.colspan]="columns.length +2">
-                   <molecule-renderer [data]="item" [component]="item._ngComponent"></molecule-renderer>
-               </td>
-            </tr>
-        </ng-container>
-        </tbody>
-    </table>
-
-</section> -->

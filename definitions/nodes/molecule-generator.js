@@ -28,7 +28,9 @@ var MoleculeGenerator = (function (_super) {
                 _value: []
             },
             _use_only_childs: true,
+            _show_in_sidebar: false,
             _layout: '',
+            _columns: '',
             _title: '',
             _image: {
                 _options: {

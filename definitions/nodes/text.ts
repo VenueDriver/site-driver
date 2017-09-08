@@ -15,7 +15,8 @@ export class TextNode extends Molecule implements TextInterface{
   _value : string = '';
   _default_value : string;
   _options : any = {
-    _use_textarea : false
+    _use_textarea : false,
+    _additional_css_classes : ''
   };
 
 

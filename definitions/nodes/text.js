@@ -18,7 +18,8 @@ var TextNode = (function (_super) {
         // OVERRIDES SPECIFIC TO THIS CLASS
         this._value = '';
         this._options = {
-            _use_textarea: false
+            _use_textarea: false,
+            _additional_css_classes: ''
         };
         for (var key in obj) {
             this[key] = obj[key];

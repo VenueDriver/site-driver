@@ -2,6 +2,7 @@ import { Component , OnInit } from '@angular/core';
 import { ActivatedRoute , Router } from '@angular/router';
 import { CellInterface } from '../../../definitions/interfaces';
 import { MoleculeService } from '../../services/molecule.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'instance-page',
@@ -17,7 +18,11 @@ export class InstancePage implements OnInit {
     isGenerator : boolean = false;
     private sub: any;
 
-    constructor(private route: ActivatedRoute , private moleculeService : MoleculeService){}
+    constructor(
+      private route: ActivatedRoute ,
+      private moleculeService : MoleculeService,
+      private location : Location
+    ){}
 
     log(what){
       console.log(what);
@@ -26,8 +31,8 @@ export class InstancePage implements OnInit {
     ngOnInit() {
       this.sub = this.route.params.subscribe(params => {
          this.instanceID = params['id'];
-         console.log("PARAM ID:",params['id']);
-         console.log("Instance ID",this.instanceID);
+        //  console.log("PARAM ID:",params['id']);
+        //  console.log("Instance ID",this.instanceID);
          this.moleculeService.getMoleculeList({
            type : ["instance"],
            id : this.instanceID,
@@ -35,7 +40,7 @@ export class InstancePage implements OnInit {
              _id : this.instanceID
            }
           }).then((instance)=>{
-           console.log("Instance served",instance);
+          //  console.log("Instance served",instance);
            this.data = instance[0];
            this.isGenerator = (this.data._ngClass === "MoleculeGenerator");
 
@@ -50,7 +55,7 @@ export class InstancePage implements OnInit {
                  }
               }
             }).then((instances)=>{
-               console.log("Has instances:",instances);
+              //  console.log("Has instances:",instances);
                this.instances = instances;
                this.ready = true;
             });
@@ -65,6 +70,10 @@ export class InstancePage implements OnInit {
 
     ngOnDestroy() {
       this.sub.unsubscribe();
+    }
+
+    goBack(ev){
+      this.location.back();
     }
 
 }

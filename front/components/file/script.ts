@@ -1,4 +1,7 @@
 import { Component , Input , OnInit , Output, EventEmitter} from '@angular/core';
+import { NgClass } from '@angular/common';
+import { DataService } from '../../services/data.service';
+
 
 
 
@@ -15,15 +18,37 @@ export class FileNodeComponent implements OnInit{
   @Input() userRole : number = 0;
   @Output() valueChange = new EventEmitter();
 
+  additional_classes : any = [];
   panel : boolean = false;
+  editing : boolean = false;
+  ready : boolean = false;
+  isDeveloper : boolean = false;
   errors : Array<any> = [];
 
-  constructor(){
+  constructor(
+    private dataService : DataService
+  ){
 
   }
 
   ngOnInit(){
     this.validate(this.data._value);
+    this.parseAdditionalClasses();
+    this.dataService.userRole().then((data)=>{
+      this.isDeveloper = (<any>data).role > 9000;
+      this.ready = true;
+    })
+  }
+
+  ngOnChanges(){
+    this.parseAdditionalClasses();
+  }
+
+  parseAdditionalClasses(){
+    console.log("Parsing classes",this.data._options._additional_css_classes);
+    if(this.data._options){
+      if(this.data._options._additional_css_classes) this.additional_classes = this.data._options._additional_css_classes.split(',');
+    }
   }
 
   openPanel(){

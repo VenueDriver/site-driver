@@ -1,4 +1,7 @@
 import { Component , Input , OnInit } from '@angular/core';
+import { NgClass } from '@angular/common';
+import { DataService } from '../../services/data.service';
+
 
 @Component({
   selector: 'text',
@@ -8,17 +11,40 @@ import { Component , Input , OnInit } from '@angular/core';
 export class TextNodeComponent implements OnInit {
 
   @Input() data : any;
+  additional_classes : any = [];
   @Input() userRole : number = 0;
   errors : Array<any> = [];
   ckeditorContent :any;
+  isDeveloper : boolean = false;
+  editing : boolean = false;
+  ready : boolean = false;
 
 
-  constructor(){
+
+  constructor(
+    private dataService : DataService
+  ){
 
   }
 
+  parseAdditionalClasses(){
+    console.log("Parsing classes",this.data._options._additional_css_classes);
+    if(this.data._options){
+      if(this.data._options._additional_css_classes) this.additional_classes = this.data._options._additional_css_classes.split(',');
+    }
+  }
+
   ngOnInit(){
+    this.parseAdditionalClasses();
     this.validate(this.data._value);
+    this.dataService.userRole().then((data)=>{
+      this.isDeveloper = (<any>data).role > 9000;
+      this.ready = true;
+    })
+  }
+
+  ngOnChanges(){
+    this.parseAdditionalClasses();
   }
 
   setValue(event){

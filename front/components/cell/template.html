@@ -1,21 +1,23 @@
-<div class="box no-margin">
+<div *ngIf="ready" class="box no-margin" [ngClass]="additional_classes">
   <div id="accordion" class="accordion">
     <div class="acc-panel">
-      <!-- <h2 class="acc-title">
-        <a class="reduceButton" (click)="reduced = !reduced">
-          <span *ngIf="!reduced" class="fa fa-angle-down"></span>
-          <span *ngIf="reduced" class="fa fa-angle-up"></span>
-
-          <span [innerHTML]="data._name || data._type"></span>
-        </a><span class="required-indicator" *ngIf="data._can._be_required">*</span>
+      <h2 *ngIf="data._can._edit || isDeveloper" class="acc-title">
+        <span [innerHTML]="data._name || data._type"></span>
         <ul class="edit-buttons">
-
+          <li (click)="editing = !editing">
+            edit
+          </li>
+          <li>
+            remove
+          </li>
         </ul>
-      </h2> -->
+      </h2>
+      <molecule-edit *ngIf="editing" [molecule]="data"></molecule-edit>
+
       <div class="panel" *ngIf="!reduced">
         <molecule-renderer *ngFor="let cell of data._value" [data]="cell" [component]="cell._ngComponent" ></molecule-renderer>
 
-        <div class="add-molecule">
+        <div class="add-molecule" *ngIf="data._can._edit || isDeveloper ">
           <hr>
           <h3>Add Molecule</h3>
             <molecule-select [max]="1" (valueChange)="moleculeSelected($event)"></molecule-select>

@@ -6,9 +6,16 @@
       <div class="container post-layout">
       	<div *ngIf="!isGenerator" class="col-2 right" >
           <div fixedElement>
-            <a class="btn btn-save">Publish</a>
-        		<a class="btn btn-draft">Save as draft</a>
-        		<a class="btn btn-trash">Delete</a>
+
+            <molecule-save [type]="data._type" [molecule]="data">
+              <a class="btn btn-save">Publish</a>
+            </molecule-save>
+
+        		<!-- <a class="btn btn-draft">Save as draft</a> -->
+            <molecule-remove (afterRemove)="goBack($event)" [molecule]="data">
+              <a class="btn btn-trash">Delete</a>
+            </molecule-remove>
+
           </div>
       	</div>
       	<div [class.col-10]="!isGenerator" class="left">

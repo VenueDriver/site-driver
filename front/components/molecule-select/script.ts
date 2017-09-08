@@ -43,7 +43,7 @@ export class MoleculeSelect implements OnInit {
         this.useMoleculesParsed = this.useMolecules;
       }
     }
-    console.log("USE THIS MOLECULES",this.useMoleculesParsed);
+    // console.log("USE THIS MOLECULES",this.useMoleculesParsed);
     return this.moleculeService.getAllMolecules().then((list)=>{
       if(this.useMolecules){
         // console.log(list);
