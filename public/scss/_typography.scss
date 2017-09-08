@@ -32,18 +32,6 @@ h1, h2, h3, h4, h5, h6, p, span, a, ul, li, button, input, textarea {
     	font-size: 20px;
     }
 }
-.small {
-    display: block;
-    font-size: 14px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #757575;
-    font-weight: 600;
-    margin: 40px 0 20px 0;
-    &:first-of-type {
-    	margin-top: 0;
-    }
-}
 // 768px
 @media all and (min-width: $screen-portrait) {
 	.big-title {

@@ -23,14 +23,14 @@ a.cke_button_on,
 
 ckeditor > div[id^="cke_editor"]{
     -webkit-box-shadow: 0 1px 3px 0 #aaa !important;
-    box-shadow: 0 1px 3px 0 #aaa !important;
+    box-shadow: 0 2px 3px 0 #ccc !important;
 }
 
 .cke_top{
     border-bottom: 1px solid #ccc !important;
-    border-top: 6px solid #000 !important;
-    -webkit-border-radius: 2px 2px 0 0 !important;
-    border-radius: 2px 2px 0 0 !important;
+    border-top: 6px solid $accent-color !important;
+    -webkit-border-radius: 0 !important;
+    border-radius: 0 !important;
 }
 
 .cke_1 a.cke_button_off:hover{

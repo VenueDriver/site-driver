@@ -11,15 +11,19 @@
     </div>
   </div>
 
-  <div class="box" *ngIf="show_generator_edit_form">
-    <molecule-config [molecule]="data"></molecule-config>
+  <div class="box box-editor" *ngIf="show_generator_edit_form">
+    <div class="col-12">
+    <a (click)="show_generator_edit_form = !show_generator_edit_form" class="right"><i class="fa fa-times" style="color:#000;color: #666;cursor:pointer;font-size: 20px;"></i></a>
+      <molecule-config [molecule]="data"></molecule-config>
 
-    <molecule-save [type]="data._type" [molecule]="data">
-      <div class="btn btn-save">SAVE</div>
-    </molecule-save>
+      <molecule-save [type]="data._type" [molecule]="data">
+        <div class="btn btn-save">SAVE</div>
+      </molecule-save>
+    </div>
   </div>
 
-  <div class="box" *ngIf="show_new_molecule_form">
+  <div class="box box-creator" *ngIf="show_new_molecule_form">
+   <a (click)="show_new_molecule_form = !show_new_molecule_form" class="right"><i class="fa fa-times" style="color:#000;color: #666;cursor:pointer;font-size: 20px;"></i></a>
     <molecule-create [generator]="data" [type]="'instance'" [useMolecules]="data._options._molecule_types._value" ></molecule-create>
   </div>
 </section>

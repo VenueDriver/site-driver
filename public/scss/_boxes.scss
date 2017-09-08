@@ -220,7 +220,7 @@ div.fa.fa-times {
   position: absolute;
   right: 60px;
   background: none;
-  border-bottom: 1px solid #dedede;
+  border-bottom: 1px solid #dedede!important;
 }
 
 #submit {
@@ -242,12 +242,12 @@ div.fa.fa-times {
     cursor: pointer;
 }
 
-.image-wrapper {
+.image-field-container{
 	font-size: 0;
 	img {
 		max-width: 300px;
 	}
-	.edit-post {
+	.edit-field {
 		display: block;
 		width: 100%;
 		max-width: 300px;
@@ -263,6 +263,33 @@ div.fa.fa-times {
 		@include transition;
 		&:hover {
 			background: darken($accent-color,5%);
+		}
+	}
+}
+
+.post-layout {
+	.col-10 {
+		.no-margin {
+			background: none;
+		    box-shadow: none;
+		    padding: 0;
+		}
+	}
+	.panel{
+		padding-top: 0;
+		margin-top: 0;
+		border-top: none;
+		molecule-renderer {
+			&:first-of-type {
+				.label-form {
+					margin-top: 0;
+				}
+			}
+		}
+	}
+	.table-layout {
+		.btn-save {
+			width: 100%
 		}
 	}
 }
@@ -303,6 +330,24 @@ div.fa.fa-times {
 		&:hover{
 			background: none;
 		}
+	}
+}
+
+.add-molecule {
+	margin-top: 40px;
+	h3 {
+		color: $secondary-text-color;
+		padding-top: 15px;
+	}
+	.ngui-auto-complete-wrapper{
+		input {
+			border: none;
+    		background: #ececec;
+    		margin-top: 20px;
+		}
+	}
+	.btn-add {
+		margin-bottom: 10px;
 	}
 }
 
