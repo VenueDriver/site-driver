@@ -29,7 +29,7 @@
     </ul>
   </div>
 
-  <button (click)="openPanel()" *ngIf="(data._can._edit_value || isDeveloper) && (!data._value || data._value.length < 1) ">SELECT FILE</button>
+  <button class="btn-pick-img" (click)="openPanel()" *ngIf="(data._can._edit_value || isDeveloper) && (!data._value || data._value.length < 1) ">SELECT FILE</button>
 
   <s3-file-picker  *ngIf="(data._can._edit_value || isDeveloper) && panel" (close)="closePanel()" (fileSelected)="grabFiles($event)"></s3-file-picker>
 </div>
