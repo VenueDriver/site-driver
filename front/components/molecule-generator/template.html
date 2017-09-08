@@ -7,24 +7,22 @@
             <form class="search"><input id='submit' name='submit' type="submit" value="search" class="btn search-btn"><label for="submit" class="submit"></label><a href="javascript: void(0)" class="search-icon"></a><input type="text" class="search-field"></form>
             <a *ngIf="data._can._edit_value || isDeveloper" [class.active]="show_new_molecule_form" class="btn-add" (click)="show_new_molecule_form = !show_new_molecule_form" [innerHTML]="(data._options._molecule_types._value.length>1)? 'ADD NEW': 'ADD NEW '+data._options._molecule_types._value[0]._name"></a>
           </div>
+
+          <div class="box" *ngIf="show_generator_edit_form">
+            <a (click)="show_generator_edit_form = !show_generator_edit_form" class="right"><i class="fa fa-times" style="color:#000;color: #666;cursor:pointer;font-size: 20px;position:relative;z-index: 999; "></i></a>
+              <molecule-config [molecule]="data"></molecule-config>
+          
+              <molecule-save [type]="data._type" [molecule]="data">
+                <div class="btn btn-save">SAVE</div>
+              </molecule-save>
+          </div>
+
+          <div class="box" *ngIf="show_new_molecule_form">
+           <a (click)="show_new_molecule_form = !show_new_molecule_form" class="right"><i class="fa fa-times" style="color:#000;color: #666;cursor:pointer;font-size: 20px;position:relative;z-index: 999;"></i></a>
+            <molecule-create [generator]="data" [type]="'instance'" [useMolecules]="data._options._molecule_types._value" ></molecule-create>
+          </div>
       </div>
     </div>
-  </div>
-
-  <div class="box box-editor" *ngIf="show_generator_edit_form">
-    <div class="col-12">
-    <a (click)="show_generator_edit_form = !show_generator_edit_form" class="right"><i class="fa fa-times" style="color:#000;color: #666;cursor:pointer;font-size: 20px;"></i></a>
-      <molecule-config [molecule]="data"></molecule-config>
-
-      <molecule-save [type]="data._type" [molecule]="data">
-        <div class="btn btn-save">SAVE</div>
-      </molecule-save>
-    </div>
-  </div>
-
-  <div class="box box-creator" *ngIf="show_new_molecule_form">
-   <a (click)="show_new_molecule_form = !show_new_molecule_form" class="right"><i class="fa fa-times" style="color:#000;color: #666;cursor:pointer;font-size: 20px;"></i></a>
-    <molecule-create [generator]="data" [type]="'instance'" [useMolecules]="data._options._molecule_types._value" ></molecule-create>
   </div>
 </section>
 
