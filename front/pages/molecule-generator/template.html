@@ -8,12 +8,12 @@
 					
 						<molecule-select [useMolecules]="['MoleculeGenerator']" [max]="1" (valueChange)="moleculeSelected($event)"></molecule-select>
 						<molecule-config [molecule]="newMolecule"></molecule-config>
-						<div class="col-12">
-								<molecule-save [type]="'generator'" [molecule]="newMolecule">
+						
+							<molecule-save [type]="'generator'" [molecule]="newMolecule">
 								<a href="javascript:void(0)" class="btn btn-save">Create</a>
 							</molecule-save>
-										         <button (click)="log(newMolecule)">LOG</button>
-						</div>
+							<button (click)="log(newMolecule)">LOG</button>
+					
 					
 					</div>
 				</div>

@@ -27,9 +27,6 @@ input[type=text] {
 	    border-bottom: 1px solid $gray-medium;
 	    background: none;
 	}
-	&.big {
-	    font-size: 40px;
-	}
 }
 
 .checkbox-label {
@@ -319,7 +316,7 @@ input[type=radio]:not(old):checked +  label > span > span{
 			margin-left: -15px;
 		}
 	}
-	&.no-margin {
+	.no-margin {
 		-webkit-box-shadow: none;
    		box-shadow: none;
    		padding: 0;

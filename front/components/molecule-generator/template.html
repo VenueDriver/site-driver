@@ -9,7 +9,7 @@
           </div>
 
           <div class="box" *ngIf="show_generator_edit_form">
-            <a (click)="show_generator_edit_form = !show_generator_edit_form" class="right"><i class="fa fa-times" style="color:#000;color: #666;cursor:pointer;font-size: 20px;"></i></a>
+            <a (click)="show_generator_edit_form = !show_generator_edit_form" class="right"><i class="fa fa-times" style="color:#000;color: #666;cursor:pointer;font-size: 20px;position:relative;z-index: 999; "></i></a>
               <molecule-config [molecule]="data"></molecule-config>
           
               <molecule-save [type]="data._type" [molecule]="data">
@@ -18,7 +18,7 @@
           </div>
 
           <div class="box" *ngIf="show_new_molecule_form">
-           <a (click)="show_new_molecule_form = !show_new_molecule_form" class="right"><i class="fa fa-times" style="color:#000;color: #666;cursor:pointer;font-size: 20px;"></i></a>
+           <a (click)="show_new_molecule_form = !show_new_molecule_form" class="right"><i class="fa fa-times" style="color:#000;color: #666;cursor:pointer;font-size: 20px;position:relative;z-index: 999;"></i></a>
             <molecule-create [generator]="data" [type]="'instance'" [useMolecules]="data._options._molecule_types._value" ></molecule-create>
           </div>
       </div>

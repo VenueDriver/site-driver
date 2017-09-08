@@ -37,12 +37,13 @@ table.table-style {
         padding: 20px;
         vertical-align: top;
         line-height: 1.4em;
+        border-bottom: 1px solid #f5f5f5;
     }
     tr:nth-child(even) td {
-        background: #F1F1F1;
+        background: #ffffff;
     }
     tr:nth-child(odd) td {
-        background: #FEFEFE;
+        background: #ffffff;
     }
     tr:hover {
         background: #F9f9f9;
@@ -51,6 +52,9 @@ table.table-style {
     input[type="checkbox"] {
         opacity: 1;
         margin-top: 3px;
+    }
+    .box {
+        background: #f9f9f9;
     }
 }
 .table-layout {
