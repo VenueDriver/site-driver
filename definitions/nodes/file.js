@@ -20,7 +20,8 @@ var FileNode = (function (_super) {
         this._options = {
             _allow_videos: false,
             _allow_images: true,
-            _allow_documents: false
+            _allow_documents: false,
+            _additional_css_classes: ''
         };
         for (var key in obj) {
             this[key] = obj[key];

@@ -57,7 +57,7 @@ export class TableRenderer implements OnInit {
   }
 
   getColumnData(item, column){
-    console.log("Item:",item,"Column:",column);
+
     let path = column.path.map(el=>el);
     let value = Object.assign({},item);
     for(let i = 0; i < path.length; i++){
@@ -70,7 +70,7 @@ export class TableRenderer implements OnInit {
           });
           return match;
         })
-        console.log("Deep search result =",deppSearch);
+        
         if(deppSearch){
           value = deppSearch[prop.find];
         }else{

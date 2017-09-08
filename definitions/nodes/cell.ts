@@ -18,7 +18,8 @@ export class Cell extends Molecule implements CellInterface {
   _default_value : (CellInterface|NodeInterface)[] ;
 
   _options : any = {
-    _convert_array_to_keys : false
+    _convert_array_to_keys : false,
+    _additional_css_classes : ''
   };
 
   constructor(obj : CellInterface) {

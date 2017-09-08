@@ -1,4 +1,5 @@
 import { Component , Input , OnInit , Output, EventEmitter} from '@angular/core';
+import { NgClass } from '@angular/common';
 
 
 
@@ -15,6 +16,7 @@ export class FileNodeComponent implements OnInit{
   @Input() userRole : number = 0;
   @Output() valueChange = new EventEmitter();
 
+  additional_classes : any = [];
   panel : boolean = false;
   errors : Array<any> = [];
 
@@ -24,6 +26,18 @@ export class FileNodeComponent implements OnInit{
 
   ngOnInit(){
     this.validate(this.data._value);
+    this.parseAdditionalClasses();
+  }
+
+  ngOnChanges(){
+    this.parseAdditionalClasses();
+  }
+
+  parseAdditionalClasses(){
+    console.log("Parsing classes",this.data._options._additional_css_classes);
+    if(this.data._options){
+      if(this.data._options._additional_css_classes) this.additional_classes = this.data._options._additional_css_classes.split(',');
+    }
   }
 
   openPanel(){

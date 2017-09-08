@@ -44,13 +44,13 @@ export class MoleculeConfig implements OnInit {
   }
 
   validate(){
-    console.log("TYPEOF MOLECULE",typeof this.molecule,"Molecule:",this.molecule);
+    // console.log("TYPEOF MOLECULE",typeof this.molecule,"Molecule:",this.molecule);
     if(typeof this.molecule == 'object'){
-      console.log("molecule is object");
+      // console.log("molecule is object");
       this.validMolecule = this.molecule.hasOwnProperty('_can');
       this.hasOptions = this.molecule.hasOwnProperty("_options");
       this.hasName = this.molecule.hasOwnProperty("_name");
-      console.log("valid",this.validMolecule,"options",this.hasOptions,"name",this.hasName)
+      // console.log("valid",this.validMolecule,"options",this.hasOptions,"name",this.hasName)
     }
   }
 

@@ -17,7 +17,8 @@ export class FileNode extends Molecule implements FileInterface{
   _options : any = {
     _allow_videos : false,
     _allow_images : true,
-    _allow_documents : false
+    _allow_documents : false,
+    _additional_css_classes : ''
   };
 
 

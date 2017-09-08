@@ -6,6 +6,7 @@ export interface FileInterface extends NodeInterface{
   _options : {
     _allow_videos : boolean,
     _allow_images : boolean,
-    _allow_documents : boolean
+    _allow_documents : boolean,
+    _additional_css_classes : string
   }
 }

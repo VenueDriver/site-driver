@@ -1,4 +1,5 @@
 import { Component , Input , OnInit } from '@angular/core';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'text',
@@ -8,6 +9,7 @@ import { Component , Input , OnInit } from '@angular/core';
 export class TextNodeComponent implements OnInit {
 
   @Input() data : any;
+  additional_classes : any = [];
   @Input() userRole : number = 0;
   errors : Array<any> = [];
   ckeditorContent :any;
@@ -17,8 +19,20 @@ export class TextNodeComponent implements OnInit {
 
   }
 
+  parseAdditionalClasses(){
+    console.log("Parsing classes",this.data._options._additional_css_classes);
+    if(this.data._options){
+      if(this.data._options._additional_css_classes) this.additional_classes = this.data._options._additional_css_classes.split(',');
+    }
+  }
+
   ngOnInit(){
+    this.parseAdditionalClasses();
     this.validate(this.data._value);
+  }
+
+  ngOnChanges(){
+    this.parseAdditionalClasses();
   }
 
   setValue(event){

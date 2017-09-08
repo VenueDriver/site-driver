@@ -91,6 +91,21 @@ button {
 	padding: 10px;
 	@include center;
 	text-align: center;
+	&.active{
+		font-size: 18px;
+		background: darken($accent-color,5%);
+		padding:20px;
+		border-color: darken($accent-color,5%);
+		margin-right: 0;
+		&:before {
+			-moz-transform: rotate(45deg);
+			-webkit-transform: rotate(45deg);
+			-o-transform: rotate(45deg);
+			-ms-transform: rotate(45deg);
+			transform: rotate(45deg);
+		}
+		color: white !important;
+	}
 	&:before {
 		content: "\f067";
 		@include fontawesome;
@@ -110,7 +125,6 @@ button {
 			-o-transform: rotate(90deg);
 			-ms-transform: rotate(90deg);
 			transform: rotate(90deg);
-
 		}
 	}
 }
@@ -119,7 +133,7 @@ button {
 	.btn-add{
 	    margin-top: 0;
 	    width: auto;
-	}	
+	}
 }
 
 .delete-slide {
