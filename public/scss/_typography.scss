@@ -32,12 +32,7 @@ h1, h2, h3, h4, h5, h6, p, span, a, ul, li, button, input, textarea {
     	font-size: 20px;
     }
 }
-.big {
-	font-size: 40px;
-	> * {
-		font-size: 40px!important;
-	}
-}
+
 // 768px
 @media all and (min-width: $screen-portrait) {
 	.big-title {
