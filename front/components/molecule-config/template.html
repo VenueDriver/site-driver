@@ -1,14 +1,15 @@
-<div *ngIf="validMolecule">  
-  <div *ngIf="hasName">    
+<div *ngIf="validMolecule">
+  <div *ngIf="hasName">
     <label class="label-form">Name:</label>
     <input type="text" [(ngModel)]="molecule._name">
   </div>
   <label class="label-form">Can:</label>
   <div class="col-3" *ngFor="let key of molecule._can | keys ">
+
     <div (click)="canChange(key)" class="checkbox" [class.checked]="molecule._can[key]">
-        <ng-checkbox [checked]="molecule._can[key]"></ng-checkbox>
-        <label class="checkbox-label" [innerHTML]="key.replace('_',' ')">
-        </label>
+      <ng-checkbox [checked]="molecule._can[key]"></ng-checkbox>
+      <label class="checkbox-label" [innerHTML]="key.replace('_',' ')">
+      </label>
     </div>
   </div>
 

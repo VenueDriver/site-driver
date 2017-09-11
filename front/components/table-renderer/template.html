@@ -5,7 +5,9 @@
         <table class="table-style">
           <thead>
               <tr>
-                <th><input name="" type="checkbox" value=""></th>
+                <th>
+                  <!-- <input name="" type="checkbox" value=""> -->
+                </th>
                 <ng-container *ngIf="parsedColumns">
                   <th *ngFor="let column of parsedColumns">
                     <span [innerHTML]="column.label || ''"></span>
@@ -20,7 +22,7 @@
               <ng-container *ngFor="let item of list;let i = index">
                 <tr>
                     <td>
-                      <input name="" type="checkbox" value="">
+                      <!-- <input name="" type="checkbox" value=""> -->
                     </td>
                     <ng-container *ngIf="parsedColumns">
                       <td *ngFor="let column of parsedColumns" [innerHTML]="getColumnData(item,column)">

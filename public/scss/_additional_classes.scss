@@ -3,3 +3,19 @@
 		font-size: 40px!important;
 	}
 }
+
+.col-sm-12{
+	width: 100%;
+}
+
+@media (min-width:768px){
+	.col-lg-4{
+		width: 33.333333333333333333%;
+	}
+}
+
+@media (min-width:992px){
+	.col-md-6{
+		width: 50%;
+	}
+}

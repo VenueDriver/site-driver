@@ -1,6 +1,7 @@
 <page>
   <page-header></page-header>
-  <main >
+  <spinner *ngIf="!ready"></spinner>
+  <main *ngIf="ready">
 		<section>
 			<div class="container" >
 				<div class="container">

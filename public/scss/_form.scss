@@ -13,7 +13,8 @@ textarea {
     min-height: 200px;
 }
 
-input[type=text] {
+input[type=text],input[type=number],input[type=date],input[type=password] {
+	@include transition;
 	background: none;
 	border: none;
 	border-bottom: 1px dashed #dadada;
@@ -23,6 +24,11 @@ input[type=text] {
 	padding: 0 0 12px 0;
 	font-size: 14px;
 	letter-spacing: 0.02em;
+	&:hover,&:focus,&:active{
+		&:not([disabled]){
+			padding-left:25px;
+		}
+	}
 	&:focus{
 	    border-bottom: 1px solid $gray-medium;
 	    background: none;

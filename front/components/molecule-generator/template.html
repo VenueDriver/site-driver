@@ -11,7 +11,7 @@
           <div class="box" *ngIf="show_generator_edit_form">
             <a (click)="show_generator_edit_form = !show_generator_edit_form" class="right"><i class="fa fa-times" style="color:#000;color: #666;cursor:pointer;font-size: 20px;position:relative;z-index: 999; "></i></a>
               <molecule-config [molecule]="data"></molecule-config>
-          
+
               <molecule-save [type]="data._type" [molecule]="data">
                 <div class="btn btn-save">SAVE</div>
               </molecule-save>
@@ -26,9 +26,11 @@
 </section>
 
 <molecule-renderer
-  *ngIf="ready"
+  *ngIf="ready && instances.length > 0"
   [component]="getComponent(selectedLayout)"
   [options]="{instances : instances}"
   [data]="data"
   >
 </molecule-renderer>
+
+<h1 [innerHTML]="(data._options._molecule_types._value.length>1)? 'No elements to list.': 'No '+data._options._molecule_types._value[0]._name+'s to list.'" *ngIf="ready && instances.length < 1"></h1>
