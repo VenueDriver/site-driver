@@ -10,7 +10,8 @@
       </li>
     </ul>
   </div></label>
-
+  <molecule-edit *ngIf="editing" [molecule]="data"></molecule-edit>
+  
   <input [disabled]="data._can._edit_value != true || !isDeveloper" type="number" [(ngModel)]="data._value" (keyup)="setValue($event)" class="input-form">
 
   <!-- error message -->
