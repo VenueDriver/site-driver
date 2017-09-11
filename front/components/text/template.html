@@ -11,10 +11,10 @@
 		</ul>
 	</div></label>
 	<molecule-edit *ngIf="editing" [molecule]="data"></molecule-edit>
-	<input [disabled]="data._can._edit_value != true || !isDeveloper" *ngIf="data._options._use_textarea != true" type="text" [(ngModel)]="data._value" (keyup)="setValue($event)" class="input-form">
+	<input [disabled]="data._can._edit_value != true && !isDeveloper" *ngIf="data._options._use_textarea != true" type="text" [(ngModel)]="data._value" (keyup)="setValue($event)" class="input-form">
 
 	<ckeditor
-		[disabled]="data._can._edit_value != true || !isDeveloper"
+		[disabled]="data._can._edit_value != true && !isDeveloper"
 		*ngIf="data._options._use_textarea"
 	  [(ngModel)]="data._value"
 	  [config]="{
