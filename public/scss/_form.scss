@@ -315,6 +315,13 @@ input[type=radio]:not(old):checked +  label > span > span{
 		&.contCheckbox {
 			margin-left: -15px;
 		}
+		> div {
+			&:not(.col-3) {
+				> .checkbox {
+					margin-bottom: 20px;
+				}
+			}
+		}
 	}
 	.no-margin {
 		-webkit-box-shadow: none;

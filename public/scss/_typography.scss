@@ -14,6 +14,8 @@ h1, h2, h3, h4, h5, h6, p, span, a, ul, li, button, input, textarea {
 	h2.acc-title {
 		font-size: 18px;
 		font-weight: 700;
+		margin-bottom: 30px;
+    	letter-spacing: 0.02em;
 	}
 }
 .title-slide {
@@ -26,7 +28,7 @@ h1, h2, h3, h4, h5, h6, p, span, a, ul, li, button, input, textarea {
 .title {
     display: inline-block;
     font-size: 40px;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     margin-right: 15px;
     + a > .fa-pencil {
     	font-size: 20px;

@@ -56,6 +56,12 @@ table.table-style {
     .box {
         background: #f9f9f9;
     }
+    span {
+        .btn-save,
+        .btn-cancel{
+            width: 50%;
+        }
+    }
 }
 .table-layout {
     table.table-style {
