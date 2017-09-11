@@ -1,22 +1,45 @@
 import { Component , Input , OnInit} from '@angular/core';
+import { NgClass } from '@angular/common';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'number',
   template: require('./template.html')
 })
 
-export class NumberFieldComponent implements OnInit {
+export class NumberNodeComponent implements OnInit {
 
   @Input() data : any;
-  @Input() userRole : number = 0;
+  @Input() userRole : number;
+  additional_classes : any = [];
+  isDeveloper : boolean = false;
   errors : Array<any> = [];
+  editing : boolean = false;
+  ready : boolean = false;
 
-  constructor(){
+  constructor(
+    private dataService : DataService
+  ){
 
   }
 
+  parseAdditionalClasses(){
+    if(this.data._options){
+      if(this.data._options._additional_css_classes) this.additional_classes = this.data._options._additional_css_classes.split(',');
+    }
+  }
+
   ngOnInit(){
+    this.parseAdditionalClasses();
     this.validate(this.data._value);
+    this.dataService.userRole().then((data)=>{
+      this.isDeveloper = (<any>data).role > 9000;
+      this.ready = true;
+    })
+  }
+
+  ngOnChanges(){
+    this.parseAdditionalClasses();
   }
 
   setValue(event){

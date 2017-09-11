@@ -28,7 +28,6 @@ export class TextNodeComponent implements OnInit {
   }
 
   parseAdditionalClasses(){
-    console.log("Parsing classes",this.data._options._additional_css_classes);
     if(this.data._options){
       if(this.data._options._additional_css_classes) this.additional_classes = this.data._options._additional_css_classes.split(',');
     }

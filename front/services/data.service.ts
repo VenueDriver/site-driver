@@ -3,24 +3,24 @@ import { Http, Response , RequestOptions , Headers } from '@angular/http';
 import { DragulaService } from 'ng2-dragula';
 import 'rxjs/Rx'
 import { Observable } from 'rxjs/Observable';
-import {
-  Group,
-  Text,
-  Column,
-  Link,
-  Row,
-  cmsNumber,
-  cmsDate,
-  Color,
-  Artist,
-  Venue,
-  List,
-  ImageField,
-  FileField,
-  Slide,
-  Slider,
-  Event
-} from '../../models/models';
+// import {
+//   Group,
+//   Text,
+//   Column,
+//   Link,
+//   Row,
+//   cmsNumber,
+//   cmsDate,
+//   Color,
+//   Artist,
+//   Venue,
+//   List,
+//   ImageField,
+//   FileField,
+//   Slide,
+//   Slider,
+//   Event
+// } from '../../models/models';
 
 const asyncLoop = (condition,work,end)=>{
   if ( condition() ){ end() }else{ work(()=>asyncLoop(condition,work,end),end)}
@@ -28,22 +28,22 @@ const asyncLoop = (condition,work,end)=>{
 
 
 const types = {
-  "Artist"  : Artist,
-  "Color"   : Color,
-  //"Column"  : Column,
-  "Date"    : cmsDate,
-  "Event"   : Event,
-  "File"    : FileField,
-  "Group"   : Group,
-  "Image"   : ImageField,
-  "Link"    : Link,
-  "List"    : List,
-  "Number"  : cmsNumber,
-  //"row"   : Row,
-  "Slide"   : Slide,
-  "Slider"  : Slider,
-  "Text"    : Text,
-  "Venue"   : Venue
+  // "Artist"  : Artist,
+  // "Color"   : Color,
+  // //"Column"  : Column,
+  // "Date"    : cmsDate,
+  // "Event"   : Event,
+  // "File"    : FileField,
+  // "Group"   : Group,
+  // "Image"   : ImageField,
+  // "Link"    : Link,
+  // "List"    : List,
+  // "Number"  : cmsNumber,
+  // //"row"   : Row,
+  // "Slide"   : Slide,
+  // "Slider"  : Slider,
+  // "Text"    : Text,
+  // "Venue"   : Venue
 };
 
 @Injectable()
