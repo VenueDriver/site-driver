@@ -4,5 +4,6 @@ export { NodeInterface }        from './interfaces/Inode';
 export { CellInterface }        from './interfaces/Icell';
 export { TextInterface }        from './interfaces/Itext';
 export { NumberInterface }      from './interfaces/INumber';
+export { BooleanInterface }     from './interfaces/IBoolean';
 export { FileInterface }        from './interfaces/Ifile';
 export { ComponentOption }      from './interfaces/Icomponent-option';
