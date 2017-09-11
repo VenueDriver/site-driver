@@ -28,6 +28,7 @@
 <nav class="cbp-spmenu" [class.show-nav]="open" id="cbp-spmenu-s1">
  <a href="/"> <img src="/images/composer-white.png" class="brand-composer"  alt="logo"></a>
     <nav class="sub-nav">
+      <spinner *ngIf="!ready"></spinner>
       <ul>
         <!-- <li>
           <a href="/" class="select-menu"><i class="fa fa-globe"></i>Sites</a>

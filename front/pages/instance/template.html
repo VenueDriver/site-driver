@@ -1,8 +1,8 @@
 <page>
   <page-header></page-header>
-  <main *ngIf="ready">
-
-    <section>
+  <main >
+    <spinner *ngIf="!ready"></spinner>
+    <section *ngIf="ready">
       <div class="container post-layout">
       	<div *ngIf="!isGenerator" class="col-2 right" >
           <div fixedElement>

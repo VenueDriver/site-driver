@@ -1,7 +1,9 @@
+
 <page>
   <page-header></page-header>
-  <main *ngIf="ready">
-    <molecule-renderer [data]="generator" [options]="{instances : instances}" [component]="generator._ngComponent"></molecule-renderer>
+  <main >
+    <spinner *ngIf="!ready"></spinner>
+    <molecule-renderer *ngIf="ready" [data]="generator" [options]="{instances : instances}" [component]="generator._ngComponent"></molecule-renderer>
 	</main>
   <page-footer></page-footer>
 </page>
