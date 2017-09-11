@@ -1,9 +1,9 @@
 <div *ngIf="validMolecule">  
   <div *ngIf="hasName">    
-    <label>Name:</label>
+    <label class="label-form">Name:</label>
     <input type="text" [(ngModel)]="molecule._name">
   </div>
-  <label>Can:</label>
+  <label class="label-form">Can:</label>
   <div class="col-3" *ngFor="let key of molecule._can | keys ">
     <div (click)="canChange(key)" class="checkbox" [class.checked]="molecule._can[key]">
         <ng-checkbox [checked]="molecule._can[key]"></ng-checkbox>
@@ -13,7 +13,7 @@
   </div>
 
   <div *ngIf="hasOptions">
-    <label>Options:</label>
+    <label class="label-form">Options:</label>
     <div *ngFor="let key of molecule._options | keys ">
 
       <div *ngIf="isBoolean(molecule._options[key])" (click)="optionsChange(key)" class="checkbox" [class.checked]="molecule._options[key]">

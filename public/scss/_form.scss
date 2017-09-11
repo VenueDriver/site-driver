@@ -34,11 +34,6 @@ input[type=text] {
 	line-height: 1.5!important;
 }
 
-.checkbox-box {
-    vertical-align: top;
-    margin-top: 4px;
-}
-
 .event-autocomplete-item{
 	line-height: 20px;
 	.item-date{
@@ -103,33 +98,6 @@ input[type=text] {
     margin: 40px 0 20px 0;
 }
 
-.panel {
-	.panel {
-		ul {
-			>li {
-				&:first-child {
-					image-field {
-						.label-form {
-							margin-top: 0;
-						}
-					}
-				}
-			}
-		}
-	}
-	ul {
-		>li {
-			&:first-child {
-				text {
-					.label-form {
-						margin-top: 0;
-					}
-				}
-			}
-		}
-	}
-}
-
 .date-field{
 	position: relative;
 	.fake-input{
@@ -152,7 +120,7 @@ input[type=text] {
 	width: 100%;
 	border: 0;
 	height: 40px;
-	background: $gray-light;
+	background: $gray;
 	padding: 10px;
 	font-size: 16px;
 	color: black;
@@ -160,7 +128,7 @@ input[type=text] {
 	@include border-box;
 	font-family: $primary-font;
 	&:focus{
-		background : darken($gray-light, 10%);
+		background : darken($gray, 10%);
 	}
 }
 .textarea-form {
@@ -170,7 +138,7 @@ input[type=text] {
 	}
 }
 .active.fake-input{
-	background : darken($gray-light, 10%);
+	background : darken($gray, 10%);
 }
 
 .box-select {
@@ -227,11 +195,11 @@ input[type=text] {
 
 input[type=checkbox]:not(old),
 input[type=radio   ]:not(old){
-  width     : 2em;
   margin    : 0;
   padding   : 0;
   font-size : 1em;
-  opacity   : 0;
+  margin-top: 4px;
+  vertical-align: top;
 }
 
 input[type=checkbox]:not(old) + label,
@@ -302,8 +270,8 @@ input[type=radio]:not(old):checked +  label > span > span{
 .box {
 	div {
 		&:not(.checkbox) {
-			> label {
-				@extend .label-form
+			> .checkbox-label {
+				@extend .label-form;
 			}
 		}
 		&.checkbox {
