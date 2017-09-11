@@ -29,7 +29,7 @@
                       </td>
                     </ng-container>
                     <td>
-                    <span class="edit" (click)="editOpen(i)">Quick edit</span>
+                    <span class="edit toggleButton" [class.active]="showEdition[i]" (click)="editOpen(i)">Quick edit</span>
                     <a *ngIf="item._type === 'instance'" class="edit" [routerLink]="['/instance',item._id]">Edit</a>
                     <molecule-remove [molecule]="item">
                       <span class="delete-post">Delete</span>

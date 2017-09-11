@@ -13,6 +13,10 @@ textarea {
     min-height: 200px;
 }
 
+ng-checkbox + label {
+	padding-left: 10px;
+}
+
 input[type=text],input[type=number],input[type=date],input[type=password] {
 	@include transition;
 	background: none;

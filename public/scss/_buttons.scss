@@ -272,6 +272,14 @@ button {
 	border-style: dashed;
 }
 
+.toggleButton{
+	padding: 10px !important;
+	&.active{
+		background: $accent-color;
+		color : white !important;
+	}
+}
+
 // 992px
 @media all and (min-width: $screen-landscape) {
 }
