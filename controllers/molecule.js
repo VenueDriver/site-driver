@@ -13,6 +13,12 @@ const validate = (data)=>{
 
 // EASY ALIAS TO TRIGGER VALIDATION, SANITAZION AND STORAGE OF DATA
 const save = (query)=>{
+
+    /*
+      EVERY TIME A CELL IS UPDATED
+      ALL INSTANCES SHARING THE SAME CELL MODEL SHOULD BE UPDATED ASWELL
+    */
+
   return new Promise((resolve,reject)=>{
     if(query.type === "instance" && !query.id){
       query.id = uniqid();
