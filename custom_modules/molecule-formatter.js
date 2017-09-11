@@ -21,9 +21,9 @@ class MoleculeFormatter{
         })
         if(data.hasOwnProperty("_options")){
           if(data._options._convert_array_to_keys === true){
-            console.log("Data:",data);
+            // console.log("Data:",data);
             data._value = this.arrayToKeys(data._value);
-            console.log("Array to keys result data",data);
+            // console.log("Array to keys result data",data);
           }
         }
       }
