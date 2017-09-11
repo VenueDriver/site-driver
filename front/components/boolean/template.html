@@ -13,7 +13,7 @@
   </label>
   <molecule-edit *ngIf="editing" [molecule]="data"></molecule-edit>
 
-  <ng-checkbox [class.disabled]="data._can._edit_value != true || !isDeveloper" [checked]="data._value" (click)="toggle()"></ng-checkbox>
+  <ng-checkbox [class.disabled]="data._can._edit_value != true && !isDeveloper" [checked]="data._value" (click)="toggle()"></ng-checkbox>
   <label for="" >{{data._name}}</label>
 
   <!-- error message -->
