@@ -4,18 +4,22 @@
   <main *ngIf="ready">
 		<section>
 			<div class="container" >
-				<div class="col-12">
-					<div class="box">
+				<div class="container">
+					<div class="row">
+						<div class="col-12">
+							<div class="box">
 
-						<molecule-select [useMolecules]="['MoleculeGenerator']" [max]="1" (valueChange)="moleculeSelected($event)"></molecule-select>
-						<molecule-config [molecule]="newMolecule"></molecule-config>
+								<molecule-select [useMolecules]="['MoleculeGenerator']" [max]="1" (valueChange)="moleculeSelected($event)"></molecule-select>
+								<molecule-config [molecule]="newMolecule"></molecule-config>
 
-							<molecule-save [type]="'generator'" [molecule]="newMolecule">
-								<a href="javascript:void(0)" class="btn btn-save">Create</a>
-							</molecule-save>
-							<!-- <button (click)="log(newMolecule)">LOG</button> -->
+									<molecule-save [type]="'generator'" [molecule]="newMolecule">
+										<a href="javascript:void(0)" class="btn btn-save">Create</a>
+									</molecule-save>
+									<!-- <button (click)="log(newMolecule)">LOG</button> -->
 
 
+							</div>
+						</div>
 					</div>
 				</div>
         <table-renderer [list]="generatorList" [columns]="[

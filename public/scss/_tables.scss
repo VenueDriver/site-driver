@@ -24,15 +24,6 @@ table.table-style {
     thead th:nth-child(2) {
         width: 35%;
     }
-    thead th:nth-child(3) {
-        width: 30%;
-    }
-    thead th:nth-child(4) {
-        width: 15%;
-    }
-    thead th:nth-child(5) {
-        width: 15%;
-    }
     th, td {
         padding: 20px;
         vertical-align: top;
@@ -56,17 +47,10 @@ table.table-style {
     .box {
         background: #f9f9f9;
     }
-}
-.table-layout {
-    table.table-style {
-        thead th:nth-child(3) {
-            width: auto;
-        }
-        thead th:nth-child(4) {
-            width: auto;
-        }
-        thead th:nth-child(5) {
-            width: auto;
+    span {
+        .btn-save,
+        .btn-cancel{
+            width: 50%;
         }
     }
     .active {
@@ -92,6 +76,7 @@ table.table-style {
         padding-right: 0;
     }
 }
+
 .link-table {
     color: black;
     font-weight: bold;

@@ -45,7 +45,7 @@
 		top: -2px;
 	}
 	h2 {
-		background: $gray;
+		background: $gray-dark;
 		padding: 20px;
 		color: white;
 		font-weight: 700;
@@ -78,8 +78,19 @@
 		padding: 10px;
 		border: 0;
 	}
+	input {
+		&:-webkit-autofill {
+			-webkit-box-shadow: 0 0 0 30px darken($gray-light, 5%) inset;
+			&:hover,
+			&:focus,
+			&:active {
+				-webkit-box-shadow: 0 0 0 30px darken($gray-light, 10%) inset;
+				background: darken($gray-light, 15%);
+			}
+		}
+	}
 	button {
-		background: $brand-secondary;
+		background: $accent-color;
 		color: white;
 		border: 0;
 		text-transform: uppercase;
@@ -93,27 +104,13 @@
 			position: relative;
 			z-index: 999;
 		}
-		&:after {
-			content: "";
-			position: absolute;
-			background: darken($brand-secondary, 15%);
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			width: 0;
-			@include transition;
-		}
 		&:before {
 			content: "LOGIN";
 			z-index: 9;
 			position: relative;
 		}
 		&:hover {
-			background: darken($brand-secondary, 15%);
-			&:after {
-				width: 100%;
-			}
+			background: darken($accent-color, 5%);
 		}
 	}
 }

@@ -11,24 +11,20 @@
 	padding: 23px;
 	@include box-shadow;
 	margin-bottom: 40px;
-	.acc-panel {
-		position: relative;
-	}
 	.panel {
 		border-top: 1px solid #f1f1f1;
 		padding-top: 20px;
 		margin-top: 20px;
-		molecule-renderer:first-of-type {
-			.label-form {
-				margin-top: 0;
-			}
-		}
 	}
-	div:first-of-type {
-		> div:first-of-type {
-			> label {
-				margin-top: 0;
-			}
+	.acc-panel {
+		position: relative;
+		.btn-save {
+			margin-bottom: 40px;
+		}
+		.panel{
+			padding-top: 0;
+			margin-top: 0;
+			border-top: none;
 		}
 	}
 
@@ -279,18 +275,12 @@ div.fa.fa-times {
 	}
 }
 
-.post-layout {
-	.col-10 {
-		.no-margin {
-			background: none;
-		    box-shadow: none;
-		    padding: 0;
-		}
-	}
-	.panel{
-		padding-top: 0;
-		margin-top: 0;
-		border-top: none;
+
+.col-10 {
+	.no-margin {
+		background: none;
+		box-shadow: none;
+		padding: 0;
 	}
 }
 
