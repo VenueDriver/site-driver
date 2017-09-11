@@ -1,4 +1,6 @@
 const LocalStorage = require('../custom_modules/local-storage');
+const S3Storage    = require('../custom_modules/s3-storage');
+
 const uniqid = require('uniqid');
 const path = require('path');
 const rootStorageFolder = "_storage";
@@ -7,19 +9,32 @@ class StorageRoutes{
 
   constructor(query){
     this.query = query;
-    this.localStorage = new LocalStorage({ root: rootStorageFolder , query : this.query });
+
+    let storageOptions ={ root: rootStorageFolder , query : this.query };
+
+    this.localStorage = new LocalStorage(storageOptions);
+    this.remoteStorage =new S3Storage(storageOptions);
+    // console.log("REMOTE",this.remoteStorage);
   }
 
   save(){
-    return this.localStorage.post();
+    return new Promise((resolve,reject)=>{
+      this.remoteStorage.post().then(()=>{
+        this.localStorage.post().catch(reject).then(resolve);
+      }).catch(reject);
+    });
   }
 
   remove(){
-    return this.localStorage.remove();
+    return new Promise((resolve,reject)=>{
+      this.remoteStorage.remove().then(()=>{
+        this.localStorage.remove().catch(reject).then(resolve);
+      }).catch(reject);
+    });
   }
 
   get(){
-    return this.localStorage.get();
+    return this.remoteStorage.get();
   }
 
 }

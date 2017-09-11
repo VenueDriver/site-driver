@@ -9,7 +9,7 @@ var field_1 = require('./field');
 var cmsNumber = (function (_super) {
     __extends(cmsNumber, _super);
     function cmsNumber(opts, value) {
-        _super.call(this, opts._name, script_1.NumberFieldComponent, opts);
+        _super.call(this, opts._name, script_1.NumberNodeComponent, opts);
         this._value = 0;
     }
     return cmsNumber;

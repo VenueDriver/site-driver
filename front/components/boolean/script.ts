@@ -1,25 +1,21 @@
-import { Component , Input , OnInit } from '@angular/core';
+import { Component , Input , OnInit} from '@angular/core';
 import { NgClass } from '@angular/common';
 import { DataService } from '../../services/data.service';
 
-
 @Component({
-  selector: 'text',
+  selector: 'boolean-node',
   template: require('./template.html')
 })
 
-export class TextNodeComponent implements OnInit {
+export class BooleanNodeComponent implements OnInit {
 
   @Input() data : any;
+  @Input() userRole : number;
   additional_classes : any = [];
-  @Input() userRole : number = 0;
-  errors : Array<any> = [];
-  ckeditorContent :any;
   isDeveloper : boolean = false;
+  errors : Array<any> = [];
   editing : boolean = false;
   ready : boolean = false;
-
-
 
   constructor(
     private dataService : DataService
@@ -51,10 +47,16 @@ export class TextNodeComponent implements OnInit {
     this.validate(this.data._value);
   }
 
+  toggle(){
+    if(this.data._can._edit_value == true || this.isDeveloper){
+      this.data._value = !this.data._value;
+    }
+  }
+
   validate(value){
     return new Promise((resolve,reject)=>{
       this.errors = [];
-      if( typeof value !== "string" || value.length < 1){
+      if( typeof value !== "number"){
         this.errors.push("Invalid or empty value.")
       }
       resolve(true);

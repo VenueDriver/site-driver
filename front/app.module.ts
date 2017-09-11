@@ -27,7 +27,8 @@ import { PageComponent }          from './components/page/script';
 import { TextNodeComponent }      from './components/text/script';
 import { FileNodeComponent }      from './components/file/script';
 
-import { NumberFieldComponent }   from './components/number/script';
+import { NumberNodeComponent }    from './components/number/script';
+import { BooleanNodeComponent }   from './components/boolean/script';
 import { ColorFieldComponent }    from './components/color/script';
 import { DateFieldComponent }     from './components/date/script';
 import { ChildComponent }         from './components/child/script';
@@ -162,7 +163,8 @@ const appRoutes: Routes = require('./config/routes');
     DeleteButtonComponent,
     SaveButtonComponent,
     RowComponent,
-    NumberFieldComponent,
+    NumberNodeComponent,
+    BooleanNodeComponent,
     DateFieldComponent,
     ColorFieldComponent,
     ArtistFieldComponent,
@@ -203,7 +205,8 @@ const appRoutes: Routes = require('./config/routes');
     LinkFieldComponent,
     ImageFieldComponent,
     FileNodeComponent,
-    NumberFieldComponent,
+    NumberNodeComponent,
+    BooleanNodeComponent,
     DateFieldComponent,
     ColorFieldComponent,
     ArtistFieldComponent,

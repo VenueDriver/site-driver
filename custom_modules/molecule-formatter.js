@@ -9,8 +9,20 @@ class MoleculeFormatter{
       let data = Object.assign({},this._data);
       let formatFunctions = [ this.matchNameAndValue, this.removeSystemKeys ];
       data = this.deepLoop(data,formatFunctions);
+      data = this.formatRoot(data);
       resolve(data);
     });
+  }
+
+  formatRoot(data){
+    data.id = this._data["_id"];
+    data.created_at = this._data["_created_at"];
+    data.updated_at = this._data["_updated_at"];
+    Object.keys(data[this._data._name]).forEach(valueKey =>{
+      data[valueKey] = data[this._data._name][valueKey];
+    });
+    delete data[this._data._name];
+    return data;
   }
 
   deepLoop(data,formatFunctions){
@@ -21,9 +33,9 @@ class MoleculeFormatter{
         })
         if(data.hasOwnProperty("_options")){
           if(data._options._convert_array_to_keys === true){
-            console.log("Data:",data);
+            // console.log("Data:",data);
             data._value = this.arrayToKeys(data._value);
-            console.log("Array to keys result data",data);
+            // console.log("Array to keys result data",data);
           }
         }
       }

@@ -20,17 +20,19 @@ class LocalStorage{
     this.opts = {};
     this.opts.root = '_storage';
     this.opts.json = true;
+    this.fs = (this.opts.hasOwnProperty('fs')) ? this.opts.fs : fs;
     this.opts.readFiles = true;
     Object.keys(opts).forEach((key)=>{
       this.opts[key] = opts[key];
     });
     this.query = Object.assign({},opts.query);
+    this.encoding = "utf-8";
   }
 
   getInstanceNames(){
     return new Promise((resolve,reject)=>{
       this.readdir('instance',{readFiles : false}).then((names)=>{
-        console.log("Instance names",names);
+        // console.log("Instance names",names);
         resolve(names);
       })
     });
@@ -43,7 +45,7 @@ class LocalStorage{
       names = this.query.name || [],
       routes = [];
       let i = 0;
-      console.log("Async loop")
+      // console.log("Async loop")
       asyncLoop(
         ()=> i >= types.length,
         (next,end)=>{
@@ -120,7 +122,7 @@ class LocalStorage{
     return new Promise((resolve,reject)=> {
       location = path.join(this.opts.root,location);
       mkdirp(location).then(()=>{
-        fs.writeFile(path.join(location,filename) , data ,(err)=>{
+        this.fs.writeFile(path.join(location,filename) , data ,(err)=>{
           if(err){ return reject(err) } else { return resolve() }
         })
       }).catch(reject);
@@ -142,8 +144,8 @@ class LocalStorage{
   readFile(location,file){
     return new Promise((resolve,reject)=>{
       let mergedLocation = path.join(this.opts.root,location,file);
-      console.log("\nreadFile:",mergedLocation);
-      fs.readFile(mergedLocation,'utf-8',(err,data)=>{
+      // console.log("\nreadFile:",mergedLocation);
+      this.fs.readFile(mergedLocation,'utf-8',(err,data)=>{
         if(this.opts.json) data = stringToJSON(data);
         if(err){
           reject(err);
@@ -156,10 +158,9 @@ class LocalStorage{
 
   readdir(location,opts){
     return new Promise((resolve,reject)=>{
-      let encoding = this.opts.encoding || 'utf-8';
       let mergedLocation = path.join(this.opts.root,location);
       mkdirp(mergedLocation).then(()=>{
-        fs.readdir(mergedLocation,encoding,(err,directory)=>{
+        this.fs.readdir(mergedLocation,(err,directory)=>{
           directory = directory.filter(file => !(/^\./.test(file) && !/\.json$/gi.test(file)));
           if(err){
             reject(err)
@@ -196,7 +197,7 @@ class LocalStorage{
   unlink(location,filename){
     return new Promise((resolve,reject)=>{
       let mergedLocation = path.join(this.opts.root,location,filename);
-      fs.unlink(mergedLocation,(err)=>{
+      this.fs.unlink(mergedLocation,(err)=>{
         if(err){
           reject(err);
         }else{
@@ -237,7 +238,7 @@ class LocalStorage{
               });
 
               if(filename){
-                console.log("DELETE",routes[i],filename);
+                // console.log("DELETE",routes[i],filename);
                 this.unlink(routes[i],filename).then(end).catch((err)=>end(err));
               }else{
                 i++;next();

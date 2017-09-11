@@ -1,5 +1,6 @@
 const Publisher = require( "../custom_modules/publisher" );
 const uniqid = require('uniqid');
+const moment = require("moment");
 
 const validate = (data)=>{
   return new Promise((resolve,reject)=>{
@@ -13,11 +14,22 @@ const validate = (data)=>{
 
 // EASY ALIAS TO TRIGGER VALIDATION, SANITAZION AND STORAGE OF DATA
 const save = (query)=>{
+
+    /*
+      EVERY TIME A CELL IS UPDATED
+      ALL INSTANCES SHARING THE SAME CELL MODEL SHOULD BE UPDATED ASWELL
+    */
+
   return new Promise((resolve,reject)=>{
     if(query.type === "instance" && !query.id){
       query.id = uniqid();
       query.data._id = query.id;
     }
+    let unixTimeStamp = moment().format('x');
+    if(!query.data.hasOwnProperty("_created_at")){
+      query.data._created_at = unixTimeStamp;
+    }
+    query.data._updated_at = unixTimeStamp;
     // VALIDATE DATA
     validate(query.data).then((validName)=>{
       const publisher = new Publisher(query);
