@@ -1,0 +1,9 @@
+export { MoleculeInterface }    from './interfaces/Imolecule';
+export { MoleculeGeneratorInterface }  from './interfaces/Imolecule-generator';
+export { NodeInterface }        from './interfaces/Inode';
+export { CellInterface }        from './interfaces/Icell';
+export { TextInterface }        from './interfaces/Ibext';
+export { NumberInterface }      from './interfaces/Inumber';
+export { BooleanInterface }     from './interfaces/Iboolean';
+export { FileInterface }        from './interfaces/IFfile';
+export { ComponentOption }      from './interfaces/Icomponent-option';
