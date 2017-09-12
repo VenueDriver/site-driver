@@ -1,4 +1,4 @@
-import { Component , Input , OnInit } from '@angular/core';
+import { Component , Input , OnInit , Output, EventEmitter} from '@angular/core';
 import { MoleculeService } from '../../services/molecule.service';
 
 
@@ -12,6 +12,7 @@ export class MoleculeSave implements OnInit {
 
   @Input() molecule : any;
   @Input() type : string;
+  @Output() afterSave = new EventEmitter();
 
   bussy : boolean = false;
 
@@ -34,6 +35,7 @@ export class MoleculeSave implements OnInit {
       data : this.molecule
     }).then((response)=>{
       this.bussy = false;
+      this.afterSave.emit(true);
       console.log("All good saved",response);
     });
   }

@@ -13,6 +13,8 @@ export class InstancePage implements OnInit {
 
     ready : boolean = false;
     instanceID : string;
+    cache : any;
+    cacheSecondary : any;
     instances : Array<any>;
     data : any;
     isGenerator : boolean = false;
@@ -39,12 +41,13 @@ export class InstancePage implements OnInit {
            where : {
              _id : this.instanceID
            }
-          }).then((instance)=>{
+         }).then((firstCache)=>{
+            this.cacheSecondary = firstCache;
           //  console.log("Instance served",instance);
-           this.data = instance[0];
+           this.data = firstCache.data[0];
            this.isGenerator = (this.data._ngClass === "MoleculeGenerator");
 
-           if(this.isGenerator){
+           if(this.isGenerator && !this.cache){
              this.moleculeService.getMoleculeList({
                type : ["instance"],
                name : this.data._options._molecule_types._value.map(value=>value._name),
@@ -54,9 +57,10 @@ export class InstancePage implements OnInit {
                    _id : this.data._id
                  }
               }
-            }).then((instances)=>{
+            }).then((mainCache)=>{
+              this.cache = mainCache;
               //  console.log("Has instances:",instances);
-               this.instances = instances;
+               this.instances = mainCache.data;
                this.ready = true;
             });
 

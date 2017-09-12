@@ -14,6 +14,7 @@ export class MoleculeGenerator implements OnInit {
   reduced = false;
   generatorList : any;
   ready : boolean = false;
+  cache : any;
 
   constructor( private moleculeService : MoleculeService ){}
 
@@ -22,12 +23,15 @@ export class MoleculeGenerator implements OnInit {
   }
 
   ngOnInit(){
-    this.moleculeService.getMoleculeList({
-      type : ['generator']
-    }).then((list)=>{
-      this.generatorList = list;
-      this.ready = true;
-    })
+    if(!this.cache){
+      this.moleculeService.getMoleculeList({
+        type : ['generator']
+      }).then((cache)=>{
+        this.cache = cache;
+        this.generatorList = cache.data;
+        this.ready = true;
+      })
+    }
   }
 
   log(what){

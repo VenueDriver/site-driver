@@ -15,6 +15,7 @@ import { MoleculeParser } from '../helpers/molecule-parser';
 export class MoleculeService implements OnInit {
 
   parser : any;
+  cache : any = {};
 
   constructor(private _server : ServerService ){
     this.parser = new MoleculeParser();
@@ -32,10 +33,17 @@ export class MoleculeService implements OnInit {
 
   saveMolecule(query){
     return new Promise((resolve,reject)=>{
+      let queryID = new Date().getTime();
+      this.cache[queryID] = {query : query , action : "save"};
+      query = this.cache[queryID].query;
+      this.cache[queryID].id = queryID;
       query.data = this.parser.toData(query.data);
       this.validateMolecule(query.data).then(()=>{
         this._server.post( `/molecule/save` , query, [] ).subscribe((data)=>{
-          resolve(data);
+          this.cache[queryID].data = data;
+          this.updateResults().then(()=>{
+            resolve(this.cache[queryID]);
+          }).catch(reject);
         },
         (error)=>{
           console.log("Observable error",error);
@@ -51,8 +59,15 @@ export class MoleculeService implements OnInit {
         name : [molecule._name],
         id : molecule._id
       };
+      let queryID = new Date().getTime();
+      this.cache[queryID] = {query : query , action : "remove"};
+      query = this.cache[queryID].query;
+      this.cache[queryID].id = queryID;
       this._server.post( `/molecule/remove`, query, [] ).subscribe((data)=>{
-        resolve(data);
+        this.cache[queryID].data = data;
+        this.updateResults().then(()=>{
+          resolve(this.cache[queryID]);
+        }).catch(reject);
       },
       (error)=>{
         console.log("Observable error",error);
@@ -60,13 +75,23 @@ export class MoleculeService implements OnInit {
     });
   }
 
-  getMoleculeList(query) {
+  getMoleculeList(query,cache ?: any) {
     return new Promise<any>((resolve,reject)=>{
       if(typeof query === "string"){
         query = {
           type : [query]
         }
       }
+      let queryID;
+      if(!cache){
+        queryID = new Date().getTime();
+        this.cache[queryID] = {query : query , action : "get"};
+      }else{
+        queryID = cache.id;
+      }
+      query = this.cache[queryID].query;
+      this.cache[queryID].id = queryID;
+
       this._server.post( `/molecule/get` , query , [] ).subscribe((data)=>{
         let i = 0;
         asyncLoop(
@@ -82,7 +107,9 @@ export class MoleculeService implements OnInit {
             if(err){
               reject(err);
             }else{
-              resolve(data);
+              this.cache[queryID].data = data;
+              console.log("Get, resolved");
+              resolve(this.cache[queryID]);
             }
           }
         );
@@ -94,14 +121,40 @@ export class MoleculeService implements OnInit {
 
   getAllMolecules(){
     return new Promise<any>((resolve,reject)=>{
-      this.getMoleculeList({type : ['cell','generator']}).catch(reject).then((cells)=>{
-        let fullList = cells.map(cell => cell);
+      this.getMoleculeList({type : ['cell','generator']}).catch(reject).then((cache)=>{
+        let fullList = cache.data.map(cell => cell);
         for(var key in nodes){
           fullList.push(new nodes[key]({}));
         }
         resolve(fullList);
       });
     })
+  }
+
+  updateResults(){
+    return new Promise((resolve,reject)=>{
+      let cacheIDS = Object.keys(this.cache);
+      let i = 0;
+      asyncLoop(
+        ()=> i >= cacheIDS.length,
+        (next,end)=>{
+          let cache = this.cache[cacheIDS[i]];
+          if(cache.action === "get"){
+            console.log("Update cache",i,"/",cacheIDS.length-1);
+            this.getMoleculeList(cache.query,cache).catch(reject).then(()=>{
+              i++;next();
+            });
+          }else{
+            i++;
+            next();
+          }
+        },
+        ()=>{
+          console.log("update results end");
+          resolve();
+        }
+      );
+    });
   }
 
 }

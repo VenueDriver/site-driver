@@ -10,21 +10,26 @@ import { MoleculeService } from '../../services/molecule.service';
 
 export class CellBuilder implements OnInit{
 
-    ready : boolean = true;
-    cellList : Array<any>;
+  ready : boolean = true;
+  cellList : Array<any>;
+  cache : any;
 
-    constructor(private moleculeService : MoleculeService){}
+  constructor(private moleculeService : MoleculeService){}
 
-    log(what){
-      console.log(what);
-    }
+  log(what){
+    console.log(what);
+  }
 
-    ngOnInit(){
+  ngOnInit(){
+    if(!this.cache){
       this.moleculeService.getMoleculeList({
         type : ['cell']
-      }).then((list)=>{
-        this.cellList = list;
+      }).then((cache)=>{
+        this.cache = cache;
+        this.cellList = cache.data;
+        this.ready = true;
       })
     }
+  }
 
 }
