@@ -48,7 +48,7 @@ class MoleculeFormatter{
 
   matchNameAndValue(data){
     let tmp = {};
-    tmp[data._name] = data._value;
+    tmp[data._name.replace(/\s/gi,'_')] = data._value;
     return tmp;
   }
 
