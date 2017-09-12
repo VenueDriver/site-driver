@@ -5,6 +5,7 @@
             padding: 0;
             .btn-add {
                 margin-top: 0;
+                opacity: 1;
             }
         }
     }
@@ -13,6 +14,9 @@
     display: block!important;
     margin: 0!important;
     width: 100%!important;
+}
+.close-overlay {
+    z-index: 999!important;
 }
 .content-thumbs {
     position: relative;
@@ -37,6 +41,7 @@
 }
 .content-thumbs-col-left {
     border-right: 1px solid white;
+    background: lighten($gray-dark, 5%);
     .content-overflow {
         margin-top: 20px;
     }
@@ -54,7 +59,8 @@
         height: auto;
     }
     &:hover {
-        img {
+        img,
+        .video-file {
             outline: 2px solid $accent-color;
         }
     }
@@ -107,10 +113,10 @@
 
 .form-files {
     border-top: 3px solid $accent-color;
-    margin-top: 10px;
     position: relative;
     label {
         margin-top: 10px;
+        color: $white;
     }
     input, button {
         font-family: $primary-font;
@@ -118,6 +124,7 @@
     input {
         width: 100%;
         @include border-box;
+        color: $white;
     }
     button {
         display: inline-block;
@@ -141,14 +148,15 @@
 
 .header-title {
     padding-bottom: 20px;
-    border-bottom: 1px solid #FFF;
+    border-bottom: 1px solid #ececec;
     margin-bottom: 20px;
-    padding-top: 15px;
+    padding-top: 10px;
     h2 {
         display: inline-block;
         vertical-align: middle;
         text-transform: uppercase;
         font-size: 20px;
+        padding: 10px 0;
     }
 }
 .folder-plus {
@@ -221,7 +229,7 @@
     }
 }
 .cancel-btn {
-    background: $gray-medium;
+    background: #8e8e8e;
     display: block;
     padding: 10px;
     @include transition;
@@ -229,7 +237,7 @@
     color: white;
     text-align: center;
     &:hover {
-        background: darken($gray-medium, 5%);
+        background: darken(#8e8e8e, 5%);
     }
 }
 
@@ -321,10 +329,10 @@ div.content-name {
         li {
             a {
                 i {
-                    color: $brand-primary;
+                    color: $white;
                 }
                 background: transparent;
-                color: $brand-primary;
+                color: $white;
                 &:hover {
                     background: transparent;
                     color: $accent-color;
