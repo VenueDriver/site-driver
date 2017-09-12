@@ -11,5 +11,6 @@ _test-output
 _temp
 .DS_Store
 *.scssc
+_storage
 
 /public/css/style.css
