@@ -527,8 +527,8 @@ router.post('/login', passport.authenticate('local', {successRedirect:'/', failu
 );
 // Register User
 router.post('/register', (req, res)=>{
-  // c.sites.checkUser(req,res, (isAuth)=> {
-    // if(isAuth){
+  c.sites.checkUser(req,res, (isAuth)=> {
+    if(isAuth){
 
     	let name = req.body.name;
     	let email = req.body.email;
@@ -574,10 +574,10 @@ router.post('/register', (req, res)=>{
 
     		res.json({"message" : 'You are registered and can now login' , "user" : blablaNewUser});
     	}
-    // }else{
-      // res.json({ "message" : "Not allowed." });
-    // }
-  // })
+    }else{
+      res.json({ "message" : "Not allowed." });
+    }
+  })
 });
 
 
