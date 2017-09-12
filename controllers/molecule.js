@@ -33,7 +33,25 @@ const save = (query)=>{
     // VALIDATE DATA
     validate(query.data).then((validName)=>{
       const publisher = new Publisher(query);
-      publisher.publishAll().then(resolve).catch(reject);
+      publisher.publishAll().then((data)=>{
+        if(query.data._ngClass === "MoleculeGenerator"){
+          get({
+            type : ["instance"],
+            name : query.data._options._molecule_types._value.map(value=>value._name),
+            where : {
+              _generator : {
+                _name : query.data._name,
+                _id : query.data._id
+              }
+           }
+         }).then((generatorNewInstances)=>{
+           query.data._value = generatorNewInstances;
+           save(query).then(resolve).catch(reject);
+         }).catch(reject);
+        }else{
+          resolve(data);
+        }
+      }).catch(reject);
     }).catch((errors)=>{
       // REJECT IF DATA COULDN'T GET THROUGH VALIDATION
       console.log("site invalid",errors );
