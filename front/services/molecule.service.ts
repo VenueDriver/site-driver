@@ -41,9 +41,9 @@ export class MoleculeService implements OnInit {
       this.validateMolecule(query.data).then(()=>{
         this._server.post( `/molecule/save` , query, [] ).subscribe((data)=>{
           this.cache[queryID].data = data;
-          this.updateResults().then(()=>{
+          // this.updateResults().then(()=>{
             resolve(this.cache[queryID]);
-          }).catch(reject);
+          // }).catch(reject);
         },
         (error)=>{
           console.log("Observable error",error);
@@ -65,9 +65,9 @@ export class MoleculeService implements OnInit {
       this.cache[queryID].id = queryID;
       this._server.post( `/molecule/remove`, query, [] ).subscribe((data)=>{
         this.cache[queryID].data = data;
-        this.updateResults().then(()=>{
+        // this.updateResults().then(()=>{
           resolve(this.cache[queryID]);
-        }).catch(reject);
+        // }).catch(reject);
       },
       (error)=>{
         console.log("Observable error",error);
