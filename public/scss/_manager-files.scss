@@ -1,3 +1,19 @@
+.floating-panel {
+    &.centered {
+        width: 97vw;
+        .box {
+            padding: 0;
+            .btn-add {
+                margin-top: 0;
+            }
+        }
+    }
+}
+.filemanager-container {
+    display: block!important;
+    margin: 0!important;
+    width: 100%!important;
+}
 .content-thumbs {
     position: relative;
     .btns {
@@ -13,11 +29,17 @@
     padding: 10px;
     @include border-box;
     background: $gray-light;
+    height: 100%;
 }
 .content-thumbs-col-right {
     font-size: 0;
     background: $gray-light;
-    border-left: 1px solid white;
+}
+.content-thumbs-col-left {
+    border-right: 1px solid white;
+    .content-overflow {
+        margin-top: 20px;
+    }
 }
 .thumb {
     display: inline-block;
@@ -26,6 +48,7 @@
     position: relative;
     @include border-box;
     cursor: pointer;
+    vertical-align: bottom;
     img {
         width: 100%;
         height: auto;
@@ -83,56 +106,27 @@
 }
 
 .form-files {
-    border-top: 3px solid white;
+    border-top: 3px solid $accent-color;
     margin-top: 10px;
     position: relative;
-    button.ok, button.nop {
-        position: absolute;
-        right: 0;
-        top: 0;
-        height: 35px;
-        padding: 10px;
-        width: 35px;
-        @include border-box;
-        @include transition;
-        background: $brand-atention;
-        &:before {
-            content: "\f00d";
-            display: inline-block;
-            font-family: FontAwesome;
-            font-size: 15px;
-            text-align: center;
-            text-rendering: auto;
-            -webkit-font-smoothing: antialiased;
-            color: white;
-        }
-        &:hover {
-            opacity: .8;
-        }
-    }
-    button.ok {
-        right: 35px;
-        background: $accent-color;
-        &:before {
-            content: "\f00c";
-        }
+    label {
+        margin-top: 10px;
     }
     input, button {
         font-family: $primary-font;
     }
     input {
         width: 100%;
-        height: 35px;
-        font-size: 16px;
-        padding: 10px 80px 10px 10px;
         @include border-box;
     }
     button {
-        border: 0;
-        cursor: pointer;
+        display: inline-block;
+        width: 49%;
+        min-width: 0;
+        position: static;
+        border: none;
         color: white;
-        font-size: 14px;
-        text-align: center;
+        padding: 10px 5px;
     }
 }
 .message-not-found {
@@ -150,25 +144,11 @@
     border-bottom: 1px solid #FFF;
     margin-bottom: 20px;
     padding-top: 15px;
-    h2, a {
+    h2 {
         display: inline-block;
         vertical-align: middle;
         text-transform: uppercase;
         font-size: 20px;
-    }
-    h2 {
-        font-weight: bold;
-    }
-    a {
-        background: $accent-color;
-        color: white;
-        padding: 10px;
-        margin-left: 10px;
-        text-align: center;
-        font-size: 14px;
-        &:hover {
-            background: darken($accent-color, 10%);
-        }
     }
 }
 .folder-plus {
@@ -221,34 +201,35 @@
 }
 
 .content-overflow {
-    max-height: 380px;
-    overflow: scroll;
+    overflow: auto;
+    height: calc(100% - 140px);
 }
 
 .content-thumbs {
     .close-btn {
         font-size: 20px;
         position: absolute;
-        color: white;
-        background: $accent-color;
         right: 5px;
         top: 5px;
         border: 0;
         padding: 0;
         z-index: 999;
+        color: #666666;
+        cursor: pointer;
+        border: none;
+        min-width: 0;
     }
 }
 .cancel-btn {
-    background: $accent-color;
+    background: $gray-medium;
     display: block;
     padding: 10px;
     @include transition;
     @include border-box;
     color: white;
     text-align: center;
-    margin: 20px 0;
-    i {
-        margin-right: 10px;
+    &:hover {
+        background: darken($gray-medium, 5%);
     }
 }
 
@@ -305,17 +286,16 @@ div.content-name {
 // 992px
 @media all and (min-width: $screen-landscape) {
     .content-thumbs {
-        display: table;
         width: 100%;
         .close-btn {
-            right: 22px;
-            top: 35px;
+            right: 10px;
+            top: 10px;
             font-size: 20px;
             padding: 5px;
             cursor: pointer;
             @include transition;
             &:hover {
-                background: darken( $accent-color, 10%);
+                color: darken( #666666, 10%);
             }
         }
     }
@@ -323,12 +303,13 @@ div.content-name {
         position: relative;
     }
     .content-thumbs-col-left, .content-thumbs-col-right {
-        display: table-cell;
+        display: inline-block;
         width: 20%;
         vertical-align: top;
     }
     .content-thumbs-col-right {
         width: 80%;
+        margin-left: -5px;
     }
     .thumb {
         width: 20%;
@@ -389,10 +370,8 @@ div.content-name {
 
     .cancel-btn {
         position: absolute;
-        bottom: 0;
         left: 0;
-        width: 90%;
-        left: 10px;
+        width: 100%;
         bottom: 0px;
     }
 }

@@ -13,8 +13,10 @@ textarea {
     min-height: 200px;
 }
 
-ng-checkbox + label {
+ng-checkbox + label,
+ng-checkbox + .checkbox-label {
 	padding-left: 10px;
+	margin-left: 0!important;
 }
 
 input[type=text],input[type=number],input[type=date],input[type=password] {
@@ -30,7 +32,7 @@ input[type=text],input[type=number],input[type=date],input[type=password] {
 	letter-spacing: 0.02em;
 	&:hover,&:focus,&:active{
 		&:not([disabled]){
-			padding-left:25px;
+			padding-left:10px;
 		}
 	}
 	&:focus{
@@ -40,8 +42,9 @@ input[type=text],input[type=number],input[type=date],input[type=password] {
 }
 
 .checkbox-label {
-	max-width: calc(100% - 28px);
+	max-width: calc(100% - 34px);
 	line-height: 1.5!important;
+    text-transform: capitalize;
 }
 
 .event-autocomplete-item{
@@ -282,12 +285,6 @@ input[type=radio]:not(old):checked +  label > span > span{
 		&:not(.checkbox) {
 			> .checkbox-label {
 				@extend .label-form;
-			}
-		}
-		&.checkbox {
-			> label {
-				padding-left: 10px;
-				text-transform: capitalize;
 			}
 		}
 		&.contCheckbox {
