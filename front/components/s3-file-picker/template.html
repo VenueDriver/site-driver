@@ -4,11 +4,13 @@
             <button (click)="cancel()" class="fa fa-times close-btn"></button>
             <div class="content-thumbs-col-left">
                 <a (click)="mobileToggleFolders()" class="folder-plus cf">Folders<i class="fa fa-angle-down" aria-hidden="true"></i></a>
-                <a *ngIf="!newFolderInput" (click)="newFolderInput=true" class="btns"><i class="fa fa-plus"></i>ADD FOLDER</a>
+                <a *ngIf="!newFolderInput" (click)="newFolderInput=true" class="btn-add">ADD FOLDER</a>
                 <div *ngIf="newFolderInput" class="form-files">
+                    <label class="label-form">New folder name</label>
                     <input [disabled]="loading" [(ngModel)]="newFolderName" type="text">
-                    <button (click)="newFolder()" class="ok"></button>
-                    <button (click)="resetFolderInput()" class="nop"></button>
+                    <button (click)="resetFolderInput()" class="btn cancel-btn">CANCEL</button>
+                    <button (click)="newFolder()" class="btn">ADD FOLDER</button>
+
                 </div>
 
                 <div [class.show-folders]="mobileFolders" class="content-overflow">
@@ -21,7 +23,7 @@
                     </ul>
                 </div>
 
-                <a (click)="cancel()" class="cancel-btn"><i class="fa fa-undo"></i><span>CANCEL</span></a>
+                <a (click)="cancel()" class="btn cancel-btn"><span>CANCEL</span></a>
 
             </div>
             <div class="content-thumbs-col-right">
@@ -33,7 +35,9 @@
                 </div>
                 <header class="header-title cf">
                     <h2>Media Files</h2>
-                    <a *ngIf="!loading" (click)="inputFile.click()">Add files</a>
+                    <div class="right">
+                        <a *ngIf="!loading" (click)="inputFile.click()" class="btn-add">Add files</a>
+                    </div>
                     <input style="display:none" #inputFile type="file" multiple [accept]="(accept.length>0) ? accept.join(',') : ''" (change)="fileChange($event)" placeholder="Upload file" >
                 </header>
                 <span *ngIf="!loading && current._files.length < 1" class="message-not-found">No files found.</span>

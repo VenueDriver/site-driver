@@ -273,10 +273,9 @@ button {
 }
 
 .toggleButton{
-	padding: 10px !important;
+	padding: 20px 0 0 0 0;
 	&.active{
-		background: $accent-color;
-		color : white !important;
+		color : $secondary-text-color !important;
 	}
 }
 
