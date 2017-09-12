@@ -4,7 +4,7 @@
   "description": "Content Management System",
   "main": "update.js",
   "scripts": {
-    "postinstall": "tsc && gulp sass && webpack ",
+    "postinstall": "gulp sass && webpack ",
     "start": "node server.js",
     "server": "tsc && gulp sass && webpack && concurrently \"tsc -w\" \"nodemon server.js --ignore '_storage/*.*'\" \"gulp sass:watch\" ",
     "dev": "tsc && concurrently \"tsc -w\" \"webpack --progress --display-error-details --watch\" \"gulp \" "
