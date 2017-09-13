@@ -17,7 +17,7 @@
 		&:hover {
 			background: darken($gray-medium,5%);
 		}
-		+ .btn-save {
+		+ molecule-save {
 			 margin-left: 5px;
 		}
 	}
