@@ -272,9 +272,7 @@ div.content-name {
     span {
         float: right;
         background: $gray-dark;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
+        @include border-box;
         font-size: 14px;
         padding: 5px;
         display: block;
@@ -359,9 +357,7 @@ div.content-name {
         left: auto;
         right: 15px;
         position: absolute;
-        box-shadow: none;
         width: 77%;
-
         text-align: center;
 
         a {
