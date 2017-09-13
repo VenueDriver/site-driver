@@ -18,12 +18,15 @@ class QueryFilter{
   }
 
   filter(list){
+    console.log("QueryFilter.filter, start");
 
     if(this.query.hasOwnProperty("where")){
       list = list.filter(item=>{
         return this.deep(this.query.where,item);
       });
     }
+
+    console.log("QueryFilter.filter, done");
 
     return list;
   }

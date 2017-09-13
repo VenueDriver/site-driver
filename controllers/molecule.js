@@ -7,7 +7,7 @@ const validate = (data)=>{
     if(data._name){
       resolve(data._name);
     }else{
-      reject();
+      reject("Data has no '_name'");
     }
   });
 }
@@ -34,19 +34,29 @@ const save = (query)=>{
     validate(query.data).then((validName)=>{
       const publisher = new Publisher(query);
       publisher.publishAll().then((data)=>{
-        if(query.data._ngClass === "MoleculeGenerator"){
+        if((query.data.hasOwnProperty("_generator"))){
+          console.log("Updating generator");
+          let generator = query.data._generator;
           get({
             type : ["instance"],
-            name : query.data._options._molecule_types._value.map(value=>value._name),
+            name : generator._options._molecule_types._value.map(value=>value._name),
             where : {
               _generator : {
-                _name : query.data._name,
-                _id : query.data._id
+                _name : generator._name,
+                _id : generator._id
               }
            }
          }).then((generatorNewInstances)=>{
-           query.data._value = generatorNewInstances;
-           save(query).then(resolve).catch(reject);
+          //  console.log("\n\n\n\nreadable instances:",generatorNewInstances[0]);
+
+           generator._value = generatorNewInstances;
+           save({
+             type : generator._type,
+             name : generator._name,
+             id   : generator._id,
+             data : generator,
+             nonRecursive : true
+           }).then(resolve).catch(reject);
          }).catch(reject);
         }else{
           resolve(data);
@@ -65,9 +75,9 @@ const remove = (query)=>{
   return publisher.unpublishAll();
 }
 
-const get = (query)=>{
+const get = (query,format = 'original')=>{
   const publisher = new Publisher(query);
-  return publisher.get('original');
+  return publisher.get(format);
 }
 
 module.exports = {
