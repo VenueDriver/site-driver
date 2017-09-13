@@ -7,22 +7,10 @@ class MoleculeFormatter{
   readable(){
     return new Promise((resolve,reject)=>{
       let data = Object.assign({},this._data);
-      let formatFunctions = [ this.matchNameAndValue, this.removeSystemKeys ];
+      let formatFunctions = [ this.matchNameAndValue, this.formatRoot, this.removeSystemKeys ];
       data = this.deepLoop(data,formatFunctions);
-      data = this.formatRoot(data);
       resolve(data);
     });
-  }
-
-  formatRoot(data){
-    data.id = this._data["_id"];
-    data.created_at = this._data["_created_at"];
-    data.updated_at = this._data["_updated_at"];
-    Object.keys(data[this._data._name]).forEach(valueKey =>{
-      data[valueKey] = data[this._data._name][valueKey];
-    });
-    delete data[this._data._name];
-    return data;
   }
 
   deepLoop(data,formatFunctions){
@@ -46,10 +34,20 @@ class MoleculeFormatter{
     return data;
   }
 
+  formatRoot(data){
+    if(data._id){
+      data.id = data._id;
+    }
+    if(data._created_at && data._updated_at){
+      data.created_at = data._created_at;
+      data.updated_at = data._updated_at;
+    }
+    return data;
+  }
+
   matchNameAndValue(data){
-    let tmp = {};
-    tmp[data._name.replace(/\s/gi,'_')] = data._value;
-    return tmp;
+    data[data._name.replace(/\s/gi,'_')] = data._value;
+    return data;
   }
 
   removeSystemKeys(data){
@@ -61,12 +59,14 @@ class MoleculeFormatter{
 
   arrayToKeys(array){
     let obj = {};
-    array.forEach((item,i)=>{
-      let keys = Object.keys(item);
-      if(keys.length>1) console.log("ERROR: More than one key name existing in [object]. Information could be lost in the formatting process.",keys);
-      let key = keys[0];
-      obj[key] = item[key];
-    });
+    if(Array.isArray(array)){
+      array.forEach((item,i)=>{
+        let keys = Object.keys(item);
+        if(keys.length>1) console.log("WARNING: More than one key name existing in [object]. Information could be lost in the formatting process.",keys,"OBJECT:",item);
+        let key = keys[0];
+        obj[key] = item[key];
+      });
+    }
     return obj;
   }
 

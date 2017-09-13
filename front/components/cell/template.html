@@ -15,8 +15,9 @@
       <molecule-edit *ngIf="editing" [molecule]="data"></molecule-edit>
 
       <div class="panel" *ngIf="!reduced">
-        <molecule-renderer *ngFor="let cell of data._value" [data]="cell" [component]="cell._ngComponent" ></molecule-renderer>
-
+        <ng-container *ngFor="let cell of data._value">
+          <molecule-renderer *ngIf="cell._can._show || isDeveloper"  [data]="cell" [component]="cell._ngComponent" ></molecule-renderer>
+        </ng-container>
         <div class="add-molecule" *ngIf="data._can._edit || isDeveloper ">
           <hr>
           <h3>Add Molecule</h3>

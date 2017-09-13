@@ -12,6 +12,7 @@ export class MoleculeParser{
         let parsedMolecule  = new nodes[molecule._ngClass](molecule);
         resolve(parsedMolecule);
       }else{
+        console.log(molecule);
         reject("No class for "+molecule._ngClass);
       }
     });
@@ -94,7 +95,7 @@ export class MoleculeParser{
           data._value = arrayCopy;
         }
       }
-      
+
       return data;
     }
 
