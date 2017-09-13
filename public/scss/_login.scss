@@ -64,6 +64,11 @@
 			}
 		}
 	}
+	&:hover {
+		input {
+			opacity: 1!important;
+		}
+	}
 }
 .cms-login {
 	padding: 35px 25px 25px 25px;
@@ -79,6 +84,7 @@
 		border: 0;
 	}
 	input {
+		background: $gray-light;
 		&:-webkit-autofill {
 		    opacity: 0.8;
 			-webkit-box-shadow: 0 0 0 30px $gray-light inset;
@@ -87,7 +93,14 @@
 			&:focus,
 			&:active {
 				opacity: 1;
+				background: $gray-light;
 			}
+		}
+		&:hover,
+		&:focus,
+		&:active {
+			opacity: 1;
+			background: $gray-light;
 		}
 	}
 	button {
