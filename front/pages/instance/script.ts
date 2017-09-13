@@ -42,6 +42,7 @@ export class InstancePage implements OnInit {
              _id : this.instanceID
            }
          }).then((firstCache)=>{
+           console.log("main instance",firstCache);
             this.cacheSecondary = firstCache;
           //  console.log("Instance served",instance);
            this.data = firstCache.data[0];
@@ -58,6 +59,7 @@ export class InstancePage implements OnInit {
                  }
               }
             }).then((mainCache)=>{
+              console.log("main instance, childs",mainCache);
               this.cache = mainCache;
               //  console.log("Has instances:",instances);
                this.instances = mainCache.data;

@@ -19,21 +19,26 @@ class StorageRoutes{
 
   save(){
     return new Promise((resolve,reject)=>{
-      this.remoteStorage.post().then(()=>{
-        this.localStorage.post().catch(reject).then(resolve);
-      }).catch(reject);
+      this.remoteStorage.post().then(resolve
+        // ()=>{
+        // this.localStorage.post().catch(reject).then(resolve);
+        // }
+      ).catch(reject);
     });
   }
 
   remove(){
     return new Promise((resolve,reject)=>{
-      this.remoteStorage.remove().then(()=>{
-        this.localStorage.remove().catch(reject).then(resolve);
-      }).catch(reject);
+      this.remoteStorage.remove().then(resolve
+        // ()=>{
+        //   this.localStorage.remove().catch(reject).then(resolve);
+        // }
+      ).catch(reject);
     });
   }
 
   get(){
+    // return this.localStorage.get();
     return this.remoteStorage.get();
   }
 
