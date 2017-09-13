@@ -44,7 +44,7 @@ const save = (query)=>{
                 _id : query.data._id
               }
            }
-         }).then((generatorNewInstances)=>{
+         },'readable').then((generatorNewInstances)=>{
            query.data._value = generatorNewInstances;
            save(query).then(resolve).catch(reject);
          }).catch(reject);
@@ -65,9 +65,9 @@ const remove = (query)=>{
   return publisher.unpublishAll();
 }
 
-const get = (query)=>{
+const get = (query,format = 'original')=>{
   const publisher = new Publisher(query);
-  return publisher.get('original');
+  return publisher.get(format);
 }
 
 module.exports = {
