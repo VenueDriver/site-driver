@@ -18,7 +18,7 @@
           </div>
 
           <div class="box" *ngIf="show_new_molecule_form">
-            <molecule-create [generator]="data" [type]="'instance'" [useMolecules]="data._options._molecule_types._value" ></molecule-create>
+            <molecule-create (canceled)="show_new_molecule_form = false" [generator]="data" [type]="'instance'" [useMolecules]="data._options._molecule_types._value" ></molecule-create>
           </div>
       </div>
     </div>
