@@ -1,5 +1,6 @@
 import { Component , Input , OnInit , Output, EventEmitter} from '@angular/core';
 import { MoleculeService } from '../../services/molecule.service';
+import { Location } from '@angular/common';
 
 
 @Component({
@@ -16,7 +17,10 @@ export class MoleculeRemove implements OnInit {
 
   bussy : boolean = false;
 
-  constructor(private moleculeService : MoleculeService){
+  constructor(
+    private moleculeService : MoleculeService,
+    private location : Location
+  ){
 
   }
 
@@ -31,6 +35,7 @@ export class MoleculeRemove implements OnInit {
       this.moleculeService.removeMolecule(this.molecule).then((response)=>{
         this.afterRemove.emit(true);
         this.bussy = false;
+        location.reload();
       });
     }
   }
