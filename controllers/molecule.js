@@ -35,29 +35,7 @@ const save = (query)=>{
       const publisher = new Publisher(query);
       publisher.publishAll().then((data)=>{
         if((query.data.hasOwnProperty("_generator"))){
-          console.log("Updating generator");
-          let generator = query.data._generator;
-          get({
-            type : ["instance"],
-            name : generator._options._molecule_types._value.map(value=>value._name),
-            where : {
-              _generator : {
-                _name : generator._name,
-                _id : generator._id
-              }
-           }
-         }).then((generatorNewInstances)=>{
-          //  console.log("\n\n\n\nreadable instances:",generatorNewInstances[0]);
-
-           generator._value = generatorNewInstances;
-           save({
-             type : generator._type,
-             name : generator._name,
-             id   : generator._id,
-             data : generator,
-             nonRecursive : true
-           }).then(resolve).catch(reject);
-         }).catch(reject);
+          updateGenerator(query).then(resolve).catch(reject);
         }else{
           resolve(data);
         }
@@ -71,13 +49,45 @@ const save = (query)=>{
 }
 
 const remove = (query)=>{
-  const publisher = new Publisher(query);
-  return publisher.unpublishAll();
+  return new Promise((resolve,reject)=>{
+    const publisher = new Publisher(query);
+    publisher.unpublishAll().then((response)=>{
+      updateGenerator(query).then(resolve).catch(reject);
+    }).catch(reject);
+  });
 }
 
 const get = (query,format = 'original')=>{
   const publisher = new Publisher(query);
   return publisher.get(format);
+}
+
+const updateGenerator = (query)=>{
+  return new Promise((resolve,reject)=>{
+    console.log("Updating generator");
+    let generator = query.data._generator;
+    get({
+      type : ["instance"],
+      name : generator._options._molecule_types._value.map(value=>value._name),
+      where : {
+        _generator : {
+          _name : generator._name,
+          _id : generator._id
+        }
+     }
+   }).then((generatorNewInstances)=>{
+    //  console.log("\n\n\n\nreadable instances:",generatorNewInstances[0]);
+
+     generator._value = generatorNewInstances;
+     save({
+       type : generator._type,
+       name : generator._name,
+       id   : generator._id,
+       data : generator,
+       nonRecursive : true
+      }).then(resolve).catch(reject);
+    }).catch(reject);
+  })
 }
 
 module.exports = {

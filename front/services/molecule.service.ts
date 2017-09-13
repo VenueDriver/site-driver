@@ -57,7 +57,8 @@ export class MoleculeService implements OnInit {
       let query = {
         type : [molecule._type],
         name : [molecule._name],
-        id : molecule._id
+        id : molecule._id,
+        data : molecule
       };
       let queryID = new Date().getTime();
       this.cache[queryID] = {query : query , action : "remove"};
