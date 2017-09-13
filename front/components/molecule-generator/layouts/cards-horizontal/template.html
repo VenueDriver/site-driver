@@ -1,9 +1,9 @@
-<section *ngIf="ready">
+<section *ngIf="ready" class="animated fadeIn">
   <div class="container card-layout">
  	  <div class="row">
 
 			<ng-container *ngFor="let item of instances;let i = index">
-				<div class="col-t-6 col-4">
+				<div class="col-t-6 col-4 animated fadeIn" >
 					<div class="card">
 						<a class="to-site" [routerLink]="['/instance',item._id]">
 	            <div class="aspect-ratio">
