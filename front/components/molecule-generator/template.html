@@ -11,7 +11,7 @@
           <div class="box" *ngIf="show_generator_edit_form">
             <a (click)="show_generator_edit_form = !show_generator_edit_form" class="right"><i class="fa fa-times" style="color:#000;color: #666;cursor:pointer;font-size: 20px;position:relative;z-index: 999; "></i></a>
               <molecule-config [molecule]="data"></molecule-config>
-
+              <a href="javascript:void(0)" (click)="show_generator_edit_form = !show_generator_edit_form" class="btn btn-cancel">CANCEL</a>
               <molecule-save [type]="data._type" [molecule]="data">
                 <div class="btn btn-save">SAVE</div>
               </molecule-save>

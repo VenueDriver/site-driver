@@ -38,6 +38,7 @@
                 </tr>
                 <tr *ngIf="showEdition[i]">
                    <td class="no-padding" [attr.colspan]="parsedColumns.length +2">
+                      <a href="javascript:void(0)" (click)="editOpen(i)" class="right"><i class="fa fa-times" style="color: #666;cursor:pointer;font-size: 20px;position:relative;z-index: 999; padding: 23px;"></i></a>
                        <molecule-renderer [data]="item" [component]="item._ngComponent"></molecule-renderer>
                        <molecule-save [type]="item._type" [molecule]="item">
                          <a href="javascript:void(0)" (click)="editOpen(i)" class="btn btn-cancel">Cancel</a>
