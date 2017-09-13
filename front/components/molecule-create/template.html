@@ -3,8 +3,8 @@
 <molecule-config class="animated fadeIn" *ngIf="['generator','cell'].indexOf(type)>-1" [molecule]="newMolecule"></molecule-config>
 <molecule-renderer class="animated fadeIn" [data]="newMolecule" [component]="newMolecule._ngComponent" *ngIf="['instance'].indexOf(type)>-1 && newMolecule"></molecule-renderer>
 
-<molecule-save class="animated fadeIn" [type]="type" [molecule]="newMolecule">
+<molecule-save *ngIf="newMolecule" class="animated fadeIn" [type]="type" [molecule]="newMolecule">
   <a href="javascript:void(0)" class="btn btn-save">Create</a>
 </molecule-save>
-<a href="javascript:void(0)" (click)="cancelCreation()" class="btn btn-cancel animated fadeIn">Cancel</a>
+<a href="javascript:void(0)" *ngIf="newMolecule" (click)="cancelCreation()" class="btn btn-cancel animated fadeIn">Cancel</a>
 <!-- <button (click)="log(newMolecule)">LOG</button> -->
