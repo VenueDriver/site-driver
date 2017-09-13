@@ -1,4 +1,4 @@
-<section *ngIf="ready">
+<section *ngIf="ready" class="animated fadeIn">
   <div class="container table-layout card-layout">
     <div class="row">
       <div class="col-12">
@@ -17,7 +17,7 @@
               </molecule-save>
           </div>
 
-          <div class="box" *ngIf="show_new_molecule_form">
+          <div class="box animated fadeInDown" *ngIf="show_new_molecule_form">
             <molecule-create (canceled)="show_new_molecule_form = false" [generator]="data" [type]="'instance'" [useMolecules]="data._options._molecule_types._value" ></molecule-create>
           </div>
       </div>

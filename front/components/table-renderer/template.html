@@ -30,14 +30,15 @@
                     </ng-container>
                     <td>
                     <span class="edit toggleButton" [class.active]="showEdition[i]" (click)="editOpen(i)">Quick edit</span>
-                    <a *ngIf="item._type === 'instance'" class="edit" [routerLink]="['/instance',item._id]">Edit</a>
+
+                    <a *ngIf="item._type === 'instance'" class="edit" (click)="openEditInstance(i)" [routerLink]="['/instance',item._id]">Edit</a>
                     <molecule-remove (afterRemove)="showEdition[i] = false" [molecule]="item">
                       <span class="delete-post">Delete</span>
                     </molecule-remove>
                     </td>
                 </tr>
-                <tr *ngIf="showEdition[i]">
-                   <td class="no-padding" [attr.colspan]="parsedColumns.length +2">
+                <tr class="box" *ngIf="showEdition[i]">
+                   <td class="no-padding animated fadeIn" [attr.colspan]="parsedColumns.length +2">
                        <molecule-renderer [data]="item" [component]="item._ngComponent"></molecule-renderer>
                        <molecule-save [type]="item._type" [molecule]="item">
                          <a href="javascript:void(0)" class="btn btn-save">Save</a>

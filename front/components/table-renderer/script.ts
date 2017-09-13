@@ -17,7 +17,9 @@ export class TableRenderer implements OnInit {
   @Input() columns : any;
   parsedColumns : any;
   @Input() list : Array<any>;
-  showEdition: any = {};
+  showEdition : any = {};
+  openingEditInstance : any = {};
+
 
   constructor(){
 
@@ -56,6 +58,12 @@ export class TableRenderer implements OnInit {
     this.showEdition[index] = !this.showEdition[index];
   }
 
+  openEditInstance(index : number){
+    if(!this.openingEditInstance.hasOwnProperty(index)) this.openingEditInstance[index] = false;
+    this.openingEditInstance[index] = !this.openingEditInstance[index];
+  }
+
+
   getColumnData(item, column){
 
     let path = column.path.map(el=>el);
@@ -70,7 +78,7 @@ export class TableRenderer implements OnInit {
           });
           return match;
         })
-        
+
         if(deppSearch){
           value = deppSearch[prop.find];
         }else{
