@@ -40,9 +40,9 @@
                    <td class="no-padding" [attr.colspan]="parsedColumns.length +2">
                        <molecule-renderer [data]="item" [component]="item._ngComponent"></molecule-renderer>
                        <molecule-save [type]="item._type" [molecule]="item">
-                         <a href="javascript:void(0)" (click)="editOpen(i)" class="btn btn-cancel">Cancel</a>
                          <a href="javascript:void(0)" class="btn btn-save">Save</a>
                        </molecule-save>
+                       <a href="javascript:void(0)" (click)="editOpen(i)" class="btn btn-cancel">Cancel</a>
                    </td>
                 </tr>
               </ng-container>

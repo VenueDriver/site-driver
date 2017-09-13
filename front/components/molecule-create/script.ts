@@ -16,6 +16,7 @@ export class MoleculeCreate {
   @Input() type : string;
   @Input() generator : any;
   @Input() useMolecules : Array<string>;
+  @Output() canceled = new EventEmitter();
   newMolecule : any;
 
   constructor(){
@@ -29,6 +30,10 @@ export class MoleculeCreate {
       this.newMolecule._generator = this.generator;
       this.newMolecule._id = '';
     }
+  }
+
+  cancelCreation(){
+    this.canceled.emit(true);
   }
 
   log(message){
