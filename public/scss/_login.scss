@@ -30,28 +30,28 @@
 	}
 }
 .box-login-cms {
-	background: white;
-	@include box-shadow;
+	border: 1px solid #555;
 	max-width: 500px;
 	@include center;
 
 	.fa-lock {
 		color: white;
-		font-size: 20px;
+		font-size: 30px;
 		display: inline-block;
 		vertical-align: middle;
 		margin-right: 10px;
 		position: relative;
 		top: -2px;
+		opacity: 0.2;
 	}
 	h2 {
-		background: $gray-dark;
 		padding: 20px;
-		color: white;
-		font-weight: 700;
-		font-size: 20px;
+		padding-bottom: 0;
+		color: $gray-medium;
+		font-weight: 400;
+		font-size: 28px;
 		text-align: left;
-		letter-spacing: 1px;
+		letter-spacing: 3px;
 	}
 	small {
 		font-size: 12px;
@@ -62,6 +62,11 @@
 			&:hover {
 				color: $gray;
 			}
+		}
+	}
+	&:hover {
+		input {
+			opacity: 1!important;
 		}
 	}
 }
@@ -79,38 +84,46 @@
 		border: 0;
 	}
 	input {
+		background: $gray-light;
 		&:-webkit-autofill {
-			-webkit-box-shadow: 0 0 0 30px darken($gray-light, 5%) inset;
+		    opacity: 0.8;
+			-webkit-box-shadow: 0 0 0 30px $gray-light inset;
+			box-shadow: 0 0 0 30px $gray-light inset;
 			&:hover,
 			&:focus,
 			&:active {
-				-webkit-box-shadow: 0 0 0 30px darken($gray-light, 10%) inset;
-				background: darken($gray-light, 15%);
+				opacity: 1;
+				background: $gray-light;
 			}
+		}
+		&:hover,
+		&:focus,
+		&:active {
+			opacity: 1;
+			background: $gray-light;
 		}
 	}
 	button {
-		background: $accent-color;
-		color: white;
-		border: 0;
+		background: none;
+		color: $accent-color;
+		border: 2px solid $accent-color;
 		text-transform: uppercase;
 		padding: 0;
-		margin-bottom: 10px;
+		margin: 20px 0;
 		@include transition;
 		cursor: pointer;
 		position: relative;
-		span {
-			background: olive;
-			position: relative;
-			z-index: 999;
-		}
+		max-width: 140px;
+		opacity: 0.6;
 		&:before {
 			content: "LOGIN";
 			z-index: 9;
 			position: relative;
 		}
 		&:hover {
-			background: darken($accent-color, 5%);
+			border-color: darken($accent-color, 10%);
+			color: darken($accent-color, 10%);
+			opacity: 1;
 		}
 	}
 }

@@ -7,7 +7,6 @@ table.table-style {
     text-align: left;
     width: 100%;
     border-collapse: collapse;
-    border: 1px solid #f1f1f1;
     thead {
         background: $primary-color-dark;
         color: white;
@@ -23,6 +22,9 @@ table.table-style {
     }
     thead th:nth-child(2) {
         width: 35%;
+    }
+    tr {
+        border: none;
     }
     th, td {
         padding: 20px;
@@ -47,10 +49,21 @@ table.table-style {
     .box {
         background: #f9f9f9;
     }
-    span {
-        .btn-save,
-        .btn-cancel{
-            width: 50%;
+    .no-padding {
+        .right:last-child {
+            text-align: right;
+            width: 100%;
+            display: inline-block;
+            background: #f9f9f9;
+            padding-bottom: 25px;
+            padding-right: 20px;
+            margin-bottom: 20px;
+            @include box-shadow;
+            @include border-box;
+            .btn-save,
+            .btn-cancel{
+                float: none;
+            }
         }
     }
     .active {
@@ -89,6 +102,7 @@ table.table-style {
 
 .no-padding{
   padding: 0 !important;
+  background: none!important;
 }
 
 .no-margin{
@@ -128,7 +142,7 @@ input[type='checkbox'] {
         background: white;
         width: 2px;
         height: 2px;
-        box-shadow: 
+        box-shadow:
           2px 0 0 white,
           4px 0 0 white,
           4px -2px 0 white,
@@ -172,7 +186,7 @@ input[type='checkbox'] {
         background: white;
         width: 2px;
         height: 2px;
-        box-shadow: 
+        box-shadow:
           2px 0 0 white,
           4px 0 0 white,
           4px -2px 0 white,
