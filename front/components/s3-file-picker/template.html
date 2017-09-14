@@ -22,9 +22,6 @@
                         </li>
                     </ul>
                 </div>
-
-                <a (click)="cancel()" class="btn cancel-btn"><span>CANCEL</span></a>
-
             </div>
             <div class="content-thumbs-col-right">
 
@@ -46,9 +43,13 @@
                     <spinner *ngIf="loading"></spinner>
                     <div *ngIf="!loading">
                         <figure class="thumb" [class.selected]="file.selected" *ngFor="let file of current._files" (click)="selectFile(file)">
-                            <div class="thumb-image" *ngIf="file.isImage">
-                                <img [src]="file.src" alt="">
-                                <div class="content-name"> <span>{{file.name}}</span></div>
+                            <div class="thumb-wrapper" *ngIf="file.isImage">
+                              <div class="thumb-image" >
+                                 <div class="thumb-center">
+                                    <img [src]="file.src" alt="">
+                                   <div class="content-name"> <span>{{file.name}}</span></div>
+                                 </div>
+                              </div>
                             </div>
 
                             <span class="video-file" *ngIf="!file.isImage">{{file.src}}
@@ -60,11 +61,11 @@
                 </div>
 
                 <div *ngIf="selected().length > 0 && !loading" class="box-buttons-image">
-                    <a class="btn-ok" (click)="save()">
-                        <i class="fa fa-check"></i><span>SELECT</span>
-                    </a>
                     <a class="btn-del" (click)="deleteSelected()">
                         <i class="fa fa-times"></i><span>DELETE</span>
+                    </a>
+                    <a class="btn-ok" (click)="save()">
+                        <i class="fa fa-check"></i><span>SELECT</span>
                     </a>
                 </div>
             </div>
