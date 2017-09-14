@@ -34,17 +34,17 @@
           <a href="/" class="select-menu"><i class="fa fa-globe"></i>Sites</a>
         </li> -->
         <ng-container *ngFor="let generator of generators">
-          <li class="animated fadeIn" *ngIf="generator._options._show_in_sidebar">
+          <li class="animated fadeIn" [class.animating]="ready" *ngIf="generator._options._show_in_sidebar">
             <a [routerLink]="['/generator',generator._name]" class="select-menu"><i class="fa fa-database"></i>{{generator._name}}</a>
           </li>
         </ng-container>
-        <li class="animated fadeIn">
+        <li class="animated fadeIn" [class.animating]="ready">
           <hr>
         </li>
-        <li class="animated fadeIn" *ngIf="isDeveloper">
+        <li class="animated fadeIn" [class.animating]="ready" *ngIf="isDeveloper">
           <a href="/molecule-generator" class="select-menu"><i class="fa fa-sitemap"></i>M. Generator</a>
         </li>
-        <li class="animated fadeIn" *ngIf="isDeveloper">
+        <li class="animated fadeIn" [class.animating]="ready" *ngIf="isDeveloper">
           <a href="/cell-builder" class="select-menu"><i class="fa fa-code-fork"></i>Cell Builder</a>
         </li>
         <!-- <li>
@@ -65,7 +65,7 @@
         <li>
           <a style="pointer-events: none;cursor: default;"><i class="fa fa-file-text"></i>Screen Driver</a>
         </li> -->
-        <li class="animated fadeIn">
+        <li class="animated fadeIn" [class.animating]="ready">
           <a href="/logout" class="select-menu"><i class="fa fa-sign-out"></i>Log out</a>
         </li>
       </ul>

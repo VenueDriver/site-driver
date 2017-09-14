@@ -15,7 +15,11 @@ export class MoleculeGeneratorComponent implements OnInit {
 
   isDeveloper : boolean = false;
   ready : boolean = false;
+  animated : boolean = false;
+  animated_modal : boolean = false;
   selectedLayout : string = "Default";
+
+  show_new_molecule_form : boolean = false;
 
   constructor(
     private dataService : DataService
@@ -28,6 +32,7 @@ export class MoleculeGeneratorComponent implements OnInit {
     // console.log(layouts.name.indexOf(this.data._options._layout) > -1,"Available layouts",layouts);
     this.dataService.userRole().then((data)=>{
       this.ready = true;
+      setTimeout(()=>{this.animated = true},100);
       this.isDeveloper = (<any>data).role > 9000;
     })
   }
@@ -35,6 +40,11 @@ export class MoleculeGeneratorComponent implements OnInit {
   getComponent(layoutName){
     console.log("Get layout component");
     return layouts.ngComponent[layoutName];
+  }
+
+  toggleModal(){
+    this.show_new_molecule_form = !this.show_new_molecule_form;
+    setTimeout(()=>{this.animated_modal = true},100);
   }
 
 }
