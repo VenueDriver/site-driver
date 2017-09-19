@@ -1,8 +1,8 @@
-<molecule-select class="animated fadeIn" [useMolecules]="(useMolecules)? useMolecules : null" [max]="1" (valueChange)="updateMolecule($event)"></molecule-select>
+<molecule-select [useMolecules]="(useMolecules)? useMolecules : null" [max]="1" (valueChange)="updateMolecule($event)"></molecule-select>
 
-<molecule-config class="animated fadeIn" *ngIf="['generator','cell'].indexOf(type)>-1" [molecule]="newMolecule"></molecule-config>
-<molecule-renderer class="animated fadeIn" [data]="newMolecule" [component]="newMolecule._ngComponent" *ngIf="['instance'].indexOf(type)>-1 && newMolecule"></molecule-renderer>
-<div class="animated fadeIn right" *ngIf="newMolecule" >
+<molecule-config *ngIf="['generator','cell'].indexOf(type)>-1" [molecule]="newMolecule"></molecule-config>
+<molecule-renderer [data]="newMolecule" [component]="newMolecule._ngComponent" *ngIf="['instance'].indexOf(type)>-1 && newMolecule"></molecule-renderer>
+<div *ngIf="newMolecule" >
 	<a href="javascript:void(0)" (click)="cancelCreation()" class="btn btn-cancel">Cancel</a>
 	<molecule-save [type]="type" [molecule]="newMolecule">
 	  <a href="javascript:void(0)" class="btn btn-save">Create</a>
