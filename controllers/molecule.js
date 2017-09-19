@@ -2,6 +2,9 @@ const Publisher = require( "../custom_modules/publisher" );
 const uniqid = require('uniqid');
 const moment = require("moment");
 
+
+
+
 const validate = (data)=>{
   return new Promise((resolve,reject)=>{
     if(data._name){
@@ -12,6 +15,9 @@ const validate = (data)=>{
   });
 }
 
+
+
+
 // EASY ALIAS TO TRIGGER VALIDATION, SANITAZION AND STORAGE OF DATA
 const save = (query)=>{
 
@@ -21,7 +27,12 @@ const save = (query)=>{
     */
 
   return new Promise((resolve,reject)=>{
-    if(query.type === "instance" && !query.id){
+    if(query.type === "instance" && !query.data._instance_of){
+      query.data._instance_of = query.data._id;
+      query.id = uniqid();
+      query.data._id = query.id;
+    }
+    if(!query.id){
       query.id = uniqid();
       query.data._id = query.id;
     }
@@ -48,6 +59,8 @@ const save = (query)=>{
   })
 }
 
+
+
 const remove = (query)=>{
   return new Promise((resolve,reject)=>{
     const publisher = new Publisher(query);
@@ -57,10 +70,17 @@ const remove = (query)=>{
   });
 }
 
+
+
 const get = (query,format = 'original')=>{
   const publisher = new Publisher(query);
   return publisher.get(format);
 }
+
+
+
+
+
 
 const updateGenerator = (query)=>{
   return new Promise((resolve,reject)=>{
@@ -89,6 +109,24 @@ const updateGenerator = (query)=>{
     }).catch(reject);
   })
 }
+
+
+
+const synchronizeCell = (cell)=>{
+
+  // GET THE CELL
+  // FIND INSTANCES USING THIS CELL
+    // DEEP LOOP ALL THE CHILDS
+    // IF A CHILD IS MADE OF A MODEL CELL
+      // EXECUTE THIS SYNC AGAIN FOR THE NEW
+
+  // WHAT HAPPENS WITH THE INSTANCES HAVING THIS CELL INSTANCE AS A VALUE AND NOT
+  // AS IT'S CORE ROOT ?
+
+}
+
+
+
 
 module.exports = {
   save : save,

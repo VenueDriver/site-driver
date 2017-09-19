@@ -99,7 +99,7 @@ class LocalStorage{
           ()=> i >= routes.length,
           (next,end)=>{
             this.readdir(routes[i],{readFiles : true}).catch(reject).then((list)=>{
-              console.log("Files received get.asyncLoop");
+              // console.log("Files received get.asyncLoop");
               const queryFilter = new QueryFilter(this.query);
               list = queryFilter.filter(list);
 
@@ -108,7 +108,7 @@ class LocalStorage{
             });
           },
           ()=>{
-            console.log("LocalStorage.get(),promise fulfilled");
+            // console.log("LocalStorage.get(),promise fulfilled");
             resolve(mergedResultList);
           }
         );
@@ -142,7 +142,7 @@ class LocalStorage{
   }
 
   readFile(location,file){
-    console.log("Reading",location,file);
+    // console.log("Reading",location,file);
     return new Promise((resolve,reject)=>{
       let mergedLocation = path.join(this.opts.root,location,file);
       // console.log("\nreadFile:",mergedLocation);
@@ -152,7 +152,7 @@ class LocalStorage{
         if(err){
           reject(err);
         }else{
-          console.log("readFile, promise fulfilled");
+          // console.log("readFile, promise fulfilled");
           resolve(data);
         }
       });

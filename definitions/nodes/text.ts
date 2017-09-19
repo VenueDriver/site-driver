@@ -13,6 +13,7 @@ export class TextNode extends Molecule implements TextInterface{
 
   // OVERRIDES SPECIFIC TO THIS CLASS
   _value : string = '';
+  _instance_of : string = '';
   _default_value : string;
   _options : any = {
     _use_textarea : false,

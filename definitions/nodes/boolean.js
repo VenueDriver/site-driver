@@ -17,6 +17,7 @@ var BooleanNode = (function (_super) {
         this._ngComponent = script_1.BooleanNodeComponent;
         // OVERRIDES SPECIFIC TO THIS CLASS
         this._value = false;
+        this._instance_of = '';
         this._default_value = false;
         this._options = {
             _additional_css_classes: ''

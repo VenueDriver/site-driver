@@ -16,6 +16,7 @@ var Cell = (function (_super) {
         this._label = "Cell";
         this._name = "Cell";
         this._ngComponent = script_1.CellComponent;
+        this._instance_of = '';
         this._options = {
             _convert_array_to_keys: false,
             _additional_css_classes: ''

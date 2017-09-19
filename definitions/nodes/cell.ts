@@ -15,6 +15,7 @@ export class Cell extends Molecule implements CellInterface {
 
   // OVERRIDES SPECIFIC TO THIS CLASS
   _value : (CellInterface|NodeInterface)[] ;
+  _instance_of : string = '';
   _default_value : (CellInterface|NodeInterface)[] ;
 
   _options : any = {

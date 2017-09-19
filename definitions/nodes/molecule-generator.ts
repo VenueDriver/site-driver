@@ -15,6 +15,7 @@ export class MoleculeGenerator extends Molecule implements MoleculeGeneratorInte
 
   // OVERRIDES SPECIFIC TO THIS CLASS
   _value : Array<any> = [];
+  _instance_of : string = '';
   _default_value : Array<any> = [];
   _options = {
     _molecule_types : {
