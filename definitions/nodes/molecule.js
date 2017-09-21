@@ -29,6 +29,8 @@ var Molecule = (function () {
         return new Promise(function (resolve, reject) {
             if (Array.isArray(_this._value)) {
                 _this.parser.toNg(obj).then(function (ngObj) {
+                    ngObj._instance_of = ngObj._id;
+                    ngObj._id = '';
                     _this._value.push(ngObj);
                     resolve(_this);
                 }).catch(reject);

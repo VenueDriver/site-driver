@@ -37,6 +37,8 @@ export class Molecule implements NodeInterface {
     return new Promise((resolve,reject)=>{
       if(Array.isArray(this._value)){
         this.parser.toNg(obj).then((ngObj)=>{
+          ngObj._instance_of = ngObj._id;
+          ngObj._id = '';
           this._value.push(ngObj);
           resolve(this);
         }).catch(reject);

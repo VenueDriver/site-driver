@@ -46,7 +46,11 @@ class MoleculeFormatter{
   }
 
   matchNameAndValue(data){
-    data[data._name.replace(/\s/gi,'_')] = data._value;
+    if(data._name){
+      data[data._name.replace(/\s/gi,'_')] = data._value;
+    }else {
+      console.log("WARNING: Could not match name and value of data.","\n",data);
+    }
     return data;
   }
 
@@ -62,9 +66,10 @@ class MoleculeFormatter{
     if(Array.isArray(array)){
       array.forEach((item,i)=>{
         let keys = Object.keys(item);
-        if(keys.length>1) console.log("WARNING: More than one key name existing in [object]. Information could be lost in the formatting process.",keys,"OBJECT:",item);
-        let key = keys[0];
-        obj[key] = item[key];
+        // if(keys.length>1) console.log("WARNING: More than one key name existing in [object]. Information could be lost in the formatting process.",keys,"OBJECT:",item);
+        keys.forEach(key =>{
+          obj[key] = item[key];
+        })
       });
     }
     return obj;
