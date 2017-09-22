@@ -28,6 +28,7 @@ var Molecule = (function () {
         var _this = this;
         return new Promise(function (resolve, reject) {
             if (Array.isArray(_this._value)) {
+                console.log("Molecule.insert()", obj);
                 _this.parser.toNg(obj).then(function (ngObj) {
                     ngObj._instance_of = ngObj._id;
                     ngObj._id = '';

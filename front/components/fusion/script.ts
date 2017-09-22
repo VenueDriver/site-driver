@@ -17,7 +17,9 @@ export class FusionComponent {
   @Output() afterInsert = new EventEmitter();
 
   insert(){
-    this.node.insert(this.nodeInsert);
+    this.node.insert(this.nodeInsert).then(()=>{
+      console.log("Fusion complete\n",this.node);
+    });
     this.afterInsert.emit(false);
   }
 

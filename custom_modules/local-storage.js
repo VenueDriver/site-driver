@@ -147,7 +147,7 @@ class LocalStorage{
       let mergedLocation = path.join(this.opts.root,location,file);
       // console.log("\nreadFile:",mergedLocation);
       this.fs.readFile(mergedLocation,'utf-8',(err,data)=>{
-        console.log("err:",err);
+        // console.log("err:",err);
         if(this.opts.json) data = stringToJSON(data);
         if(err){
           reject(err);
@@ -217,9 +217,9 @@ class LocalStorage{
 
         let i = 0;
         let id;
-        if(this.query.id){
+        if(this.query.type.indexOf("instance")>-1){
           id = this.query.id;
-        }else if(this.query.name && this.query.name.length > 0){
+        }else if(this.query.name.length == 1){
           id = this.query.name[0];
         }else{
           console.log("Malformed query",this.query);
@@ -241,6 +241,7 @@ class LocalStorage{
               });
 
               if(filename){
+                console.log("Removing",filename);
                 // console.log("DELETE",routes[i],filename);
                 this.unlink(routes[i],filename).then(end).catch((err)=>end(err));
               }else{
