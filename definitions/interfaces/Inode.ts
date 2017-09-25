@@ -5,6 +5,7 @@ export interface NodeInterface extends MoleculeInterface{
     _ngClass ?: string;
     _generator ?: MoleculeGeneratorInterface;
     _path    : Array<number>;
+    _instance_of : string;
     _can : {
         _be_required : boolean;
         _edit_value  : boolean;

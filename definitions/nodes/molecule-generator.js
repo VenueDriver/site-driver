@@ -18,6 +18,7 @@ var MoleculeGenerator = (function (_super) {
         this._ngComponent = script_1.MoleculeGeneratorComponent;
         // OVERRIDES SPECIFIC TO THIS CLASS
         this._value = [];
+        this._instance_of = '';
         this._default_value = [];
         this._options = {
             _molecule_types: {

@@ -13,6 +13,7 @@ export class NumberNode extends Molecule implements NumberInterface{
 
   // OVERRIDES SPECIFIC TO THIS CLASS
   _value : number ;
+  _instance_of : string = '';
   _default_value : number;
   _options : any = {
     _additional_css_classes : ''

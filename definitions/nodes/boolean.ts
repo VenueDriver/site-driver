@@ -13,6 +13,7 @@ export class BooleanNode extends Molecule implements BooleanInterface{
 
   // OVERRIDES SPECIFIC TO THIS CLASS
   _value : boolean = false;
+  _instance_of : string = '';
   _default_value : boolean = false;
   _options : any = {
     _additional_css_classes : ''

@@ -17,6 +17,7 @@ var FileNode = (function (_super) {
         this._ngComponent = script_1.FileNodeComponent;
         // OVERRIDES SPECIFIC TO THIS CLASS
         this._value = '';
+        this._instance_of = '';
         this._options = {
             _allow_videos: false,
             _allow_images: true,

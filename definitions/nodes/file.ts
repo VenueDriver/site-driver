@@ -13,6 +13,7 @@ export class FileNode extends Molecule implements FileInterface{
 
   // OVERRIDES SPECIFIC TO THIS CLASS
   _value : string = '';
+  _instance_of : string = '';
   _default_value : string;
   _options : any = {
     _allow_videos : false,

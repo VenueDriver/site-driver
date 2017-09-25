@@ -28,7 +28,6 @@ export class MoleculeCreate {
     // console.log("This Molecule:",this.newMolecule);
     if(this.generator){
       this.newMolecule._generator = this.generator;
-      this.newMolecule._id = '';
     }
   }
 

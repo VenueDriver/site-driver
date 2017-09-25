@@ -18,7 +18,7 @@ class QueryFilter{
   }
 
   filter(list){
-    console.log("QueryFilter.filter, start");
+    // console.log("QueryFilter.filter, start");
 
     if(this.query.hasOwnProperty("where")){
       list = list.filter(item=>{
@@ -26,7 +26,7 @@ class QueryFilter{
       });
     }
 
-    console.log("QueryFilter.filter, done");
+    // console.log("QueryFilter.filter, done");
 
     return list;
   }

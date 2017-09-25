@@ -14,32 +14,39 @@ class StorageRoutes{
 
     this.localStorage = new LocalStorage(storageOptions);
     this.remoteStorage =new S3Storage(storageOptions);
+    this.storage = this.localStorage;
+    if(process.env.STORAGE == "remote"){
+      this.storage = this.remoteStorage;
+    };
     // console.log("REMOTE",this.remoteStorage);
   }
 
   save(){
-    return new Promise((resolve,reject)=>{
-      this.remoteStorage.post().then(resolve
-        // ()=>{
-        // this.localStorage.post().catch(reject).then(resolve);
-        // }
-      ).catch(reject);
-    });
+    return this.storage.post();
+    // return new Promise((resolve,reject)=>{
+    //   this.remoteStorage.post().then(resolve
+    //     ()=>{
+    //     this.localStorage.post().catch(reject).then(resolve);
+    //     }
+    //   ).catch(reject);
+    // });
   }
 
   remove(){
-    return new Promise((resolve,reject)=>{
-      this.remoteStorage.remove().then(resolve
-        // ()=>{
-        //   this.localStorage.remove().catch(reject).then(resolve);
-        // }
-      ).catch(reject);
-    });
+    return this.storage.remove();
+    // return new Promise((resolve,reject)=>{
+    //   this.remoteStorage.remove().then(resolve
+    //     ()=>{
+    //       this.localStorage.remove().catch(reject).then(resolve);
+    //     }
+    //   ).catch(reject);
+    // });
   }
 
   get(){
+    return this.storage.get();
     // return this.localStorage.get();
-    return this.remoteStorage.get();
+    // return this.remoteStorage.get();
   }
 
 }

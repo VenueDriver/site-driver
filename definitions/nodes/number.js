@@ -15,6 +15,7 @@ var NumberNode = (function (_super) {
         this._type = "number";
         this._label = "Number";
         this._ngComponent = script_1.NumberNodeComponent;
+        this._instance_of = '';
         this._options = {
             _additional_css_classes: ''
         };
