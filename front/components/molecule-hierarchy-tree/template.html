@@ -1,0 +1,26 @@
+<div *ngIf="!ready"><spinner></spinner> Please wait...</div>
+
+
+<div *ngIf="ready && (max > 1 || max < 1) && typesList.length > 1" class="contCheckbox">
+  <div class="col-3" *ngFor="let item of typesList">
+    <div (click)="emitValue(item)" class="checkbox" [class.checked]="item.checked">
+        <ng-checkbox [checked]="item.checked"></ng-checkbox>
+        <span class="checkbox-label">
+          {{item._name}} ({{item._type}})
+        </span>
+    </div>
+  </div>
+</div>
+
+
+<div *ngIf="ready && max == 1 && typesList.length > 1">
+  <input
+    [match-formatted]="true"
+    [accept-user-input]="false"
+    auto-complete
+    (ngModelChange)="emitValue($event)"
+    [(ngModel)]="value"
+    [source]="typesList"
+    [value-formatter]="formatItems"
+    [list-formatter]="formatItems" />
+</div>

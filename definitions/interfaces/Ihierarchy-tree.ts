@@ -5,5 +5,5 @@ export interface HierarchyTreeInterface{
   _type : string,
   _id : string,
   _name : string,
-  _childs : HierarchyTreeChild
+  _childs : HierarchyTreeChildInterface
 }
