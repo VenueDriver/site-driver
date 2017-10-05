@@ -65,6 +65,7 @@ import { MoleculeSelect }             from './components/molecule-select/script'
 import { MoleculeSave }               from './components/molecule-save/script';
 import { MoleculeRemove }             from './components/molecule-remove/script';
 import { MoleculeGeneratorComponent } from './components/molecule-generator/script';
+import { MoleculeBrowserComponent }   from './components/molecule-browser/script';
 import { MoleculeConfig }             from './components/molecule-config/script';
 import { MoleculeEdit }               from './components/molecule-edit/script';
 import { MoleculeRenderer }           from './components/molecule-renderer/script';
@@ -189,6 +190,7 @@ const appRoutes: Routes = require('./config/routes');
     MoleculeCreate,
     FusionComponent,
     MoleculeGeneratorComponent,
+    MoleculeBrowserComponent,
     TableRenderer,
     GeneratorLayoutHorizontalCards,
     GeneratorLayoutVerticalCards,
@@ -216,6 +218,7 @@ const appRoutes: Routes = require('./config/routes');
     ColumnComponent,
     MoleculeSelect,
     MoleculeGeneratorComponent,
+    MoleculeBrowserComponent,
     GeneratorLayoutHorizontalCards,
     GeneratorLayoutVerticalCards,
     GeneratorLayoutTable,

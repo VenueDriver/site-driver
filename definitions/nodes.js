@@ -11,4 +11,6 @@ var cell_1 = require('./nodes/cell');
 exports.Cell = cell_1.Cell;
 var molecule_generator_1 = require('./nodes/molecule-generator');
 exports.MoleculeGenerator = molecule_generator_1.MoleculeGenerator;
+var molecule_browser_1 = require('./nodes/molecule-browser');
+exports.MoleculeBrowser = molecule_browser_1.MoleculeBrowser;
 //# sourceMappingURL=nodes.js.map
