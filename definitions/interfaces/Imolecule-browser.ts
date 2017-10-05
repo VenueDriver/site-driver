@@ -1,7 +1,7 @@
-import { NodeInterface , ComponentOption } from '../interfaces';
+import { NodeInterface , ComponentOption , HierarchyTreeInterface } from '../interfaces';
 
 export interface MoleculeBrowserInterface extends NodeInterface{
-  _value : Array<any>;
+  _value : Array<HierarchyTreeInterface>;
   _default_value : Array<any>;
   _options : {
     _display_selection_ui : boolean,

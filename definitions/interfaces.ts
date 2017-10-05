@@ -8,3 +8,5 @@ export { NumberInterface }      from './interfaces/Inumber';
 export { BooleanInterface }     from './interfaces/Iboolean';
 export { FileInterface }        from './interfaces/Ifile';
 export { ComponentOption }      from './interfaces/Icomponent-option';
+export { HierarchyTreeInterface }    from './interfaces/Ihierarchy-tree';
+export { HierarchyTreeChildInterface }    from './interfaces/Ihierarchy-tree-child';
