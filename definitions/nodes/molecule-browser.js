@@ -21,27 +21,11 @@ var MoleculeBrowser = (function (_super) {
         this._instance_of = '';
         this._default_value = [];
         this._options = {
-            _molecule_types: {
-                _options: {
-                    max: -1
-                },
-                _ngComponentName: 'MoleculeSelect',
-                _value: []
-            },
-            _use_only_childs: true,
-            _show_in_sidebar: false,
-            _layout: '',
-            _columns: '',
-            _title: '',
-            _image: {
-                _options: {
-                    _allow_videos: false,
-                    _allow_images: true,
-                    _allow_documents: false
-                },
-                _ngComponentName: 'FileNodeComponent',
-                _value: ''
-            }
+            _display_selection_ui: true,
+            _select_multiple: true,
+            _show_cells: false,
+            _show_generators: true,
+            _show_instances: true
         };
         for (var key in obj) {
             this[key] = obj[key];
