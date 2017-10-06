@@ -24,9 +24,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
       type : ["instance","generator"]
     }).then((cache)=>{
       this.ready = true;
-      console.log("List loaded");
       this._og_list = cache.data;
-      console.log(this._og_list);
       this.rebuildTree();
     }).catch((err)=>{
       console.log(err);
@@ -54,7 +52,32 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
   }
 
   buildTreeBranch(branch : HierarchyTreeInterface) : HierarchyTreeInterface | null{
+    if(branch._branches._value.length > 0) return branch
     let childs = [];
+    const convertValueIntoBranch = (value)=>{
+      if(value._branches) return value;
+      let value_branch_values = (Array.isArray(value._value)) ? [] : typeof value._value;
+
+      if(value._ngClass !== "MoleculeGenerator" && Array.isArray(value._value)){
+        value_branch_values = value._value.map(convertValueIntoBranch);
+      }
+
+      return {
+        _type : value._type,
+        _id : value._id,
+        _name : value._name,
+        _branches : {
+          _all : true,
+          _include : [],
+          _exclude : [],
+          _value : value_branch_values
+        }
+      }
+
+    }
+
+
+
     if(branch._branches._all === false){
       //USE ONLY THE CORRESPONDING CHILDS
       childs = branch._branches._include;
@@ -70,28 +93,24 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
         }
         return false;
       });
-      childs = childs.map((el)=>{
-        return {
-          _type : el._type,
-          _id : el._id,
-          _name : el._name,
-          _branches : {
-            _all : true,
-            _include : [],
-            _exclude : [],
-            _value : []
-          }
-        }
-      })
+
       //EXCLUDE THE CORRESPONDING CHILDS
       if(branch._branches._exclude.length > 0){
         let excluded_ids = branch._branches._exclude.map((excluded)=> excluded._id);
         childs.filter((el)=> excluded_ids.indexOf(el._id) < 0 );
       }
+
+      childs = childs.map( convertValueIntoBranch );
     }
+
+
+
     branch._branches._value = childs.map((branch)=>{
       return this.buildTreeBranch(branch);
     });
+
+
+
     return branch;
   }
 

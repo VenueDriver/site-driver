@@ -1,8 +1,10 @@
 <ng-container *ngIf="ready">
   <div class="hierarchy-tree-branch">
     <div>> {{branch._type}} <b>{{branch._name}}</b> - ({{branch._id}})</div>
-    <ng-container *ngFor="let childBranch of branch._branches._value">
-      <molecule-hierarchy-tree-branch [branch]="childBranch"></molecule-hierarchy-tree-branch>
+    <ng-container *ngIf="isArrayValue">
+      <ng-container *ngFor="let childBranch of branch._branches._value">
+        <molecule-hierarchy-tree-branch [branch]="childBranch"></molecule-hierarchy-tree-branch>
+      </ng-container>
     </ng-container>
   </div>
 
