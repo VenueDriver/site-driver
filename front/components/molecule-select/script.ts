@@ -22,12 +22,25 @@ export class MoleculeSelect implements OnInit {
 
   }
 
+
   emitValue(item){
-    if(this.max > 1 || this.max < 1){
-      item.checked = !item.checked;
-      this.valueChange.emit(this.typesList.filter(el=>el.checked));
-    }else{
-      this.valueChange.emit([item]);
+    const newIdentity = (molecule)=>{
+      molecule._id = '';
+      if(molecule._ngClass !== "MoleculeGenerator" && Array.isArray(molecule._value)){
+        molecule._value = molecule._value.map(newIdentity);
+      }
+      return Object.assign({},molecule);
+    }
+    if(item){
+      if(!item._instance_of) item._instance_of = Object.assign({},item._id);
+      if(this.max > 1 || this.max < 1){
+        item.checked = !item.checked;
+        let returnList = this.typesList.filter(el=>el.checked);
+        returnList = returnList.map(newIdentity);
+        this.valueChange.emit(returnList);
+      }else{
+        this.valueChange.emit([newIdentity(item)]);
+      }
     }
   }
 

@@ -84,7 +84,9 @@ const cellMigration = (query)=>{
               }else{
                 console.log("CELL STATUS:",cell);
                 console.log("No match using:",cell_value);
-                tmp_value.push(Object.assign({},cell_value));
+                let value_copy = Object.assign({},cell_value);
+                value_copy._id = uniqid();
+                tmp_value.push(value_copy);
               }
 
             });
@@ -177,6 +179,19 @@ const save = (query)=>{
       query.id = uniqid();
       query.data._id = query.id;
     }
+
+    const id_everything = (thing)=>{
+      if(!thing._id){
+        thing._id = uniqid();
+      }
+      if(Array.isArray(thing._value)){
+        thing._value = thing._value.map(id_everything);
+      }
+      return thing;
+    }
+
+    query.data = id_everything(query.data);
+
     let unixTimeStamp = moment().format('x');
     if(!query.data.hasOwnProperty("_created_at")){
       query.data._created_at = unixTimeStamp;
