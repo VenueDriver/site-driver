@@ -1,4 +1,11 @@
-<h1>Hierarchy tree</h1>
-<div *ngFor="let item of typesList">
-  {{item._name}}
-</div>
+<ng-container *ngIf="ready">
+  <div class="hierarchy-tree-branch">
+    <div>
+      <b>~:</b>ROOT
+    </div>
+    <ng-container *ngFor="let childBranch of _tree._branches._value">
+      <molecule-hierarchy-tree-branch [branch]="childBranch"></molecule-hierarchy-tree-branch>
+    </ng-container>
+  </div>
+
+</ng-container>

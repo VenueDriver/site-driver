@@ -66,6 +66,7 @@ import { MoleculeSave }               from './components/molecule-save/script';
 import { MoleculeRemove }             from './components/molecule-remove/script';
 import { MoleculeGeneratorComponent } from './components/molecule-generator/script';
 import { MoleculeHierarchyTreeComponent } from './components/molecule-hierarchy-tree/script';
+import { MoleculeHierarchyTreeBranchComponent } from './components/molecule-hierarchy-tree/molecule-hierarchy-tree-branch/script';
 import { MoleculeBrowserComponent }   from './components/molecule-browser/script';
 import { MoleculeConfig }             from './components/molecule-config/script';
 import { MoleculeEdit }               from './components/molecule-edit/script';
@@ -190,6 +191,7 @@ const appRoutes: Routes = require('./config/routes');
     MoleculeRemove,
     MoleculeCreate,
     MoleculeHierarchyTreeComponent,
+    MoleculeHierarchyTreeBranchComponent,
     FusionComponent,
     MoleculeGeneratorComponent,
     MoleculeBrowserComponent,

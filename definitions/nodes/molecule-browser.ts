@@ -1,7 +1,7 @@
 import { Molecule } from './molecule'; // IMPORT NODE CLASS
 import { MoleculeSelect } from '../../front/components/molecule-select/script'; // IMPORT NG COMPONENT
 import { MoleculeBrowserComponent } from '../../front/components/molecule-browser/script'; // IMPORT NG COMPONENT
-import { MoleculeBrowserInterface , ComponentOption} from './../interfaces'; // IMPORT INTERFACE
+import { MoleculeBrowserInterface , ComponentOption, HierarchyTreeInterface} from './../interfaces'; // IMPORT INTERFACE
 
 
 export class MoleculeBrowser extends Molecule implements MoleculeBrowserInterface{
@@ -14,7 +14,7 @@ export class MoleculeBrowser extends Molecule implements MoleculeBrowserInterfac
   _ngComponent = MoleculeBrowserComponent;
 
   // OVERRIDES SPECIFIC TO THIS CLASS
-  _value : Array<any> = [];
+  _value : HierarchyTreeInterface | null = null;
   _instance_of : string = '';
   _default_value : Array<any> = [];
   _options = {

@@ -17,7 +17,7 @@ var MoleculeBrowser = (function (_super) {
         this._name = "MoleculeBrowser";
         this._ngComponent = script_1.MoleculeBrowserComponent;
         // OVERRIDES SPECIFIC TO THIS CLASS
-        this._value = [];
+        this._value = null;
         this._instance_of = '';
         this._default_value = [];
         this._options = {
