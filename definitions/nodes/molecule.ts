@@ -38,8 +38,6 @@ export class Molecule implements NodeInterface {
       if(Array.isArray(this._value)){
         console.log("Molecule.insert()",obj);
         this.parser.toNg(obj).then((ngObj)=>{
-          ngObj._instance_of = ngObj._id;
-          ngObj._id = '';
           this._value.push(ngObj);
           resolve(this);
         }).catch(reject);

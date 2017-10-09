@@ -32,13 +32,14 @@ export class MoleculeSelect implements OnInit {
       return Object.assign({},molecule);
     }
     if(item){
-      if(!item._instance_of) item._instance_of = Object.assign({},item._id);
+      item._instance_of = Object.assign({},item)._id;
       if(this.max > 1 || this.max < 1){
         item.checked = !item.checked;
         let returnList = this.typesList.filter(el=>el.checked);
         returnList = returnList.map(newIdentity);
         this.valueChange.emit(returnList);
       }else{
+        console.log(newIdentity(item));
         this.valueChange.emit([newIdentity(item)]);
       }
     }

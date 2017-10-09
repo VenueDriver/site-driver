@@ -31,6 +31,7 @@ const cellMigration = (query)=>{
 
         // console.log("Cell:\n",cell);
         const migrate = (cell,instance)=>{
+          cell = Object.assign({},cell);
 
           // console.log("\n\n\n\n cellMigration.migrate() CELL:\n",cell,"\n\nWith:\n",instance);
 
@@ -96,10 +97,10 @@ const cellMigration = (query)=>{
           return instance;
         }
 
-        const deepLoop = (array,work)=>{
+        const mapDeep = (array,work)=>{
           return array.map((instance)=>{
             if(instance._value && Array.isArray(instance._value)){
-              instance._value = deepLoop(instance._value,work);
+              instance._value = mapDeep(instance._value,work);
             }
             return work(instance);
           });
@@ -117,7 +118,7 @@ const cellMigration = (query)=>{
               }else{
                 // console.log("PRE MIGRATE INSTANCE",instances[i]);
                 if(instances[i]._value && Array.isArray(instances[i]._value)){
-                  instances[i]._value = deepLoop(instances[i]._value,(instance)=>{
+                  instances[i]._value = mapDeep(instances[i]._value,(instance)=>{
                     return migrate(Object.assign({},cell),instance);
                   });
                 }
@@ -170,11 +171,6 @@ const save = (query)=>{
     */
 
   return new Promise((resolve,reject)=>{
-    if(query.type === "instance" && !query.data._instance_of){
-      query.data._instance_of = query.data._id;
-      query.id = uniqid();
-      query.data._id = query.id;
-    }
     if(!query.id){
       query.id = uniqid();
       query.data._id = query.id;

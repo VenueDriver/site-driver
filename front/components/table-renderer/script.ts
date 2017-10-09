@@ -95,4 +95,8 @@ export class TableRenderer implements OnInit {
     return value;
   }
 
+  log(message){
+    console.log(message);
+  }
+
 }
