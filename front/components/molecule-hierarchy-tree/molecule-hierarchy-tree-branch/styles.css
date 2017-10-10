@@ -1,4 +1,33 @@
-.hierarchy-tree-branch{
+molecule-hierarchy-tree-branch ul{
   padding-left: 30px;
+}
+
+li.branch-handler{
   background: #eee;
+  border-top:1px solid #ccc;
+  cursor: pointer;
+  padding: 10px;
+}
+
+li.branch-handler:hover{
+  background: #ccc;
+}
+
+.toggleAllButton{
+  padding: 10px 15px;
+  background: #999;
+  color: #ddd;
+}
+
+.toggleAllButton.active{
+  background: #38c;
+  color: #FFF;
+}
+
+ul.horizontal{
+  display: table;
+}
+
+ul.horizontal > li{
+  display: table-cell;
 }

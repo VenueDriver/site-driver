@@ -19,6 +19,10 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
 
   }
 
+  branchSelected(branch){
+    console.log("Branch selected:",branch);
+  }
+
   ngOnInit(){
     this.moleculeService.getMoleculeList({
       type : ["instance","generator"]

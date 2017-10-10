@@ -1,11 +1,12 @@
-<ng-container *ngIf="ready">
-  <div class="hierarchy-tree-branch">
-    <div>
-      <b>~:</b>ROOT
-    </div>
-    <ng-container *ngFor="let childBranch of _tree._branches._value">
-      <molecule-hierarchy-tree-branch [branch]="childBranch"></molecule-hierarchy-tree-branch>
-    </ng-container>
-  </div>
-
-</ng-container>
+<ul *ngIf="ready">
+  <li class="branch-handler">
+    <div>> root</div>
+  </li>
+  <li>
+    <ul>
+      <li *ngFor="let childBranch of _tree._branches._value">
+        <molecule-hierarchy-tree-branch (valueChange)="branchSelected($event)" [branch]="childBranch"></molecule-hierarchy-tree-branch>
+      </li>
+    </ul>
+  </li>
+</ul>

@@ -12,6 +12,8 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
   ready : boolean = false;
   isArrayValue : boolean = false;
   @Input() branch : HierarchyTreeInterface;
+  @Input() checked : boolean = false;
+  @Output() valueChange = new EventEmitter();
 
   constructor(){}
 
@@ -20,6 +22,16 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
       this.isArrayValue = Array.isArray(this.branch._branches._value);
       this.ready = true;
     }
+  }
+
+  selected(branch){
+    this.valueChange.emit(branch);
+  }
+
+  toggleAllChilds(branch){
+    branch._branches._include = [];
+    branch._branches._exclude = [];
+    branch._branches._all = !branch._branches._all;
   }
 
 }

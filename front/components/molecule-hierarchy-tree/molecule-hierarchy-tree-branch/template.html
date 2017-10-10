@@ -1,11 +1,26 @@
-<ng-container *ngIf="ready">
-  <div class="hierarchy-tree-branch">
-    <div>> {{branch._type}} <b>{{branch._name}}</b> - ({{branch._id}})</div>
-    <ng-container *ngIf="isArrayValue">
-      <ng-container *ngFor="let childBranch of branch._branches._value">
-        <molecule-hierarchy-tree-branch [branch]="childBranch"></molecule-hierarchy-tree-branch>
-      </ng-container>
-    </ng-container>
-  </div>
-
-</ng-container>
+<ul *ngIf="ready">
+  <li class="branch-handler">
+    <ul class="horizontal">
+      <li>
+        <ng-checkbox (click)="selected(branch)" [checked]="checked"></ng-checkbox>
+      </li>
+      <li>
+        > {{branch._type}} <b>{{branch._name}}</b> - ({{branch._id}})
+      </li>
+      <li *ngIf="isArrayValue">
+        <span [class.active]="branch._branches._all" class="toggleAllButton" (click)="toggleAllChilds(branch)">
+          ALL
+        </span>
+      </li>
+    </ul>
+  </li>
+  <ng-container *ngIf="isArrayValue">
+  <li>
+    <ul>
+      <li *ngFor="let childBranch of branch._branches._value">
+        <molecule-hierarchy-tree-branch (valueChange)="selectedChild($event)" [branch]="childBranch"></molecule-hierarchy-tree-branch>
+      </li>
+    </ul>
+  </li>
+  </ng-container>
+</ul>
