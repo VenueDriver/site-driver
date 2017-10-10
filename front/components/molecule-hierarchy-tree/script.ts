@@ -20,7 +20,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
   }
 
   branchSelected(branch){
-    console.log("Branch selected:",branch);
+
   }
 
   ngOnInit(){
@@ -43,6 +43,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
         _type : "root",
         _id : "",
         _name : "root",
+        _collapsed : false,
         _branches : {
           _all : true,
           _include : [],
@@ -58,27 +59,34 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
   buildTreeBranch(branch : HierarchyTreeInterface) : HierarchyTreeInterface | null{
     if(branch._branches._value.length > 0) return branch
     let childs = [];
-    const convertValueIntoBranch = (value)=>{
+
+    const convertValueIntoBranch = (value,parent)=>{
       if(value._branches) return value;
       let value_branch_values = (Array.isArray(value._value)) ? [] : typeof value._value;
 
       if(value._ngClass !== "MoleculeGenerator" && Array.isArray(value._value)){
-        value_branch_values = value._value.map(convertValueIntoBranch);
+        value_branch_values = value._value.map(el => convertValueIntoBranch(el,value));
       }
 
-      return {
+      let currentBranch = {
         _type : value._type,
         _id : value._id,
         _name : value._name,
+        _collapsed : true,
+        _checked : true,
         _branches : {
           _all : true,
           _include : [],
           _exclude : [],
           _value : value_branch_values
         }
-      }
+      };
+
+      return currentBranch;
 
     }
+
+
 
 
 
@@ -104,7 +112,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
         childs.filter((el)=> excluded_ids.indexOf(el._id) < 0 );
       }
 
-      childs = childs.map( convertValueIntoBranch );
+      childs = childs.map( el => convertValueIntoBranch(el,branch) );
     }
 
 

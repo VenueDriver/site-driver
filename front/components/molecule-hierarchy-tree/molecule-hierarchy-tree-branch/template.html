@@ -2,7 +2,7 @@
   <li class="branch-handler">
     <ul class="horizontal">
       <li>
-        <ng-checkbox (click)="selected(branch)" [checked]="checked"></ng-checkbox>
+        <ng-checkbox (click)="branchSelected(branch)" [checked]="checkedBranch"></ng-checkbox>
       </li>
       <li>
         > {{branch._type}} <b>{{branch._name}}</b> - ({{branch._id}})
@@ -16,9 +16,9 @@
   </li>
   <ng-container *ngIf="isArrayValue">
   <li>
-    <ul>
+    <ul class="branch-level">
       <li *ngFor="let childBranch of branch._branches._value">
-        <molecule-hierarchy-tree-branch (valueChange)="selectedChild($event)" [branch]="childBranch"></molecule-hierarchy-tree-branch>
+        <molecule-hierarchy-tree-branch [parent]="branch" [tree]="tree" [checked]="childBranch._checked" (updated)="emitUpwards('updated',$event)" (selected)="childBranchSelected($event)" [branch]="childBranch"></molecule-hierarchy-tree-branch>
       </li>
     </ul>
   </li>
