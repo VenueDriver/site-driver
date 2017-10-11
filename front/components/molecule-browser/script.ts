@@ -9,14 +9,16 @@ import { Component , Input , OnInit , Output, EventEmitter} from '@angular/core'
 
 export class MoleculeBrowserComponent {
 
+  @Input() data : any;
   @Output() valueChange = new EventEmitter();
 
   constructor(){
 
   }
 
-  emitValue(tree){
-    this.valueChange.emit(tree);
+  emitValue(hierarchyTree){
+    this.valueChange.emit(hierarchyTree);
+    this.data._value = hierarchyTree;
   }
 
 }
