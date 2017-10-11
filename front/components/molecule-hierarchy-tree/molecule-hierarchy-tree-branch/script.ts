@@ -18,10 +18,17 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
 
   @Input() checked : boolean = false;
 
-  @Output() updated = new EventEmitter();
   @Output() selected = new EventEmitter();
 
-  constructor(){}
+  @Output() treeUpdated = new EventEmitter();
+
+  constructor(){
+
+  }
+
+  branchChanged(){
+    this.treeUpdated.emit();
+  }
 
   ngOnInit(){
     if(this.branch){
@@ -50,6 +57,7 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
       }
       this.updateChilds();
     }
+    this.branchChanged();
   }
 
   isBranchChecked(child,parent){

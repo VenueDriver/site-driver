@@ -17,8 +17,14 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
   checked : boolean = true;
   @Input() root : HierarchyTreeInterface;
 
+  @Output() treeUpdated = new EventEmitter();
+
   constructor(private moleculeService : MoleculeService){
 
+  }
+
+  branchChanged(){
+    this.treeUpdated.emit(this._tree);
   }
 
   childChecked(branch){
@@ -37,6 +43,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
       }
       this.updateChilds();
     }
+    this.branchChanged();
   }
 
   updateChilds(){
