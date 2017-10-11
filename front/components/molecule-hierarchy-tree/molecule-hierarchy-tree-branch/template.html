@@ -1,4 +1,4 @@
-<ul *ngIf="ready">
+<ul *ngIf="ready" class="branch-level">
   <li class="branch-handler">
     <ul class="horizontal">
       <li>
@@ -16,7 +16,7 @@
   </li>
   <ng-container *ngIf="isArrayValue && checked">
   <li>
-    <ul class="branch-level">
+    <ul>
       <li *ngFor="let childBranch of branch._branches._value">
         <molecule-hierarchy-tree-branch (selected)="childChecked(childBranch)" [checked]="childBranch._checked" [parent]="branch" [branch]="childBranch"></molecule-hierarchy-tree-branch>
       </li>
