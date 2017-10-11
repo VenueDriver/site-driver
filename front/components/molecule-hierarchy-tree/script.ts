@@ -12,15 +12,53 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
 
   ready : boolean = false;
   _og_list : Array<any> = [];
+  isArrayValue : boolean = true;
   _tree : HierarchyTreeInterface | null = null;
+  checked : boolean = true;
   @Input() root : HierarchyTreeInterface;
 
   constructor(private moleculeService : MoleculeService){
 
   }
 
-  branchSelected(branch){
+  childChecked(branch){
+    if(this.checked){
+      let targetArray = this._tree._branches[ (this._tree._branches._all) ? "_exclude" : "_include"];
+      let targetIndex = null;
+      targetArray.forEach((el,i)=>{
+        if(el._id === branch._id){
+        targetIndex = i
+        }
+      });
+      if(targetIndex != null){
+        targetArray.splice(targetIndex,1);
+      }else{
+        targetArray.push(branch);
+      }
+      this.updateChilds();
+    }
+  }
 
+  updateChilds(){
+    if(this.isArrayValue){
+      this._tree._branches._value = (<HierarchyTreeInterface[]>this._tree._branches._value).map((childBranch)=>{
+        return this.isBranchChecked(childBranch,this._tree);
+      })
+    }
+  }
+
+  isBranchChecked(child,parent){
+    let includedALL = this._tree._branches._all;
+    let excludedBranch = this._tree._branches._exclude.find(el=> el._id === child._id);
+    let includedBranch = this._tree._branches._include.find(el=> el._id === child._id);
+    if(includedALL && excludedBranch){
+      child._checked = false;
+    }else if(!includedALL && !includedBranch){
+      child._checked = false;
+    }else{
+      child._checked = true;
+    }
+    return child;
   }
 
   ngOnInit(){
@@ -44,6 +82,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
         _id : "",
         _name : "root",
         _collapsed : false,
+        _checked : true,
         _branches : {
           _all : true,
           _include : [],

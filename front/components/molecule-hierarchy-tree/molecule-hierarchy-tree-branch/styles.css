@@ -17,6 +17,11 @@ li.branch-handler:hover{
   padding: 10px 15px;
   background: #999;
   color: #ddd;
+  cursor: pointer;
+}
+
+ng-checkbox{
+  cursor: pointer;
 }
 
 .toggleAllButton.active{

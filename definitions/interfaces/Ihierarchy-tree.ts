@@ -5,5 +5,6 @@ export interface HierarchyTreeInterface{
   _id : string,
   _name : string,
   _branches : HierarchyTreeBranchInterface,
+  _checked : boolean,
   _collapsed : boolean
 }

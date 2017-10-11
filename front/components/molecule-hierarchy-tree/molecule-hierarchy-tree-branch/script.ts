@@ -17,6 +17,7 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
   @Input() tree : HierarchyTreeInterface;
 
   @Input() checked : boolean = false;
+
   @Output() updated = new EventEmitter();
   @Output() selected = new EventEmitter();
 
@@ -26,54 +27,65 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
     if(this.branch){
       this.isArrayValue = Array.isArray(this.branch._branches._value);
       this.ready = true;
-      this.isBranchChecked();
     }
   }
 
-  isBranchChecked(){
-    let includedALL = this.parent._branches._all;
-    let excludedBranch = this.parent._branches._exclude.find(el=> el._id === this.branch._id);
-    let includedBranch = this.parent._branches._include.find(el=> el._id === this.branch._id);
-    if(includedALL && excludedBranch){
-      this.checkedBranch = false;
-    }else if(!includedALL && !includedBranch){
-      this.checkedBranch = false;
+  checkBoxClicked(current_state){
+    this.selected.emit(current_state);
+  }
+
+  childChecked(branch){
+    if(this.checked){
+      let targetArray = this.branch._branches[ (this.branch._branches._all) ? "_exclude" : "_include"];
+      let targetIndex = null;
+      targetArray.forEach((el,i)=>{
+        if(el._id === branch._id){
+        targetIndex = i
+        }
+      });
+      if(targetIndex != null){
+        targetArray.splice(targetIndex,1);
+      }else{
+        targetArray.push(branch);
+      }
+      this.updateChilds();
     }
+  }
+
+  isBranchChecked(child,parent){
+    let includedALL = this.branch._branches._all;
+    let excludedBranch = this.branch._branches._exclude.find(el=> el._id === child._id);
+    let includedBranch = this.branch._branches._include.find(el=> el._id === child._id);
+    if(includedALL && excludedBranch){
+      child._checked = false;
+    }else if(!includedALL && !includedBranch){
+      child._checked = false;
+    }else{
+      child._checked = true;
+    }
+    return child;
   }
 
   ngOnChanges(){
-    this.isBranchChecked();
+    this.toggleAllChilds(this.checked);
   }
 
-
-  branchSelected(branch){
-    this.selected.emit(branch);
+  toggleAllChilds(setTo ?: boolean){
+    this.branch._branches._include = [];
+    this.branch._branches._exclude = [];
+    this.branch._branches._all = (this.checked) ? setTo || !this.branch._branches._all : false;
+    this.updateChilds();
   }
 
-  toggleAllChilds(branch){
-    branch._branches._include = [];
-    branch._branches._exclude = [];
-    branch._branches._all = !branch._branches._all;
-    this.updated.emit(this.branch);
-  }
-
-  childBranchSelected(branch){
-    let targetArray = this.branch._branches[ (this.branch._branches._all) ? "_exclude" : "_include"];
-    let targetIndex = null;
-    targetArray.forEach((el,i)=>{ if(el._id === branch._id) targetIndex = i})
-    if(!targetIndex){
-      targetArray.splice(targetIndex,1);
-    }else{
-      targetArray.push(branch);
+  updateChilds(){
+    if(this.isArrayValue){
+      this.branch._branches._value = (<HierarchyTreeInterface[]>this.branch._branches._value).map((childBranch)=>{
+        return this.isBranchChecked(childBranch,this.branch);
+      })
     }
-
-    console.log("childBranchSelected:",this.branch);
-
-    this.updated.emit(this.branch);
   }
 
   emitUpwards(eventName,ev){
-    this[eventName].emit(ev);
   }
 
 }
