@@ -16,7 +16,6 @@ export class MoleculeBrowserComponent {
   }
 
   emitValue(tree){
-    console.log("tree changed",tree);
     this.valueChange.emit(tree);
   }
 

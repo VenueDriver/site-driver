@@ -26,8 +26,8 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
 
   }
 
-  branchChanged(){
-    this.treeUpdated.emit();
+  branchChanged(branch : HierarchyTreeInterface){
+    this.treeUpdated.emit(branch);
   }
 
   ngOnInit(){
@@ -57,7 +57,7 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
       }
       this.updateChilds();
     }
-    this.branchChanged();
+    this.branchChanged(this.branch);
   }
 
   isBranchChecked(child,parent){

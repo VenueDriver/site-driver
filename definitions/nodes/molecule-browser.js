@@ -23,9 +23,8 @@ var MoleculeBrowser = (function (_super) {
         this._options = {
             _display_selection_ui: true,
             _select_multiple: true,
-            _show_cells: false,
-            _show_generators: true,
-            _show_instances: true
+            _single_value: false,
+            _output_branch_only: false
         };
         for (var key in obj) {
             this[key] = obj[key];

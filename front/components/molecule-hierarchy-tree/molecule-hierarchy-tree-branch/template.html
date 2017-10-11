@@ -18,7 +18,7 @@
   <li>
     <ul>
       <li *ngFor="let childBranch of branch._branches._value">
-        <molecule-hierarchy-tree-branch (treeUpdated)="branchChanged()" (selected)="childChecked(childBranch)" [checked]="childBranch._checked" [parent]="branch" [branch]="childBranch"></molecule-hierarchy-tree-branch>
+        <molecule-hierarchy-tree-branch (treeUpdated)="branchChanged($event)" (selected)="childChecked(childBranch)" [checked]="childBranch._checked" [parent]="branch" [branch]="childBranch"></molecule-hierarchy-tree-branch>
       </li>
     </ul>
   </li>
