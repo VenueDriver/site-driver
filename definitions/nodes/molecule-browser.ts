@@ -19,7 +19,6 @@ export class MoleculeBrowser extends Molecule implements MoleculeBrowserInterfac
   _default_value : Array<any> = [];
   _options = {
     _display_selection_ui : true,
-    _select_multiple : true,
     _single_value : false,
     _output_branch_only : false
 

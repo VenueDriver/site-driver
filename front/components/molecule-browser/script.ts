@@ -9,7 +9,7 @@ import { Component , Input , OnInit , Output, EventEmitter} from '@angular/core'
 
 export class MoleculeBrowserComponent {
 
-  @Input() data : any;
+  @Input() data ;
   @Output() valueChange = new EventEmitter();
 
   constructor(){

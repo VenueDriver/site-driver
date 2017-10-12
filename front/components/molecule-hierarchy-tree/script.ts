@@ -15,18 +15,33 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
   isArrayValue : boolean = true;
   _tree : HierarchyTreeInterface | null = null;
   checked : boolean = true;
-  @Input() root : HierarchyTreeInterface;
 
+  outputValue : any = {};
+
+  @Input() single_value : boolean = false;
+  @Input() output_branch_only : boolean = false;
+  @Input() root : HierarchyTreeInterface;
   @Output() treeUpdated = new EventEmitter();
 
   constructor(private moleculeService : MoleculeService){
 
   }
 
+
   branchChanged( branch : HierarchyTreeInterface ){
     console.log("Branch changed",branch);
-    this.treeUpdated.emit(branch);
+    if(!this.output_branch_only){
+      this.outputValue = this._tree;
+    }else{
+      if(this.single_value){
+        this.outputValue = [branch];
+      }else{
+        this.outputValue.push(branch);
+      }
+    }
+    this.treeUpdated.emit(this.outputValue);
   }
+
 
   childChecked(branch){
     if(this.checked){
@@ -47,6 +62,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
     this.branchChanged(this._tree);
   }
 
+
   updateChilds(){
     if(this.isArrayValue){
       this._tree._branches._value = (<HierarchyTreeInterface[]>this._tree._branches._value).map((childBranch)=>{
@@ -54,6 +70,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
       })
     }
   }
+
 
   isBranchChecked(child,parent){
     let includedALL = this._tree._branches._all;
@@ -69,6 +86,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
     return child;
   }
 
+
   ngOnInit(){
     this.moleculeService.getMoleculeList({
       type : ["instance","generator"]
@@ -80,6 +98,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
       console.log(err);
     })
   }
+
 
   buildTree(){
     if(this.root){
@@ -102,6 +121,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
     this._tree = this.buildTreeBranch(this._tree);
     console.log("_tree:",this._tree);
   }
+
 
   buildTreeBranch(branch : HierarchyTreeInterface) : HierarchyTreeInterface | null{
     if(branch._branches._value.length > 0) return branch
@@ -133,10 +153,6 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
 
     }
 
-
-
-
-
     if(branch._branches._all === false){
       //USE ONLY THE CORRESPONDING CHILDS
       childs = branch._branches._include;
@@ -162,16 +178,13 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
       childs = childs.map( el => convertValueIntoBranch(el,branch) );
     }
 
-
-
     branch._branches._value = childs.map((branch)=>{
       return this.buildTreeBranch(branch);
     });
 
-
-
     return branch;
   }
+
 
   rebuildTree(){
     this._tree = null;
