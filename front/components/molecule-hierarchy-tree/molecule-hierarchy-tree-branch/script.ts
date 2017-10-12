@@ -57,7 +57,7 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
       }
       this.updateChilds();
     }
-    this.branchChanged(this.branch);
+    this.branchChanged(branch);
   }
 
   isBranchChecked(child,parent){
@@ -91,9 +91,6 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
         return this.isBranchChecked(childBranch,this.branch);
       })
     }
-  }
-
-  emitUpwards(eventName,ev){
   }
 
 }

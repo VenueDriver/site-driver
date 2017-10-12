@@ -1,4 +1,4 @@
-import { Component , Input , OnInit , Output, EventEmitter} from '@angular/core';
+import { Component , Input , OnInit , Output, EventEmitter, ComponentRef, ChangeDetectorRef} from '@angular/core';
 
 
 @Component({
@@ -12,13 +12,14 @@ export class MoleculeBrowserComponent {
   @Input() data ;
   @Output() valueChange = new EventEmitter();
 
-  constructor(){
+  constructor(private ref: ChangeDetectorRef){
 
   }
 
   emitValue(hierarchyTree){
     this.valueChange.emit(hierarchyTree);
     this.data._value = hierarchyTree;
+    this.ref.detectChanges();
   }
 
 }
