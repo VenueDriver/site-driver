@@ -32,6 +32,7 @@ export class MoleculeBrowserComponent implements OnInit {
   }
 
   ngOnInit(){
+    console.log("Browser data:",this.data);
     this.parseAdditionalClasses();
     this.validate(this.data._value);
     this.dataService.userRole().then((data)=>{

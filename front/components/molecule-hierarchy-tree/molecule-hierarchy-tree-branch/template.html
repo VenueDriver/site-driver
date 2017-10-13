@@ -1,11 +1,11 @@
 <ul *ngIf="ready" class="branch-level" [class.selected-branch]="selectedBranch">
-  <li class="branch-handler">
+  <li class="branch-handler" (click)="branchClicked()">
     <ul class="horizontal">
       <li *ngIf="!output_branch_only">
         <ng-checkbox (click)="checkBoxClicked(checked)" [checked]="checked"></ng-checkbox>
       </li>
-      <li (click)="branchClicked()">
-        >{{branch._type}} <b>{{branch._name}}</b> - ({{branch._id}})
+      <li>
+        >{{branch._type}} <b>{{branch._name}}</b> - ({{branch._id}}) (IS CHECKED? {{checked}})
       </li>
       <li *ngIf="isArrayValue && !output_branch_only">
         <span [class.active]="branch._branches._all" class="toggleAllButton" (click)="toggleAllChilds()">
@@ -18,17 +18,19 @@
   <li>
     <ul>
       <li *ngFor="let childBranch of branch._branches._value">
-        <molecule-hierarchy-tree-branch
-          [single_value]="single_value"
-          [branchSelectionList]="branchSelectionList"
-          [output_branch_only]="output_branch_only"
-          (treeUpdated)="branchChanged($event)"
-          (selected)="childChecked(childBranch)"
-          (branchClick)="branchClicked($event)"
-          [checked]="childBranch._checked"
-          [parent]="branch"
-          [branch]="childBranch"
-        ></molecule-hierarchy-tree-branch>
+        <ng-container *ngIf="childBranch._checked || !output_branch_only">
+          <molecule-hierarchy-tree-branch
+            [single_value]="single_value"
+            [branchSelectionList]="branchSelectionList"
+            [output_branch_only]="output_branch_only"
+            (treeUpdated)="branchChanged($event)"
+            (selected)="childChecked(childBranch)"
+            (branchClick)="branchClicked($event)"
+            [checked]="childBranch._checked"
+            [parent]="branch"
+            [branch]="childBranch"
+          ></molecule-hierarchy-tree-branch>
+        </ng-container>
       </li>
     </ul>
   </li>

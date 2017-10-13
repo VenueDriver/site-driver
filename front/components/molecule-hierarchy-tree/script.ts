@@ -22,6 +22,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
   @Input() output_branch_only : boolean = false;
   @Input() root : HierarchyTreeInterface;
   @Output() treeUpdated = new EventEmitter();
+  @Output() valueChange = new EventEmitter();
 
   constructor(private moleculeService : MoleculeService){
 
@@ -37,6 +38,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
     }
     console.log("Emit value:",this.outputValue);
     this.treeUpdated.emit(this.outputValue);
+    this.valueChange.emit(this.outputValue);
   }
 
   getBranchSelection(branch : HierarchyTreeInterface){
@@ -166,6 +168,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
 
 
   buildTree(){
+    console.log("Root?",this.root);
     if(this.root){
       this._tree = this.root;
     }else{

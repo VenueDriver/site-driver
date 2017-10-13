@@ -20,8 +20,15 @@ export class MoleculeBrowser extends Molecule implements MoleculeBrowserInterfac
   _options = {
     _display_selection_ui : true,
     _single_value : false,
-    _output_branch_only : false
-
+    _output_branch_only : false,
+    _root : {
+      _options : {
+        single_value : false,
+        output_branch_only : false
+      },
+      _ngComponentName : 'MoleculeHierarchyTreeComponent',
+      _value : null
+    }
   };
 
 

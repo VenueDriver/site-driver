@@ -6,7 +6,7 @@ export interface MoleculeBrowserInterface extends NodeInterface{
   _options : {
     _display_selection_ui : boolean,
     _single_value : boolean,
-    _output_branch_only : boolean
-
+    _output_branch_only : boolean,
+    _root : ComponentOption
   }
 }
