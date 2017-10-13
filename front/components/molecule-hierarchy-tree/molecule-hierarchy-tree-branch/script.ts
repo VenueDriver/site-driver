@@ -12,11 +12,13 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
   ready : boolean = false;
   isArrayValue : boolean = false;
   checkedBranch : boolean = true;
+  selectedBranch : boolean = false;
   @Input() branch : HierarchyTreeInterface;
   @Input() parent : HierarchyTreeInterface;
   @Input() tree : HierarchyTreeInterface;
   @Input() single_value : boolean = false;
   @Input() output_branch_only : boolean = false;
+  @Input() branchSelectionList : Array<HierarchyTreeInterface> = [];
 
   @Input() checked : boolean = false;
 
@@ -86,6 +88,11 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
 
   ngOnChanges(){
     this.toggleAllChilds(this.checked);
+    if(this.branchSelectionList.find((el)=> el._id === this.branch._id )){
+      this.selectedBranch = true;
+    }else{
+      this.selectedBranch = false;
+    }
   }
 
   toggleAllChilds(setTo ?: boolean){

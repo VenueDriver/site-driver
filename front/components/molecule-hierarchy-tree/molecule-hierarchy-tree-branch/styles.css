@@ -36,3 +36,8 @@ ul.horizontal{
 ul.horizontal > li{
   display: table-cell;
 }
+
+.selected-branch .branch-handler{
+  background: #3996ea;
+  color: #fff;
+}

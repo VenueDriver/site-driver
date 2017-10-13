@@ -1,4 +1,4 @@
-<ul *ngIf="ready" class="branch-level">
+<ul *ngIf="ready" class="branch-level" [class.selected-branch]="selectedBranch">
   <li class="branch-handler">
     <ul class="horizontal">
       <li *ngIf="!output_branch_only">
@@ -20,6 +20,7 @@
       <li *ngFor="let childBranch of branch._branches._value">
         <molecule-hierarchy-tree-branch
           [single_value]="single_value"
+          [branchSelectionList]="branchSelectionList"
           [output_branch_only]="output_branch_only"
           (treeUpdated)="branchChanged($event)"
           (selected)="childChecked(childBranch)"
