@@ -160,6 +160,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
     }).then((cache)=>{
       this.ready = true;
       this._og_list = cache.data;
+      console.log("Getting data");
       this.rebuildTree();
     }).catch((err)=>{
       console.log(err);
