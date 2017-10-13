@@ -7,6 +7,7 @@
       <li *ngFor="let childBranch of _tree._branches._value">
         <molecule-hierarchy-tree-branch
           [single_value]="single_value"
+          (branchClick)="branchChanged($event)"
           [output_branch_only]="output_branch_only"
           (treeUpdated)="branchChanged($event)"
           (selected)="childChecked(childBranch)" [checked]="childBranch._checked" [parent]="_tree" [branch]="childBranch"></molecule-hierarchy-tree-branch>

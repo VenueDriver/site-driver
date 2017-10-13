@@ -4,7 +4,7 @@
       <li *ngIf="!output_branch_only">
         <ng-checkbox (click)="checkBoxClicked(checked)" [checked]="checked"></ng-checkbox>
       </li>
-      <li>
+      <li (click)="branchClicked()">
         >{{branch._type}} <b>{{branch._name}}</b> - ({{branch._id}})
       </li>
       <li *ngIf="isArrayValue && !output_branch_only">
@@ -23,6 +23,7 @@
           [output_branch_only]="output_branch_only"
           (treeUpdated)="branchChanged($event)"
           (selected)="childChecked(childBranch)"
+          (branchClick)="branchClicked($event)"
           [checked]="childBranch._checked"
           [parent]="branch"
           [branch]="childBranch"

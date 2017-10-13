@@ -24,8 +24,16 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
 
   @Output() treeUpdated = new EventEmitter();
 
+  @Output() branchClick = new EventEmitter();
+
   constructor(){
 
+  }
+
+  branchClicked(branch ?: HierarchyTreeInterface){
+    if(this.output_branch_only){
+      this.branchClick.emit(branch || this.branch);
+    }
   }
 
   branchChanged(branch : HierarchyTreeInterface){

@@ -29,6 +29,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
 
 
   branchChanged( branch : HierarchyTreeInterface ){
+    console.log("received branch",branch);
     if(!this.output_branch_only){
       this.outputValue = this._tree;
     }else{
