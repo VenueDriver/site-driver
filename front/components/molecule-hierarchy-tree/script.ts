@@ -33,9 +33,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
     if(!this.output_branch_only){
       this.outputValue = this._tree;
     }else{
-      if(this.single_value){
-        this.outputValue = this.getBranchSelection(branch);
-      }
+      this.outputValue = this.getBranchSelection(branch);
     }
     console.log("Emit value:",this.outputValue);
     this.treeUpdated.emit(this.outputValue);
@@ -46,7 +44,63 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
       this._selection = [branch];
     }else{
       const avoidInsest = (branch : HierarchyTreeInterface) : Array<HierarchyTreeInterface> =>{
-        return [];
+        let newSelection = this._selection.slice();
+        let depth = branch._path_trace.length;
+
+        const getParenthoodReport = (branch : HierarchyTreeInterface ,value : HierarchyTreeInterface )=>{
+          let report = { child : false, parent : false};
+          let ancestry = depth - value._path_trace.length;
+
+          if (ancestry > 0){
+            //Branch could be child, check:
+            report.child = true;
+            value._path_trace.forEach((index,i)=>{
+              if(index !== branch._path_trace[i]) report.child = false;
+            });
+          }else if(ancestry < 0){
+            //Branch could be parent, check:
+            report.parent = true;
+            branch._path_trace.forEach((index,i)=>{
+              if(index !== value._path_trace[i]) report.parent = false;
+            });
+          }
+
+          return report;
+        }
+
+        let insertValueAfterFilter = true;
+
+        newSelection = newSelection.filter((existing_selection)=>{
+
+          //If exists, it'll be removed.
+          if(existing_selection._id == branch._id){
+            insertValueAfterFilter = false;
+            return false;
+          }
+
+          let branchIs = getParenthoodReport(branch,existing_selection);
+
+          console.log("See report:",branchIs);
+
+          // If it's a child of an existing value, the parent will be removed.
+          if(branchIs.child){
+            return false;
+          }
+
+          // If it's parent of one or more values It'll replace those.
+          if(branchIs.parent){
+            return false;
+          }
+
+          //If it's from the same depth level or it doesn't exist it'll be added.
+          return true;
+        });
+
+        if(insertValueAfterFilter){
+          newSelection.push(branch);
+        }
+
+        return newSelection;
       }
       this._selection = avoidInsest(branch);
     }
