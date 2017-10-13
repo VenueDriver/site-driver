@@ -15,7 +15,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
   isArrayValue : boolean = true;
   _tree : HierarchyTreeInterface | null = null;
   checked : boolean = true;
-
+  _selection : Array<HierarchyTreeInterface> = [];
   outputValue : any = {};
 
   @Input() single_value : boolean = false;
@@ -29,17 +29,27 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
 
 
   branchChanged( branch : HierarchyTreeInterface ){
-    console.log("Branch changed",branch);
     if(!this.output_branch_only){
       this.outputValue = this._tree;
     }else{
       if(this.single_value){
-        this.outputValue = [branch];
-      }else{
-        this.outputValue.push(branch);
+        this.outputValue = this.getBranchSelection(branch);
       }
     }
+    console.log("Emit value:",this.outputValue);
     this.treeUpdated.emit(this.outputValue);
+  }
+
+  getBranchSelection(branch : HierarchyTreeInterface){
+    if(this.single_value){
+      this._selection = [branch];
+    }else{
+      const avoidInsest = (branch : HierarchyTreeInterface) : Array<HierarchyTreeInterface> =>{
+        return [];
+      }
+      this._selection = avoidInsest(branch);
+    }
+    return this._selection;
   }
 
 
@@ -108,7 +118,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
         _type : "root",
         _id : "",
         _name : "root",
-        _collapsed : false,
+        _path_trace : [],
         _checked : true,
         _branches : {
           _all : true,
@@ -127,19 +137,19 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
     if(branch._branches._value.length > 0) return branch
     let childs = [];
 
-    const convertValueIntoBranch = (value,parent)=>{
+    const convertValueIntoBranch = (value,parent,index)=>{
       if(value._branches) return value;
-      let value_branch_values = (Array.isArray(value._value)) ? [] : typeof value._value;
 
-      if(value._ngClass !== "MoleculeGenerator" && Array.isArray(value._value)){
-        value_branch_values = value._value.map(el => convertValueIntoBranch(el,value));
-      }
+      let _path_trace_to_root = parent._path_trace.slice();
+      _path_trace_to_root.push(index);
+
+      let value_branch_values = (Array.isArray(value._value)) ? [] : typeof value._value;
 
       let currentBranch = {
         _type : value._type,
         _id : value._id,
         _name : value._name,
-        _collapsed : true,
+        _path_trace : _path_trace_to_root,
         _checked : true,
         _branches : {
           _all : true,
@@ -148,6 +158,14 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
           _value : value_branch_values
         }
       };
+
+
+
+      if(value._ngClass !== "MoleculeGenerator" && Array.isArray(value._value)){
+        value_branch_values = value._value.map( (el,i) => convertValueIntoBranch(el,currentBranch,i));
+      }
+
+      currentBranch._branches._value = value_branch_values;
 
       return currentBranch;
 
@@ -175,7 +193,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
         childs.filter((el)=> excluded_ids.indexOf(el._id) < 0 );
       }
 
-      childs = childs.map( el => convertValueIntoBranch(el,branch) );
+      childs = childs.map( (el,i) => convertValueIntoBranch(el,branch,i) );
     }
 
     branch._branches._value = childs.map((branch)=>{

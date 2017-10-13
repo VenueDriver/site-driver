@@ -15,6 +15,8 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
   @Input() branch : HierarchyTreeInterface;
   @Input() parent : HierarchyTreeInterface;
   @Input() tree : HierarchyTreeInterface;
+  @Input() single_value : boolean = false;
+  @Input() output_branch_only : boolean = false;
 
   @Input() checked : boolean = false;
 
