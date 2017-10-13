@@ -187,7 +187,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
       }
     }
     this._tree = this.buildTreeBranch(this._tree);
-    console.log("_tree:",this._tree);
+    console.log("buildTree() : _tree",this._tree);
   }
 
 

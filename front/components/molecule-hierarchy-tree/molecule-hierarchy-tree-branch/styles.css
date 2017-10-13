@@ -41,3 +41,25 @@ ul.horizontal > li{
   background: #3996ea;
   color: #fff;
 }
+
+.branch-handler{
+  position: relative;
+}
+
+.branch-level > li:before{
+  content: "";
+  position: absolute;
+  border-left:1px solid #ccc;
+  border-bottom:1px solid #ccc;
+  top:0;
+  z-index: 0;
+  bottom: 20px;
+  left: -15px;
+  right: 0;
+  max-width: 10px;
+}
+
+.selected-branch .branch-level > li:before{
+  border-left: 2px solid #3996ea;
+  border-bottom: 2px solid #3996ea;
+}

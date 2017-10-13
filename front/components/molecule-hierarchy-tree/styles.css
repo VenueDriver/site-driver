@@ -12,3 +12,7 @@
 .checkbox:hover .checkbox-label, .checked .checkbox-label{
   color: #1b79e2;
 }
+
+molecule-hierarchy-tree{
+  position: relative;
+}
