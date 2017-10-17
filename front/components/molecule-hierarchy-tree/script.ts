@@ -116,6 +116,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
     return branch;
   }
 
+
   regenerateTree(){
 
   }
@@ -140,7 +141,6 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
     this.branchChanged(this._tree);
   }
 
-
   updateChilds(){
     if(this.isArrayValue){
       this._tree._branches._value = (<HierarchyTreeInterface[]>this._tree._branches._value).map((childBranch)=>{
@@ -148,7 +148,6 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
       })
     }
   }
-
 
   isBranchChecked(child,parent){
     let includedALL = this._tree._branches._all;
@@ -243,9 +242,5 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
     }
     return this._selection;
   }
-
-
-
-
 
 }

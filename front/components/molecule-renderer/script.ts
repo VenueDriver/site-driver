@@ -52,11 +52,13 @@ export class MoleculeRenderer {
       if((<any>this.cmpRef.instance).valueChange && this.valueChange){
         (<any>this.cmpRef.instance).valueChange = this.valueChange;
       }
+
       if(this.options){
         for(let key in this.options){
           (<any>this.cmpRef.instance)[key] = this.options[key];
         }
       }
+
     }
 
     this.ref.detectChanges();
