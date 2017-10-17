@@ -5,7 +5,7 @@
         <ng-checkbox (click)="checkBoxClicked(checked)" [checked]="checked"></ng-checkbox>
       </li>
       <li>
-        >{{branch._type}} <b>{{branch._name}}</b> - ({{branch._id}}) (IS CHECKED? {{checked}})
+        > {{branch._type}} <b>{{branch._name}}</b> - ({{branch._id}})
       </li>
       <li *ngIf="isArrayValue && !output_branch_only">
         <span [class.active]="branch._branches._all" class="toggleAllButton" (click)="toggleAllChilds()">
