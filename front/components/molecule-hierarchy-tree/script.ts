@@ -32,18 +32,21 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
     this.moleculeService.getMoleculeList({
       type : ["instance","generator"]
     }).then((cache)=>{
-      this.ready = true;
+      console.log("Received Cache","Root?",this.root);
       this._og_list = cache.data;
       if(this.root){
+        console.log("\n\nUsing Provided Root Tree");
         this._tree = this.root;
+        this.regenerateTree();
         console.log("Tree provided",this._tree);
       }else{
+        console.log("\n\nBuilding Tree");
         this._tree = this.buildNewTree();
         console.log("Tree built",this._tree);
       }
-      this.regenerateTree();
+      this.ready = true;
     }).catch((err)=>{
-      console.log(err);
+      console.error(err);
     })
   }
 
@@ -127,13 +130,16 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
   }
 
   regenerateTree(branch : any = false){
+    console.log("regenerateTree(branch = ",branch,")");
     if(!branch){
       this._tree = this.regenerateTree(this._tree);
+      return this._tree;
     }
 
     // GET AN UPDATED LIST OF CHILDS FOR THIS BRANCH
     let newListOfChilds = this.getBranchChilds(branch);
 
+    console.log("Branch branches",branch);
     if(branch._branches._all){
       newListOfChilds = newListOfChilds.filter(val => {
         typeof branch._branches._exclude.find(incVal => incVal._id == val._id) === "undefined";
@@ -158,13 +164,14 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
       }
 
       // DO THE SAME FOR THE CHILD VALUES
-      newBranch._branches._value = newBranch._branches._value.map(val => this.regenerateTree(val));
+      console.log("Regenerating childs",newBranch);
+      newBranch._branches._value = newBranch._branches._value.map((val)=>{console.log("Mapping childs");this.regenerateTree(val)});
 
       return newBranch;
     });
 
     // MAKE SURE CHILDS ARE COHERENT WITH PARENT
-    this.updateChilds();
+    // this.updateChilds();
 
     return branch;
   }
