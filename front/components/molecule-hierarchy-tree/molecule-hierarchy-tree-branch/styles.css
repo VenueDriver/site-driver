@@ -46,7 +46,7 @@ ul.horizontal > li{
   position: relative;
 }
 
-.branch-level > li:before{
+.branch-level > li.branch-handler:before{
   content: "";
   position: absolute;
   border-left:1px solid #ccc;
