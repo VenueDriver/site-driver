@@ -100,6 +100,7 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
     this.branch._branches._exclude = [];
     this.branch._branches._all = (this.checked) ? setTo || !this.branch._branches._all : false;
     this.updateChilds();
+    this.branchChanged(this.branch);
   }
 
   updateChilds(){

@@ -66,7 +66,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
         _exclude : [],
         _value : value_branch_values
       }
-    };
+    }
   }
 
   buildNewTree(branch : any = false){
