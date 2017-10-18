@@ -13,19 +13,17 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
   isArrayValue : boolean = false;
   checkedBranch : boolean = true;
   selectedBranch : boolean = false;
+
   @Input() branch : HierarchyTreeInterface;
   @Input() parent : HierarchyTreeInterface;
   @Input() tree : HierarchyTreeInterface;
   @Input() single_value : boolean = false;
   @Input() output_branch_only : boolean = false;
   @Input() branchSelectionList : Array<HierarchyTreeInterface> = [];
-
   @Input() checked : boolean = false;
 
   @Output() selected = new EventEmitter();
-
   @Output() treeUpdated = new EventEmitter();
-
   @Output() branchClick = new EventEmitter();
 
   constructor(){
@@ -34,11 +32,13 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
 
   branchClicked(branch ?: HierarchyTreeInterface){
     if(this.output_branch_only){
+      console.log("branchClick.emit:",branch || this.branch);
       this.branchClick.emit(branch || this.branch);
     }
   }
 
   branchChanged(branch : HierarchyTreeInterface){
+    console.log("treeUpdated");
     this.treeUpdated.emit(branch);
   }
 
@@ -50,6 +50,7 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
   }
 
   checkBoxClicked(current_state){
+    console.log("selected.emit:",current_state);
     this.selected.emit(current_state);
   }
 
@@ -69,7 +70,6 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
       }
       this.updateChilds();
     }
-    this.branchChanged(branch);
   }
 
   isBranchChecked(child,parent){
@@ -100,7 +100,6 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
     this.branch._branches._exclude = [];
     this.branch._branches._all = (this.checked) ? setTo || !this.branch._branches._all : false;
     this.updateChilds();
-    this.branchChanged(this.branch);
   }
 
   updateChilds(){
