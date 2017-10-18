@@ -13,6 +13,7 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
   isArrayValue : boolean = false;
   checkedBranch : boolean = true;
   selectedBranch : boolean = false;
+  _previous_checked : boolean = false;
 
   @Input() branch : HierarchyTreeInterface;
   @Input() parent : HierarchyTreeInterface;
@@ -32,13 +33,11 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
 
   branchClicked(branch ?: HierarchyTreeInterface){
     if(this.output_branch_only){
-      console.log("branchClick.emit:",branch || this.branch);
       this.branchClick.emit(branch || this.branch);
     }
   }
 
   branchChanged(branch : HierarchyTreeInterface){
-    console.log("treeUpdated");
     this.treeUpdated.emit(branch);
   }
 
@@ -50,7 +49,6 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
   }
 
   checkBoxClicked(current_state){
-    console.log("selected.emit:",current_state);
     this.selected.emit(current_state);
   }
 
@@ -87,7 +85,11 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
   }
 
   ngOnChanges(){
-    this.toggleAllChilds(this.checked);
+    if(this._previous_checked != this.checked){
+      this._previous_checked = this.checked;
+      this.toggleAllChilds(this.checked);
+      this.branchChanged(this.branch);
+    }
     if(this.branchSelectionList.find((el)=> el._id === this.branch._id )){
       this.selectedBranch = true;
     }else{

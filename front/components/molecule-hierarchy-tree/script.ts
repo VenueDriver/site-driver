@@ -42,8 +42,8 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
       }else{
         console.log("\n\nBuilding Tree");
         this._tree = this.buildNewTree();
-        console.log("Tree built",this._tree);
       }
+      console.log("\n\n\n\nTree result",this._tree);
       this.ready = true;
     }).catch((err)=>{
       console.error(err);
@@ -130,7 +130,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
   }
 
   regenerateTree(branch : any = false){
-    console.log("regenerateTree(branch = ",branch,")");
+
     if(!branch){
       this._tree = this.regenerateTree(this._tree);
       return this._tree;
@@ -139,16 +139,19 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
     // GET AN UPDATED LIST OF CHILDS FOR THIS BRANCH
     let newListOfChilds = this.getBranchChilds(branch);
 
-    console.log("Branch branches",branch);
-    if(branch._branches._all){
-      newListOfChilds = newListOfChilds.filter(val => {
-        typeof branch._branches._exclude.find(incVal => incVal._id == val._id) === "undefined";
-      })
-    }else{
-      newListOfChilds = newListOfChilds.filter(val => {
-        typeof branch._branches._include.find(incVal => incVal._id == val._id) !== "undefined";
-      })
-    }
+    console.log("Raw list of childs",newListOfChilds);
+
+    // if(branch._branches._all){
+    //   newListOfChilds = newListOfChilds.filter(val => {
+    //     return (typeof branch._branches._exclude.find(incVal => incVal._id == val._id) == "undefined");
+    //   })
+    // }else{
+    //   newListOfChilds = newListOfChilds.filter(val => {
+    //     return (typeof branch._branches._include.find(incVal => incVal._id == val._id) != "undefined");
+    //   })
+    // }
+
+    console.log("New List of childs",newListOfChilds);
 
     // CONVERT THOSE CHILD RECORDS INTO BRANCHES
     newListOfChilds = newListOfChilds.map((val,index) =>{
@@ -164,13 +167,11 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
       }
 
       // DO THE SAME FOR THE CHILD VALUES
-      console.log("Regenerating childs",newBranch);
-      newBranch._branches._value = newBranch._branches._value.map((val)=>{console.log("Mapping childs");this.regenerateTree(val)});
-
-      return newBranch;
+      return this.regenerateTree(newBranch);
     });
 
     // MAKE SURE CHILDS ARE COHERENT WITH PARENT
+    branch._branches._value = newListOfChilds;
     // this.updateChilds();
 
     return branch;
