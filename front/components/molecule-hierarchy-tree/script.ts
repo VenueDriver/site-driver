@@ -47,32 +47,38 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
     })
   }
 
+  valueToBranch(value,parent,index) : HierarchyTreeInterface{
+
+    let _path_trace_to_root = parent._path_trace.slice();
+    _path_trace_to_root.push(index);
+
+    let value_branch_values = (Array.isArray(value._value)) ? [] : typeof value._value;
+
+    return {
+      _type : value._type,
+      _id : value._id,
+      _name : value._name,
+      _path_trace : _path_trace_to_root,
+      _checked : true,
+      _branches : {
+        _all : true,
+        _include : [],
+        _exclude : [],
+        _value : value_branch_values
+      }
+    };
+  }
+
   buildNewTree(branch : any = false){
 
-    const convertValueIntoBranch = (value,parent,index)=>{
-      if(value._branches) return value;
+    const valueToBranch = this.valueToBranch;
 
-      let _path_trace_to_root = parent._path_trace.slice();
-      _path_trace_to_root.push(index);
-
-      let value_branch_values = (Array.isArray(value._value)) ? [] : typeof value._value;
-
-      let currentBranch = {
-        _type : value._type,
-        _id : value._id,
-        _name : value._name,
-        _path_trace : _path_trace_to_root,
-        _checked : true,
-        _branches : {
-          _all : true,
-          _include : [],
-          _exclude : [],
-          _value : value_branch_values
-        }
-      };
+    const convertValuesIntoBranchs = (value,parent,index)=>{
+      let currentBranch = valueToBranch(value,parent,index);
+      let value_branch_values = currentBranch._branches._value;
 
       if(value._ngClass !== "MoleculeGenerator" && Array.isArray(value._value)){
-        value_branch_values = value._value.map( (el,i) => convertValueIntoBranch(el,currentBranch,i));
+        value_branch_values = value._value.map( (el,i) => convertValuesIntoBranchs(el,currentBranch,i));
       }
       currentBranch._branches._value = value_branch_values;
 
@@ -96,7 +102,19 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
     }
 
     //FETCH ALL CHILDS FOR THIS BRANCH
-    let childs = this._og_list.filter((el)=>{
+    let childs = this.getBranchChilds(branch);
+
+    childs = childs.map( (el,i) => convertValuesIntoBranchs(el,branch,i) );
+
+    branch._branches._value = childs.map((branch)=>{
+      return this.buildNewTree(branch);
+    });
+
+    return branch;
+  }
+
+  getBranchChilds(branch : HierarchyTreeInterface){
+    return this._og_list.filter((el)=>{
       if(branch._id){
         if(el._generator){
           return el._generator._id == branch._id;
@@ -106,19 +124,49 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
       }
       return false;
     });
-
-    childs = childs.map( (el,i) => convertValueIntoBranch(el,branch,i) );
-
-    branch._branches._value = childs.map((branch)=>{
-      return this.buildNewTree(branch);
-    });
-
-    return branch;
   }
 
+  regenerateTree(branch : any = false){
+    if(!branch){
+      this._tree = this.regenerateTree(this._tree);
+    }
 
-  regenerateTree(){
+    // GET AN UPDATED LIST OF CHILDS FOR THIS BRANCH
+    let newListOfChilds = this.getBranchChilds(branch);
 
+    if(branch._branches._all){
+      newListOfChilds = newListOfChilds.filter(val => {
+        typeof branch._branches._exclude.find(incVal => incVal._id == val._id) === "undefined";
+      })
+    }else{
+      newListOfChilds = newListOfChilds.filter(val => {
+        typeof branch._branches._include.find(incVal => incVal._id == val._id) !== "undefined";
+      })
+    }
+
+    // CONVERT THOSE CHILD RECORDS INTO BRANCHES
+    newListOfChilds = newListOfChilds.map((val,index) =>{
+      let newBranch : any = this.valueToBranch(val,branch,index);
+      let existingValue = newBranch._branches._value.find(el=> el._id === newBranch._id);
+
+      // INHERIT ANY IMPORTANT PROPERTY FROM THE OLD BRANCH
+      if(existingValue){
+        newBranch._checked = existingValue._checked;
+        newBranch._branches._all = existingValue._branches._all;
+        newBranch._branches._include = existingValue._branches._include;
+        newBranch._branches._exclude = existingValue._branches._exclude;
+      }
+
+      // DO THE SAME FOR THE CHILD VALUES
+      newBranch._branches._value = newBranch._branches._value.map(val => this.regenerateTree(val));
+
+      return newBranch;
+    });
+
+    // MAKE SURE CHILDS ARE COHERENT WITH PARENT
+    this.updateChilds();
+
+    return branch;
   }
 
 

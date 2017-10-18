@@ -36,7 +36,7 @@ export class TableRenderer implements OnInit {
   parseColumnsData(){
     // console.log("Column:",this.columns);
     let err;
-    if(typeof this.columns === "string"){
+    if(this.columns && typeof this.columns === "string"){
       try{
         JSON.parse(this.columns);
       }catch(e){
@@ -50,7 +50,7 @@ export class TableRenderer implements OnInit {
     }else{
       this.parsedColumns = this.columns;
     }
-    if(err) console.log("Parsed:",this.parsedColumns,"error:",err);
+    if(err) console.error("Error parssing at table renderer component:\n","Original data:\n=============\n",this.columns,"\n=============\n",this.parsedColumns,"error:",err,);
   }
 
   editOpen(index : number){
