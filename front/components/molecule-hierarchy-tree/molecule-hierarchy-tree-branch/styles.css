@@ -68,3 +68,10 @@ molecule-hierarchy-tree-branch ul.branch-level > li.branch-handler {
   border-left: 2px solid #3996ea;
   border-bottom: 2px solid #3996ea;
 }
+ul.horizontal {
+  width: 100%;
+}
+.horizontal > li:last-child {
+    float: right;
+    margin-right: -10px;
+}

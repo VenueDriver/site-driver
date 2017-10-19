@@ -19,7 +19,7 @@
           <molecule-renderer *ngIf="cell._can._show || isDeveloper"  [data]="cell" [component]="cell._ngComponent" ></molecule-renderer>
         </ng-container>
 
-        <div class="add-molecule" style="padding:100px 20px 0 20px;margin:100px 50px 30px 10px;border:1px dotted #999;opacity:0.5;background:#fff" *ngIf="data._can._edit || isDeveloper ">
+        <div class="add-molecule" style="padding:10px 20px 0 20px;margin:100px 50px 30px 10px;border:1px dotted #999;opacity:0.5;background:#fff" *ngIf="data._can._edit || isDeveloper ">
           <hr>
           <h3>INSERT MOLECULE INTO CELL</h3>
             <molecule-select [max]="1" (valueChange)="moleculeSelected($event)"></molecule-select>
