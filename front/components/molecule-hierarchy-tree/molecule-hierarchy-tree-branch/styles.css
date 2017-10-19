@@ -4,7 +4,6 @@ molecule-hierarchy-tree-branch ul.branch-level{
 
 li.branch-handler{
   background: #eee;
-  border-top:1px solid #ccc;
   cursor: pointer;
   padding: 10px;
 }
@@ -44,13 +43,14 @@ ul.horizontal > li{
 
 .branch-handler{
   position: relative;
+  margin-top: 15px;
 }
 
-.branch-level > li:before{
+molecule-hierarchy-tree-branch ul.branch-level > li.branch-handler:before {
   content: "";
   position: absolute;
-  border-left:1px solid #ccc;
   border-bottom:1px solid #ccc;
+  border-left:1px solid #ccc;
   top:0;
   z-index: 0;
   bottom: 20px;
@@ -59,7 +59,19 @@ ul.horizontal > li{
   max-width: 10px;
 }
 
+molecule-hierarchy-tree-branch ul.branch-level > li.branch-handler {
+  margin-top: 0px;
+  border-top:1px solid #e0e0e0;
+}
+
 .selected-branch .branch-level > li:before{
   border-left: 2px solid #3996ea;
   border-bottom: 2px solid #3996ea;
+}
+ul.horizontal {
+  width: 100%;
+}
+.horizontal > li:last-child {
+    float: right;
+    margin-right: -10px;
 }
