@@ -51,8 +51,6 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
   }
 
   valueToBranch(value : any , parent : HierarchyTreeInterface , index : number) : HierarchyTreeInterface{
-
-    // let deepLoop = Array.isArray(value._value) && value._ngClass == "MoleculeGenerator";
     let _path_trace_to_root = parent._path_trace.slice();
     _path_trace_to_root.push(index);
 
@@ -69,12 +67,6 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
         _value : typeof value._value
       }
     };
-
-    // console.log("Deep loop?");
-    // if(deepLoop){
-    //   console.log("Deep looping",value);
-    //   newBranch._branches._value = value._value.map((val,i)=> this.valueToBranch(val,newBranch,i));
-    // }
 
     return newBranch;
   }
@@ -123,8 +115,11 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
     return branch;
   }
 
+
+
   getBranchChilds(branch : HierarchyTreeInterface){
-    return this._og_list.filter((el)=>{
+    // console.log("Fetching childs for",branch);
+    let childs = this._og_list.filter((el)=>{
       if(branch._id){
         if(el._generator){
           return el._generator._id == branch._id;
@@ -134,7 +129,27 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
       }
       return false;
     });
+
+    if(childs.length < 1){
+      let deepLoop = false;
+      let branchValue : any = this._og_list.find((el)=> el._id == branch._id);
+      if(branchValue){
+        deepLoop = Array.isArray(branchValue._value) && branchValue._ngClass !== "MoleculeGenerator";
+      }
+      // console.log("Doesn't have childs ;(",branch,"\ndeepLoop = ",deepLoop,"\nbranchValue = ",branchValue);
+      if(branchValue && deepLoop){
+        childs = branchValue._value;
+        branchValue._value.forEach(val => this._og_list.push(val));
+      }
+    }
+
+    // console.log("Child result = ",childs);
+
+    return childs;
+
   }
+
+
 
   regenerateTree(branch : any = false){
 
@@ -146,8 +161,9 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
     // GET AN UPDATED LIST OF CHILDS FOR THIS BRANCH
     let newListOfChilds = this.getBranchChilds(branch);
 
-    // CONVERT THOSE CHILD RECORDS INTO BRANCHES
+    // CONVERT THOSE CHILD VALUES INTO BRANCHES
     newListOfChilds = newListOfChilds.map((val,index) =>{
+
       let newBranch : any = this.valueToBranch(val,branch,index);
       let existingValue = (Array.isArray(branch._branches._value)) ? branch._branches._value.find(el=> el._id === newBranch._id) : false;
 
