@@ -32,18 +32,18 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
     this.moleculeService.getMoleculeList({
       type : ["instance","generator"]
     }).then((cache)=>{
-      console.log("Received Cache","Root?",this.root);
+      // console.log("Received Cache","Root?",this.root);
       this._og_list = cache.data;
       if(this.root){
-        console.log("\n\nUsing Provided Root Tree");
+        // console.log("\n\nUsing Provided Root Tree");
         this._tree = this.root;
         this.regenerateTree();
-        console.log("Tree provided",this._tree);
+        // console.log("Tree provided",this._tree);
       }else{
-        console.log("\n\nBuilding Tree");
+        // console.log("\n\nBuilding Tree");
         this._tree = this.buildNewTree();
       }
-      console.log("\n\n\n\nTree result",this._tree);
+      // console.log("\n\n\n\nTree result",this._tree);
       this.ready = true;
     }).catch((err)=>{
       console.error(err);
@@ -230,13 +230,13 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
   }
 
   branchChanged( branch : HierarchyTreeInterface ){
-    console.log("received branch",branch);
+    // console.log("received branch",branch);
     if(!this.output_branch_only){
       this.outputValue = this._tree;
     }else{
       this.outputValue = this.getBranchSelection(branch);
     }
-    console.log("Emit value:",this.outputValue);
+    // console.log("Emit value:",this.outputValue);
     this.treeUpdated.emit(this.outputValue);
     this.valueChange.emit(this.outputValue);
   }
@@ -281,8 +281,6 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
           }
 
           let branchIs = getParenthoodReport(branch,existing_selection);
-
-          console.log("See report:",branchIs);
 
           // If it's a child of an existing value, the parent will be removed.
           if(branchIs.child){

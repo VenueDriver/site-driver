@@ -12,7 +12,9 @@ export class MoleculeParser{
         let parsedMolecule  = new nodes[molecule._ngClass](molecule);
         resolve(parsedMolecule);
       }else{
+        // resolve(molecule);
         console.log(molecule);
+        // alert("An error ocurred. Please contact the system administrator. " + '\nERROR: "No class for '+ molecule._ngClass+'"');
         reject("No class for " + molecule._ngClass);
       }
     });
@@ -23,7 +25,6 @@ export class MoleculeParser{
     return new Promise<any>((resolve,reject)=>{
       molecule = Object.assign({},molecule);
       this._parseDataLayer(molecule).then((parsedLayer)=>{
-
         if(Array.isArray(parsedLayer._value)){
 
           let i = 0;
@@ -36,14 +37,19 @@ export class MoleculeParser{
                 parsedLayer._value[i] = subLayer;
                 i++;
                 next();
-              }).catch((error)=> end(error))
+              }).catch((error)=>{
+                console.warn(error);
+                i++;
+                next();
+              })
             },
 
             (error)=>{
               if(error){
                 // CHANGE ERROR FOR AN ERROR COMPONENT
                 // SO THIS WILL NOT BLOCK THE FLOW
-                reject(error);
+                console.error(error);
+                // reject(error);
               }else{
                 resolve(parsedLayer);
               }
