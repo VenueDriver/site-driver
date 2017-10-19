@@ -13,7 +13,7 @@ export class MoleculeParser{
         resolve(parsedMolecule);
       }else{
         console.log(molecule);
-        reject("No class for "+molecule._ngClass);
+        reject("No class for " + molecule._ngClass);
       }
     });
   }
