@@ -303,4 +303,8 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
     return this._selection;
   }
 
+  log(x){
+    console.log(x);
+  }
+
 }

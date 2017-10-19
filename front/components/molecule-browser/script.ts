@@ -14,7 +14,7 @@ export class MoleculeBrowserComponent implements OnInit {
   @Input() data ;
   @Output() valueChange = new EventEmitter();
   @Input() userRole : number;
-  
+
   additional_classes : any = [];
   isDeveloper : boolean = false;
   errors : Array<any> = [];
@@ -56,6 +56,10 @@ export class MoleculeBrowserComponent implements OnInit {
       this.errors = [];
       resolve(true);
     })
+  }
+
+  log(x){
+    console.log(x);
   }
 
 }
