@@ -43,6 +43,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
         // console.log("\n\nBuilding Tree");
         this._tree = this.buildNewTree();
       }
+      this.updateChilds();
       // console.log("\n\n\n\nTree result",this._tree);
       this.ready = true;
     }).catch((err)=>{
@@ -115,8 +116,6 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
     return branch;
   }
 
-
-
   getBranchChilds(branch : HierarchyTreeInterface){
     // console.log("Fetching childs for",branch);
     let childs = this._og_list.filter((el)=>{
@@ -149,8 +148,6 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
 
   }
 
-
-
   regenerateTree(branch : any = false){
 
     if(!branch){
@@ -182,7 +179,6 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
     branch._branches._value = newListOfChilds;
 
     // MAKE SURE CHILDS ARE COHERENT WITH PARENT
-    // this.updateChilds();
 
     return branch;
   }

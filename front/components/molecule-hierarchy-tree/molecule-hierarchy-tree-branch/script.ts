@@ -44,6 +44,7 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
   ngOnInit(){
     if(this.branch){
       this.isArrayValue = Array.isArray(this.branch._branches._value);
+      this.toggleAllChilds(this.branch._branches._all);
       this.ready = true;
     }
   }
@@ -87,7 +88,7 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
   ngOnChanges(){
     if(this._previous_checked != this.checked){
       this._previous_checked = this.checked;
-      this.toggleAllChilds(this.checked);
+      this.toggleAllChilds();
       this.branchChanged(this.branch);
     }
     if(this.branchSelectionList.find((el)=> el._id === this.branch._id )){
@@ -100,7 +101,7 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
   toggleAllChilds(setTo ?: boolean){
     this.branch._branches._include = [];
     this.branch._branches._exclude = [];
-    this.branch._branches._all = (this.checked) ? setTo || !this.branch._branches._all : false;
+    this.branch._branches._all = (setTo) ? setTo || !this.branch._branches._all : false;
     this.updateChilds();
   }
 
