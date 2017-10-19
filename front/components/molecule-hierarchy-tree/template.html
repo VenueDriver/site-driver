@@ -12,7 +12,7 @@
             (branchClick)="branchChanged($event)"
             [output_branch_only]="output_branch_only"
             (treeUpdated)="branchChanged($event)"
-            (selected)="childChecked(childBranch)" [checked]="childBranch._checked" [parent]="_tree" [branch]="childBranch"></molecule-hierarchy-tree-branch>
+            (selected)="childChecked(childBranch)" [parent]="_tree" [branch]="childBranch"></molecule-hierarchy-tree-branch>
         </ng-container>
       </li>
     </ul>

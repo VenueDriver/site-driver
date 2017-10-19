@@ -11,7 +11,6 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
 
   ready : boolean = false;
   isArrayValue : boolean = false;
-  checkedBranch : boolean = true;
   selectedBranch : boolean = false;
   _previous_checked : boolean = false;
 
@@ -21,7 +20,6 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
   @Input() single_value : boolean = false;
   @Input() output_branch_only : boolean = false;
   @Input() branchSelectionList : Array<HierarchyTreeInterface> = [];
-  @Input() checked : boolean = false;
 
   @Output() selected = new EventEmitter();
   @Output() treeUpdated = new EventEmitter();
@@ -50,47 +48,49 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
   }
 
   checkBoxClicked(current_state){
-    this.selected.emit(current_state);
+    this.branch._checked = !this.branch._checked;
+    this.toggleAllChilds(this.branch._checked);
+    // this.selected.emit(current_state);
   }
 
-  childChecked(branch){
-    if(this.checked){
-      let targetArray = this.branch._branches[ (this.branch._branches._all) ? "_exclude" : "_include"];
-      let targetIndex = null;
-      targetArray.forEach((el,i)=>{
-        if(el._id === branch._id){
-        targetIndex = i
-        }
-      });
-      if(targetIndex != null){
-        targetArray.splice(targetIndex,1);
-      }else{
-        targetArray.push(branch);
-      }
-      this.updateChilds();
-    }
-  }
+  // childChecked(branch){
+  //   if(this.checked){
+  //     let targetArray = this.branch._branches[ (this.branch._branches._all) ? "_exclude" : "_include"];
+  //     let targetIndex = null;
+  //     targetArray.forEach((el,i)=>{
+  //       if(el._id === branch._id){
+  //       targetIndex = i
+  //       }
+  //     });
+  //     if(targetIndex != null){
+  //       targetArray.splice(targetIndex,1);
+  //     }else{
+  //       targetArray.push(branch);
+  //     }
+  //     this.updateChilds();
+  //   }
+  // }
 
-  isBranchChecked(child,parent){
-    let includedALL = this.branch._branches._all;
-    let excludedBranch = this.branch._branches._exclude.find(el=> el._id === child._id);
-    let includedBranch = this.branch._branches._include.find(el=> el._id === child._id);
-    if(includedALL && excludedBranch){
-      child._checked = false;
-    }else if(!includedALL && !includedBranch){
-      child._checked = false;
-    }else{
-      child._checked = true;
-    }
-    return child;
-  }
+  // isBranchChecked(child,parent){
+  //   let includedALL = this.branch._branches._all;
+  //   let excludedBranch = this.branch._branches._exclude.find(el=> el._id === child._id);
+  //   let includedBranch = this.branch._branches._include.find(el=> el._id === child._id);
+  //   if(includedALL && excludedBranch){
+  //     child._checked = false;
+  //   }else if(!includedALL && !includedBranch){
+  //     child._checked = false;
+  //   }else{
+  //     child._checked = true;
+  //   }
+  //   return child;
+  // }
 
   ngOnChanges(){
-    if(this._previous_checked != this.checked){
-      this._previous_checked = this.checked;
-      this.toggleAllChilds();
-      this.branchChanged(this.branch);
-    }
+    // if(this._previous_checked != this.checked){
+      // this._previous_checked = this.checked;
+      // this.toggleAllChilds();
+      // this.branchChanged(this.branch);
+    // }
     if(this.branchSelectionList.find((el)=> el._id === this.branch._id )){
       this.selectedBranch = true;
     }else{
@@ -102,15 +102,15 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
     this.branch._branches._include = [];
     this.branch._branches._exclude = [];
     this.branch._branches._all = (setTo) ? setTo || !this.branch._branches._all : false;
-    this.updateChilds();
+    // this.updateChilds();
   }
 
-  updateChilds(){
-    if(this.isArrayValue){
-      this.branch._branches._value = (<HierarchyTreeInterface[]>this.branch._branches._value).map((childBranch)=>{
-        return this.isBranchChecked(childBranch,this.branch);
-      })
-    }
-  }
+  // updateChilds(){
+  //   if(this.isArrayValue){
+  //     this.branch._branches._value = (<HierarchyTreeInterface[]>this.branch._branches._value).map((childBranch)=>{
+  //       return this.isBranchChecked(childBranch,this.branch);
+  //     })
+  //   }
+  // }
 
 }
