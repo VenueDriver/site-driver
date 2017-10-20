@@ -71,7 +71,7 @@ molecule-hierarchy-tree-branch ul.branch-level > li.branch-handler {
 ul.horizontal {
   width: 100%;
 }
-.horizontal > li:last-child {
+.horizontal > li.all-button-li {
     float: right;
     margin-right: -10px;
 }

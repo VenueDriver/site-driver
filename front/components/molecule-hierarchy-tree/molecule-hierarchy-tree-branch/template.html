@@ -7,7 +7,7 @@
       <li>
         > {{branch._type}} <b>{{branch._name}}</b> - ({{branch._id}})
       </li>
-      <li *ngIf="isArrayValue && !output_branch_only">
+      <li *ngIf="isArrayValue && !output_branch_only" class="all-button-li">
         <span [class.active]="branch._branches._all" class="toggleAllButton" (click)="toggleAllChilds()">
           ALL
         </span>
