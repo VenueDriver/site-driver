@@ -18,10 +18,6 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
   @Input() parent : HierarchyTreeInterface;
   @Input() tree : HierarchyTreeInterface;
 
-  @Input() _checked : boolean;
-  @Input() _selected : boolean;
-  @Input() _parent_selected : boolean;
-
   @Input() single_value : boolean = false;
   @Input() output_branch_only : boolean = false;
   @Input() branchSelectionList : Array<HierarchyTreeInterface> = [];
@@ -36,16 +32,16 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
 
   branchClicked(branch ?: HierarchyTreeInterface){
     if(this.output_branch_only){
-    //   this.branchClick.emit(branch || this.branch);
-      this.branch._selected = !this.branch._selected;
-      if(this.parent._selected && this._parent_selected) this.parent._selected = false;
-      if(this.branch._selected && Array.isArray(this.branch._branches._value)){
-        this.branch._branches._value = this.branch._branches._value.map(el =>{
-          el._selected = false;
-          return el;
-        })
-      }
-      console.log("Branch selected");
+      this.branchClick.emit(branch || this.branch);
+      // this.branch._selected = !this.branch._selected;
+      // if(this.parent._selected && this.parent._selected) this.parent._selected = false;
+      // if(this.branch._selected && Array.isArray(this.branch._branches._value)){
+      //   this.branch._branches._value = this.branch._branches._value.map(el =>{
+      //     el._selected = false;
+      //     return el;
+      //   })
+      // }
+      // console.log("Branch selected");
     }
 
   }
@@ -113,11 +109,11 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
     //   this.ref.detectChanges();
     // }
 
-    // if(this.branchSelectionList.find((el)=> el._id === this.branch._id )){
-    //   this.selectedBranch = true;
-    // }else{
-    //   this.selectedBranch = false;
-    // }
+    if(this.branchSelectionList.find((el)=> el._id === this.branch._id )){
+      this.branch._selected = true;
+    }else{
+      this.branch._selected = false;
+    }
   }
 
   toggleAllChilds(setTo ?: boolean){

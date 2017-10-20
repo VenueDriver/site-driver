@@ -7,9 +7,6 @@
       <li *ngFor="let childBranch of _tree._branches._value">
         <ng-container *ngIf="childBranch._checked || !output_branch_only">
           <molecule-hierarchy-tree-branch
-            [_checked]="childBranch._checked"
-            [_selected]="childBranch._selected"
-            [_parent_selected]="_tree._selected"
             [single_value]="single_value"
             [branchSelectionList]="_selection"
             (branchClick)="branchChanged($event)"

@@ -253,6 +253,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
   }
 
   getBranchSelection(branch : HierarchyTreeInterface){
+    console.log("Getting branch selection");
     if(this.single_value){
       this._selection = [branch];
     }else{
