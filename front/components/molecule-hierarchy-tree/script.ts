@@ -45,6 +45,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
       // this.updateChilds();
       // console.log("\n\n\n\nTree result",this._tree);
       this.ready = true;
+      this.branchChanged(this._tree);
     }).catch((err)=>{
       console.error(err);
     })
