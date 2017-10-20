@@ -23,9 +23,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
   @Output() treeUpdated = new EventEmitter();
   @Output() valueChange = new EventEmitter();
 
-  constructor(private moleculeService : MoleculeService){
-
-  }
+  constructor(private moleculeService : MoleculeService){}
 
   ngOnInit(){
     this.moleculeService.getMoleculeList({
@@ -60,12 +58,13 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
       _id : value._id,
       _name : value._name,
       _path_trace : _path_trace_to_root,
+      _selected : false,
       _checked : true,
       _branches : {
         _all : true,
         _include : [],
         _exclude : [],
-        _value : typeof value._value
+        _value : (Array.isArray(value._value)) ? [] : typeof value._value
       }
     };
 
@@ -94,6 +93,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
         _id : "",
         _name : "root",
         _path_trace : [],
+        _selected : false,
         _checked : true,
         _branches : {
           _all : true,
@@ -161,7 +161,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
       console.log("text branch",branch);
     }
 
-    if(!Array.isArray(branch._value)){
+    if(!Array.isArray(branch._branches._value)){
       return branch;
     }
 
@@ -176,7 +176,8 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
 
       // INHERIT ANY IMPORTANT PROPERTY FROM THE OLD BRANCH
       if(existingValue){
-        newBranch._checked = existingValue._checked;
+        newBranch._checked  = existingValue._checked;
+        newBranch._selected = existingValue._selected;
         newBranch._branches._all = existingValue._branches._all;
         newBranch._branches._include = existingValue._branches._include;
         newBranch._branches._exclude = existingValue._branches._exclude;
@@ -189,6 +190,10 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
     branch._branches._value = newListOfChilds;
 
     // MAKE SURE CHILDS ARE COHERENT WITH PARENT
+
+    if(branch._checked == false){
+      branch._branches._all = false;
+    }
 
     return branch;
   }

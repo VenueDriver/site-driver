@@ -1,4 +1,4 @@
-import { Component , Input , OnInit , Output, EventEmitter} from '@angular/core';
+import { Component , Input , OnInit , Output, EventEmitter, ComponentRef, ChangeDetectorRef} from '@angular/core';
 import { HierarchyTreeInterface } from '../../../../definitions/interfaces'
 
 @Component({
@@ -17,6 +17,11 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
   @Input() branch : HierarchyTreeInterface;
   @Input() parent : HierarchyTreeInterface;
   @Input() tree : HierarchyTreeInterface;
+
+  @Input() _checked : boolean;
+  @Input() _selected : boolean;
+  @Input() _parent_selected : boolean;
+
   @Input() single_value : boolean = false;
   @Input() output_branch_only : boolean = false;
   @Input() branchSelectionList : Array<HierarchyTreeInterface> = [];
@@ -25,14 +30,24 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
   @Output() treeUpdated = new EventEmitter();
   @Output() branchClick = new EventEmitter();
 
-  constructor(){
+  constructor(private ref: ChangeDetectorRef){
 
   }
 
   branchClicked(branch ?: HierarchyTreeInterface){
     if(this.output_branch_only){
-      this.branchClick.emit(branch || this.branch);
+    //   this.branchClick.emit(branch || this.branch);
+      this.branch._selected = !this.branch._selected;
+      if(this.parent._selected && this._parent_selected) this.parent._selected = false;
+      if(this.branch._selected && Array.isArray(this.branch._branches._value)){
+        this.branch._branches._value = this.branch._branches._value.map(el =>{
+          el._selected = false;
+          return el;
+        })
+      }
+      console.log("Branch selected");
     }
+
   }
 
   branchChanged(branch : HierarchyTreeInterface){
@@ -85,23 +100,39 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
   //   return child;
   // }
 
-  ngOnChanges(){
+  ngOnChanges(changes){
     // if(this._previous_checked != this.checked){
       // this._previous_checked = this.checked;
       // this.toggleAllChilds();
       // this.branchChanged(this.branch);
     // }
-    if(this.branchSelectionList.find((el)=> el._id === this.branch._id )){
-      this.selectedBranch = true;
-    }else{
-      this.selectedBranch = false;
-    }
+    // console.log("Branch changed:",changes);
+    // if(this._parent_selected && this._selected){
+    //   this.branch._selected = false;
+    //   this._selected = false;
+    //   this.ref.detectChanges();
+    // }
+
+    // if(this.branchSelectionList.find((el)=> el._id === this.branch._id )){
+    //   this.selectedBranch = true;
+    // }else{
+    //   this.selectedBranch = false;
+    // }
   }
 
   toggleAllChilds(setTo ?: boolean){
     this.branch._branches._include = [];
     this.branch._branches._exclude = [];
-    this.branch._branches._all = (setTo) ? setTo || !this.branch._branches._all : false;
+    if(!this.branch._checked){
+      this.branch._branches._all = false;
+    }else{
+      if(setTo){
+        this.branch._branches._all = setTo;
+      }else{
+        this.branch._branches._all = !this.branch._branches._all;
+      }
+    }
+
     // this.updateChilds();
   }
 
