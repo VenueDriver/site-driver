@@ -19,6 +19,8 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
 
   @Input() single_value : boolean = false;
   @Input() output_branch_only : boolean = false;
+  @Input() disable_top_level : boolean = false;
+  @Input() hide_instance_values : boolean = false;
   @Input() root : HierarchyTreeInterface;
   @Input() selection : HierarchyTreeInterface[] | null = null;
   @Output() treeUpdated = new EventEmitter();

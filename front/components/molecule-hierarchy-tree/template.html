@@ -11,6 +11,8 @@
             [branchSelectionList]="_selection"
             (branchClick)="branchChanged($event)"
             [output_branch_only]="output_branch_only"
+            [disable_top_level]="disable_top_level"
+            [hide_instance_values]="hide_instance_values"
             (treeUpdated)="branchChanged($event)"
             (selected)="childChecked(childBranch)" [parent]="_tree" [branch]="childBranch"></molecule-hierarchy-tree-branch>
         </ng-container>

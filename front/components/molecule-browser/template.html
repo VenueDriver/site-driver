@@ -17,6 +17,8 @@
      [selection]="(data._options._output_branch_only) ? data._value : null"
      [single_value]="data._options._single_value"
      [output_branch_only]="data._options._output_branch_only"
+     [disable_top_level]="data._options._disable_top_level"
+     [hide_instance_values]="data._options._hide_instance_values"
      (treeUpdated)="emitValue($event)"
     ></molecule-hierarchy-tree>
 

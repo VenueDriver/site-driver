@@ -2,6 +2,22 @@ molecule-hierarchy-tree-branch ul.branch-level{
   padding-left: 30px;
 }
 
+.top-level{
+  font-size: 24px;
+  background: none;
+}
+
+.top-level{
+  font-size: 24px;
+}
+
+.disabled-top-level{
+  background: none !important;
+  padding-top: 30px !important;
+  padding-bottom: 15px !important;
+  cursor: default !important;
+}
+
 li.branch-handler{
   background: #eee;
   cursor: pointer;

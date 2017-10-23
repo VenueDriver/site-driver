@@ -21,6 +21,8 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
   @Input() single_value : boolean = false;
   @Input() output_branch_only : boolean = false;
   @Input() branchSelectionList : Array<HierarchyTreeInterface> = [];
+  @Input() disable_top_level : boolean = false;
+  @Input() hide_instance_values : boolean = false;
 
   @Output() selected = new EventEmitter();
   @Output() treeUpdated = new EventEmitter();
@@ -32,18 +34,14 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
 
   branchClicked(branch ?: HierarchyTreeInterface){
     if(this.output_branch_only){
-      this.branchClick.emit(branch || this.branch);
-      // this.branch._selected = !this.branch._selected;
-      // if(this.parent._selected && this.parent._selected) this.parent._selected = false;
-      // if(this.branch._selected && Array.isArray(this.branch._branches._value)){
-      //   this.branch._branches._value = this.branch._branches._value.map(el =>{
-      //     el._selected = false;
-      //     return el;
-      //   })
-      // }
-      // console.log("Branch selected");
+      if(!this.disable_top_level || !this.isTopLevel(branch)){
+        this.branchClick.emit(branch || this.branch);
+      }
     }
+  }
 
+  isTopLevel(branch : HierarchyTreeInterface = this.branch){
+    return branch._path_trace.length === 1;
   }
 
   branchChanged(branch : HierarchyTreeInterface){
