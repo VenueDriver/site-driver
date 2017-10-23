@@ -1,4 +1,4 @@
-<ul *ngIf="ready" class="branch-level" [class.selected-branch]="branch._selected" [class.unchecked-branch]="!branch._checked">
+<ul *ngIf="ready && (isArrayValue || !hide_instance_values)" class="branch-level" [class.selected-branch]="branch._selected" [class.unchecked-branch]="!branch._checked">
   <li class="branch-handler" [class.top-level]="isTopLevel()" [class.disabled-top-level]="isTopLevel() && disable_top_level"  (click)="branchClicked()">
     <ul class="horizontal">
       <li *ngIf="!output_branch_only && (!disable_top_level || !isTopLevel())">
@@ -15,25 +15,25 @@
     </ul>
   </li>
   <ng-container *ngIf="isArrayValue">
-  <li>
-    <ul>
-      <li *ngFor="let childBranch of branch._branches._value">
-        <ng-container>
-          <molecule-hierarchy-tree-branch
-            [single_value]="single_value"
-            [branchSelectionList]="branchSelectionList"
-            [output_branch_only]="output_branch_only"
-            (treeUpdated)="branchChanged($event)"
-            (selected)="childChecked(childBranch)"
-            (branchClick)="branchClicked($event)"
-            [parent]="branch"
-            [disable_top_level]="disable_top_level"
-            [hide_instance_values]="hide_instance_values"
-            [branch]="childBranch"
-          ></molecule-hierarchy-tree-branch>
-        </ng-container>
-      </li>
-    </ul>
-  </li>
+    <li>
+      <ul>
+        <li *ngFor="let childBranch of branch._branches._value">
+          <ng-container>
+            <molecule-hierarchy-tree-branch
+              [single_value]="single_value"
+              [branchSelectionList]="branchSelectionList"
+              [output_branch_only]="output_branch_only"
+              (treeUpdated)="branchChanged($event)"
+              (selected)="childChecked(childBranch)"
+              (branchClick)="branchClicked($event)"
+              [parent]="branch"
+              [disable_top_level]="disable_top_level"
+              [hide_instance_values]="hide_instance_values"
+              [branch]="childBranch"
+            ></molecule-hierarchy-tree-branch>
+          </ng-container>
+        </li>
+      </ul>
+    </li>
   </ng-container>
 </ul>
