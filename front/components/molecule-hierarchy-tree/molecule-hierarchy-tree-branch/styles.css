@@ -1,5 +1,6 @@
 molecule-hierarchy-tree-branch ul.branch-level{
   padding-left: 30px;
+  padding-right: 0;
 }
 
 .top-level{
@@ -22,6 +23,7 @@ li.branch-handler{
   background: #eee;
   cursor: pointer;
   padding: 10px;
+  padding-right: 0;
 }
 
 li.branch-handler:hover{
@@ -89,8 +91,12 @@ ul.horizontal {
 }
 
 .horizontal > li:nth-child(3) {
-    float: right;
     margin-right: -10px;
+    text-align: right;
+    font-size: 16px;
+}
+.top-level .horizontal > li:nth-child(3) span{
+  padding: 12px 15px;
 }
 
 .unchecked-branch{
