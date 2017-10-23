@@ -1,6 +1,6 @@
 <ul *ngIf="ready">
   <li class="branch-handler">
-    <div>> {{_tree._name}}</div>
+    <div>{{_tree._name}}</div>
   </li>
   <li>
     <ul class="branch-level">
@@ -11,8 +11,10 @@
             [branchSelectionList]="_selection"
             (branchClick)="branchChanged($event)"
             [output_branch_only]="output_branch_only"
+            [disable_top_level]="disable_top_level"
+            [hide_instance_values]="hide_instance_values"
             (treeUpdated)="branchChanged($event)"
-            (selected)="childChecked(childBranch)" [checked]="childBranch._checked" [parent]="_tree" [branch]="childBranch"></molecule-hierarchy-tree-branch>
+            (selected)="childChecked(childBranch)" [parent]="_tree" [branch]="childBranch"></molecule-hierarchy-tree-branch>
         </ng-container>
       </li>
     </ul>

@@ -2,6 +2,22 @@ molecule-hierarchy-tree-branch ul.branch-level{
   padding-left: 30px;
 }
 
+.top-level{
+  font-size: 24px;
+  background: none;
+}
+
+.top-level{
+  font-size: 24px;
+}
+
+.disabled-top-level{
+  background: none !important;
+  padding-top: 30px !important;
+  padding-bottom: 15px !important;
+  cursor: default !important;
+}
+
 li.branch-handler{
   background: #eee;
   cursor: pointer;
@@ -71,7 +87,18 @@ molecule-hierarchy-tree-branch ul.branch-level > li.branch-handler {
 ul.horizontal {
   width: 100%;
 }
+
 .horizontal > li:nth-child(3) {
     float: right;
     margin-right: -10px;
+}
+
+.unchecked-branch{
+  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+  opacity: 0.5;
+}
+
+.unchecked-branch .unchecked-branch{
+  opacity: 1.0;
 }

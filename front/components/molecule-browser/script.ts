@@ -32,7 +32,7 @@ export class MoleculeBrowserComponent implements OnInit {
   }
 
   ngOnInit(){
-    console.log("Browser data:",this.data);
+    console.log("Browser original data:",this.data);
     this.parseAdditionalClasses();
     this.validate(this.data._value);
     this.dataService.userRole().then((data)=>{
@@ -47,6 +47,7 @@ export class MoleculeBrowserComponent implements OnInit {
 
   emitValue(hierarchyTree){
     this.valueChange.emit(hierarchyTree);
+    console.log("New value",hierarchyTree);
     this.data._value = hierarchyTree;
     this.ref.detectChanges();
   }

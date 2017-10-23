@@ -21,8 +21,9 @@ var MoleculeBrowser = (function (_super) {
         this._instance_of = '';
         this._default_value = [];
         this._options = {
-            _display_selection_ui: true,
             _single_value: false,
+            _hide_instance_values: false,
+            _disable_top_level: false,
             _output_branch_only: false,
             _root: {
                 _options: {
