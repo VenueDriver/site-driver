@@ -1,4 +1,4 @@
-<ul *ngIf="ready" class="branch-level" [class.selected-branch]="branch._selected">
+<ul *ngIf="ready" class="branch-level" [class.selected-branch]="branch._selected" [class.unchecked-branch]="!branch._checked">
   <li class="branch-handler" (click)="branchClicked()">
     <ul class="horizontal">
       <li *ngIf="!output_branch_only">

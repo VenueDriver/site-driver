@@ -53,7 +53,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
     let _path_trace_to_root = parent._path_trace.slice();
     _path_trace_to_root.push(index);
 
-    let newBranch = {
+    return {
       _type : value._type,
       _id : value._id,
       _name : value._name,
@@ -67,8 +67,6 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
         _value : (Array.isArray(value._value)) ? [] : typeof value._value
       }
     };
-
-    return newBranch;
   }
 
   buildNewTree(branch : any = false){
@@ -126,6 +124,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
           return el._generator._id == branch._id;
         }
       }else{
+        // IF IT'S ROOT RETURN THE PRIMAL GENERATORS
         return el._type == "generator";
       }
       return false;
@@ -156,28 +155,29 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
       this._tree = this.regenerateTree(this._tree);
       return this._tree;
     }
-    console.log(branch._type);
-    if(branch._type == "text"){
-      console.log("text branch",branch);
-    }
 
+    // IF ELEMENT IS THE END OF A BRANCH
     if(!Array.isArray(branch._branches._value)){
       return branch;
     }
 
+
     // GET AN UPDATED LIST OF CHILDS FOR THIS BRANCH
     let newListOfChilds = this.getBranchChilds(branch);
+    let branchOldChilds = branch._branches._value.slice();
 
     // CONVERT THOSE CHILD VALUES INTO BRANCHES
-    newListOfChilds = newListOfChilds.map((val,index) =>{
+    branch._branches._value = newListOfChilds.map((val,index) =>{
 
       let newBranch : any = this.valueToBranch(val,branch,index);
-      let existingValue = (Array.isArray(branch._branches._value)) ? branch._branches._value.find(el=> el._id === newBranch._id) : false;
+
+      let existingValue = branchOldChilds.find( (el)=> el._id === newBranch._id );
 
       // INHERIT ANY IMPORTANT PROPERTY FROM THE OLD BRANCH
       if(existingValue){
         newBranch._checked  = existingValue._checked;
         newBranch._selected = existingValue._selected;
+        newBranch._branches._value = existingValue._branches._value;
         newBranch._branches._all = existingValue._branches._all;
         newBranch._branches._include = existingValue._branches._include;
         newBranch._branches._exclude = existingValue._branches._exclude;
@@ -185,9 +185,8 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
 
       // DO THE SAME FOR THE CHILD VALUES
       return this.regenerateTree(newBranch);
-    });
 
-    branch._branches._value = newListOfChilds;
+    });
 
     // MAKE SURE CHILDS ARE COHERENT WITH PARENT
 
