@@ -20,6 +20,7 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
   @Input() single_value : boolean = false;
   @Input() output_branch_only : boolean = false;
   @Input() root : HierarchyTreeInterface;
+  @Input() selection : HierarchyTreeInterface[] | null = null;
   @Output() treeUpdated = new EventEmitter();
   @Output() valueChange = new EventEmitter();
 
@@ -42,8 +43,14 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
       }
       // this.updateChilds();
       // console.log("\n\n\n\nTree result",this._tree);
+      if(this.output_branch_only){
+        if(this.selection){
+          this.getBranchSelection(this.selection);
+        }
+      }else{
+        this.branchChanged(this._tree);
+      }
       this.ready = true;
-      this.branchChanged(this._tree);
     }).catch((err)=>{
       console.error(err);
     })
@@ -255,9 +262,10 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
     this.valueChange.emit(this.outputValue);
   }
 
-  getBranchSelection(branch : HierarchyTreeInterface){
-    console.log("Getting branch selection");
-    if(this.single_value){
+  getBranchSelection(branch : (HierarchyTreeInterface | HierarchyTreeInterface[])){
+    if(Array.isArray(branch)){
+      this._selection = branch;
+    }else if(this.single_value){
       this._selection = [branch];
     }else{
       const avoidInsest = (branch : HierarchyTreeInterface) : Array<HierarchyTreeInterface> =>{

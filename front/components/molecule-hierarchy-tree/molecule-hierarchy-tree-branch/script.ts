@@ -54,6 +54,7 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
     if(this.branch){
       this.isArrayValue = Array.isArray(this.branch._branches._value);
       // this.toggleAllChilds(this.branch._branches._all);
+      this.branchSelected();
       this.ready = true;
     }
   }
@@ -108,7 +109,11 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
     //   this._selected = false;
     //   this.ref.detectChanges();
     // }
+    this.branchSelected();
 
+  }
+
+  branchSelected(){
     if(this.branchSelectionList.find((el)=> el._id === this.branch._id )){
       this.branch._selected = true;
     }else{
