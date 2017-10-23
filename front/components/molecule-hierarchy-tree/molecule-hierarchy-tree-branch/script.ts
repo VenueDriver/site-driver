@@ -53,7 +53,7 @@ export class MoleculeHierarchyTreeBranchComponent implements OnInit {
   ngOnInit(){
     if(this.branch){
       this.isArrayValue = Array.isArray(this.branch._branches._value);
-      this.toggleAllChilds(this.branch._branches._all);
+      // this.toggleAllChilds(this.branch._branches._all);
       this.ready = true;
     }
   }

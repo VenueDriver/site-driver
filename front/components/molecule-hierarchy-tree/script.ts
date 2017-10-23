@@ -181,7 +181,11 @@ export class MoleculeHierarchyTreeComponent implements OnInit {
         newBranch._branches._all = existingValue._branches._all;
         newBranch._branches._include = existingValue._branches._include;
         newBranch._branches._exclude = existingValue._branches._exclude;
+      }else{
+        newBranch._checked = branch._branches._all;
       }
+
+      if(!newBranch._checked) newBranch._branches._all = false
 
       // DO THE SAME FOR THE CHILD VALUES
       return this.regenerateTree(newBranch);
