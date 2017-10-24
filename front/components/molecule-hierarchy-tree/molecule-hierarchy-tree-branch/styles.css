@@ -62,6 +62,26 @@ ul.horizontal > li{
 .branch-handler{
   position: relative;
   margin-top: 15px;
+} 
+.top-level + li > ul > li:last-of-type > molecule-hierarchy-tree-branch > ul.branch-level:before  {
+  display: none;
+}
+.top-level + li > ul > li molecule-hierarchy-tree-branch > ul.branch-level > li:last-of-type > ul > li:last-of-type > molecule-hierarchy-tree-branch > ul.branch-level:before{
+  bottom: 20px;
+}
+molecule-hierarchy-tree-branch > ul.branch-level {
+  position: relative;
+}
+molecule-hierarchy-tree-branch > ul.branch-level:before {
+    content: '';
+    border-left: 1px solid #ccc;
+    position: absolute;
+    top: 0;
+    z-index: 0;
+    bottom: -1px;
+    left: 15px;
+    right: 0;
+    max-width: 10px;
 }
 
 molecule-hierarchy-tree-branch ul.branch-level > li.branch-handler:before {
