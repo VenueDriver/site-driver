@@ -101,6 +101,17 @@ input[type=text],input[type=number],input[type=date],input[type=password] {
 	}
 }
 
+molecule-config {
+	.label-form {
+		~ div.col-3{
+			white-space: nowrap;
+			&:nth-child(4n+3) {
+				padding-left: 0;
+			}
+		}
+	}
+}
+
 .label-form {
     display: block;
     font-size: 14px;
@@ -336,4 +347,27 @@ input[type=radio]:not(old):checked +  label > span > span{
 
 // 1200px
 @media all and (min-width: $screen-desktop) {
+}
+
+@media all and (max-width: 1260px) {
+	molecule-config {
+		.label-form {
+			~ div.col-3{
+				width: 50%;
+				&:nth-child(4n+3) {
+					padding-left: 15px;
+				}
+				&:nth-child(odd) {
+					padding-left: 0;
+				}
+			}
+		}
+	}
+	molecule-select {
+		.contCheckbox {
+			div.col-3{
+				width: 50%;
+			}
+		}
+	}
 }

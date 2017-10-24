@@ -344,7 +344,7 @@ div.fa.fa-times {
 	color: $secondary-text-color;
 	text-align: center;
 	h1 {
-	    font-size: 80px;
+	    font-size: 40px;
 	    margin: 60px 0 30px 0;
 	    color: #757575;
 	}
@@ -362,6 +362,11 @@ div.fa.fa-times {
 		&:first-of-type {
 			margin-top: 0;
 		}
+	}
+	.empty {
+	h1 {
+	    font-size: 80px;
+	}
 	}
 }
 
