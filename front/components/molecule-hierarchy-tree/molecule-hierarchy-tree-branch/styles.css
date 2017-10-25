@@ -67,7 +67,7 @@ ul.horizontal > li{
   display: none;
 }
 .top-level + li > ul > li molecule-hierarchy-tree-branch > ul.branch-level > li:last-of-type > ul > li:last-of-type > molecule-hierarchy-tree-branch > ul.branch-level:before{
-  bottom: 20px;
+  bottom: calc(100% - 23px);
 }
 molecule-hierarchy-tree-branch > ul.branch-level {
   position: relative;
