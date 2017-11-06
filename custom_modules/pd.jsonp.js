@@ -1,8 +1,8 @@
 const getJSON     = require("./rest");
+const retrieveJSONP = (data)=> data;
 
 const pdParse = (raw)=>{
-  let response = raw.replace(/^retrieveJSONP\(\{ref\:\"([a-zA-Z0-9/])*\w+\.json\"\,data\:/,'');
-  return JSON.parse(response.substring(0,response.length-2));
+  return eval(raw).data;
 }
 
 const pdGet = (location,next)=>{
