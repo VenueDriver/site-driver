@@ -1,6 +1,6 @@
 const config ={
   db : require("./db_postgresql"),
-  port : process.env.PORT || 3001
+  port : 8080
 }
 
 // = EXPOSE IT

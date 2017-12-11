@@ -176,11 +176,12 @@ const save = (req,res,next)=>{
 }
 
 const checkUser = (req,res,next)=>{
-  if(req.isAuthenticated()){
-		return next(true);
-	} else {
-		return next(false);
-	}
+//   if(req.isAuthenticated()){
+// 		return next(true);
+// 	} else {
+// 		return next(false);
+// 	}
+return next(true);
 }
 
 const getSiteList = (req,res,next = false)=>{

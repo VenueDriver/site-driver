@@ -12,5 +12,6 @@ _temp
 .DS_Store
 *.scssc
 _storage
+.c9
 
 /public/css/style.css

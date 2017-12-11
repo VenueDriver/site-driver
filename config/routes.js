@@ -3,15 +3,15 @@ const express       = require ('express');
 const fs            = require ('fs');
 const router	      = express.Router();
 const path          = require ('path');
-const passport      = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
+// const passport      = require('passport');
+// const LocalStrategy = require('passport-local').Strategy;
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/tmp' })
 const pdStatic = require('../custom_modules/pd.jsonp');
 const s3module = require("../custom_modules/amazons3");
 const s3 = new s3module();
 
-const User = require('../models/user');
+// const User = require('../models/user');
 
 
 // = LOAD CONTROLLERS
@@ -24,11 +24,12 @@ const c = {
 
 const bouncer = (req,res)=>{
   return new Promise((resolve,reject)=>{
-    if(req.isAuthenticated()){
-      resolve(req,res);
-    }else{
-      reject(req,res);
-    }
+    resolve(req,res)
+    // if(req.isAuthenticated()){
+    //   resolve(req,res);
+    // }else{
+    //   reject(req,res);
+    // }
   })
 }
 
@@ -144,39 +145,39 @@ router.get( "/site/:site_domain" ,(req,res)=>{
   });
 });
 
-router.get("/login", (req,res)=>{
-  res.render("login");
-});
+// router.get("/login", (req,res)=>{
+//   res.render("login");
+// });
 
 
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-   User.getUserByUsername(username, function(err, user){
-   	if(err) throw err;
-   	if(!user){
-   		return done(null, false, {message: 'Unknown User'});
-   	}
+// passport.use(new LocalStrategy(
+//   function(username, password, done) {
+//   User.getUserByUsername(username, function(err, user){
+//   	if(err) throw err;
+//   	if(!user){
+//   		return done(null, false, {message: 'Unknown User'});
+//   	}
 
-   	User.comparePassword(password, user.password, function(err, isMatch){
-   		if(err) throw err;
-   		if(isMatch){
-   			return done(null, user);
-   		} else {
-   			return done(null, false, {message: 'Invalid password'});
-   		}
-   	});
-   });
-  }));
+//   	User.comparePassword(password, user.password, function(err, isMatch){
+//   		if(err) throw err;
+//   		if(isMatch){
+//   			return done(null, user);
+//   		} else {
+//   			return done(null, false, {message: 'Invalid password'});
+//   		}
+//   	});
+//   });
+//   }));
 
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
+// passport.serializeUser(function(user, done) {
+//   done(null, user.id);
+// });
 
-passport.deserializeUser(function(id, done) {
-  User.getUserById(id, function(err, user) {
-    done(err, user);
-  });
-});
+// passport.deserializeUser(function(id, done) {
+//   User.getUserById(id, function(err, user) {
+//     done(err, user);
+//   });
+// });
 
 
 
@@ -512,73 +513,73 @@ router.post( "/upload/file" , upload.single('_file') , (req,res)=>{
 */
 
 router.post( "/user/role" , (req,res)=>{
-  c.sites.checkUser(req,res, (isAuth)=> {
-    if(isAuth){
-      res.json({role : req.user.role});
-    }else{
-      res.status(403);
-      res.json({error : "User not allowed"});
-    }
-  });
+  // c.sites.checkUser(req,res, (isAuth)=> {
+  //   if(isAuth){
+      res.json({role : 9001});
+    // }else{
+    //   res.status(403);
+      // res.json({error : "User not allowed"});
+    // }
+  // });
 });
 
-router.post('/login', passport.authenticate('local', {successRedirect:'/', failureRedirect:'/login',failureFlash: false}),
-  (req, res)=>{ res.redirect('/'); }
-);
-// Register User
-router.post('/register', (req, res)=>{
-  c.sites.checkUser(req,res, (isAuth)=> {
-    if(isAuth){
+// router.post('/login', passport.authenticate('local', {successRedirect:'/', failureRedirect:'/login',failureFlash: false}),
+//   (req, res)=>{ res.redirect('/'); }
+// );
+// // Register User
+// router.post('/register', (req, res)=>{
+//   c.sites.checkUser(req,res, (isAuth)=> {
+//     if(isAuth){
 
-    	let name = req.body.name;
-    	let email = req.body.email;
-    	let username = req.body.username;
-    	let password = req.body.password;
-    	let password2 = req.body.password2;
-    	let role = req.body.role;
+//     	let name = req.body.name;
+//     	let email = req.body.email;
+//     	let username = req.body.username;
+//     	let password = req.body.password;
+//     	let password2 = req.body.password2;
+//     	let role = req.body.role;
 
-      console.log("HEADERS:",req.headers);
+//       console.log("HEADERS:",req.headers);
 
-      console.log("BODY:",req.body);
+//       console.log("BODY:",req.body);
 
-    	// Validation
-    	req.checkBody('name', 'Name is required').notEmpty();
-    	req.checkBody('email', 'Email is required').notEmpty();
-    	req.checkBody('email', 'Email is not valid').isEmail();
-    	req.checkBody('username', 'Username is required').notEmpty();
-    	req.checkBody('password', 'Password is required').notEmpty();
-    	req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
-    	req.checkBody('role', 'Role is required').notEmpty();
+//     	// Validation
+//     	req.checkBody('name', 'Name is required').notEmpty();
+//     	req.checkBody('email', 'Email is required').notEmpty();
+//     	req.checkBody('email', 'Email is not valid').isEmail();
+//     	req.checkBody('username', 'Username is required').notEmpty();
+//     	req.checkBody('password', 'Password is required').notEmpty();
+//     	req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
+//     	req.checkBody('role', 'Role is required').notEmpty();
 
-    	let errors = req.validationErrors();
+//     	let errors = req.validationErrors();
 
-    	if(errors){
-    		res.json({"message" : 'Error!', errors : errors});
-    	} else {
-    		let newUser = new User({
-    			name: name,
-    			email: email,
-    			username: username,
-    			password: password,
-    			role: role
-    		});
+//     	if(errors){
+//     		res.json({"message" : 'Error!', errors : errors});
+//     	} else {
+//     		let newUser = new User({
+//     			name: name,
+//     			email: email,
+//     			username: username,
+//     			password: password,
+//     			role: role
+//     		});
 
-        let blablaNewUser = {};
+//         let blablaNewUser = {};
 
-    		User.createUser(newUser, function(err, user){
-    			if(err) throw err;
-    			console.log(user);
-          blablaNewUser = user;
-    		});
+//     		User.createUser(newUser, function(err, user){
+//     			if(err) throw err;
+//     			console.log(user);
+//           blablaNewUser = user;
+//     		});
 
 
-    		res.json({"message" : 'You are registered and can now login' , "user" : blablaNewUser});
-    	}
-    }else{
-      res.json({ "message" : "Not allowed." });
-    }
-  })
-});
+//     		res.json({"message" : 'You are registered and can now login' , "user" : blablaNewUser});
+//     	}
+//     }else{
+//       res.json({ "message" : "Not allowed." });
+//     }
+//   })
+// });
 
 
 // = DEFAUL ROUTES
