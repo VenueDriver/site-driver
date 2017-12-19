@@ -52,7 +52,11 @@ const remove = (query)=>{
   return new Promise((resolve,reject)=>{
     const publisher = new Publisher(query);
     publisher.unpublishAll().then((response)=>{
-      updateGenerator(query).then(resolve).catch(reject);
+      if((query.data.hasOwnProperty("_generator"))){
+        updateGenerator(query).then(resolve).catch(reject);
+      }else{
+        resolve(response);
+      }
     }).catch(reject);
   });
 }
