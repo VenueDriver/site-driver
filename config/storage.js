@@ -1,5 +1,6 @@
 const LocalStorage = require('../custom_modules/local-storage');
 const S3Storage    = require('../custom_modules/s3-storage');
+const MongoStorage = require('../custom_modules/mongo-storage');
 
 const uniqid = require('uniqid');
 const path = require('path');
@@ -12,34 +13,35 @@ class StorageRoutes{
 
     let storageOptions ={ root: rootStorageFolder , query : this.query };
 
-    this.localStorage = new LocalStorage(storageOptions);
+    this.localStorage = new MongoStorage(storageOptions);
     this.remoteStorage =new S3Storage(storageOptions);
     // console.log("REMOTE",this.remoteStorage);
   }
 
   save(){
-    return new Promise((resolve,reject)=>{
-      this.remoteStorage.post().then(resolve
-        // ()=>{
-        // this.localStorage.post().catch(reject).then(resolve);
-        // }
-      ).catch(reject);
-    });
+    if(this.query.format == 'original'){
+      return this.localStorage.post();
+    }else{
+      return this.remoteStorage.post();
+    }
   }
 
   remove(){
-    return new Promise((resolve,reject)=>{
-      this.remoteStorage.remove().then(resolve
-        // ()=>{
-        //   this.localStorage.remove().catch(reject).then(resolve);
-        // }
-      ).catch(reject);
-    });
+    if(this.query.format == 'original'){
+      return this.localStorage.remove();
+    }else{
+      return this.remoteStorage.remove();
+    }
   }
 
   get(){
-    // return this.localStorage.get();
-    return this.remoteStorage.get();
+    console.log("Get query",this.query);
+    if(this.query.format == 'original'){
+      // return this.localStorage.get();
+      return this.remoteStorage.get();
+    }else{
+      return this.remoteStorage.get();
+    }
   }
 
 }
