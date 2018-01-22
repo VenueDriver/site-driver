@@ -1,7 +1,7 @@
 const StorageRoutes = require('../config/storage');
 const cellsStorage = new StorageRoutes({ format : 'original' , type : ['cell'] });
 const generatorsStorage = new StorageRoutes({ format : 'original' , type : ['generator'] });
-const instancesStorage = new StorageRoutes({ format : 'original' , type : ['instance'] , where : { _name : "Venue" });
+const instancesStorage = new StorageRoutes({ format : 'original' , type : ['instance'] , where : { _name : "Venue" } });
 const asyncLoop = require('../custom_modules/asyncloop');
 const uniqid = require('uniqid');
 
