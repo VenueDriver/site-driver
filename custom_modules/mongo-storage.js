@@ -62,10 +62,12 @@ class MongoStorage{
   }
 
   post(){
+    console.log("MongoDB: Save, promise.");
     return new Promise((resolve,reject)=>{
       let buf = new Buffer(JSON.stringify(this.query.formattedData), 'utf-8')
+      console.log("MongoDB: Compressing.");
       zlib.gzip(buf,(err,compressed)=>{
-
+        console.log("MongoDB: Prepare Query");
         let data = {
           _id   : this.query.id,
           _value : compressed,
@@ -77,8 +79,10 @@ class MongoStorage{
         console.log(`MongoDB: Saving ${data._type}/${data._name}/${data._id}`);
         MoleculeModel.update({_id : data._id},data,{upsert: true},(err)=>{
           if(err){
+            console.log("MongoDB: "+err);
             reject(err);
           }else{
+            console.log("MongoDB: Saved.");
             resolve(null);
           }
         })
