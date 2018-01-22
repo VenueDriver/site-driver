@@ -19,7 +19,7 @@ class StorageRoutes{
   }
 
   save(){
-    return this.localStorage.post();
+    // return this.localStorage.post();
     if(this.query.format == 'original'){
       return this.localStorage.post();
     }else{
@@ -37,10 +37,9 @@ class StorageRoutes{
 
   get(){
     console.log("Get query",this.query);
-    return this.remoteStorage.get();
+    // return this.remoteStorage.get();
     if(this.query.format == 'original'){
       return this.localStorage.get();
-      // return this.remoteStorage.get();
     }else{
       return this.remoteStorage.get();
     }

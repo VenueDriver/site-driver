@@ -51,7 +51,7 @@ const rejectEndpoint = (req,res)=>{
 ==============================
 */
 
-router.get("*",(req,res)=> res.send("DATABASE MIGRATION IN PROGRESS"));
+// router.get("*",(req,res)=> res.send("DATABASE MIGRATION IN PROGRESS"));
 
 router.get('/get/config/:domain',(req,res)=>{
   let fileSystem = s3.dataBucket.fs;
