@@ -1,5 +1,5 @@
 const StorageRoutes = require('../config/storage');
-const storage = new StorageRoutes({ format : 'original' , type : ['instance','cell','generator'] });
+const storage = new StorageRoutes({ format : 'original' , type : ['cell','generator','instance'] });
 const asyncLoop = require('../custom_modules/asyncloop');
 const uniqid = require('uniqid');
 
