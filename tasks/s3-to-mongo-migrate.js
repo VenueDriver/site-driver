@@ -20,13 +20,16 @@ storage.get().catch(err => console.error(err))
           format : 'original'
         };
         let storageInstance = new StorageRoutes(query);
+        console.log("Saving.");
         storageInstance.save().catch(end).then(()=>{ i++ ; next(); });
       },
       (err)=>{
         if(err){
           console.error(err);
+          console.log("Exiting with errors...");
           process.exit(1);
         }else{
+          console.log("Exiting...");
           process.exit(0);
         }
       }
