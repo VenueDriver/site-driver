@@ -1,6 +1,6 @@
 const StorageRoutes = require('../config/storage');
 const storage = new StorageRoutes({ format : 'original' , type : ['instance','cell','generator'] });
-const asyncLoop = require('../custom_modules/asyncLoop');
+const asyncLoop = require('../custom_modules/asyncloop');
 const uniqid = require('uniqid');
 
 storage.get().catch(err => console.error(err))

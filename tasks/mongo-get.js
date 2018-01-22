@@ -1,7 +1,7 @@
 const mongo       = require('mongodb');
 const mongoose    = require('mongoose');
 const MoleculeModel = require('../definitions/schemas/molecule');
-const asyncLoop = require('../custom_modules/asyncLoop');
+const asyncLoop = require('../custom_modules/asyncloop');
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/loginapp',{ useMongoClient: true });
 const db          = mongoose.connection;
 

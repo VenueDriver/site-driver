@@ -12,7 +12,6 @@ export class CellBuilder implements OnInit{
 
   ready : boolean = true;
   cellList : Array<any>;
-  cache : any;
 
   constructor(private moleculeService : MoleculeService){}
 
@@ -21,15 +20,12 @@ export class CellBuilder implements OnInit{
   }
 
   ngOnInit(){
-    if(!this.cache){
-      this.moleculeService.getMoleculeList({
-        type : ['cell']
-      }).then((cache)=>{
-        this.cache = cache;
-        this.cellList = cache.data;
-        this.ready = true;
-      })
-    }
+    this.moleculeService.getMoleculeList({
+      type : ['cell']
+    }).then((data)=>{
+      this.cellList = data;
+      this.ready = true;
+    })
   }
 
 }
