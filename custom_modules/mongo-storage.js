@@ -78,6 +78,7 @@ class MongoStorage{
 
         console.log(`MongoDB: Saving ${data._type}/${data._name}/${data._id}`);
         MoleculeModel.update({_id : data._id},data,{upsert: true},(err)=>{
+          console.log("After 'update'.")
           if(err){
             console.log("MongoDB: "+err);
             reject(err);
