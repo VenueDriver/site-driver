@@ -15,10 +15,10 @@ const validate = (data)=>{
 // EASY ALIAS TO TRIGGER VALIDATION, SANITAZION AND STORAGE OF DATA
 const save = (query)=>{
 
-    /*
-      EVERY TIME A CELL IS UPDATED
-      ALL INSTANCES SHARING THE SAME CELL MODEL SHOULD BE UPDATED ASWELL
-    */
+  /*
+    EVERY TIME A CELL IS UPDATED
+    ALL INSTANCES SHARING THE SAME CELL MODEL SHOULD BE UPDATED ASWELL
+  */
 
   return new Promise((resolve,reject)=>{
     if(query.type === "instance" && !query.id){
@@ -33,7 +33,8 @@ const save = (query)=>{
     // VALIDATE DATA
     validate(query.data).then((validName)=>{
       const publisher = new Publisher(query);
-      publisher.publishAll().then((data)=>{
+      ((query.format) ? publisher.publish(query.format,query.data) : publisher.publishAll())
+      .then((data)=>{
         if((query.data.hasOwnProperty("_generator"))){
           updateGenerator(query).then(resolve).catch(reject);
         }else{
@@ -88,6 +89,7 @@ const updateGenerator = (query)=>{
        name : generator._name,
        id   : generator._id,
        data : generator,
+       format : "readable",
        nonRecursive : true
       }).then(resolve).catch(reject);
     }).catch(reject);

@@ -37,8 +37,8 @@ class StorageRoutes{
   get(){
     console.log("Get query",this.query);
     if(this.query.format == 'original'){
-      // return this.localStorage.get();
-      return this.remoteStorage.get();
+      return this.localStorage.get();
+      // return this.remoteStorage.get();
     }else{
       return this.remoteStorage.get();
     }
