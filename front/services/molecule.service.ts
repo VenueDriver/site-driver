@@ -92,7 +92,6 @@ export class MoleculeService implements OnInit {
           id : queryID
         };
       }
-
       if(this.index[queryID].data){
         resolve(this.index[queryID].data.slice())
       }else{
@@ -112,7 +111,7 @@ export class MoleculeService implements OnInit {
                 reject(err);
               }else{
                 this.index[queryID].data = data;
-                console.log("Get, resolved");
+                // console.log("Get, resolved");
                 resolve(this.index[queryID].data.slice());
               }
             }

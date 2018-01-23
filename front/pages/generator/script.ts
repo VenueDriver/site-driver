@@ -11,8 +11,6 @@ import { MoleculeService } from '../../services/molecule.service';
 export class GeneratorPage implements OnInit {
 
     ready : boolean = false;
-    cache :any;
-    cacheSecondary : any;
     generatorName : string;
     generator : any;
     newMolecule : any;
@@ -33,33 +31,28 @@ export class GeneratorPage implements OnInit {
 
     ngOnInit() {
       this.sub = this.route.params.subscribe(params => {
-         this.generatorName = params['generator_name'];
-         this.moleculeService.getMoleculeList({
-           type : ["generator"],
-           where : {
-             _name : this.generatorName
-         }}).then((generatorCache)=>{
-         this.cacheSecondary = generatorCache;
-         this.generator = generatorCache.data[0];
-        //  console.log("Showing generator:",this.generator._name,this.generator);
-         this.useMolecules = this.generator._options._molecule_types._value.map((value)=> value._name);
-         if(!this.cache){
-           this.moleculeService.getMoleculeList({
-             type : ["instance"],
-             name : this.useMolecules,
-             where : {
-               _generator : {
-                 _name : this.generatorName
-               }
-           }}).then((mainCache)=>{
-             this.cache = mainCache;
+        this.generatorName = params['generator_name'];
+        this.moleculeService.getMoleculeList({
+          type : ["generator"],
+          where : {
+            _name : this.generatorName
+        }}).then((data)=>{
+        this.generator = data[0];
+        // console.log("Showing generator:",this.generator._name,this.generator);
+        this.useMolecules = this.generator._options._molecule_types._value.map((value)=> value._name);
+        this.moleculeService.getMoleculeList({
+            type : ["instance"],
+            name : this.useMolecules,
+            where : {
+              _generator : {
+                _name : this.generatorName
+              }
+            }
+          }).then((instances)=>{
             //  console.log("Has instances:",instances);
-             this.instances = mainCache.data;
-             this.ready = true;
-           });
-         }else{
-           this.ready = true;
-         }
+            this.instances = instances;
+            this.ready = true;
+          });
          });
       });
     }
