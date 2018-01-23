@@ -68,9 +68,9 @@ const get = (query,format = 'original')=>{
 }
 
 const updateGenerator = (query)=>{
+  let generator = query.data._generator;
   return new Promise((resolve,reject)=>{
-    console.log("Updating generator");
-    let generator = query.data._generator;
+    console.log("Updating generator",JSON.stringify(generator));
     get({
       type : ["instance"],
       name : generator._options._molecule_types._value.map(value=>value._name),
@@ -94,6 +94,7 @@ const updateGenerator = (query)=>{
      }).then(()=>{
 
        generator._value = [];
+       console.log("Updating gnerator id",generator._id);
        save({
          type : generator._type,
          name : generator._name,

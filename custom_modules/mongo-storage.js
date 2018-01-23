@@ -92,6 +92,7 @@ class MongoStorage{
 
   remove(){
     return new Promise((resolve,reject)=>{
+      console.log(`\nMongoDB: Deleting - ${JSON.stringify(this.mongooseQuery)}\n`);
       MoleculeModel.deleteMany(this.mongooseQuery,(err)=>{
         if (err) {
           reject(err);
