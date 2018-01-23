@@ -21,7 +21,7 @@ const save = (query)=>{
   */
 
   return new Promise((resolve,reject)=>{
-    if(query.type === "instance" && !query.id){
+    if(!query.id){
       query.id = uniqid();
       query.data._id = query.id;
     }
@@ -91,8 +91,20 @@ const updateGenerator = (query)=>{
        data : generator,
        format : "readable",
        nonRecursive : true
-      }).then(resolve).catch(reject);
-    }).catch(reject);
+     }).then(()=>{
+
+       generator._value = [];
+       save({
+         type : generator._type,
+         name : generator._name,
+         id   : generator._id,
+         data : generator,
+         format : "original",
+         nonRecursive : true
+        }).then(resolve).catch(reject);
+
+      }).catch(reject);
+     }).catch(reject);
   })
 }
 
