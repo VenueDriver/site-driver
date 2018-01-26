@@ -6,7 +6,6 @@ const generatorsStorage = new StorageRoutes({ format : 'original' , type : ['gen
 const asyncLoop = require('../custom_modules/asyncloop');
 const uniqid = require('uniqid');
 
-
 generatorsStorage.get().catch(err => console.error(err))
   .then((prime_generators)=>{
 
@@ -82,8 +81,6 @@ generatorsStorage.get().catch(err => console.error(err))
     });
   }
 );
-
-
 
 // storage.get().catch(err => console.error(err))
 //   .then((molecules)=>{
