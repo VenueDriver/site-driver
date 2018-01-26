@@ -73,7 +73,7 @@ const updateGenerator = (query)=>{
     console.log("Updating generator",JSON.stringify(generator));
     get({
       type : ["instance"],
-      name : generator._options._molecule_types._value.map(value=>value._name),
+      name : generator._molecule_types,
       where : {
         _generator : {
           _name : generator._name,
@@ -81,7 +81,7 @@ const updateGenerator = (query)=>{
         }
      }
    }).then((generatorNewInstances)=>{
-    //  console.log("\n\n\n\nreadable instances:",generatorNewInstances[0]);
+     // console.log("\n\n\n\nreadable instances:",generatorNewInstances[0]);
 
      generator._value = generatorNewInstances;
      save({
@@ -91,20 +91,7 @@ const updateGenerator = (query)=>{
        data : generator,
        format : "readable",
        nonRecursive : true
-     }).then(()=>{
-
-       generator._value = [];
-       console.log("Updating gnerator id",generator._id);
-       save({
-         type : generator._type,
-         name : generator._name,
-         id   : generator._id,
-         data : generator,
-         format : "original",
-         nonRecursive : true
-        }).then(resolve).catch(reject);
-
-      }).catch(reject);
+     }).then(resolve).catch(reject);
      }).catch(reject);
   })
 }

@@ -3,6 +3,7 @@ const mongo       = require('mongodb');
 const mongoose    = require('mongoose');
 const MoleculeModel = require('../definitions/schemas/molecule');
 const asyncLoop = require('../custom_modules/asyncloop');
+
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/loginapp',{ useMongoClient: true });
 const db          = mongoose.connection;
 zlib              = require('zlib');
@@ -31,7 +32,6 @@ class MongoStorage{
     return new Promise((resolve,reject)=>{
       console.log("MongoDB: GET - ",this.mongooseQuery);
       MoleculeModel.find(this.mongooseQuery).exec((err, mongoResult)=>{
-
         let i = 0;
         let molecules = [];
         asyncLoop(
@@ -51,9 +51,12 @@ class MongoStorage{
             if (err) {
               reject(err)
             } else {
+              // molecules.forEach((molecule)=> fs.writeFileSync(__dirname+"/test/"+molecule._id, JSON.stringify(molecule) , 'utf-8' ));
               // molecules.forEach(molecule => console.log(`${molecule._type} | ${molecule._name} | ${molecule._id}`))
+              // fs.writeFileSync(__dirname+"/test/mongo_result_"+new Date().getTime(), JSON.stringify(molecules) , 'utf-8' )
               const queryFilter = new QueryFilter(this.query);
-              resolve(queryFilter.filter(molecules))
+              let res = queryFilter.filter(molecules);
+              resolve(res);
             }
           }
         )

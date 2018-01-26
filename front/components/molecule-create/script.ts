@@ -27,11 +27,7 @@ export class MoleculeCreate {
     this.newMolecule = molecules[0];
     // console.log("This Molecule:",this.newMolecule);
     if(this.generator){
-      this.newMolecule._generator = {
-        _id : this.generator._id,
-        _type : this.generator._type,
-        _name : this.generator._name
-      };
+      this.newMolecule._generator = this.generator;
       this.newMolecule._id = '';
     }
   }

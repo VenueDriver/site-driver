@@ -46,13 +46,13 @@ export class InstancePage implements OnInit {
 
            if(this.isGenerator){
              this.moleculeService.getMoleculeList({
-               type : ["instance"],
-               name : this.data._options._molecule_types._value.map(value=>value._name),
-               where : {
-                 _generator : {
-                   _name : this.data._name,
-                   _id : this.data._id
-                 }
+              type : ["instance"],
+              name : this.data._options._molecule_types._value.map(value=>value._name),
+              where : {
+                _generator : {
+                  _name : this.data._name,
+                  _id : this.data._id
+                }
               }
             }).then((instances)=>{
               //  console.log("Has instances:",instances);
