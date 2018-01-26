@@ -98,10 +98,13 @@ class LocalStorage{
         asyncLoop(
           ()=> i >= routes.length,
           (next,end)=>{
+            console.log("Read file");
             this.readdir(routes[i],{readFiles : true}).catch(reject).then((list)=>{
+              console.log("Done, apply query.");
               const queryFilter = new QueryFilter(this.query);
               list = queryFilter.filter(list);
               list.forEach(item => mergedResultList.push(item));
+              console.log("Next ->");
               i++; next();
             });
           },
@@ -143,6 +146,7 @@ class LocalStorage{
       let mergedLocation = path.join(this.opts.root,location,file);
       // console.log("\nreadFile:",mergedLocation);
       this.fs.readFile(mergedLocation,'utf-8',(err,data)=>{
+        console.log("Done reading");
         if(err) console.log("err:",err);
         if(this.opts.json) data = stringToJSON(data);
         if(err){

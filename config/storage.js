@@ -14,24 +14,28 @@ class StorageRoutes{
 
     let storageOptions ={ root: rootStorageFolder , query : this.query };
 
-    this.localStorage = new MongoStorage(storageOptions);
-    this.remoteStorage = new EmptyStorage(storageOptions);
+    this.mongoStorage = new MongoStorage(storageOptions);
+    this.s3Storage    = new S3Storage(storageOptions);
+    this.emptyStorage = new EmptyStorage(storageOptions);
 
-    if(process.env.REMOTE_STORAGE){
-      this.remoteStorage = new S3Storage(storageOptions);
-    }
+    this.localStorage = this.mongoStorage;
+    // this.remoteStorage = new EmptyStorage(storageOptions);
+
+    // if(process.env.REMOTE_STORAGE){
+      this.remoteStorage = this.s3Storage;
+    // }
 
     // console.log("REMOTE",this.remoteStorage);
   }
 
   save(){
-    // return this.localStorage.post();
     if(this.query.format == 'original'){
       console.log("Saving Original");
       return this.localStorage.post();
     }else{
       console.log("Saving "+this.query.format);
-      return this.remoteStorage.post();
+      return this.emptyStorage.post();
+      // return this.remoteStorage.post();
     }
   }
 
@@ -39,12 +43,13 @@ class StorageRoutes{
     if(this.query.format == 'original'){
       return this.localStorage.remove();
     }else{
-      return this.remoteStorage.remove();
+      return this.emptyStorage.remove();
+      // return this.remoteStorage.remove();
     }
   }
 
   get(){
-    // return this.remoteStorage.get();
+    return this.remoteStorage.get();
     if(this.query.format == 'original'){
       return this.localStorage.get();
     }else{

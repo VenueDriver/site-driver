@@ -21,6 +21,7 @@ export class PageHeader implements OnInit {
       this.isDeveloper = (<any>data).role > 9000;
         this.moleculeService.getMoleculeList({type : ['generator']}).then((data)=>{
           this.generators = data;
+          console.log("Generators List:",this.generators);
           this.ready = true;
         })
     });
