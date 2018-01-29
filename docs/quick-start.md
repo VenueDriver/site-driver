@@ -1,5 +1,3 @@
-# Molecule Driver
-
 ## Quick start
 Make sure you have all dependencies installed:
 
