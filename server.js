@@ -11,6 +11,7 @@ const LocalStrategy     = require('passport-local').Strategy;
 const mongo             = require('mongodb');
 const MongoStore        = require('connect-mongo')(session);
 const mongoose          = require('mongoose');
+const compression = require('compression')
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/loginapp',{ useMongoClient: true });
 const app   = express();
@@ -21,6 +22,7 @@ const config = require('./config/settings');
 
 // paths
 app.use(favicon(path.join(__dirname , './favicon.ico')));
+app.use(compression());
 
 // = MIDDLEWARER
 app.use(session({
@@ -55,7 +57,7 @@ app.use(expressValidator({
   }
 }));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json({limit : '50mb'}));
+app.use(bodyParser.json({limit : '900mb'}));
 app.use(cookieParser());
 app.use(passport.initialize());
 app.use(passport.session());

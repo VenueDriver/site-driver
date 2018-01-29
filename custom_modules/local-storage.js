@@ -32,9 +32,8 @@ class LocalStorage{
   getInstanceNames(){
     return new Promise((resolve,reject)=>{
       this.readdir('instance',{readFiles : false}).then((names)=>{
-        // console.log("Instance names",names);
         resolve(names);
-      })
+      }).catch(reject);
     });
   }
 
@@ -65,6 +64,7 @@ class LocalStorage{
                 i++;
                 next();
               }).catch((err)=>{
+                console.log(err);
                 end("Error While getting instance names.");
               })
             }
@@ -98,21 +98,20 @@ class LocalStorage{
         asyncLoop(
           ()=> i >= routes.length,
           (next,end)=>{
+            console.log("Read file");
             this.readdir(routes[i],{readFiles : true}).catch(reject).then((list)=>{
-              // console.log("Files received get.asyncLoop");
+              console.log("Done, apply query.");
               const queryFilter = new QueryFilter(this.query);
               list = queryFilter.filter(list);
-
               list.forEach(item => mergedResultList.push(item));
+              console.log("Next ->");
               i++; next();
             });
           },
           ()=>{
-            // console.log("LocalStorage.get(),promise fulfilled");
             resolve(mergedResultList);
           }
         );
-
       })
 
     });
@@ -147,12 +146,12 @@ class LocalStorage{
       let mergedLocation = path.join(this.opts.root,location,file);
       // console.log("\nreadFile:",mergedLocation);
       this.fs.readFile(mergedLocation,'utf-8',(err,data)=>{
-        // console.log("err:",err);
+        console.log("Done reading");
+        if(err) console.log("err:",err);
         if(this.opts.json) data = stringToJSON(data);
         if(err){
           reject(err);
         }else{
-          // console.log("readFile, promise fulfilled");
           resolve(data);
         }
       });

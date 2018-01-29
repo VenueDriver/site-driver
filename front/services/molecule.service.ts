@@ -14,6 +14,8 @@ import { MoleculeParser } from '../helpers/molecule-parser';
 
 export class MoleculeService implements OnInit {
 
+  index : any = {};
+
   parser : any;
   cache : any = {};
 
@@ -76,54 +78,55 @@ export class MoleculeService implements OnInit {
     });
   }
 
-  getMoleculeList(query,cache ?: any) {
+  getMoleculeList(query) {
     return new Promise<any>((resolve,reject)=>{
       if(typeof query === "string"){
         query = {
           type : [query]
         }
       }
-      let queryID;
-      if(!cache){
-        queryID = new Date().getTime();
-        this.cache[queryID] = {query : query , action : "get"};
-      }else{
-        queryID = cache.id;
+      let queryID = JSON.stringify(query);
+      if(!this.index.hasOwnProperty(queryID)){
+        this.index[queryID] = {
+          query : Object.assign({},query) ,
+          id : queryID
+        };
       }
-      query = this.cache[queryID].query;
-      this.cache[queryID].id = queryID;
-
-      this._server.post( `/molecule/get` , query , [] ).subscribe((data)=>{
-        let i = 0;
-        asyncLoop(
-          ()=> i >= data.length,
-          (next,end)=>{
-            this.parser.toNg(data[i]).then((parsedResult)=>{
-              data[i] = parsedResult;
-              i++;
-              next();
-            }).catch((error)=> end(error));
-          },
-          (err)=>{
-            if(err){
-              reject(err);
-            }else{
-              this.cache[queryID].data = data;
-              console.log("Get, resolved");
-              resolve(this.cache[queryID]);
+      if(this.index[queryID].data){
+        resolve(this.index[queryID].data.slice())
+      }else{
+        this._server.post( `/molecule/get` , query , [] ).subscribe((data)=>{
+          let i = 0;
+          asyncLoop(
+            ()=> i >= data.length,
+            (next,end)=>{
+              this.parser.toNg(data[i]).then((parsedResult)=>{
+                data[i] = parsedResult;
+                i++;
+                next();
+              }).catch((error)=> end(error));
+            },
+            (err)=>{
+              if(err){
+                reject(err);
+              }else{
+                this.index[queryID].data = data;
+                // console.log("Get, resolved");
+                resolve(this.index[queryID].data.slice());
+              }
             }
-          }
-        );
-      },(error)=>{
-        reject(error);
-      })
+          );
+        },(error)=>{
+          reject(error);
+        })
+      }
     });
   }
 
   getAllMolecules(){
     return new Promise<any>((resolve,reject)=>{
-      this.getMoleculeList({type : ['cell','generator']}).catch(reject).then((cache)=>{
-        let fullList = cache.data.map(cell => cell);
+      this.getMoleculeList({type : ['cell','generator']}).catch(reject).then((data)=>{
+        let fullList = data.map(cell => cell);
         for(var key in nodes){
           fullList.push(new nodes[key]({}));
         }
@@ -132,30 +135,30 @@ export class MoleculeService implements OnInit {
     })
   }
 
-  updateResults(){
-    return new Promise((resolve,reject)=>{
-      let cacheIDS = Object.keys(this.cache);
-      let i = 0;
-      asyncLoop(
-        ()=> i >= cacheIDS.length,
-        (next,end)=>{
-          let cache = this.cache[cacheIDS[i]];
-          if(cache.action === "get"){
-            console.log("Update cache",i,"/",cacheIDS.length-1);
-            this.getMoleculeList(cache.query,cache).catch(reject).then(()=>{
-              i++;next();
-            });
-          }else{
-            i++;
-            next();
-          }
-        },
-        ()=>{
-          console.log("update results end");
-          resolve();
-        }
-      );
-    });
-  }
+  // updateResults(){
+  //   return new Promise((resolve,reject)=>{
+  //     let cacheIDS = Object.keys(this.cache);
+  //     let i = 0;
+  //     asyncLoop(
+  //       ()=> i >= cacheIDS.length,
+  //       (next,end)=>{
+  //         let cache = this.cache[cacheIDS[i]];
+  //         if(cache.action === "get"){
+  //           console.log("Update cache",i,"/",cacheIDS.length-1);
+  //           this.getMoleculeList(cache.query).catch(reject).then(()=>{
+  //             i++;next();
+  //           });
+  //         }else{
+  //           i++;
+  //           next();
+  //         }
+  //       },
+  //       ()=>{
+  //         console.log("update results end");
+  //         resolve();
+  //       }
+  //     );
+  //   });
+  // }
 
 }

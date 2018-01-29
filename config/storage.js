@@ -1,5 +1,7 @@
 const LocalStorage = require('../custom_modules/local-storage');
 const S3Storage    = require('../custom_modules/s3-storage');
+const MongoStorage = require('../custom_modules/mongo-storage');
+const EmptyStorage = require('../custom_modules/empty-storage');
 
 const uniqid = require('uniqid');
 const path = require('path');
@@ -12,41 +14,42 @@ class StorageRoutes{
 
     let storageOptions ={ root: rootStorageFolder , query : this.query };
 
-    this.localStorage = new LocalStorage(storageOptions);
-    this.remoteStorage =new S3Storage(storageOptions);
-    this.storage = this.localStorage;
-    if(process.env.STORAGE == "remote"){
-      this.storage = this.remoteStorage;
-    };
+    this.mongoStorage = new MongoStorage(storageOptions);
+    this.s3Storage    = new S3Storage(storageOptions);
+    this.emptyStorage = new EmptyStorage(storageOptions);
+
+    this.localStorage = this.mongoStorage;
+    this.remoteStorage = this.emptyStorage;
+
+    if(process.env.REMOTE_STORAGE){
+      this.remoteStorage = this.s3Storage;
+    }
+
     // console.log("REMOTE",this.remoteStorage);
   }
 
   save(){
-    return this.storage.post();
-    // return new Promise((resolve,reject)=>{
-    //   this.remoteStorage.post().then(resolve
-    //     ()=>{
-    //     this.localStorage.post().catch(reject).then(resolve);
-    //     }
-    //   ).catch(reject);
-    // });
+    if(this.query.format == 'original'){
+      return this.localStorage.post();
+    }else{
+      return this.remoteStorage.post();
+    }
   }
 
   remove(){
-    return this.storage.remove();
-    // return new Promise((resolve,reject)=>{
-    //   this.remoteStorage.remove().then(resolve
-    //     ()=>{
-    //       this.localStorage.remove().catch(reject).then(resolve);
-    //     }
-    //   ).catch(reject);
-    // });
+    if(this.query.format == 'original'){
+      return this.localStorage.remove();
+    }else{
+      return this.remoteStorage.remove();
+    }
   }
 
   get(){
-    return this.storage.get();
-    // return this.localStorage.get();
-    // return this.remoteStorage.get();
+    if(this.query.format == 'original'){
+      return this.localStorage.get();
+    }else{
+      return this.remoteStorage.get();
+    }
   }
 
 }
