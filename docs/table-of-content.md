@@ -2,9 +2,12 @@
 
 - Quick Start
 - Storage
+	- Storage Routes
 	- Storage Modules
-	- Configuration
--	Routes
+		- Local Storage
+		- S3 Storage
+		- Mongo Storage
+- Routes
 - Molecule
 	- Cell
 	- Text
