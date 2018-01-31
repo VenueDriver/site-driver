@@ -1,0 +1,17 @@
+{
+  "name": "md-interfaces",
+  "version": "1.0.0",
+  "description": "Molecule Driver Typescript interfaces.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "interfaces",
+    "molecule",
+    "driver",
+    "typescript"
+  ],
+  "author": "Gaspar G. Errobidart",
+  "license": "MIT"
+}

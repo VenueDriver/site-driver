@@ -1,0 +1,23 @@
+{
+  "name": "md-empty-storage",
+  "version": "1.0.0",
+  "description": "Molecule Driver's storage module. Routing molecule records through this module will not have any effect. It works as a placeholder that will always resolve its promise but will not save, update, remove or get any records.",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha || true",
+    "dev": "concurrently \"tsc -w\" \"./node_modules/mocha/bin/mocha -w || true\""
+  },
+  "keywords": [
+    "molecule",
+    "driver",
+    "storage",
+    "module"
+  ],
+  "author": "Gaspar G. Errobidart",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "concurrently": "^3.5.1",
+    "mocha": "^5.0.0"
+  }
+}
