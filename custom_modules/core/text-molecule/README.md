@@ -1,8 +1,13 @@
 ## Molecule Driver
-# Molecule
-Basic interface all Text Molecules must ensure.
+# Text Molecule
+Molecule destinated to hold string values.
 
 ### _value : `String`
 `Optional: no`
 
 `Default: ''`
+
+### _type : `String`
+`Optional: no`
+
+`Fixed Value: 'text'`

@@ -4,13 +4,17 @@ export class Molecule implements MoleculeInterface {
 
   _name : string = '';
   _id   : string = '';
-  _type : string = '';
+  _type : string = 'molecule';
   _value : any = null;
 
   constructor(data : any){
+    const readOnly = ['_type'];
+    
     for(let key in data){
-      this[key] = data[key];
+      if(!readOnly.includes(key)) this[key] = data[key];
     }
   }
 
 }
+
+module.exports = Molecule

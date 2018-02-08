@@ -22,9 +22,9 @@ String attribute used to name a molecule.
 ### _type : `String`
 `Optional: no`
 
-`Default: ''`
+`Fixed Value: 'molecule'`
 
-This attribute defines how this record should be handled.
+This attribute defines how this record should be handled. It can't be changed.
 
 
 ### _value : `Any`
