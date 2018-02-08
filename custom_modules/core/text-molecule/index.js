@@ -10,16 +10,20 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var molecule_1 = require("@molecule-driver/molecule");
+var Molecule = require("@molecule-driver/molecule");
 var TextMolecule = /** @class */ (function (_super) {
     __extends(TextMolecule, _super);
     function TextMolecule(data) {
         var _this = _super.call(this, data) || this;
-        _this._value = '';
+        _this._type = "text";
+        /* Value must be a string. */
+        if (typeof _this._value != 'string') {
+            throw new Error("Expected '_value' to be of type 'string'. Value was reverted to '' for molecule ", _this);
+        }
         return _this;
     }
     return TextMolecule;
-}(molecule_1.Molecule));
+}(Molecule));
 exports.TextMolecule = TextMolecule;
 module.exports = TextMolecule;
 //# sourceMappingURL=index.js.map

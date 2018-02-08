@@ -9,9 +9,9 @@ export class Molecule implements MoleculeInterface {
 
   constructor(data : any){
     const readOnly = ['_type'];
-    
+
     for(let key in data){
-      if(!readOnly.includes(key)) this[key] = data[key];
+      if( readOnly.indexOf(key) == -1 ) this[key] = data[key];
     }
   }
 

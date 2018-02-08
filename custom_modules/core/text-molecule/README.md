@@ -1,11 +1,13 @@
 ## Molecule Driver
 # Text Molecule
-Molecule destinated to hold string values.
+Molecule destined to hold a string value.
 
 ### _value : `String`
 `Optional: no`
 
-`Default: ''`
+`Default: no`
+
+This property must be provided and be a string value.
 
 ### _type : `String`
 `Optional: no`

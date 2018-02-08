@@ -8,7 +8,7 @@ var Molecule = /** @class */ (function () {
         this._value = null;
         var readOnly = ['_type'];
         for (var key in data) {
-            if (!readOnly.includes(key))
+            if (readOnly.indexOf(key) == -1)
                 this[key] = data[key];
         }
     }
