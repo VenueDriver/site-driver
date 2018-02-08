@@ -1,5 +1,7 @@
 import { StorageModule } from './interface';
 
+console.log(require.resolve("chai"));
+
 class TestStorage implements StorageModule {
 
   private query : Query;

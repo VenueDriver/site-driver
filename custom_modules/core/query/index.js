@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+console.log(require.resolve("chai"));
 var TestStorage = /** @class */ (function () {
     function TestStorage(query) {
         this.query = query;

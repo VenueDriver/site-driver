@@ -1,0 +1,28 @@
+{
+  "name": "@molecule-driver/text-molecule",
+  "version": "1.0.0",
+  "description": "Text value molecule.",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha || true",
+    "dev": "concurrently \"tsc -w\" \"./node_modules/mocha/bin/mocha -w || true\""
+  },
+  "keywords": [
+    "molecule",
+    "driver",
+    "interface",
+    "text",
+    "string",
+    "value"
+  ],
+  "author": "Gaspar G. Errobidart",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "concurrently": "^3.5.1",
+    "mocha": "^5.0.0"
+  },
+  "dependencies": {
+    "@molecule-driver/molecule": "file:../molecule"
+  }
+}

@@ -1,5 +1,5 @@
 export interface StorageModule{
-  get() : Promise<any | Molecule[]>,
+  get() : Promise<any>,
   post() : Promise<any>,
   remove() : Promise<any>
 }
