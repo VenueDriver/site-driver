@@ -1,5 +1,5 @@
 {
-  "name": "@molecule-driver/text-molecule",
+  "name": "@molecule-driver/number-molecule",
   "version": "1.0.0",
   "description": "Molecule destined to hold a string value.",
   "main": "index.js",
@@ -12,7 +12,7 @@
     "driver",
     "interface",
     "text",
-    "string",
+    "number",
     "value"
   ],
   "author": "Gaspar G. Errobidart",

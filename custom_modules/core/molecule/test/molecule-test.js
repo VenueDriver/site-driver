@@ -1,7 +1,7 @@
 const expect = require('chai').expect;
 const Molecule = require('../index');
 
-describe('Attributes', function(){
+describe('Molecule', function(){
   let testMolecule;
   before(function(){
     testMolecule = new Molecule({_type : 'other type'});

@@ -1,7 +1,7 @@
 import { MoleculeInterface } from './node_modules/@molecule-driver/molecule/interface';
 
-export interface TextMoleculeInterface extends MoleculeInterface {
+export interface NumberMoleculeInterface extends MoleculeInterface {
 
-  _value : string;
+  _value : number;
 
 }

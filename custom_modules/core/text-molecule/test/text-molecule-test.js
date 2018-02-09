@@ -6,7 +6,6 @@ describe('Text Molecule', function(){
   let testMolecule;
   before(function(){
     testMolecule = new TextMolecule({_type : 'number' , _value : '1234'});
-    console.log(testMolecule);
   });
 
 
