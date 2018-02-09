@@ -1,7 +1,7 @@
 import { TextMoleculeInterface } from './interface';
-import * as Molecule from '@molecule-driver/molecule';
+import Molecule = require('@molecule-driver/molecule');
 
-export class TextMolecule extends Molecule implements TextMoleculeInterface  {
+class TextMolecule extends Molecule implements TextMoleculeInterface  {
 
   _type : string = "text";
 
@@ -10,11 +10,11 @@ export class TextMolecule extends Molecule implements TextMoleculeInterface  {
 
     /* Value must be a string. */
     if(typeof this._value != 'string'){
-      throw new Error("Expected '_value' to be of type 'string'. Value was reverted to '' for molecule ", this);
+      throw new Error("Expected '_value' to be of type 'string' for molecule " + JSON.stringify(this));
     }
 
   }
 
 }
 
-module.exports = TextMolecule;
+export = TextMolecule;

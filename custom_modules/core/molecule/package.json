@@ -1,6 +1,6 @@
 {
   "name": "@molecule-driver/molecule",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Basic interface all Molecules must ensure.",
   "main": "index.js",
   "scripts": {

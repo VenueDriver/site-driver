@@ -1,6 +1,5 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var Molecule = /** @class */ (function () {
+var Molecule = (function () {
     function Molecule(data) {
         this._name = '';
         this._id = '';
@@ -14,6 +13,5 @@ var Molecule = /** @class */ (function () {
     }
     return Molecule;
 }());
-exports.Molecule = Molecule;
 module.exports = Molecule;
 //# sourceMappingURL=index.js.map

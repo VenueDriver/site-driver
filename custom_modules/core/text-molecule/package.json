@@ -23,6 +23,7 @@
     "mocha": "^5.0.0"
   },
   "dependencies": {
-    "@molecule-driver/molecule": "file:../molecule"
+    "@molecule-driver/molecule": "file:../molecule",
+    "@types/node": "^9.4.4"
   }
 }

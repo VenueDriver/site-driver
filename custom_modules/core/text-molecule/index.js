@@ -9,21 +9,18 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-Object.defineProperty(exports, "__esModule", { value: true });
 var Molecule = require("@molecule-driver/molecule");
-var TextMolecule = /** @class */ (function (_super) {
+var TextMolecule = (function (_super) {
     __extends(TextMolecule, _super);
     function TextMolecule(data) {
         var _this = _super.call(this, data) || this;
         _this._type = "text";
-        /* Value must be a string. */
         if (typeof _this._value != 'string') {
-            throw new Error("Expected '_value' to be of type 'string'. Value was reverted to '' for molecule ", _this);
+            throw new Error("Expected '_value' to be of type 'string' for molecule " + JSON.stringify(_this));
         }
         return _this;
     }
     return TextMolecule;
 }(Molecule));
-exports.TextMolecule = TextMolecule;
 module.exports = TextMolecule;
 //# sourceMappingURL=index.js.map
