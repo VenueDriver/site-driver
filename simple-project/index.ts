@@ -1,5 +1,8 @@
-import Molecule = require('@molecule-driver/molecule');
+import mdServer = require('@molecule-driver/server');
 
-console.log(Molecule);
+mdServer.config('routes','config/routes');
+mdServer.config('storage','config/storage');
+mdServer.config('formats','config/formats');
+mdServer.config('client','config/client');
 
-process.exit(0);
+mdServer.listen(3001);

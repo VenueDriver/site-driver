@@ -12,7 +12,7 @@ var stringToJSON = function (str) {
     }
     return JSON.parse(str);
 };
-var LocalStorage = /** @class */ (function () {
+var LocalStorage = (function () {
     function LocalStorage(opts) {
         var _this = this;
         this.opts = {};
@@ -39,7 +39,6 @@ var LocalStorage = /** @class */ (function () {
         return new Promise(function (resolve, reject) {
             var types = _this.query.type || [], names = _this.query.name || [], routes = [];
             var i = 0;
-            // console.log("Async loop")
             asyncLoop(function () { return i >= types.length; }, function (next, end) {
                 var type = types[i];
                 if (type === "instance") {
@@ -130,10 +129,8 @@ var LocalStorage = /** @class */ (function () {
     };
     LocalStorage.prototype.readFile = function (location, file) {
         var _this = this;
-        // console.log("Reading",location,file);
         return new Promise(function (resolve, reject) {
             var mergedLocation = path.join(_this.opts.root, location, file);
-            // console.log("\nreadFile:",mergedLocation);
             _this.fs.readFile(mergedLocation, 'utf-8', function (err, data) {
                 console.log("Done reading");
                 if (err)
@@ -227,7 +224,6 @@ var LocalStorage = /** @class */ (function () {
                         });
                         if (filename) {
                             console.log("Removing", filename);
-                            // console.log("DELETE",routes[i],filename);
                             _this.unlink(routes[i], filename).then(end).catch(function (err) { return end(err); });
                         }
                         else {

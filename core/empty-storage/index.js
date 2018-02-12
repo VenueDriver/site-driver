@@ -1,4 +1,4 @@
-var EmptyStorage = /** @class */ (function () {
+var EmptyStorage = (function () {
     function EmptyStorage(opts) {
         var _this = this;
         this.opts = {};
