@@ -1,0 +1,17 @@
+<div class="month-name-separator">
+	{{month.name}}
+</div>
+<div class="calendar-week-days">
+	<ul class="horizontal-list">
+		<li><div class="week-day-inner">Sun</div></li>
+		<li><div class="week-day-inner">Mon</div></li>
+		<li><div class="week-day-inner">Tue</div></li>
+		<li><div class="week-day-inner">Wed</div></li>
+		<li><div class="week-day-inner">Thu</div></li>
+		<li><div class="week-day-inner">Fri</div></li>
+		<li><div class="week-day-inner">Sat</div></li>
+	</ul>
+</div>
+<div class="calendar-month"><!-- MONTHS -->
+	<week (reservationClick)="reservationTrigger($event)" *ngFor="let week of weeks" [week]="week" [month]="month"></week>
+</div>

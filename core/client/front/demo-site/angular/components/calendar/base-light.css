@@ -1,0 +1,229 @@
+.calendar ul, .calendar ol {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+
+.calendar {
+  font-family: 'Roboto Condensed', sans-serif;
+  position: relative;
+  background: #e1e1e1; }
+
+a {
+  color: black;
+  text-decoration: none; }
+
+ul.horizontal-list {
+  display: table;
+  width: 100%; }
+
+ul.horizontal-list > li {
+  display: table-cell; }
+
+ul.vertical-list {
+  display: block; }
+
+ul.vertical-list > li {
+  display: block;
+  width: 100%; }
+
+.calendar-inner {
+  display: table;
+  width: 100%; }
+
+.calendar header {
+  background: #e1e1e1;
+  padding-left: 50px;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  box-sizing: border-box; }
+
+.calendar .central-label {
+  display: table;
+  margin: 0 auto;
+  padding: 10px 0;
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: 300; }
+
+.calendar .current-month,
+.calendar .left-arrow,
+.calendar .right-arrow {
+  display: inline-block;
+  color: black; }
+
+.calendar .current-month {
+  width: 180px;
+  text-align: center; }
+
+.calendar .left-arrow,
+.calendar .right-arrow {
+  width: 50px; }
+
+.calendar .left-arrow {
+  text-align: right; }
+
+.calendar .right-arrow {
+  text-align: left; }
+
+.calendar .right-arrow a,
+.calendar .left-arrow a {
+  -webkit-transition: all 300ms ease-out;
+  -moz-transition: all 300ms ease-out;
+  -ms-transition: all 300ms ease-out;
+  -o-transition: all 300ms ease-out;
+  transition: all 300ms ease-out;
+  padding: 10px 0; }
+
+.calendar .right-arrow a:hover {
+  padding-left: 15px; }
+
+.calendar .left-arrow a:hover {
+  padding-right: 15px; }
+
+.calendar-week {
+  width: 100%;
+  float: left; }
+
+.calendar-week-days {
+  text-align: center;
+  text-transform: uppercase;
+  background: #eee;
+  color: black;
+  border-bottom: 1px solid #FFF; }
+
+.calendar-week-days ul li {
+  padding: 7px 0 4px 0;
+  border-left: 1px solid #FFF;
+  border-right: 1px solid #FFF;
+  width: 14.285714286%;
+  box-sizing: border-box; }
+
+.calendar-sidebar {
+  background: #e1e1e1;
+  display: table-cell;
+  width: 50px;
+  height: 100%; }
+
+.calendar-nav {
+  height: 100vh;
+  position: relative; }
+
+.calendar-nav > ul {
+  position: fixed;
+  bottom: 0; }
+
+.calendar-nav > ul > li > a {
+  width: 50px;
+  vertical-align: center;
+  height: 50px;
+  padding: 18px 0;
+  box-sizing: border-box;
+  display: inline-block;
+  text-align: center;
+  text-transform: uppercase; }
+
+.calendar-nav > ul > li.active > a,
+.calendar-nav > ul > li.active > a:hover {
+  background: #FFF; }
+
+.calendar-nav > ul > li > a:hover {
+  background: #FFF; }
+
+.calendar-main {
+  display: table-cell;
+  vertical-align: top;
+  padding-top: 70px; }
+
+.calendar-event-flyer {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 200px; }
+
+.calendar-day {
+  position: relative;
+  border: 5px solid #eee;
+  background: #e8e8e8;
+  width: 14.285714286%;
+  box-sizing: border-box; }
+
+.calendar-day.hasNoEvents {
+  height: 100px; }
+
+.calendar-day.isPlaceholder {
+  background: #e3e3e3; }
+
+.calendar-day.isPlaceholder .calendar-day-number {
+  display: none; }
+
+.calendar-event-title {
+  padding: 10px; }
+
+.calendar-day-number {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #e1e1e1;
+  color: black;
+  padding: 5px 7px; }
+
+.calendar-week-day-indicator {
+  display: none;
+  text-transform: uppercase;
+  margin-right: 5px; }
+
+.month-name-separator {
+  font-size: 30px;
+  background: #eee;
+  margin: 0;
+  text-transform: uppercase;
+  padding: 20px 10px;
+  width: 100%;
+  text-align: center;
+  box-sizing: border-box;
+  float: left;
+  color: black; }
+
+.calendar-main > div:first-child > .calendar-month:first-child > .month-name-separator:first-child {
+  margin-top: 0; }
+
+.calendar-month {
+  float: left;
+  width: 100%; }
+
+@media only screen and (max-width: 1100px) {
+  .calendar-day.isPlaceholder,
+  .calendar-day.hasNoEvents {
+    display: none !important; }
+
+  .calendar-main {
+    padding-top: 45px; }
+
+  .month-name-separator {
+    margin-top: 10px; }
+
+  .calendar-week-day-indicator {
+    display: inline-block; }
+
+  .calendar-week-days {
+    display: none; }
+
+  .calendar-week > ul {
+    display: inline; }
+
+  ul > li.calendar-day {
+    display: inline-block;
+    width: 25%;
+    float: left; }
+
+  .calendar-week {
+    float: none; } }
+@media only screen and (max-width: 768px) {
+  .calendar header {
+    padding-left: 0; }
+
+  ul > li.calendar-day {
+    width: 50%;
+    height: 300px; } }

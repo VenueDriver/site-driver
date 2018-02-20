@@ -1,0 +1,22 @@
+<%
+let fixedNav = (layout.home_layout.sections[0] !== 'hero-slider')  ? 'fixed-nav' : '';
+%>
+<!doctype html>
+<html lang="es">
+	<%- include('includes/head') %>
+<body class="<%= fixedNav %>">
+	<%- include('includes/header') %>
+	<main>
+		<% layout.home_layout.sections.forEach(section =>{ %>
+			<%- include('section-templates/'+section) %>
+		<% }) %>
+
+	</main>
+	<%- include('includes/footer') %>
+	<!--JQUERY -->
+	<script type="text/javascript" src="/demo-site/js/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="/demo-site/js/owl.carousel.min.js"></script>
+	<script type="text/javascript" src="/demo-site/js/lightgallery.min.js"></script>
+	<script type="text/javascript" src="/demo-site/js/main.js"></script>
+</body>
+</html>

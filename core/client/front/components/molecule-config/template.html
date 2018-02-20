@@ -1,0 +1,41 @@
+<div *ngIf="validMolecule">
+  <div *ngIf="hasName">
+    <label class="label-form">Name:</label>
+    <input type="text" [(ngModel)]="molecule._name">
+  </div>
+  <label class="label-form">Can:</label>
+  <div class="col-3" *ngFor="let key of molecule._can | keys ">
+
+    <div (click)="canChange(key)" class="checkbox" [class.checked]="molecule._can[key]">
+      <ng-checkbox [checked]="molecule._can[key]"></ng-checkbox>
+      <label class="checkbox-label" [innerHTML]="key.replace('_',' ')">
+      </label>
+    </div>
+  </div>
+
+  <div *ngIf="hasOptions">
+    <label class="label-form">Options:</label>
+    <div *ngFor="let key of molecule._options | keys ">
+
+      <div *ngIf="isBoolean(molecule._options[key])" (click)="optionsChange(key)" class="checkbox" [class.checked]="molecule._options[key]">
+        <ng-checkbox [checked]="molecule._options[key]"></ng-checkbox>
+        <label class="checkbox-label" [innerHTML]="key.replace('_',' ')"> </label>
+      </div>
+
+      <div *ngIf="isString(molecule._options[key])">
+        <label class="checkbox-label" [innerHTML]="key.replace('_',' ')"> </label>
+        <input type="text" [(ngModel)]="molecule._options[key]">
+      </div>
+
+      <div *ngIf="isComplex(molecule._options[key])">
+        <label class="checkbox-label" [innerHTML]="key.replace('_',' ')"> </label>
+        <molecule-renderer
+          (valueChange)="molecule._options[key]._value = $event"
+          [component]="getComponent(molecule._options[key]._ngComponentName)"
+          [options]="molecule._options[key]._options">
+        </molecule-renderer>
+      </div>
+
+    </div>
+  </div>
+</div>

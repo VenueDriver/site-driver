@@ -1,0 +1,55 @@
+
+<ul class="horizontal full-width full-height" >
+
+
+  <li class="sidebar full-height va-top">
+    <div class="scrollable">
+      <event-filter></event-filter>
+    </div>
+  <li></li>
+  <!-- MAIN CONTENT START -->
+  <li class="content">
+
+    <div>
+
+      <div class="events-list" *ngIf="PdService._state.indexOf('loading events') < 0 || PdService.index.events.length >= 1">
+
+
+        <div class="event-wrapper" *ngFor="let event of PdService.index.events">
+          <ul class="horizontal full-width">
+            <li class="flyer">
+              <img [src]="event.flyer_url" alt="{{event.title}}">
+            </li>
+            <li class="va-middle prelative">
+              <div class="event-content">
+                <h4>{{event.title | uppercase}}</h4>
+                <span class="sub-title">AT {{event.venue_title | uppercase}}<br>{{event.date | date: 'EEE dd MMM'}}</span>
+                <div class="actions">
+                  <ul class="horizontal full-width full-height">
+                    <li class="full-height va-middle"><a href="http://staging.ticketdriver.com/omnialv/buy/tickets/event/{{event.id}}" class="btn">Tickets</a></li>
+                    <li class="full-height va-middle"><a href="#" class="btn">Reserve</a></li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+
+
+      </div>
+      
+      <div *ngIf="PdService._state.indexOf('loading events')> -1">
+        <h1 >
+          Loading events...
+        </h1>
+      </div>
+
+
+    </div>
+
+  </li>
+  <!-- MAIN CONTENT END -->
+
+
+</ul>

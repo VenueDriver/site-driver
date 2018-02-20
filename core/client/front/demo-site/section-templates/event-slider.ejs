@@ -1,0 +1,50 @@
+<section class="box-events">
+  <h2>EVENTS</h2>
+  <div class="container">
+    <div class="owl-carousel owl-events">
+
+      <% event_slider.slider.slides.forEach(slide =>{ %>
+
+        <%
+          for(let key of Object.keys(slide)){
+            if(["tmp","buttons"].indexOf(key) < 0 && slide[key]) slide.tmp[key] = slide[key];
+          }
+          slide.buttons.forEach( (button,i) =>{
+            if(button.url && button.label) {
+              slide.tmp.buttons[i] = button
+            }
+          })
+        %>
+
+        <div class="item">
+          <div class="event cf">
+            <div class="event-content">
+              <div class="event-caption">
+                <h2><%- slide.tmp.title.replace(/\n/g,"<br>") %></h2><br>
+                <% if(slide.tmp.additional_text.length > 0){ %>
+                  <h3><%- slide.tmp.additional_text.replace(/\n/g,"<br>") %></h3>
+                <% } %>
+              </div>
+              <% if(['.jpg','.jpeg','.png','.gif','.bmp','.tif','.svg'].indexOf(slide.tmp.media.match(/\.\w+$/)[0]) > -1){ %>
+                  <div class="event-flyer" style="background: url(<%= slide.tmp.media %>) no-repeat center center; -webkit-background-size: cover;-moz-background-size: cover;-o-background-size: cover;background-size: cover;"></div>
+              <% }else{ %>
+                  <div class="event-flyer-video"></div>
+                <video playsinline autoplay muted loop >
+                  <source src="<%= slide.tmp.media %>" type="video/mp4">
+                </video>
+              <% } %>
+            </div>
+            <% slide.tmp.buttons.forEach(button =>{ %>
+              <% if(button.label && button.url){ %>
+                <a href="<%= button.url %>" class="btn"><%= button.label %></a>
+              <% } %>
+            <% }) %>
+          </div>
+        </div>
+
+
+      <% }) /* FOR EACH END */ %>
+
+    </div>
+  </div>
+</section>

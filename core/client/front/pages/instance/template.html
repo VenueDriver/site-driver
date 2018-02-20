@@ -1,0 +1,28 @@
+<page>
+  <main>
+    <spinner *ngIf="!ready"></spinner>
+    <section *ngIf="ready">
+      <div class="container">
+      	<div *ngIf="!isGenerator" class="col-2 right" >
+          <div fixedElement>
+
+            <molecule-save [type]="data._type" [molecule]="data">
+              <a class="btn btn-save">Publish</a>
+            </molecule-save>
+
+        		<!-- <a class="btn btn-draft">Save as draft</a> -->
+            <molecule-remove (afterRemove)="goBack($event)" [molecule]="data">
+              <a class="btn btn-trash">Delete</a>
+            </molecule-remove>
+
+          </div>
+      	</div>
+      	<div [class.col-10]="!isGenerator" class="left">
+      	  <molecule-renderer [data]="data" [options]="{instances:instances}" [component]="data._ngComponent"></molecule-renderer>
+      	</div>
+      </div>
+    </section>
+
+	</main>
+
+</page>

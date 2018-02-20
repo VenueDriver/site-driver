@@ -1,0 +1,43 @@
+<section *ngIf="ready" class="animated fadeIn" [class.animating]="animated">
+  <div class="container table-layout card-layout">
+    <div class="row">
+      <div class="col-12">
+          <h1 class="title">{{data._options._title || data._name}}</h1><a *ngIf="data._can._edit || isDeveloper" href="javascript:void(0);" (click)="show_generator_edit_form = !show_generator_edit_form"><i class="fa fa-pencil"></i></a>
+          <div class="right">
+            <form class="search"><input id='submit' name='submit' type="submit" value="search" class="btn search-btn"><label for="submit" class="submit"></label><a href="javascript: void(0)" class="search-icon"></a><input type="text" class="search-field"></form>
+            <a *ngIf="data._can._edit_value || isDeveloper" [class.active]="show_new_molecule_form" class="btn-add" (click)="toggleModal()" [innerHTML]="(data._options._molecule_types._value.length>1)? 'ADD NEW': 'ADD NEW '+data._options._molecule_types._value[0]._name"></a>
+          </div>
+
+          <div class="box cf" *ngIf="show_generator_edit_form">
+            <a (click)="show_generator_edit_form = !show_generator_edit_form" class="right"><i class="fa fa-times" style="color:#000;color: #666;cursor:pointer;font-size: 20px;position:relative;z-index: 999; "></i></a>
+              <molecule-config [molecule]="data"></molecule-config>
+              <div class="right">
+                <a href="javascript:void(0)" (click)="show_generator_edit_form = !show_generator_edit_form" class="btn btn-cancel">CANCEL</a>
+                <molecule-save [type]="data._type" [molecule]="data">
+                  <div class="btn btn-save">SAVE</div>
+                </molecule-save>
+              </div>
+          </div>
+
+          <div class="box cf animated fadeIn" [class.animating]="animated_modal" *ngIf="show_new_molecule_form">
+            <molecule-create (canceled)="show_new_molecule_form = false" [generator]="data" [type]="'instance'" [useMolecules]="data._options._molecule_types._value" ></molecule-create>
+          </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<molecule-renderer
+  *ngIf="ready && instances.length > 0"
+  [component]="getComponent(selectedLayout)"
+  [options]="{instances : instances}"
+  [data]="data"
+  >
+</molecule-renderer>
+
+<div class="empty">
+  <h1 [innerHTML]="(data._options._molecule_types._value.length>1)? 'No elements to list': 'No '+data._options._molecule_types._value[0]._name+'s to list'" *ngIf="ready && instances.length < 1"></h1>
+  <p [innerHTML]="(data._options._molecule_types._value.length>1)? 'Go ahead and create your first element!': 'Go ahead and create your first '+data._options._molecule_types._value[0]._name+'!'" *ngIf="ready && instances.length < 1">></p>
+  <a [class.active]="show_new_molecule_form" class="btn-add" (click)="toggleModal()" [innerHTML]="(data._options._molecule_types._value.length>1)? 'ADD NEW': 'ADD NEW '+data._options._molecule_types._value[0]._name" *ngIf="(ready && instances.length < 1) && (data._can._edit_value || isDeveloper)"></a>
+</div>

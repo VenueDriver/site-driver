@@ -1,0 +1,14 @@
+.checkbox-label{
+  display: inline-block;
+  margin-left: 5px;
+  padding-bottom: 4px;
+  line-height: 30px;
+}
+
+.checkbox{
+  cursor: pointer;
+}
+
+.checkbox:hover .checkbox-label, .checked .checkbox-label{
+  color: #1b79e2;
+}

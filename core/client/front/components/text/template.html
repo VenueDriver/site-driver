@@ -1,0 +1,35 @@
+<div [ngClass]="additional_classes">
+	<label for="" class="label-form">{{data._name | userlabel: userRole }}<span class="required-indicator" *ngIf="data._can._be_required">*</span>
+	<div class="edit-buttons" *ngIf="data._can._edit || isDeveloper">
+		<ul>
+			<li (click)="editing = !editing">
+				<i class="fa fa-pencil" style="color: #888888;cursor:pointer;font-size: 16px;position:relative;z-index: 999; "></i>
+			</li>
+			<li>
+				 <i class="fa fa-times" style="color: #888888;cursor:pointer;font-size: 16px;position:relative;z-index: 999;"></i>
+			</li>
+		</ul>
+	</div></label>
+	<molecule-edit *ngIf="editing" [molecule]="data"></molecule-edit>
+	<input [disabled]="data._can._edit_value != true && !isDeveloper" *ngIf="data._options._use_textarea != true" type="text" [(ngModel)]="data._value" (keyup)="setValue($event)" class="input-form">
+
+	<ckeditor
+		[disabled]="data._can._edit_value != true && !isDeveloper"
+		*ngIf="data._options._use_textarea"
+	  [(ngModel)]="data._value"
+	  [config]="{
+	    uiColor: '#999999',
+	    removeButtons : 'Form,Checkbox,Radio Button,Textfield,Textarea,Selectionfield,Button,Hiddenfield,Templates,Flash,Iframe,NewPage,Preview,Print,Save,Createdivcontainer,Cut,Paste',
+	    removePlugins : 'font,forms'
+	  }"
+	  [readonly]="false"
+	  debounce="500">
+	</ckeditor>
+
+	<!-- error message -->
+	<div class="error-message" *ngIf="errors.length > 0 && data._required">
+	  <ul>
+	    <li *ngFor="let error of errors">- {{error}}</li>
+	  </ul>
+	</div>
+</div>

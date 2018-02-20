@@ -1,0 +1,27 @@
+<section *ngIf="ready" >
+  <div class="container card-layout" >
+ 	  <div class="row">
+
+			<ng-container *ngFor="let item of instances;let i = index">
+				<div class="col-t-6 col-4">
+					<div class="card">
+						<a class="to-site" [routerLink]="['/instance',item._id]">
+	            <div class="aspect-ratio">
+	            	<div class="aspect-ratio-content">
+	              	<figure>
+	                  	<img alt="" class="brand-icon" [src]="item._options._image._value || '/images/placeholder.jpg'">
+	               	</figure>
+	              </div>
+	            </div>
+							<div class="box box-details">
+								<h2>{{item._options._title}}</h2>
+							</div>
+						</a>
+					</div>
+				</div>
+			</ng-container>
+
+
+		</div>
+  </div>
+</section>

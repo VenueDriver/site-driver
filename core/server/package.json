@@ -1,0 +1,23 @@
+{
+  "name": "@molecule-driver/server",
+  "version": "1.0.0",
+  "description": "Server module",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha || true",
+    "dev": "concurrently \"tsc -w\" \"./node_modules/mocha/bin/mocha -w || true\""
+  },
+  "keywords": [
+    "molecule",
+    "driver",
+    "client",
+    "angular"
+  ],
+  "author": "Gaspar G. Errobidart",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "concurrently": "^3.5.1",
+    "mocha": "^5.0.0"
+  }
+}

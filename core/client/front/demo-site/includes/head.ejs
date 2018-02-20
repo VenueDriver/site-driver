@@ -1,0 +1,107 @@
+<head>
+<base href="/demo-site/<%= _domain %>/" target="_blank">
+<meta charset="UTF-8">
+<title>THE BANK DEV</title>
+
+<meta name="revisit-after" content="30 days">
+<meta name="robots" content="index,follow">
+<meta name="distribution" content="global">
+<meta name="author" content="">
+
+<%# TWITTER CARD %>
+<meta name="twitter:card" content="<%= social_media.twitter.card.type %>">
+<meta name="twitter:site" content="<%= social_media.twitter.card.site %>">
+<meta name="twitter:creator" content="<%= social_media.twitter.card.creator %>">
+<meta name="twitter:title" content="<%= social_media.twitter.card.title %>">
+<meta name="twitter:description" content="<%= social_media.twitter.card.description %>">
+<meta name="twitter:image" content="<%= social_media.twitter.card.image %>">
+
+<%# FACEBOOK OPEN GRAPH %>
+<meta property="og:url" content="<%= social_media.facebook.open_graph.site %>" />
+<meta property="og:type" content="<%= social_media.facebook.open_graph.type %>" />
+<meta property="og:title" content="<%= social_media.facebook.open_graph.title %>" />
+<meta property="og:description" content="<%= social_media.facebook.open_graph.description %>" />
+<meta property="og:image" content="<%= social_media.facebook.open_graph.image %>" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet">
+<script src="https://use.typekit.net/igy0nvs.js"></script>
+<script>try{Typekit.load({ async: true });}catch(e){}</script>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+<link rel="stylesheet" href="/demo-site/css/owl.carousel.min.css">
+<link rel="stylesheet" href="/demo-site/css/lightgallery.min.css">
+<link rel="stylesheet" href="/css/demo-site/style.css">
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="/demo-site/js/respond.min.js"></script>
+  <script src="/demo-site/js/html5.js"></script>
+<![endif]-->
+<style media="screen">
+  .text-main-color,
+  h1,h2,h3,h4,h5,h6,p,div,body,
+  a, a:hover, a:active, a:focus,
+  .event a.btn:hover, .event a.btn-primary:hover,
+  .navbar-featured li a:hover,
+  .box-legal p a{
+    color : <%= layout.font.main_color %>;
+  }
+  .text-alternate-color,
+  .box-arrow.to-right div:nth-child(1) h2, .box-arrow.to-right div:nth-child(1) p{
+    color : <%= layout.font.alternate_color %>;
+  }
+  .brand-border,
+  .btn, .btn-primary,
+  .navbar-featured li a,
+  .owl-events .owl-dots .owl-dot.active,
+  .btn-primary:hover{
+    border-color: <%= layout.brand.main_color %>;
+  }
+  .brand-color,
+  .btn, .btn-primary,
+  .box-contact h4,
+  .navbar-featured li a,
+  .box-arrow div:nth-child(2):before,
+  .col-middle .navbar li a:hover,
+  .box-legal p a:hover{
+    color: <%= layout.brand.main_color %>;
+  }
+  .brand-bg,
+  .event a.btn:hover,
+  .event-caption h3,
+  .box-arrow div:nth-child(2),
+  .navbar-featured li a:hover,
+  .btn-primary:hover{
+    background-color: <%= layout.brand.main_color %>;
+  }
+  .brand-bg {
+    color: white;
+  }
+  .brand-secondary-border{
+    border-color: <%= layout.brand.secondary_color %>;
+  }
+  .brand-secondary-color{
+    color: <%= layout.brand.secondary_color %>;
+  }
+  .brand-secondary-bg{
+    background-color: <%= layout.brand.secondary_color %>;
+  }
+
+  .text-alternate-color,
+  .box-arrow.to-right div:nth-child(1) h2, .box-arrow.to-right div:nth-child(1) p{
+    color : <%= layout.font.alternate_color %>;
+  }
+
+  .brand-border{
+    border-color: <%= layout.brand.main_color %> !important;
+  }
+  .month-name-separator,
+  .highlight-text{
+    color: <%= layout.brand.main_color %> !important;
+  }
+  .week-day-inner{
+    background-color: <%= layout.brand.secondary_color %> !important;
+  }
+
+</style>
+</head>

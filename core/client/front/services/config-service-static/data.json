@@ -1,0 +1,6 @@
+{
+  "venues" : [],
+  "orderBy" : [{ "field" : "date" , "desc" : false }],
+  "prebaked" : false,
+  "defaultFlyerURL" : "site_assets/img/default_flyer.jpg"
+}

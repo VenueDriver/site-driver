@@ -12,8 +12,11 @@
     "suppressImplicitAnyIndexErrors": true
   },
   "exclude": [
-      "node_modules",
-      "./**/node_modules",
-      "./**/demo-site"
+    "node_modules",
+    "./**/node_modules",
+    "./**/demo-site",
+    "core",
+    "sample-project",
+    "core-in-progress"
   ]
 }

@@ -1,0 +1,17 @@
+<div class="custom-select" >
+  <div (click)="triggerSelect()" class="selected-item-box">
+    <div class="selected-item">
+      {{selectedOption.text}}
+    </div>
+  </div>
+  <div class="options-box" [class.open]="open">
+    <div *ngFor="let option of options" class="select-option">
+      <div class="option-inner" (click)="onChange(option)">
+        {{option.text}}
+      </div>
+    </div>
+  </div>
+  <!-- <select (change)="onChange($event.target.value)" name="{{name}}" id="{{name}}">
+    <option *ngFor="let option of options">{{option.text}}</option>
+  </select> -->
+</div>

@@ -1,0 +1,39 @@
+
+<page>
+  <main>
+		<section>
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<add-site *ngIf="userRole > 9000"></add-site>
+					</div>
+				</div>
+				<site-list #sites>
+					<div class="row">
+
+						<div class="col-t-6 col-4" *ngFor="let site of sites.sites">
+							<a class="to-site" [routerLink]="['/site', site._domain]">
+                                <div class="aspect-ratio">
+                                    <div class="aspect-ratio-content">
+                                        <figure>
+                                            <img [src]="site._icon" class="brand-icon" alt="">
+                                        </figure>
+                                    </div>
+                                </div>
+                                <!-- <figure class="box-brand-icon">
+									<img [src]="site._icon" class="brand-icon" alt="">
+								</figure> -->
+								<div class="box box-details">
+		  						    <h2>{{site._name}}</h2>
+									<p>{{site._domain}}</p>
+								</div>
+							</a>
+						</div>
+
+					</div>
+				</site-list>
+			</div>
+		</section>
+	</main>
+
+</page>

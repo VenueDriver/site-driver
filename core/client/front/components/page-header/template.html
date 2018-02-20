@@ -1,0 +1,73 @@
+  <section class="brand-content">
+      <img src="/images/composer-white.png" class="brand-composer" alt="logo">
+  </section>
+  <div class="big-title admin-bar cf">
+    <div class="left">
+      <span class="menu-btn"><a (click)="toggleNav()" [class.fa-close]="open" [class.active]="open" class="fa fa-bars" id="toggle2"></a></span>
+      <ul class="">
+        <!-- <span class="previous-section">Blogs</span><span class="current-section">The Bank Blog</span> -->
+      </ul>
+    </div>
+    <div class="right">
+      <div class="user-bar">
+        <img src="//s3-us-west-1.amazonaws.com/assets.portaldriver.com/thebanklv/ef8549b37c8724a9248d209e4a97a761.jpg">
+        <span>Hi, User</span> <i class="fa fa-angle-down"></i>
+        <div class="user-dropdown">
+          <ul>
+           <!-- <li>
+              <a>Profile</a>
+           </li> -->
+            <li>
+              <a href="/logout">Log Out</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+<nav class="cbp-spmenu" [class.show-nav]="open" id="cbp-spmenu-s1">
+ <a href="/"> <img src="/images/composer-white-small.png" class="brand-composer"  alt="logo"></a>
+    <nav class="sub-nav">
+      <spinner *ngIf="!ready"></spinner>
+      <ul>
+        <!-- <li>
+          <a href="/" class="select-menu"><i class="fa fa-globe"></i>Sites</a>
+        </li> -->
+        <ng-container *ngFor="let generator of generators">
+          <li class="animated fadeIn" [class.animating]="ready" *ngIf="generator._options._show_in_sidebar">
+            <a [routerLink]="['/generator',generator._name]" class="select-menu"><i class="fa fa-database"></i>{{generator._name}}</a>
+          </li>
+        </ng-container>
+        <li class="animated fadeIn" [class.animating]="ready">
+          <hr>
+        </li>
+        <li class="animated fadeIn" [class.animating]="ready" *ngIf="isDeveloper">
+          <a routerLink="/molecule-generator" class="select-menu"><i class="fa fa-sitemap"></i>M. Generator</a>
+        </li>
+        <li class="animated fadeIn" [class.animating]="ready" *ngIf="isDeveloper">
+          <a routerLink="/cell-builder" class="select-menu"><i class="fa fa-code-fork"></i>Cell Builder</a>
+        </li>
+        <!-- <li>
+          <a style="pointer-events: none;cursor: default;"><i class="fa fa-picture-o"></i>Smartimage</a>
+        </li>
+        <li>
+          <a style="pointer-events: none;cursor: default;"><i class="fa fa-check-square-o"></i>Marketo</a>
+        </li>
+        <li>
+          <a style="pointer-events: none;cursor: default;"><i class="fa fa-video-camera"></i>Wistia</a>
+        </li>
+        <li>
+          <a style="pointer-events: none;cursor: default;"><i class="fa fa-user"></i>Profile</a>
+        </li>
+        <li>
+          <a style="pointer-events: none;cursor: default;"><i class="fa fa-bar-chart"></i>Analytics Overview</a>
+        </li>
+        <li>
+          <a style="pointer-events: none;cursor: default;"><i class="fa fa-file-text"></i>Screen Driver</a>
+        </li> -->
+        <li class="animated fadeIn" [class.animating]="ready">
+          <a href="/logout" class="select-menu"><i class="fa fa-sign-out"></i>Log out</a>
+        </li>
+      </ul>
+    </nav>
+</nav>
