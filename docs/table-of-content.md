@@ -15,3 +15,6 @@
 	- File
 	- Boolean
 - Query
+- Client
+	- Cell Builder
+	- Generators
