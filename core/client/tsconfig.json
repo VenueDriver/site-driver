@@ -1,19 +1,22 @@
 {
   "compilerOptions": {
     "target": "es5",
+    "lib": ["es2015"],
     "module": "commonjs",
+    "declaration": true,
+    "noImplicitAny": false,
+    "strictNullChecks": true,
+    "removeComments": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": false,
     "moduleResolution": "node",
     "sourceMap": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "lib": [ "es2015", "dom" ],
-    "noImplicitAny": false,
-    "types" : [ "node" ],
-    "suppressImplicitAnyIndexErrors": true
+    "inlineSources": true,
+    "types": ["node"]
   },
   "exclude": [
       "node_modules",
       "./**/node_modules",
-      "./**/demo-site"
+      "front"
   ]
 }

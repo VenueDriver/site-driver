@@ -1,2 +1,0 @@
-<div *ngIf="!ready"><spinner></spinner> Loading Venues...</div>
-<input [disabled]="disabled" (focus)="value = ''"  [match-formatted]="true" [accept-user-input]="false" *ngIf="ready" placeholder="Select a Venue" auto-complete (ngModelChange)="emitValue($event)" [(ngModel)]="value" [source]="venues" [value-formatter]="formatItems"  [list-formatter]="formatItems" />

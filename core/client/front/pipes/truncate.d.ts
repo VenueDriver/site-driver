@@ -1,4 +1,0 @@
-import { PipeTransform } from '@angular/core';
-export declare class TruncatePipe implements PipeTransform {
-    transform(value: string, limit?: number, trail?: String): any;
-}

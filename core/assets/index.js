@@ -1,6 +1,6 @@
 "use strict";
-var path = require('path');
-var parseUrl = require('parseurl');
+var path = require("path");
+var parseUrl = require("parseurl");
 var assets = function (req, res, next) {
     var target = parseUrl(req).pathname;
     if (/^\/molecule\-assets/.test(target)) {

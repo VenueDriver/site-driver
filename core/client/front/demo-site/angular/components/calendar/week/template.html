@@ -1,6 +1,0 @@
-<!-- WEEKS -->
-<div class="calendar-week">
-	<ul class="horizontal-list">
-		<li [class.isPlaceholder]="day.isPlaceHolder" (reservationClick)="reservationTrigger($event)" [class.hasNoEvents]="day.events.length<1" day class="calendar-day" *ngFor="let day of week.days" [day]="day" [d]="day.number"></li>
-	</ul>
-</div>

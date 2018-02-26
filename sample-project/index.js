@@ -1,9 +1,10 @@
 "use strict";
-var path = require('path');
-var favicon = require('serve-favicon');
-var bodyParser = require('body-parser');
-var express = require('express');
-var MD = require('@molecule-driver/core');
+Object.defineProperty(exports, "__esModule", { value: true });
+var path = require("path");
+var favicon = require("serve-favicon");
+var bodyParser = require("body-parser");
+var express = require("express");
+var MD = require("@molecule-driver/core");
 var app = express();
 var config = require('./config/index');
 app.use(favicon(path.join(__dirname, './favicon.ico')));
