@@ -6,13 +6,13 @@
   "apps": [
     {
       "root": "src",
-      "outDir": "../public/js",
+      "outDir": "../public/js/",
       "assets": [
         "assets",
         "favicon.ico"
       ],
       "index": "index.html",
-      "deployUrl": "/molecule-assets/client/public/js",
+      "deployUrl": "/molecule-assets/client/public/js/",
       "main": "main.ts",
       "polyfills": "polyfills.ts",
       "test": "test.ts",

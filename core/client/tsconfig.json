@@ -12,7 +12,10 @@
     "moduleResolution": "node",
     "sourceMap": true,
     "inlineSources": true,
-    "types": ["node"]
+    "types": ["node"],
+    "typeRoots": [
+      "node_modules/@types"
+     ]
   },
   "exclude": [
       "node_modules",
