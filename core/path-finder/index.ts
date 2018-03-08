@@ -10,11 +10,12 @@
 
 
 import path = require('path');
-import fs = require('fs.extra');
+import fs = require('fs-extra');
+import asyncloop = require('flexible-asyncloop');
 
 const MD = {
   plugins : () => { return [{
-    name : 'cell-builder',
+    name : 'plugin',
     front : {
       ngModule : 'src/app/cell-builder/module#CellBuilderModule',
       ngRoute : {
@@ -34,18 +35,19 @@ class RouteInjector{
   }
 
   findRoot(moduleName : string = ''){
-    return path.join(require.resolve('@molecule-driver/client'),'../',moduleName);
+    let result = path.join(require.resolve('@molecule-driver/molecule'),'/../../',moduleName);
+    return result;
   }
 
   mapRoutes(){
     // Map plugin assets to client destination
     this.routes.root = this.findRoot();
     this.plugins.forEach(plugin =>{
-      let route = this.routes[plugin.name];
+      let route = this.routes[plugin.name] = {};
       if(plugin.front){
         route.front = {
           src : path.join(this.findRoot(plugin.name),'/front'),
-          dest : path.join(this.findRoot('client'),'/front/.build')
+          dest : path.join(this.findRoot('client'),'/front/.build/',plugin.name)
         }
       }
     });
@@ -54,19 +56,32 @@ class RouteInjector{
 
   buildFront(){
     return new Promise((resolve,reject)=>{
-      Object.keys(this.mapRoutes()).filter(name => name != 'root')
-      // Copy plugin/front into client/front/.build directory
-      .forEach(name =>{
-        let route = this.routes[name];
-        console.log("Copying ",route.src,route.dest)
-        fs.copyRecursive(route.src, route.dest , { replace: true }, function (err) {
+      let routeNames = Object.keys(this.mapRoutes()).filter(name => name != 'root');
+      let i = 0;
+
+      asyncloop(
+        ()=> i >= routeNames.length,
+        (next,end)=>{
+          let route = this.routes[routeNames[i]];
+          console.log("Copying ", routeNames[i] , " | from " ,route.front.src," to ",route.front.dest);
+          fs.copy(route.front.src, route.front.dest , function (err) {
+            if(err){
+              end(true);
+            }else{
+              i++;
+              next();
+            }
+          });
+        },
+        (err)=>{
           if (err){
             reject(err);
           }else{
             resolve();
           };
-        });
-      });
+        }
+      )
+
     });
   }
 
