@@ -2,6 +2,9 @@
 var path = require("path");
 var fs = require("fs-extra");
 var asyncloop = require("flexible-asyncloop");
+var colors = require("colors/safe");
+var exec = require("child_process");
+exec;
 var MD = {
     plugins: function () {
         return [{
@@ -47,7 +50,9 @@ var RouteInjector = (function () {
             var i = 0;
             asyncloop(function () { return i >= routeNames.length; }, function (next, end) {
                 var route = _this.routes[routeNames[i]];
-                console.log("Copying ", routeNames[i], " | from ", route.front.src, " to ", route.front.dest);
+                console.log('');
+                console.log(colors.bgWhite.bold.black(' COPYING "' + routeNames[i] + '" '));
+                console.log(colors.cyan(route.front.src) + ' ==> ' + colors.green(route.front.dest));
                 fs.copy(route.front.src, route.front.dest, function (err) {
                     if (err) {
                         end(true);

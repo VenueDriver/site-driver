@@ -1,17 +1,8 @@
-/*
-
-- Install plugins dependencies
-- Generate client routes based
-- Add import modules
-- Compile client bundle
-- Delete .build modules
-
-*/
-
-
 import path = require('path');
 import fs = require('fs-extra');
 import asyncloop = require('flexible-asyncloop');
+import colors = require('colors/safe');
+import exec = require('child_process').exec;
 
 const MD = {
   plugins : () => { return [{
@@ -63,7 +54,9 @@ class RouteInjector{
         ()=> i >= routeNames.length,
         (next,end)=>{
           let route = this.routes[routeNames[i]];
-          console.log("Copying ", routeNames[i] , " | from " ,route.front.src," to ",route.front.dest);
+          console.log('');
+          console.log(colors.bgWhite.bold.black(' COPYING "'+routeNames[i]+'" '));
+          console.log(colors.cyan(route.front.src)+ ' ==> ' + colors.green(route.front.dest));
           fs.copy(route.front.src, route.front.dest , function (err) {
             if(err){
               end(true);
