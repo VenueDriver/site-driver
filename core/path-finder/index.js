@@ -3,8 +3,7 @@ var path = require("path");
 var fs = require("fs-extra");
 var asyncloop = require("flexible-asyncloop");
 var colors = require("colors/safe");
-var exec = require("child_process");
-exec;
+var cp = require("child_process");
 var MD = {
     plugins: function () {
         return [{
@@ -53,13 +52,20 @@ var RouteInjector = (function () {
                 console.log('');
                 console.log(colors.bgWhite.bold.black(' COPYING "' + routeNames[i] + '" '));
                 console.log(colors.cyan(route.front.src) + ' ==> ' + colors.green(route.front.dest));
-                fs.copy(route.front.src, route.front.dest, function (err) {
-                    if (err) {
-                        end(true);
+                cp.exec('npm i', { cwd: path.join(route.front.src) }, function (error, stdout, stderr) {
+                    if (!error) {
+                        fs.copy(route.front.src, route.front.dest, function (err) {
+                            if (err) {
+                                end(true);
+                            }
+                            else {
+                                i++;
+                                next();
+                            }
+                        });
                     }
                     else {
-                        i++;
-                        next();
+                        end(true);
                     }
                 });
             }, function (err) {

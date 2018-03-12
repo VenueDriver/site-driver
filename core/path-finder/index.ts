@@ -2,7 +2,7 @@ import path = require('path');
 import fs = require('fs-extra');
 import asyncloop = require('flexible-asyncloop');
 import colors = require('colors/safe');
-import exec = require('child_process').exec;
+import cp = require('child_process');
 
 const MD = {
   plugins : () => { return [{
@@ -54,17 +54,28 @@ class RouteInjector{
         ()=> i >= routeNames.length,
         (next,end)=>{
           let route = this.routes[routeNames[i]];
+
+
           console.log('');
           console.log(colors.bgWhite.bold.black(' COPYING "'+routeNames[i]+'" '));
           console.log(colors.cyan(route.front.src)+ ' ==> ' + colors.green(route.front.dest));
-          fs.copy(route.front.src, route.front.dest , function (err) {
-            if(err){
-              end(true);
+
+          cp.exec('npm i', { cwd : path.join(route.front.src)} ,(error, stdout, stderr) =>{
+            if(!error){
+              fs.copy(route.front.src, route.front.dest , function (err) {
+                if(err){
+                  end(true);
+                }else{
+                  i++;
+                  next();
+                }
+              });
             }else{
-              i++;
-              next();
+              end(true);
             }
           });
+
+
         },
         (err)=>{
           if (err){
