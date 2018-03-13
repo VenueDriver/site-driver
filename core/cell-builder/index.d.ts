@@ -1,4 +1,2 @@
-declare const _default: {
-    ngModule: string;
-};
+declare const _default: any;
 export = _default;

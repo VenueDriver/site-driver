@@ -1,4 +1,6 @@
-declare const _default: {
-    ngModule: string;
-};
-export = _default;
+declare class Plugin {
+    _data: any;
+    constructor(opt: any);
+    export(): any;
+}
+export = Plugin;

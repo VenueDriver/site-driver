@@ -1,5 +1,5 @@
 {
-  "name": "@molecule-driver/cell-builder",
+  "name": "@molecule-driver/plugin",
   "version": "1.0.0",
   "description": "Used for incorporating plugins.",
   "main": "index.js",
@@ -19,8 +19,5 @@
     "chai": "^4.1.2",
     "concurrently": "^3.5.1",
     "mocha": "^5.0.0"
-  },
-  "dependencies": {
-    "@molecule-driver/plugin": "file:../plugin"
   }
 }
