@@ -11,7 +11,7 @@ import { PageFooter } from './page-footer/component';
 const routes : Routes = [
     {
       path: '',
-      loadChildren: './cell-builder/module#CellBuilderModule'
+      loadChildren: './build/plugin/src/app/cell-builder/module#CellBuilderModule'
     }
   ];
 

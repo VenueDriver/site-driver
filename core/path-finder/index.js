@@ -36,7 +36,7 @@ var RouteInjector = (function () {
             if (plugin.front) {
                 route.front = {
                     src: path.join(_this.findRoot(plugin.name), '/front'),
-                    dest: path.join(_this.findRoot('client'), '/front/.build/', plugin.name)
+                    dest: path.join(_this.findRoot('client'), '/front/src/app/build/', plugin.name)
                 };
             }
         });
@@ -73,7 +73,16 @@ var RouteInjector = (function () {
                     reject(err);
                 }
                 else {
-                    resolve();
+                    console.log("npm run dev");
+                    cp.exec('npm run dev', { cwd: path.join(_this.findRoot('client'), '/front') }, function (error, stdout, stderr) {
+                        console.log("npm run dev done. Error:", error);
+                        if (!error) {
+                            resolve();
+                        }
+                        else {
+                            reject(error);
+                        }
+                    });
                 }
                 ;
             });

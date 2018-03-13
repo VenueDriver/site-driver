@@ -38,7 +38,7 @@ class RouteInjector{
       if(plugin.front){
         route.front = {
           src : path.join(this.findRoot(plugin.name),'/front'),
-          dest : path.join(this.findRoot('client'),'/front/.build/',plugin.name)
+          dest : path.join(this.findRoot('client'),'/front/src/app/build/',plugin.name)
         }
       }
     });
@@ -81,7 +81,15 @@ class RouteInjector{
           if (err){
             reject(err);
           }else{
-            resolve();
+            console.log("npm run dev");
+            cp.exec('npm run dev', { cwd : path.join(this.findRoot('client'),'/front')} ,(error, stdout, stderr) =>{
+              console.log("npm run dev done. Error:",error);
+              if(!error){
+                resolve();
+              }else{
+                reject(error);
+              }
+            });
           };
         }
       )
