@@ -8,12 +8,12 @@ import { PageComponent } from './page/component';
 import { PageHeader } from './page-header/component';
 import { PageFooter } from './page-footer/component';
 
-const routes : Routes = [
-    {
-      path: '',
-      loadChildren: './build/plugin/src/app/cell-builder/module#CellBuilderModule'
-    }
-  ];
+// const routes : Routes = [
+//     {
+//       path: '',
+//       loadChildren: './build/plugin/src/app/cell-builder/module#CellBuilderModule'
+//     }
+//   ];
 
 @NgModule({
   declarations: [
@@ -23,8 +23,8 @@ const routes : Routes = [
     PageFooter
   ],
   imports: [
-    BrowserModule,
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    BrowserModule
+    // RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],
   bootstrap: [AppComponent]
 })
